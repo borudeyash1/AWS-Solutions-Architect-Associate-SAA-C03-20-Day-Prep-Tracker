@@ -1,76 +1,291 @@
-# 🎯 AWS Solutions Architect Associate (SAA-C03) 2-Day Prep Tracker
+# 🎯 AWS Solutions Architect Associate (SAA-C03) 20-Day Prep Tracker
 
-> **Goal**: Complete all remaining lectures across Security, Reliability, Performance, and Cost Optimization in 2 days.
-
----
-
-## 📅 Day 1: Security Section Complete
-
-**Target**: Complete all Security lectures by end of night. Includes Gym Break (5:15 PM – 8:00 PM).
-
-### ☀️ Morning & Afternoon (11:00 AM – 5:15 PM)
-- [x] **11:00 – 12:00** | Compute Security Part 4 *(44:36)*
-- [x] **12:05 – 12:30** | Compute Security Part 5 *(21:07)*
-- [ ] **12:35 – 01:20** | Compute Security Part 6 *(39:38)*
-- [ ] **01:20 – 02:00** | 🥪 *Lunch Break*
-- [ ] **02:00 – 02:30** | Database Security Part 1 *(31:35)*
-- [ ] **02:35 – 03:00** | Database Security Part 2 *(18:44)*
-- [ ] **03:05 – 03:35** | Database Security Part 3 *(25:30)*
-- [ ] **03:40 – 04:00** | Database Security Part 4 *(19:27)*
-- [ ] **04:05 – 04:30** | Database Security Part 5 *(18:58)*
-- [ ] **04:35 – 04:45** | Database Security Part 6 *(07:24)*
-- [ ] **04:50 – 05:15** | Application Integration Security Part 1 *(24:45)*
+> **Source Material**: [AWS Solution Architect Handbook.pdf](file:///d:/Interview/SAA/AWS%20Solution%20Architect%20Handbook.pdf)  
+> **Goal**: Master all 16 AWS domains and 100+ core services across 20 structured prep days to clear the **SAA-C03** examination with confidence.
 
 ---
 
-🏋️‍♂️ **05:15 PM – 08:00 PM** | **Gym Break & Refreshment**
+## 📊 Preparation Overview
+
+| Phase | Days | Focus Areas | Primary Handbook Categories Covered |
+| :--- | :--- | :--- | :--- |
+| **Phase 1** | Days 1–5 | Core Infrastructure & Storage | Compute, Serverless, Storage, VPC & Core Networking |
+| **Phase 2** | Days 6–10 | Advanced Networking, Databases & App Integration | Edge Networking, Databases, Containers, Developer Tools & Messaging |
+| **Phase 3** | Days 11–15 | Security, Governance, Analytics & Cost Management | Security & Identity, Compliance, Management & Governance, Analytics & Cost |
+| **Phase 4** | Days 16–20 | Migration, AI/ML, Architecture Patterns & Mock Exams | Migration & Transfer, Front-End/ML, Well-Architected Framework & Practice Exams |
 
 ---
 
-### 🌙 Night Session (08:00 PM – 11:45 PM)
-- [ ] **08:00 – 08:25** | Application Integration Security Part 2 *(21:28)*
-- [ ] **08:30 – 09:00** | Data Services Security Part 1 *(29:14)*
-- [ ] **09:05 – 09:25** | Data Services Security Part 2 *(19:00)*
-- [ ] **09:30 – 09:55** | Migration/Transfer Security *(21:24)*
-- [ ] **10:00 – 10:25** | Management Security Part 1 *(23:29)*
-- [ ] **10:30 – 10:55** | Management Security Part 2 *(23:04)*
-- [ ] **11:00 – 11:25** | Security Services Part 1 *(21:57)*
-- [ ] **11:30 – 11:45** | Security Services Part 2 *(14:27)*
+## 🗓️ Phase 1: Core Infrastructure & Storage (Days 1–5)
 
-> ✅ **Day 1 Milestone**: All Security lectures finished!
+### 📅 Day 1: Core Compute Services
+**Focus**: Primary EC2 instances, auto-scaling, batch workloads, and Elastic Beanstalk.  
+**Handbook Category**: `COMPUTE`
 
----
-
-## 📅 Day 2: Reliability, Performance & Cost Optimization
-
-**Target**: Complete Reliability, Performance, and Cost Optimization lectures. Includes Gym Break (5:15 PM – 8:00 PM).
-
-### 🌅 Morning (09:00 AM – 01:00 PM) — Reliability Part 1
-- [ ] **09:00 – 09:50** | Reliability Intro + Principles + Disaster Recovery + Foundations *(06:21 + 12:12 + 14:55 + 17:16 ≈ 50 min)*
-- [ ] **09:50 – 10:30** | Network Reliability *(38:03)*
-- [ ] **10:30 – 11:00** | Storage Reliability *(21:25)*
-- [ ] **11:00 – 11:30** | Compute Reliability Part 1 *(24:05)*
-- [ ] **11:30 – 12:00** | Compute Reliability Part 2 *(26:19)*
-- [ ] **12:00 – 12:30** | Compute Reliability Part 3 *(29:53)*
-- [ ] **12:30 – 02:00** | 🥪 *Lunch & Midday Break*
-
-### 🌆 Afternoon (02:00 PM – 05:15 PM) — Reliability Part 2
-- [ ] **02:00 – 03:15** | Database Reliability *(01:11:15)*
-- [ ] **03:15 – 04:00** | Application Integration Reliability *(41:57)*
-- [ ] **04:00 – 04:25** | Data Services Reliability *(25:17)*
-- [ ] **04:30 – 04:45** | Migration/Transfer Reliability *(12:47)*
-- [ ] **04:45 – 05:00** | Management Reliability *(15:03)*
-- [ ] **05:00 – 05:15** | Security Reliability *(13:55)*
+- [ ] **Amazon EC2** — Instance types (General, Compute, Memory, Storage), Pricing Models (On-Demand, Reserved, Spot, Dedicated), Placement Groups, AMIs.
+- [ ] **Amazon EC2 Auto Scaling** — Auto Scaling Groups (ASG), Scaling Policies (Target Tracking, Step, Simple, Predictive), Health Checks.
+- [ ] **AWS Batch** — Batch processing, Job Definitions, Job Queues, Compute Environments (Managed vs Unmanaged).
+- [ ] **AWS Elastic Beanstalk** — PaaS deployment model, Deployment Strategies (All-at-once, Rolling, Rolling with batch, Immutable, Blue/Green).
+- [ ] 🎯 *Day 1 Review*: Review EC2 pricing models and scaling policy selection scenarios in the Handbook.
 
 ---
 
-🏋️‍♂️ **05:15 PM – 08:00 PM** | **Gym Break & Refreshment**
+### 📅 Day 2: Edge/Hybrid Compute & Serverless Foundations
+**Focus**: Hybrid compute infrastructure, edge deployment, and core serverless compute.  
+**Handbook Categories**: `COMPUTE`, `SERVERLESS`
+
+- [ ] **AWS Outposts** — Extending AWS infrastructure and services on-premises for low-latency workloads.
+- [ ] **AWS Wavelength** — Ultra-low latency application deployment for 5G devices at the carrier edge.
+- [ ] **AWS Serverless Application Repository** — Managing and sharing serverless applications and components.
+- [ ] **AWS Lambda** — Serverless computing, Execution Context, Concurrency (Unreserved, Reserved, Provisioned), Event Sources, Function URLs.
+- [ ] **AWS Fargate** — Serverless compute engine for containerized workloads without managing EC2 instances.
+- [ ] 🎯 *Day 2 Review*: Contrast Lambda provisioned concurrency vs on-demand execution.
 
 ---
 
-### 🌃 Night Session (08:00 PM – 09:45 PM) — Performance & Cost Optimization
-- [ ] **08:00 – 08:45** | Performance Section *(4 lessons: ~42 min total)*
-- [ ] **08:50 – 09:20** | Cost Optimization Section *(4 lessons: ~26 min total)*
-- [ ] **09:20 – 09:45** | 🎯 Day 2 Wrap-up & Overall Review
+### 📅 Day 3: Storage Deep Dive (Part 1 — S3 & EBS)
+**Focus**: Object storage partitioning, lifecycle management, and block storage performance.  
+**Handbook Category**: `STORAGE`
 
-> ✅ **Day 2 Milestone**: All Reliability, Performance, and Cost Optimization lectures completed!
+- [ ] **Amazon S3** — Storage Classes (Standard, Intelligent-Tiering, Standard-IA, One Zone-IA, Glacier Instant/Flexible/Deep Archive), Lifecycle Rules, Versioning, Replication (CRR/SRR), Object Lock.
+- [ ] **Amazon S3 Security & Performance** — S3 Bucket Policies, KMS Encryption, S3 Select, Byte-Range Fetches, Multipart Upload, Access Points, Multi-Region Access Points.
+- [ ] **Amazon Elastic Block Store (Amazon EBS)** — Volume types (gp2/gp3, io1/io2, st1, sc1), EBS Snapshots, Data Lifecycle Manager (DLM), Encryption, Multi-Attach.
+- [ ] 🎯 *Day 3 Review*: Solve storage class cost-optimization scenarios.
+
+---
+
+### 📅 Day 4: Storage Deep Dive (Part 2 — File Systems, Backup & Hybrid Storage)
+**Focus**: Distributed file systems, central backups, and hybrid storage gateways.  
+**Handbook Category**: `STORAGE`
+
+- [ ] **Amazon Elastic File System (Amazon EFS)** — Network file system (NFSv4), Performance Modes (General Purpose, Max I/O), Throughput Modes (Bursting, Provisioned, Elastic), Storage Classes.
+- [ ] **Amazon FSx (All Types)** — FSx for Windows File Server, FSx for Lustre (HPC), FSx for NetApp ONTAP, FSx for OpenZFS.
+- [ ] **AWS Backup** — Centralized backup management across AWS services (EBS, S3, RDS, DynamoDB, EFS).
+- [ ] **AWS Storage Gateway** — File Gateway (S3/FSx), Volume Gateway (Stored vs Cached), Tape Gateway.
+- [ ] 🎯 *Day 4 Review*: Compare EFS vs FSx for Windows vs FSx for Lustre use cases.
+
+---
+
+### 📅 Day 5: Core Networking & Load Balancing
+**Focus**: Virtual Private Cloud setup, subnet routing, security, and load distribution.  
+**Handbook Category**: `NETWORKING & CONTENT DELIVERY`
+
+- [ ] **Amazon VPC (Part 1)** — CIDR blocks, Public & Private Subnets, Route Tables, Internet Gateways (IGW), NAT Gateways vs NAT Instances.
+- [ ] **Amazon VPC (Part 2)** — Security Groups (Stateful) vs Network ACLs (Stateless), VPC Flow Logs, VPC Peering.
+- [ ] **Elastic Load Balancing (ELB)** — Application Load Balancer (ALB), Network Load Balancer (NLB), Gateway Load Balancer (GWLB), Target Groups, Cross-Zone Load Balancing, SSL Termination.
+- [ ] **Amazon Route 53** — Routing Policies (Simple, Weighted, Latency, Failover, Geolocation, Geoproximity, Multi-Value Answer), Health Checks, Private Hosted Zones.
+- [ ] 🎯 *Day 5 Review*: Practice drawing a multi-AZ VPC architecture with ALB and Auto Scaling.
+
+---
+
+## 🗓️ Phase 2: Advanced Networking, Databases & App Integration (Days 6–10)
+
+### 📅 Day 6: Advanced Networking & Content Delivery
+**Focus**: Global network acceleration, hybrid connectivity, and inter-VPC transit.  
+**Handbook Category**: `NETWORKING & CONTENT DELIVERY`
+
+- [ ] **Amazon CloudFront** — CDN origins, Edge Locations, CloudFront Functions vs Lambda@Edge, Signed URLs/Cookies, OAC/OAI, Cache Behaviors.
+- [ ] **AWS Direct Connect (DX)** — Dedicated network connections, DX Locations, Private VIF, Public VIF, Transit VIF, Direct Connect Gateway, High Availability design (Active/Active vs Active/Passive).
+- [ ] **AWS Global Accelerator** — Anycast IP addresses, Traffic Dial, Endpoint Groups, Static IP routing acceleration.
+- [ ] **AWS Transit Gateway (TGW)** — Central hub connecting VPCs, VPNs, and Direct Connect; Route Table domain isolation.
+- [ ] 🎯 *Day 6 Review*: Compare CloudFront vs Global Accelerator for dynamic content.
+
+---
+
+### 📅 Day 7: Relational Databases & Caching
+**Focus**: SQL database engine patterns, read replicas, multi-AZ high availability, and in-memory caches.  
+**Handbook Category**: `DATABASE`
+
+- [ ] **Amazon RDS** — Engines (PostgreSQL, MySQL, MariaDB, Oracle, SQL Server), Multi-AZ Deployments (Synchronous), Read Replicas (Asynchronous), Automated Backups vs Manual Snapshots, Storage Auto-Scaling.
+- [ ] **Amazon Aurora** — Aurora Architecture (6 copies across 3 AZs), Aurora Serverless v2, Aurora Global Database, Aurora Read Replicas, Parallel Query, Fault Tolerance.
+- [ ] **Amazon ElastiCache** — Redis/Valkey (Clustering, Pub/Sub, Persistence) vs Memcached (Multi-threading, Simple Key-Value), Cache Strategies (Lazy Loading, Write-Through).
+- [ ] 🎯 *Day 7 Review*: Master RDS Multi-AZ failover mechanics vs Aurora Shared Storage architecture.
+
+---
+
+### 📅 Day 8: NoSQL, Specialized Databases & Data Stores
+**Focus**: Non-relational databases, ledger, graph, and column-store databases.  
+**Handbook Category**: `DATABASE`
+
+- [ ] **Amazon DynamoDB** — Partition Keys & Sort Keys, Read/Write Capacity Units (On-Demand vs Provisioned), Global Secondary Indexes (GSI) vs Local Secondary Indexes (LSI), DynamoDB Streams, Global Tables.
+- [ ] **Amazon DocumentDB** — MongoDB-compatible managed document database.
+- [ ] **Amazon Keyspaces** — Apache Cassandra-compatible managed database service.
+- [ ] **Amazon Neptune** — Managed Graph database service (Gremlin, SPARQL).
+- [ ] **Amazon Quantum Ledger Database (Amazon QLDB)** — Immutable, cryptographically verifiable ledger database.
+- [ ] **Amazon Redshift (Database Focus)** — Columnar storage, Leader Node & Compute Nodes, Redshift Spectrum, Concurrency Scaling.
+- [ ] 🎯 *Day 8 Review*: Compare database selection criteria across OLTP, OLAP, NoSQL, and Graph.
+
+---
+
+### 📅 Day 9: Containers & Microservices Infrastructure
+**Focus**: Container management, orchestration, and image registries.  
+**Handbook Category**: `CONTAINERS`
+
+- [ ] **Amazon Elastic Container Service (Amazon ECS)** — Task Definitions, Services, Clusters, Launch Types (EC2 vs Fargate), Capacity Providers.
+- [ ] **Amazon Elastic Container Registry (Amazon ECR)** — Image repositories, vulnerability scanning, lifecycle policies, cross-account/cross-region replication.
+- [ ] **Amazon Elastic Kubernetes Service (Amazon EKS)** — Control plane management, Worker nodes (Managed Node Groups, Fargate profiles), kubectl integration.
+- [ ] **Amazon ECS Anywhere, EKS Anywhere & EKS Distro** — Hybrid container management on customer infrastructure.
+- [ ] 🎯 *Day 9 Review*: Review container deployment options (ECS Fargate vs EKS Fargate).
+
+---
+
+### 📅 Day 10: Application Integration, Messaging & Developer Tools
+**Focus**: Event-driven architectures, asynchronous decoupling, and distributed tracing.  
+**Handbook Categories**: `APPLICATION INTEGRATION`, `DEVELOPER TOOLS`
+
+- [ ] **Amazon Simple Queue Service (Amazon SQS)** — Standard vs FIFO Queues, Visibility Timeout, Short vs Long Polling, Dead Letter Queues (DLQ), Delay Queues.
+- [ ] **Amazon Simple Notification Service (Amazon SNS)** — Topic subscriptions (SQS, Lambda, HTTP, Email), Fan-out pattern, FIFO Topics, Message Filtering.
+- [ ] **Amazon EventBridge** — Event Bus, Custom Rules, Schema Registry, EventBridge Pipes, API Destinations.
+- [ ] **AWS Step Functions** — State Machines (Standard vs Express), Task States, Choice States, Parallel States, Error Handling and Retries.
+- [ ] **Amazon MQ** — Managed message broker for Apache ActiveMQ and RabbitMQ.
+- [ ] **Amazon AppFlow & AWS AppSync** — SaaS data ingestion and GraphQL endpoint integration.
+- [ ] **AWS X-Ray** — Distributed tracing, Service Maps, Traces, Segments, Annotations.
+- [ ] 🎯 *Day 10 Review*: Architectural patterns for SQS + SNS Fan-out and EventBridge routing.
+
+---
+
+## 🗓️ Phase 3: Security, Governance, Analytics & Cost Management (Days 11–15)
+
+### 📅 Day 11: Security, Identity & Key Management
+**Focus**: IAM policies, identity federation, cryptographic keys, and secret management.  
+**Handbook Category**: `SECURITY, IDENTITY & COMPLIANCE`
+
+- [ ] **AWS Identity and Access Management (IAM)** — Users, Groups, Roles, Policies (Identity-based, Resource-based, SCPs, Permission Boundaries), STS (AssumeRole), Identity Federation (SAML 2.0, Web Identity).
+- [ ] **Amazon Cognito** — User Pools (Authentication, User Directories) vs Identity Pools (Authorization, AWS Temporary Credentials).
+- [ ] **AWS Key Management Service (AWS KMS)** — Symmetric vs Asymmetric Keys, Customer Managed Keys (CMK) vs AWS Managed Keys, KMS Key Policies, Envelope Encryption, Multi-Region Keys.
+- [ ] **AWS CloudHSM** — Dedicated hardware security module for single-tenant compliance requirements.
+- [ ] **AWS Secrets Manager vs Parameter Store** — Automatic secret rotation, KMS integration, SSM Parameter Store (Free tier vs Advanced parameters).
+- [ ] **AWS Resource Access Manager (AWS RAM)** — Securely sharing AWS resources across accounts and within AWS Organizations.
+- [ ] 🎯 *Day 11 Review*: Solve IAM policy evaluation logic scenarios (Explicit Deny > Explicit Allow > Default Deny).
+
+---
+
+### 📅 Day 12: Network Security, Threat Detection & Compliance
+**Focus**: WAF protection, threat monitoring, security compliance, and firewall management.  
+**Handbook Category**: `SECURITY, IDENTITY & COMPLIANCE`
+
+- [ ] **AWS WAF & AWS Shield** — Web ACLs, Rules, SQL Injection / XSS protection, Rate-based rules, Shield Standard vs Shield Advanced (DDoS protection).
+- [ ] **AWS Firewall Manager & AWS Network Firewall** — Central security management across VPCs and Accounts; Layer 7 inspection.
+- [ ] **Amazon GuardDuty** — Intelligent threat detection using machine learning on CloudTrail, VPC Flow Logs, and DNS Logs.
+- [ ] **Amazon Inspector & Amazon Macie** — Vulnerability scanning for EC2/ECR vs Sensitive data discovery (PII) in S3.
+- [ ] **AWS Security Hub & Amazon Detective** — Centralized security posture management and root cause analysis for security findings.
+- [ ] **AWS Directory Service** — AWS Managed Microsoft AD, Simple AD, AD Connector.
+- [ ] **AWS Artifact & AWS Audit Manager** — Compliance reports, agreements, and automated audit evidence collection.
+- [ ] 🎯 *Day 12 Review*: Differentiate GuardDuty vs Inspector vs Macie vs Security Hub.
+
+---
+
+### 📅 Day 13: Management, Governance & Infrastructure as Code (Part 1)
+**Focus**: Resource management, audit logging, monitoring, and automated provisioning.  
+**Handbook Category**: `MANAGEMENT & GOVERNANCE`
+
+- [ ] **AWS CloudFormation** — Templates, Stacks, StackSets, Change Sets, Custom Resources, Drift Detection, Rollback behavior.
+- [ ] **AWS CloudTrail** — Logging management and data events, Trail organization aggregation, Integrity validation, CloudTrail Insights.
+- [ ] **Amazon CloudWatch** — Metrics, Alarm Actions, CloudWatch Logs, Log Groups, CloudWatch Insights, Dashboards, Synthetics.
+- [ ] **AWS Config** — Resource configuration history, Compliance Rules (Managed vs Custom), Remediation Actions.
+- [ ] **AWS Organizations & Control Tower** — Multi-account strategy, Organizational Units (OUs), Service Control Policies (SCPs), Guardrails.
+- [ ] **AWS Systems Manager (SSM)** — Parameter Store, Run Command, Patch Manager, Session Manager, Automation, State Manager.
+- [ ] 🎯 *Day 13 Review*: Master SCP inheritance rules across multi-account OU hierarchies.
+
+---
+
+### 📅 Day 14: Operations, Governance & Cost Optimization
+**Focus**: Observability tools, operational health, service discovery, and cost monitoring.  
+**Handbook Categories**: `MANAGEMENT & GOVERNANCE`, `AWS COST MANAGEMENT`
+
+- [ ] **AWS CLI & AWS Management Console** — Command line automation, profiles, and console controls.
+- [ ] **AWS Health Dashboard** — Personal Health Dashboard (PHD) vs Service Health Dashboard (SHD).
+- [ ] **Amazon License Manager, Managed Grafana & Prometheus** — Open-source observability and software license management.
+- [ ] **AWS Proton & AWS Service Catalog** — Standardized application templates and catalog management for end users.
+- [ ] **AWS Trusted Advisor & AWS Well-Architected Tool** — Cost, security, fault tolerance recommendations, and Well-Architected reviews.
+- [ ] **AWS Cost Management Tools** — AWS Budgets, AWS Cost Explorer, AWS Cost and Usage Report (CUR), Savings Plans (Compute vs EC2 Instance vs SageMaker), Cost Allocation Tags.
+- [ ] 🎯 *Day 14 Review*: Solve cost reduction scenario questions (Savings Plans vs Reserved Instances vs Spot).
+
+---
+
+### 📅 Day 15: Analytics & Data Lake Architectures
+**Focus**: Big data pipelines, stream processing, data lakes, and querying engines.  
+**Handbook Category**: `ANALYTICS`
+
+- [ ] **Amazon Athena** — Serverless SQL queries on S3, Partitioning, Parquet/ORC compression, Glue Data Catalog integration.
+- [ ] **AWS Data Pipeline & AWS Data Exchange** — Data workflow orchestration and third-party data subscriptions.
+- [ ] **Amazon EMR** — Hadoop and Spark processing clusters, Spot Instance utilization, EMR Serverless.
+- [ ] **AWS Glue** — ETL jobs, Data Catalog, Crawlers, Glue Streaming, AWS Lake Formation (Data Lake governance).
+- [ ] **Amazon Kinesis** — Kinesis Data Streams (Shard management, retention), Kinesis Data Firehose (Delivery to S3/Redshift/OpenSearch), Kinesis Data Analytics (Flink).
+- [ ] **Amazon MSK & Amazon OpenSearch Service** — Managed Kafka streams and log/text analytics indexing.
+- [ ] **Amazon QuickSight & Amazon Redshift** — BI dashboards, SPICE engine, Redshift Data Warehouse (Distkeys & Sortkeys).
+- [ ] 🎯 *Day 15 Review*: Architectural comparison of Kinesis Data Streams vs Kinesis Data Firehose vs SQS.
+
+---
+
+## 🗓️ Phase 4: Migration, AI/ML, Architecture Patterns & Mock Exams (Days 16–20)
+
+### 📅 Day 16: Migration, Data Transfer & Hybrid Architectures
+**Focus**: Migration strategies (6 Rs), database conversion, and large-scale data transfer.  
+**Handbook Category**: `MIGRATION AND TRANSFER`
+
+- [ ] **Migration Strategies (6 Rs)** — Rehost (Lift & Shift), Replatform (Lift, Tinker & Shift), Refactor/Re-architect, Repurchase, Retain, Retire.
+- [ ] **AWS Application Discovery Service & AWS Application Migration Service (MGN)** — Server assessment and automated block-level replication.
+- [ ] **AWS Database Migration Service (AWS DMS)** — Full load vs Change Data Capture (CDC), Schema Conversion Tool (SCT), Source/Target endpoints.
+- [ ] **AWS DataSync** — Automated data transfer between on-premises and AWS (S3, EFS, FSx).
+- [ ] **AWS Snow Family** — Snowcone, Snowball Edge (Storage/Compute), Snowmobile (PB/EB scale offline migration).
+- [ ] **AWS Transfer Family** — Managed SFTP, FTPS, and FTP transfers directly into S3 and EFS.
+- [ ] 🎯 *Day 16 Review*: Determine appropriate migration tool based on data volume, bandwidth, and downtime requirements.
+
+---
+
+### 📅 Day 17: Front-End, Mobile, Media & ML Services
+**Focus**: Mobile backends, API management, media conversion, and managed ML services.  
+**Handbook Categories**: `FRONT-END & MOBILE`, `MEDIA SERVICES`, `MACHINE LEARNING`
+
+- [ ] **AWS Amplify & Amazon API Gateway** — Full-stack web/mobile app build framework and API management (REST, HTTP, WebSocket APIs, Throttling, API Keys, Authorizers).
+- [ ] **AWS Device Farm & Amazon Pinpoint** — Mobile app testing and customer engagement messaging.
+- [ ] **Amazon Elastic Transcoder** — Media file transcoding for mobile/web playback.
+- [ ] **Managed AI/ML Services** — Amazon Comprehend (NLP), Amazon Forecast (TimeSeries), Amazon Fraud Detector, Amazon Kendra (Enterprise Search), Amazon Lex (Chatbots), Amazon Polly (Text-to-Speech), Amazon Rekognition (Computer Vision), Amazon SageMaker (ML models), Amazon Textract (Document OCR), Amazon Transcribe (Speech-to-Text), Amazon Translate.
+- [ ] 🎯 *Day 17 Review*: Identify specific AI service for business scenario questions without requiring custom ML model building.
+
+---
+
+### 📅 Day 18: Architectural Patterns & Scenario Deep Dives
+**Focus**: Scenario-based decision making aligned with SAA-C03 exam domains.  
+**Framework**: AWS Well-Architected Framework
+
+- [ ] **Design for High Availability & Disaster Recovery** — Multi-AZ vs Multi-Region, RTO (Recovery Time Objective) vs RPO (Recovery Point Objective), Backup & Restore, Pilot Light, Warm Standby, Multi-Site Active-Active.
+- [ ] **Design Secure Architectures** — Least privilege access, data protection at rest and in transit, defense-in-depth network design.
+- [ ] **Design Resilient Architectures** — Decoupled architectures, failover strategies, self-healing systems via ASG and ELB.
+- [ ] **Design High-Performing Architectures** — Caching strategies, read replicas, serverless computing, storage performance optimization.
+- [ ] **Design Cost-Optimized Architectures** — Right-sizing instances, lifecycle rules, serverless architectures, savings plans.
+- [ ] 🎯 *Day 18 Review*: Solve 20 scenario-based questions focusing on RTO/RPO requirements.
+
+---
+
+### 📅 Day 19: Full-Length Practice Exam 1 & Weak Area Drills
+**Focus**: Exam simulation and thorough gap analysis.
+
+- [ ] **Practice Exam 1 (65 Questions / 130 Mins)** — Simulating timed environment without reference materials.
+- [ ] **Score Analysis & Question Audit** — Categorize incorrect answers by AWS Domain/Category.
+- [ ] **Handbook Reference Check** — Re-read handbook sections corresponding to missed questions.
+- [ ] **Flashcard & Cheat Sheet Review** — Review service limits, default timeouts, and metric intervals.
+- [ ] 🎯 *Day 19 Milestone*: Target Score ≥ 80% on practice exam.
+
+---
+
+### 📅 Day 20: Full-Length Practice Exam 2, Final Checklist & Exam Readiness
+**Focus**: Final readiness check, key service comparisons, and exam mindset.
+
+- [ ] **Practice Exam 2 (65 Questions / 130 Mins)** — Final full-length exam simulation.
+- [ ] **Review High-Frequency Exam Distinguishers**:
+  - SQS Standard vs FIFO vs SNS Topic vs EventBridge
+  - Aurora Global Database vs RDS Read Replica vs DynamoDB Global Tables
+  - ALB vs NLB vs Global Accelerator vs CloudFront
+  - EBS Snapshots vs EFS Backups vs Storage Gateway
+  - KMS CMK vs Secrets Manager vs SSM Parameter Store
+- [ ] **Exam Day Strategy Review** — Time management (2 mins per question), flagging strategy, process of elimination.
+- [ ] 🎯 *Day 20 Milestone*: **Ready to conquer the AWS Certified Solutions Architect Associate (SAA-C03) Exam! 🚀**
+
+---
+
+## 💡 Daily Study Routine & Checklist Tip
+1. Read the specific service section in the [AWS Solution Architect Handbook.pdf](file:///d:/Interview/SAA/AWS%20Solution%20Architect%20Handbook.pdf).
+2. Note key **Exam Tips**, **Use Cases**, and **Architectural Trade-offs**.
+3. Check off each completed service using `[x]`.
