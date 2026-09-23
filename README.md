@@ -16,6 +16,18 @@
 
 ---
 
+## 🤝 Study Commitment & Dedicated Hours Promise
+
+> **The 60-Hour SAA-C03 Mastery Pledge** 📜  
+> *"I promise to dedicate **2.5 to 3 hours daily** over the next **20 days** (totaling **50–60 hours** of focused study) to thoroughly read the handbook, solve topic quizzes, analyze architectural trade-offs, and pass the **AWS Certified Solutions Architect Associate (SAA-C03)** exam with confidence."*
+
+### ⏳ Daily Hours Breakdown (2.5 – 3.0 Hours / Day):
+- 📖 **Theory & Handbook Deep-Dive (1.0 – 1.5 hrs/day)**: Study service architectures, configuration parameters, limits, and Well-Architected pillars from the handbook.
+- 🧪 **Topic Quizzes & Scenario Solving (1.0 hr/day)**: Practice scenario-based questions, multi-select evaluation, and jumbled option drills across interactive quiz modules.
+- 📝 **Audit & Retention Review (0.5 hr/day)**: Analyze incorrect options, review explanations, and solidify core architectural concepts.
+
+---
+
 ## 🗓️ Phase 1: Core Infrastructure & Storage (Days 1–5)
 
 ### 📅 Day 1: Core Compute Services
