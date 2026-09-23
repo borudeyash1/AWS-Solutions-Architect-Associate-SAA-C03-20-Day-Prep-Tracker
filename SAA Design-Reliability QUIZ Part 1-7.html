@@ -539,1209 +539,1309 @@
 
 <script>
         const quizData = [
-            {
-                id: 1,
-                question: "How does Amazon Keyspaces (for Apache Cassandra) utilize distributed storage to manage large-scale, globally distributed databases?",
-                options: [
-                    "A) Amazon Keyspaces implements a master-slave storage architecture to distribute data across multiple nodes and regions.",
-                    "B) It uses a distributed, multi-AZ storage system that automatically partitions data across numerous nodes to enhance scalability and availability.",
-                    "C) Keyspaces relies on a centralized storage model with the option to manually distribute data across different Availability Zones.",
-                    "D) The service employs a peer-to-peer distributed storage architecture, mirroring Apache Cassandra's design, to evenly distribute data across the cluster."
-                ],
-                correct: "B",
-                explanation: "Amazon Keyspaces (for Apache Cassandra) uses a distributed, multi-AZ storage system that automatically partitions data across many nodes within an AWS Region. This design allows for seamless scalability and high availability, as data is distributed and replicated across multiple physical locations within the region."
-            },
-            {
-                id: 2,
-                question: "What redundancy features are inherent in Amazon Keyspaces to ensure data is protected against loss?",
-                options: [
-                    "A) Amazon Keyspaces automatically replicates data across three geographically distant AWS Regions.",
-                    "B) It provides redundancy by creating and managing multiple copies of data within the same Availability Zone.",
-                    "C) The service ensures data redundancy by replicating data across multiple Availability Zones within a single AWS Region.",
-                    "D) Redundancy in Amazon Keyspaces is achieved by maintaining a single, durable copy of data with regular, user-initiated backups."
-                ],
-                correct: "C",
-                explanation: "Amazon Keyspaces (for Apache Cassandra) ensures data redundancy by replicating data automatically across multiple Availability Zones within the same AWS Region. This replication strategy is designed to provide high durability and availability for your data, protecting it against the loss of an Availability Zone."
-            },
-            {
-                id: 3,
-                question: "In what ways does Amazon Keyspaces maintain a reliable database service for users?",
-                options: [
-                    "A) Keyspaces achieves reliability by allowing users to manually switch between database instances in the event of a failure.",
-                    "B) It maintains reliability through a shared responsibility model where AWS manages the infrastructure and the user is responsible for data replication strategies.",
-                    "C) The service ensures reliability by automatically managing the provisioning, patching, and replication of data across multiple Availability Zones.",
-                    "D) Reliability in Amazon Keyspaces is supported by providing dedicated hardware for each user to prevent noisy neighbor issues."
-                ],
-                correct: "C",
-                explanation: "Amazon Keyspaces (for Apache Cassandra) maintains a reliable database service by automatically handling the provisioning, patching, and replication of data. It abstracts the management of the underlying infrastructure, including data replication across multiple Availability Zones, which is crucial for achieving high availability and fault tolerance."
-            },
-            {
-                id: 4,
-                question: "How does Amazon Keyspaces ensure system resiliency, particularly in the face of infrastructure disruptions or failures?",
-                options: [
-                    "A) Keyspaces relies on user-configured database clustering and manual failover processes to maintain system resiliency.",
-                    "B) It provides resiliency through automated backups and restoration capabilities that users can trigger in the event of system disruptions.",
-                    "C) The service ensures resiliency by leveraging AWS global infrastructure, offering cross-region replication and automated failover.",
-                    "D) Amazon Keyspaces uses a fully managed infrastructure with built-in redundancy and failover capabilities across multiple Availability Zones."
-                ],
-                correct: "D",
-                explanation: "Amazon Keyspaces is designed to ensure system resiliency by leveraging AWS's highly available infrastructure. It provides built-in redundancy and automated failover capabilities across multiple Availability Zones within an AWS Region. This means that in the event of a failure or disruption in one Availability Zone, the service can continue to operate seamlessly."
-            },
-            {
-                id: 5,
-                question: "A company is deploying a new application using Amazon Keyspaces (for Apache Cassandra). The data must remain available if an Availability Zone goes down. How can this be achieved?",
-                options: [
-                    "A) By enabling cross-region replication",
-                    "B) By using S3 for data durability",
-                    "C) By automatically replicating data to replica nodes",
-                    "D) By provisioning nodes in multiple subnets"
-                ],
-                correct: "C",
-                explanation: "Amazon Keyspaces provides high availability across AZs by automatically replicating data to multiple replica nodes placed in different AZs. If one AZ becomes unavailable, reads and writes can be served from replicas in other AZs."
-            },
-            {
-                id: 6,
-                question: "A company is deploying a new graph database using Amazon Neptune. The database needs to remain available in the event of an Availability Zone outage. How does Neptune provide high availability?",
-                options: [
-                    "A) By replicating data synchronously across Availability Zones",
-                    "B) By backing up data to Amazon S3",
-                    "C) By caching query results in Amazon ElastiCache",
-                    "D) By provisioning read replicas in a second region"
-                ],
-                correct: "A",
-                explanation: "Amazon Neptune provides high availability by synchronously replicating data across three Availability Zones. If one AZ becomes unavailable, Neptune can redirect reads and writes to the remaining AZs."
-            },
-            {
-                id: 7,
-                question: "A company is running a mission-critical graph database on Amazon Neptune. The database needs to remain available if an individual Neptune node fails. How can this be achieved?",
-                options: [
-                    "A) By migrating the node to new hardware automatically",
-                    "B) By replicating data synchronously across nodes",
-                    "C) By redirecting requests to the nearest available node",
-                    "D) By restoring data for the node from a backup"
-                ],
-                correct: "B",
-                explanation: "Neptune synchronously replicates data across nodes in multiple Availability Zones. If a single node fails, Neptune will continue serving requests from the remaining replicas and automatically re-replicate data when the failed node recovers."
-            },
-            {
-                id: 8,
-                question: "A company needs to ensure the data in its Amazon QLDB ledger remains available if an Availability Zone outage occurs. How does QLDB provide resiliency against AZ outages?",
-                options: [
-                    "A) By replicating data synchronously across three AZs",
-                    "B) By backing up data continuously to Amazon S3",
-                    "C) By caching data in Amazon ElastiCache for faster reads",
-                    "D) By enabling Multi-AZ deployments in the QLDB settings"
-                ],
-                correct: "A",
-                explanation: "Amazon QLDB synchronously replicates data across three Availability Zones to remain available during an AZ outage. The ledger will operate uninterrupted if one AZ becomes unavailable."
-            },
-            {
-                id: 9,
-                question: "A company is building a new application that streams data into Amazon QLDB. The data must be durably stored before further processing. How can the architecture ensure no data loss if a failure occurs when streaming data into QLDB?",
-                options: [
-                    "A) Enable data replication from QLDB to Amazon DynamoDB",
-                    "B) Stream data to an Amazon S3 bucket first before QLDB",
-                    "C) Use Amazon Kinesis Data Streams for retries on transient errors",
-                    "D) Process the data synchronously instead of using streams"
-                ],
-                correct: "C",
-                explanation: "Streaming data into QLDB via Amazon Kinesis Data Streams allows configuring retries for transient errors, ensuring the data is eventually persisted durably in QLDB without loss."
-            },
-            {
-                id: 10,
-                question: "Which QLDB CloudWatch metric can help monitor availability and durability?",
-                options: [
-                    "A) ReadIOs",
-                    "B) WriteIOs",
-                    "C) JournalS3DataSize",
-                    "D) JournalDiskUtilization"
-                ],
-                correct: "B",
-                explanation: "WriteIOs measures writes to the QLDB ledger, which can help monitor availability."
-            },
-            {
-                id: 11,
-                question: "A company is storing time series data in Amazon Timestream. The data must remain durable and available. How does Timestream provide reliability?",
-                options: [
-                    "A) By replicating data across Availability Zones",
-                    "B) By caching hot data in Amazon ElastiCache",
-                    "C) By uploading backups to Amazon S3 frequently",
-                    "D) By enabling Multi-AZ deployment during setup"
-                ],
-                correct: "A",
-                explanation: "Amazon Timestream replicates data across Availability Zones to provide durable data storage and automatic failover in case of AZ outages."
-            },
-            {
-                id: 12,
-                question: "A company needs to analyze trends in data stored in Amazon Timestream. The analytics queries must be resilient to temporary Timestream errors. How can the company achieve this?",
-                options: [
-                    "A) Enable Multi-AZ deployment for Timestream",
-                    "B) Execute queries with retry logic in the application",
-                    "C) Cache the Timestream query results in Amazon ElastiCache",
-                    "D) Use Timestream's continuous backup to S3"
-                ],
-                correct: "B",
-                explanation: "Implementing retries in the application logic allows queries to Timestream to be resilient to transient errors and temporary service disruptions."
-            },
-            {
-                id: 13,
-                question: "A company is migrating an existing application to use Amazon Timestream. The architecture must prevent cascading failures. How can the system be designed to minimize coupling?",
-                options: [
-                    "A) Store time series data in Amazon S3 before ingesting into Timestream",
-                    "B) Implement Amazon SNS and SQS for asynchronous integration",
-                    "C) Enable Multi-AZ deployment for Timestream",
-                    "D) Cache Timestream data in Amazon ElastiCache"
-                ],
-                correct: "B",
-                explanation: "Using Amazon SNS and SQS allows loosely coupled asynchronous integration between the application and Timestream. This prevents cascading failures across services."
-            },
-            {
-                id: 14,
-                question: "A company is building a new application using Amazon Timestream to store time series data. The system must remain available if Timestream has an outage. How can the architecture achieve fault tolerance?",
-                options: [
-                    "A) Enable Multi-AZ deployment for Timestream",
-                    "B) Implement retries and exponential backoff in the application",
-                    "C) Cache frequently accessed time series in Amazon ElastiCache",
-                    "D) Use cross-region replication for Timestream"
-                ],
-                correct: "B",
-                explanation: "Implementing retries with exponential backoff in the application logic allows it to gracefully handle Timestream errors and outages."
-            },
-            {
-                id: 15,
-                question: "A manufacturing company is using Amazon TimeStream to store time series data from its production line sensors. To ensure the optimal performance and health of their TimeStream database, they want to monitor specific metrics. Which metric should they prioritize monitoring to track data coming into the database?",
-                options: [
-                    "A) Write Input Records: The number of records ingested into TimeStream.",
-                    "B) Query Duration: The time taken to execute a query.",
-                    "C) Memory Usage: The amount of memory used by TimeStream.",
-                    "D) Active Connections: The number of active connections to the TimeStream database."
-                ],
-                correct: "A",
-                explanation: "Amazon TimeStream is optimized for time-series data. Monitoring the ingestion rate, represented by the Write Input Records metric, is crucial to understand the data flow and ensure that all time-series data points are being captured correctly."
-            },
-            {
-                id: 16,
-                question: "A company is running a fleet of EC2 instances behind an Application Load Balancer. The application must remain available during instance failures. How can Auto Scaling help ensure reliability?",
-                options: [
-                    "A) By automatically launching new instances to replace failed ones",
-                    "B) By distributing instances across multiple Availability Zones",
-                    "C) By caching content in Amazon ElastiCache for lower latency",
-                    "D) By enabling health checks on the Application Load Balancer"
-                ],
-                correct: "A",
-                explanation: "Auto Scaling automatically launches new instances to replace failed ones, ensuring a minimum number of healthy instances are always available to serve traffic."
-            },
-            {
-                id: 17,
-                question: "A company needs to improve the resiliency of the web tier running on EC2 instances behind an Application Load Balancer. The system must gracefully handle surges in traffic. How can Auto Scaling help make the architecture more resilient?",
-                options: [
-                    "A) By launching On-Demand Instances to handle traffic spikes",
-                    "B) By distributing instances across multiple subnets",
-                    "C) By caching content in Amazon ElastiCache for faster response times",
-                    "D) By setting up Auto Scaling scheduled actions to scale out during events"
-                ],
-                correct: "A",
-                explanation: "Auto Scaling can automatically launch On-Demand instances to rapidly scale out and handle traffic spikes, improving architecture resilience."
-            },
-            {
-                id: 18,
-                question: "A company is deploying EC2 instances in an Auto Scaling group behind an Application Load Balancer. The architects want to prevent cascading failures. How can Auto Scaling help decouple components?",
-                options: [
-                    "A) By using multiple smaller Auto Scaling groups",
-                    "B) By distributing instances across Availability Zones",
-                    "C) By caching content in Amazon ElastiCache",
-                    "D) By enabling ELB health checks for the ASG instances"
-                ],
-                correct: "A",
-                explanation: "Using multiple independent Auto Scaling groups decouples components to prevent cascading failures across layers."
-            },
-            {
-                id: 19,
-                question: "An Application Load Balancer is load balancing EC2 instances in Auto Scaling groups across multiple Availability Zones. The load balancer must automatically detect unhealthy instances. How can the ALB maintain availability?",
-                options: [
-                    "A) By enabling cross-zone load balancing",
-                    "B) By implementing target group health checks",
-                    "C) By setting up multiple listeners",
-                    "D) By integrating the ASG with CloudWatch alarms"
-                ],
-                correct: "B",
-                explanation: "Application Load Balancer health checks can automatically detect unhealthy instances and stop routing traffic to them."
-            },
-            {
-                id: 20,
-                question: "A company is deploying an Application Load Balancer across multiple Availability Zones. The load balancer must continue serving traffic if an AZ has an outage. How can this resiliency requirement be met?",
-                options: [
-                    "A) By enabling cross-zone load balancing",
-                    "B) By setting up multiple target groups",
-                    "C) By enabling connection draining",
-                    "D) By implementing health checks"
-                ],
-                correct: "A",
-                explanation: "Enabling cross-zone load balancing allows the ALB to continue routing traffic to instances in the remaining healthy AZs during an AZ outage."
-            },
-            {
-                id: 21,
-                question: "A company is deploying an Application Load Balancer. The load balancer must route HTTP and HTTPS traffic to different target groups. How can the ALB meet this requirement?",
-                options: [
-                    "A) By using multiple target groups",
-                    "B) By enabling cross-zone load balancing",
-                    "C) By implementing multiple listeners",
-                    "D) By integrating with Amazon Cognito"
-                ],
-                correct: "C",
-                explanation: "Application Load Balancer supports multiple listeners, allowing different listeners for HTTP and HTTPS traffic mapped to different target groups."
-            },
-            {
-                id: 22,
-                question: "A financial technology company is deploying an Application Load Balancer (ALB) to handle traffic for its online banking portal. Due to the sensitive nature of the data being transmitted, they want to ensure that the data is encrypted during transit. However, they also want to optimize the performance of their backend servers. Which feature of the ALB can the company use to achieve these objectives?",
-                options: [
-                    "A) Use ALB's SSL termination feature to handle the SSL/TLS handshake and decrypt the traffic before sending it to the backend servers.",
-                    "B) Enable SSL passthrough on the ALB to allow the backend servers to handle the SSL/TLS handshake and decryption.",
-                    "C) Configure the ALB to use only HTTP/2 for encrypted and optimized communication.",
-                    "D) Use ALB's SSL bridging feature to re-encrypt the traffic before sending it to the backend servers."
-                ],
-                correct: "A",
-                explanation: "SSL offloading, also known as SSL termination, refers to the process of decrypting SSL traffic at the load balancer level rather than at the backend servers, offloading the CPU-intensive handshake process."
-            },
-            {
-                id: 23,
-                question: "A global e-commerce platform is deploying an Application Load Balancer (ALB) to distribute incoming traffic across multiple EC2 instances. To ensure the optimal performance and Reliability of their application, they want to monitor their detailed traffic and any potential threats. Which monitoring and logging option is available with ALB?",
-                options: [
-                    "A) CloudWatch Metrics to monitor the operational performance of the ALB.",
-                    "B) CloudTrail Logs to capture every API call made to the ALB.",
-                    "C) Access Logs to capture detailed information about requests sent to the ALB.",
-                    "D) VPC Flow Logs to monitor the IP traffic going to and from the ALB."
-                ],
-                correct: "C",
-                explanation: "Access Logs for the Application Load Balancer provide detailed information about requests sent to the load balancer, including client IP, request path, and response code."
-            },
-            {
-                id: 24,
-                question: "A company is deploying an Application Load Balancer across multiple Availability Zones. The architects want to ensure traffic is load balanced properly if EC2 instances fail. How can the architecture provide resiliency?",
-                options: [
-                    "A) By integrating the load balancer with Auto Scaling",
-                    "B) By enabling sticky sessions",
-                    "C) By setting up multiple target groups",
-                    "D) By configuring cross-zone load balancing"
-                ],
-                correct: "A",
-                explanation: "Integrating the ALB with Auto Scaling allows failed instances to automatically be replaced, maintaining capacity."
-            },
-            {
-                id: 25,
-                question: "A company is running an application load balancer with autoscaling groups. The DevOps team needs to monitor metrics related to resilience particularly regarding the codes being returned from the backend servers. Which CloudWatch metric for the load balancer is relevant?",
-                options: [
-                    "A) HealthyHostCount",
-                    "B) HTTPCode_Target_5XX_Count",
-                    "C) RejectedConnectionCount",
-                    "D) SurgeQueueLength"
-                ],
-                correct: "B",
-                explanation: "HTTPCode_Target_5XX_Count monitors 5XX errors from targets which helps identify issues reaching the backend instances."
-            },
-            {
-                id: 26,
-                question: "A company deployed a Network Load Balancer across multiple subnets in different Availability Zones. The NLB must remain available during AZ outages. How can the architecture achieve this?",
-                options: [
-                    "A) By enabling cross-zone load balancing",
-                    "B) By implementing multiple target groups",
-                    "C) By setting up Network ACL rules",
-                    "D) By integrating with Amazon Route 53"
-                ],
-                correct: "A",
-                explanation: "Enabling cross-zone load balancing for the NLB allows it to remain available and route traffic across the remaining healthy AZs during an AZ outage."
-            },
-            {
-                id: 27,
-                question: "A company deployed a Network Load Balancer across multiple subnets. The NLB must detect unhealthy registered targets. How can the architecture meet this requirement?",
-                options: [
-                    "A) By enabling cross-zone load balancing",
-                    "B) By implementing target group health checks",
-                    "C) By integrating with Amazon CloudWatch metrics",
-                    "D) By setting up Network ACL inbound rules"
-                ],
-                correct: "B",
-                explanation: "NLB target group health checks can automatically detect and stop routing traffic to unhealthy registered targets."
-            },
-            {
-                id: 28,
-                question: "A global e-commerce platform is deploying a Network Load Balancer (NLB) to handle their TCP traffic. They want to maintain detailed logs of the TLS requests made to the NLB. Which statement is true regarding access logs in Amazon Network Load Balancer?",
-                options: [
-                    "A) Access logs are enabled by default and capture all TCP requests.",
-                    "B) Access logs can be stored in Amazon S3 and capture detailed information about the TLS requests made to the NLB.",
-                    "C) Access logs capture information only about non-TLS requests.",
-                    "D) Access logs need to be processed using third-party tools exclusively."
-                ],
-                correct: "B",
-                explanation: "Amazon Network Load Balancer provides access logs that capture detailed information about the TLS requests sent to the NLB, stored in S3."
-            },
-            {
-                id: 29,
-                question: "A company is using AWS CloudFormation to deploy resources for a multi-tier web application. The CloudFormation stacks occasionally fail during creation due to throttling errors. How can CloudFormation be configured to reliably provision the stacks?",
-                options: [
-                    "A) Enable a CloudFormation retry policy with exponential backoff to automatically re-attempt failures.",
-                    "B) Create a Lambda function to monitor and re-run failed stacks manually.",
-                    "C) Set CloudWatch alarms on stack failures to trigger notifications.",
-                    "D) Use separate stacks for each tier to isolate failures."
-                ],
-                correct: "A",
-                explanation: "Enabling a CloudFormation retry policy with exponential backoff will automatically re-attempt any failed stack operations, providing reliable stack provisioning."
-            },
-            {
-                id: 30,
-                question: "A company is using AWS CDK to deploy infrastructure as code. The operations team needs visibility into resources created via CDK to troubleshoot reliability issues. Which CDK feature would enable this visibility?",
-                options: [
-                    "A) CDK can generate a CloudFormation template",
-                    "B) Enable AWS X-Ray tracing in the CDK app code to trace infrastructure issues.",
-                    "C) Add print statements in CDK code to output resource metadata.",
-                    "D) CDK automatically tags all generated resources for discoverability."
-                ],
-                correct: "A",
-                explanation: "The CDK can synthesize a CloudFormation template from CDK app code providing full resource definitions for troubleshooting without having to dig into CDK code."
-            },
-            {
-                id: 31,
-                question: "A company is running a production application on AWS that is experiencing occasional performance issues. The operations team needs to monitor and troubleshoot the issues. Which CloudWatch feature would be most useful for troubleshooting?",
-                options: [
-                    "A) CloudWatch Logs to analyze application logs in real time",
-                    "B) CloudWatch Alarms to trigger alerts when metrics cross thresholds",
-                    "C) CloudWatch Dashboards to correlate performance metrics",
-                    "D) CloudWatch Events to log state changes for resources"
-                ],
-                correct: "C",
-                explanation: "CloudWatch Dashboards allow correlating metrics, logs, and alarms across resources on a single pane of glass, enabling real-time troubleshooting."
-            },
-            {
-                id: 32,
-                question: "A company is running a mission-critical application on AWS that cannot experience any downtime. The operations team needs to proactively monitor the service health of the underlying AWS infrastructure. Which AWS tool would provide the most comprehensive visibility?",
-                options: [
-                    "A) The AWS Personal Health Dashboard provides real-time notifications, ongoing status, and historical information on AWS service health.",
-                    "B) AWS Trusted Advisor checks can be enabled to monitor service quotas and best practices.",
-                    "C) Amazon CloudWatch metrics and dashboards can be used to monitor AWS service metrics.",
-                    "D) Enable AWS CloudTrail logging to audit API calls made to AWS services."
-                ],
-                correct: "A",
-                explanation: "The AWS Personal Health Dashboard gives comprehensive visibility into the health and status of all underlying AWS services powering an application."
-            },
-            {
-                id: 33,
-                question: "A large enterprise is planning to use Amazon Managed Service for Prometheus to monitor their containerized workloads. The company has a strong emphasis on Reliability and wants to ensure that the monitoring solution adheres to their Reliability policies. What are the key Reliability considerations?",
-                options: [
-                    "A) Enable public access to all Prometheus endpoints for ease of integration and monitoring.",
-                    "B) Utilize IAM roles and policies to control access to the Prometheus service and its data.",
-                    "C) Ignore encryption since Prometheus primarily deals with non-sensitive metric data.",
-                    "D) Rely solely on network firewalls for securing the Prometheus service."
-                ],
-                correct: "B",
-                explanation: "Utilizing IAM roles and policies is the recommended approach to control who can access the Prometheus service and the data it handles, aligning with AWS best practices."
-            },
-            {
-                id: 34,
-                question: "A company is migrating its on-premises application monitoring stack to AWS. The monitoring dashboards need to be highly available to view application and system metrics. Which approach will meet the reliability requirements?",
-                options: [
-                    "A) Use Amazon Managed Service for Grafana which provides a fully managed, highly available Grafana service.",
-                    "B) Deploy Grafana servers on EC2 instances across multiple Availability Zones.",
-                    "C) Create CloudWatch dashboards to view application metrics and logs.",
-                    "D) Use AWS Elastic Beanstalk which has integrated monitoring capabilities."
-                ],
-                correct: "A",
-                explanation: "Amazon Managed Service for Grafana provides a fully managed, highly available Grafana deployment that scales on demand."
-            },
-            {
-                id: 35,
-                question: "A company is running mission-critical applications on AWS and wants to improve their fault tolerance. The DevOps team needs a way to easily identify potential failure points. Which AWS tool would provide the most comprehensive recommendations?",
-                options: [
-                    "A) AWS Trusted Advisor provides best practice checks across multiple categories including fault tolerance.",
-                    "B) Amazon CloudWatch Synthetics can simulate user requests to test failure scenarios.",
-                    "C) AWS X-Ray traces requests to visualize application dependencies.",
-                    "D) AWS Compute Optimizer identifies optimal resource configurations."
-                ],
-                correct: "A",
-                explanation: "AWS Trusted Advisor includes specific fault tolerance checks and recommendations across a range of categories to improve operational posture."
-            },
-            {
-                id: 36,
-                question: "A company is migrating their on-premises SAP system to AWS. They need to ensure the AWS environment meets the reliability requirements for SAP. Which approach would help improve reliability?",
-                options: [
-                    "A) Use AWS Launch Wizard for SAP to automatically build a reliable and optimized VPC environment for SAP.",
-                    "B) Manually deploy EC2 instances for SAP based on AWS documentation and best practices.",
-                    "C) Use AWS Elastic Beanstalk to deploy the SAP application stacks on optimized EC2 instances.",
-                    "D) Set up autoscaling on the EC2 instances running SAP to improve fault tolerance."
-                ],
-                correct: "A",
-                explanation: "AWS Launch Wizard for SAP provides a reliable and optimized AWS environment tailored specifically for SAP workloads, incorporating best practices."
-            },
-            {
-                id: 37,
-                question: "A company is running production workloads on AWS but is experiencing occasional performance issues. The engineering team wants to ensure optimal EC2 resource configuration for reliability. Which AWS service would help provide recommendations?",
-                options: [
-                    "A) AWS Compute Optimizer analyzes EC2 usage and provides optimization recommendations to improve reliability.",
-                    "B) AWS Trusted Advisor checks some best practices but does not analyze resource configuration.",
-                    "C) Amazon CloudWatch metrics can be used to set performance alarms.",
-                    "D) AWS X-Ray traces requests but does not evaluate configurations."
-                ],
-                correct: "A",
-                explanation: "AWS Compute Optimizer specifically analyzes EC2 configurations and usage metrics to generate optimization recommendations for higher performance and reliability."
-            },
-            {
-                id: 38,
-                question: "A company runs multiple business applications across different AWS accounts. The CTO wants to enforce policies and controls across accounts to improve reliability. Which AWS service would help achieve this?",
-                options: [
-                    "A) AWS Organizations allows centrally managing policies, tags, and controls across multiple AWS accounts.",
-                    "B) AWS Config can aggregate configuration data across accounts but does not enforce policies.",
-                    "C) AWS CloudTrail can log events across accounts but does not manage policies.",
-                    "D) AWS Trusted Advisor checks best practices but does not enforce policies across accounts."
-                ],
-                correct: "A",
-                explanation: "AWS Organizations allows defining and enforcing policies, tags, service controls, and change management across multiple AWS accounts centrally."
-            },
-            {
-                id: 39,
-                question: "A large enterprise runs multiple business applications across dozens of AWS accounts and needs to enforce security, compliance, and operational standards. Which AWS service would help meet these reliability requirements?",
-                options: [
-                    "A) AWS Control Tower provides pre-built landing zones to set up new accounts with controls baked in following best practices for reliability.",
-                    "B) AWS Security Hub centralizes compliance scanning and monitoring but does not set up new accounts.",
-                    "C) AWS Config can aggregate configuration data across accounts but does not enforce policies.",
-                    "D) AWS Organizations allows policy management but requires building landing zones."
-                ],
-                correct: "A",
-                explanation: "AWS Control Tower enables setting up new accounts as landing zones pre-configured with controls, guardrails, and best practices baked-in for reliability."
-            },
-            {
-                id: 40,
-                question: "A multinational corporation is looking to manage its fleet of EC2 instances and on-premises servers located in various geographical regions. The IT team needs a centralized solution to automate operational tasks, apply OS patches, and ensure compliance with the company's Reliability policies. What solutions or approach can the Solutions Architect choose?",
-                options: [
-                    "A) Use AWS Systems Manager to automate operational tasks, apply patches, and manage configurations across EC2 instances and on-premises servers from a central location.",
-                    "B) Deploy individual scripts manually on each EC2 instance and on-premises server for operational tasks and rely on third-party tools for patch management.",
-                    "C) Limit the use of AWS Systems Manager to EC2 instances only and use different management tools for on-premises servers.",
-                    "D) Utilize AWS Lambda for automating operational tasks and apply OS patches manually for each server and EC2 instance."
-                ],
-                correct: "A",
-                explanation: "AWS Systems Manager offers a unified interface for managing AWS resources and on-premises servers, automating operational tasks and patching."
-            },
-            {
-                id: 41,
-                question: "A company wants to standardize deployment of AWS resources across different teams to improve reliability. Developers need a way to quickly deploy approved architectures. Which AWS service would help with this?",
-                options: [
-                    "A) AWS Service Catalog allows administrators to create standardized, approved products that developers can easily deploy while staying within compliance.",
-                    "B) AWS CloudFormation provides templates for deploy sets of resources but does not offer pre-approved products.",
-                    "C) AWS Organizations can centralize policies but does not provide standardized deployment catalog.",
-                    "D) AWS Control Tower builds landing zones but does not help with ongoing governance after environments are live."
-                ],
-                correct: "A",
-                explanation: "AWS Service Catalog enables administrators to create pre-defined, approved products that comply with organizational standards for governed deployment."
-            },
-            {
-                id: 42,
-                question: "A company runs a mix of licensed and open-source software across 100 EC2 instances in production. The operations team needs to make sure they remain compliant with all software licenses. Which AWS service would help manage this reliability requirement?",
-                options: [
-                    "A) AWS License Manager provides centralized visibility and tracking of software licenses across EC2 instances, enabling compliance management.",
-                    "B) AWS Organizations can enforce policies across accounts but does not track software licenses.",
-                    "C) AWS Config can aggregate configuration data but does not manage license compliance.",
-                    "D) AWS Control Tower sets up new accounts with controls but does not monitor ongoing license usage."
-                ],
-                correct: "A",
-                explanation: "AWS License Manager gives administrators a single view of license usage across EC2 instances, and tools to manage compliance."
-            },
-            {
-                id: 43,
-                question: "A company is deploying a new mission-critical application to AWS that requires high availability across multiple Availability Zones. The development team wants to use infrastructure-as-code best practices. Which service would best meet these requirements?",
-                options: [
-                    "A) AWS Proton can deploy infrastructure templates to multiple AZs and supports pull request code reviews for reliability.",
-                    "B) AWS Elastic Beanstalk will auto-scale across AZs but does not support IaC best practices.",
-                    "C) AWS CloudFormation supports multi-AZ templates but does not have built-in code review capabilities.",
-                    "D) AWS OpsWorks uses Chef and Puppet but is not designed for multi-AZ templates."
-                ],
-                correct: "A",
-                explanation: "AWS Proton allows developers to create multi-AZ infrastructure templates following IaC best practices like code reviews."
-            },
-            {
-                id: 44,
-                question: "A company manages hundreds of EC2 instances running critical applications across multiple AWS accounts. The operations team needs an easy way to manage tags on resources consistently. Which tool would help improve reliability through better tag management?",
-                options: [
-                    "A) The AWS Tag Editor provides a unified view and bulk tagging capabilities to standardize tags across resources and accounts.",
-                    "B) AWS Config can aggregate configuration data across accounts but does not manage tags.",
-                    "C) AWS Trusted Advisor checks best practices but does not address tag consistency.",
-                    "D) AWS License Manager centralizes license compliance but not general tags."
-                ],
-                correct: "A",
-                explanation: "The AWS Tag Editor gives administrators centralized visibility and bulk tagging abilities to standardize tags across accounts and resources."
-            },
-            {
-                id: 45,
-                question: "A large company has complex, multi-tier applications running on AWS across hundreds of resources. The operations team needs full visibility into resource relationships and configurations to ensure reliability. Which AWS tool would provide the most complete visibility?",
-                options: [
-                    "A) AWS Resource Explorer allows visualizing all AWS resources and relationships across accounts and regions for comprehensive visibility.",
-                    "B) AWS Config provides configuration history and compliance data but does not visualize relationships.",
-                    "C) AWS Trusted Advisor checks best practices but does not map resource dependencies.",
-                    "D) AWS X-Ray traces requests between resources but does not fully map architecture."
-                ],
-                correct: "A",
-                explanation: "AWS Resource Explorer gives a centralized interactive view of all provisioned AWS resources and relationships across accounts and regions."
-            },
-            {
-                id: 46,
-                question: "A company manages hundreds of EC2 instances running critical applications across multiple AWS accounts and regions. The operations team needs an easy way to manage these resources as a group for reliability. Which AWS tool would help meet this requirement?",
-                options: [
-                    "A) AWS Resource Groups allows grouping resources across accounts and regions into custom-defined collections to simplify operations and management for reliability.",
-                    "B) AWS Organizations can centralize policies across accounts but does not provide resource grouping.",
-                    "C) AWS Config aggregates configuration data across resources but does not group them.",
-                    "D) AWS Trusted Advisor checks best practices but does not organize resources."
-                ],
-                correct: "A",
-                explanation: "AWS Resource Groups enables creating custom collections of resources across accounts and regions that can be managed as a single unit."
-            },
-            {
-                id: 47,
-                question: "A company has multiple AWS accounts and wants to enable developers to access only the resources they need for their projects. The security team needs a way to control resource access across accounts. Which AWS service would meet this requirement?",
-                options: [
-                    "A) AWS Resource Access Manager allows managing access to resources across accounts without exposing full account credentials.",
-                    "B) AWS Organizations can centralize policies across accounts but does not control resource access.",
-                    "C) AWS IAM Identity Center supports SSO but does not manage resource access.",
-                    "D) AWS Control Tower sets up central account baselines but does not granularly control access."
-                ],
-                correct: "A",
-                explanation: "AWS Resource Access Manager enables creating resource shares that provide access to specific AWS resources across accounts under least privilege."
-            },
-            {
-                id: 48,
-                question: "A company runs critical applications across multiple Availability Zones in AWS. The operations team needs real-time visibility into resilience issues to prevent outages. Which AWS service would provide the most valuable insights?",
-                options: [
-                    "A) AWS Resilience Hub continuously monitors for disruptive events and provides alerts and recommendations to proactively improve resilience.",
-                    "B) AWS Control Tower sets up central accounts but does not monitor real-time resilience.",
-                    "C) AWS Trusted Advisor checks best practices but does not monitor real-time disruptions.",
-                    "D) Amazon CloudWatch Dashboards show operational metrics but no resilience-specific insights."
-                ],
-                correct: "A",
-                explanation: "AWS Resilience Hub monitors for disruptions in real-time and provides proactive resilience alerts and recommendations tailored to the environment."
-            },
-            {
-                id: 49,
-                question: "A company is running several critical applications on AWS. The security team needs to ensure only authorized users and roles have access to these resources. Which AWS service would help meet this reliability requirement?",
-                options: [
-                    "A) AWS IAM allows managing permissions through identity-based policies and role delegation for least-privilege access control.",
-                    "B) AWS Control Tower builds secure baseline environments but does not manage ongoing access.",
-                    "C) AWS Organizations can centralize policies across accounts but does not control identity-based access.",
-                    "D) AWS AppConfig provides configuration management capabilities but not fine-grained access control."
-                ],
-                correct: "A",
-                explanation: "AWS IAM enables creating users, roles and policies to grant least-privilege and controlled access to AWS resources and APIs."
-            },
-            {
-                id: 50,
-                question: "A software development team is planning to use the AWS Cloud Development Kit (CDK) to define cloud infrastructure in code and deploy it through AWS IAM. What are the key components and features of the AWS Cloud Development Kit that the team should be aware of?",
-                options: [
-                    "A) The CDK allows defining cloud resources in familiar programming languages and compiles this into IAM templates.",
-                    "B) The CDK is a visual tool that provides a drag-and-drop interface for designing cloud infrastructure.",
-                    "C) The CDK exclusively uses JSON to define cloud resources and does not support traditional programming languages.",
-                    "D) The CDK is a command-line tool that directly interacts with AWS services to deploy resources without using IAM."
-                ],
-                correct: "A",
-                explanation: "The AWS Cloud Development Kit (CDK) allows developers to use familiar programming languages (TypeScript, Python, Java, C#) to model and provision AWS resources via IAM templates."
-            },
-            {
-                id: 51,
-                question: "A company has a mobile app that enables users to access AWS resources after authenticating. The engineering team needs to implement secure sign-in with minimum backend coding. Which AWS service would meet this reliability requirement?",
-                options: [
-                    "A) Amazon Cognito provides user identity management and sign-in capabilities for mobile apps with built-in security features.",
-                    "B) AWS IAM Identity Center supports identity management but requires custom coding of sign-in logic.",
-                    "C) AWS API Gateway can generate SDKs for accessing serverless backends but does not handle user authentication.",
-                    "D) AWS Amplify provides client libraries for web and mobile apps but does not include pre-built sign-in functionality."
-                ],
-                correct: "A",
-                explanation: "Amazon Cognito offers user authentication, authorization, and identity management capabilities with minimal coding needed for web and mobile apps."
-            },
-            {
-                id: 52,
-                question: "A company is migrating a critical application to AWS that interacts with many AWS services across multiple accounts. The security team needs to ensure the application has least-privilege permissions. Which AWS tool would meet this reliability requirement?",
-                options: [
-                    "A) AWS Verified Permissions analyzes the actual API calls made and generates least-privilege IAM policies tailored to the workload.",
-                    "B) AWS IAM Access Analyzer checks for insecure permissions but does not provide customized policies.",
-                    "C) AWS Trusted Advisor reviews best practices but does not optimize permissions specifically.",
-                    "D) AWS License Manager tracks license usage but does not address IAM permissions."
-                ],
-                correct: "A",
-                explanation: "AWS Verified Permissions inspects API activity to generate customized, least-privilege IAM policies specific to the workload."
-            },
-            {
-                id: 53,
-                question: "A company is deploying a mission-critical application across multiple Availability Zones in AWS. The system architects need to design the system for high reliability. Which CloudWatch capability would allow detecting and resolving issues proactively?",
-                options: [
-                    "A) CloudWatch Alarms can monitor key operational metrics and send notifications when thresholds are crossed to take proactive actions.",
-                    "B) CloudWatch Logs can aggregate log data but does not allow triggering actions on metrics.",
-                    "C) CloudWatch Events can schedule automated actions but is not used for monitoring metrics.",
-                    "D) CloudWatch Dashboards visualize metrics but do not actively trigger operational changes."
-                ],
-                correct: "A",
-                explanation: "CloudWatch Alarms allows setting thresholds on metrics and taking programmatic actions when alarms are triggered to proactively address reliability issues."
-            },
-            {
-                id: 54,
-                question: "A company is deploying a multi-tier web application across multiple accounts and regions on AWS. The operations team needs to design this architecture for high reliability. Which AWS Config capability would help meet this requirement?",
-                options: [
-                    "A) AWS Config continuously monitors resource configurations and allows evaluating compliance against desired baselines.",
-                    "B) AWS Control Tower can set up core accounts with secure configurations but does not monitor ongoing drift.",
-                    "C) AWS Trusted Advisor checks best practices but does not evaluate configurations for compliance.",
-                    "D) AWS Health Dashboard shows events impacting services but does not assess infrastructure configurations."
-                ],
-                correct: "A",
-                explanation: "AWS Config continuously monitors and evaluates resource configurations for compliance against rules and desired baselines."
-            },
-            {
-                id: 55,
-                question: "A healthcare company is migrating sensitive applications to AWS that must comply with HIPAA regulations. The compliance team needs to ensure AWS infrastructure meets regulatory requirements. Which AWS tool would meet this need?",
-                options: [
-                    "A) AWS Artifact provides on-demand access to AWS compliance reports and agreements to validate infrastructure compliance with regulations.",
-                    "B) AWS Config checks resource configurations against desired settings but does not assess regulatory compliance.",
-                    "C) AWS Trusted Advisor reviews best practices and optimizations but lacks compliance reports.",
-                    "D) AWS Health Dashboard shows events impacting services but does not document compliance controls."
-                ],
-                correct: "A",
-                explanation: "AWS Artifact allows accessing AWS compliance documents like audit reports to confirm infrastructure adheres to necessary regulations."
-            },
-            {
-                id: 56,
-                question: "A company is running critical applications on AWS that contain sensitive customer data. The security team aims to design a reliable system that proactively monitors for threats. Which AWS service would meet this requirement?",
-                options: [
-                    "A) Amazon GuardDuty continuously monitors for malicious or unauthorized activity and provides threat detection alerts to respond quickly.",
-                    "B) AWS CloudTrail records API calls but does not analyze activity for threats.",
-                    "C) AWS Config monitors for resource configuration changes but does not detect malicious behavior.",
-                    "D) AWS Trusted Advisor reviews best practices but does not monitor real-time user activity."
-                ],
-                correct: "A",
-                explanation: "Amazon GuardDuty uses machine learning to analyze account and network activity patterns and identifies potential threats."
-            },
-            {
-                id: 57,
-                question: "A company is migrating a legacy application to AWS that will run on EC2 instances. The security team aims to assess the instances for vulnerabilities and securely configure them. Which AWS service would meet this requirement?",
-                options: [
-                    "A) Amazon Inspector performs automated vulnerability scans and provides a detailed report of security findings to securely configure systems.",
-                    "B) AWS Trusted Advisor reviews best practices but does not scan for vulnerabilities.",
-                    "C) AWS Config monitors for configuration changes but does not identify vulnerabilities.",
-                    "D) AWS CloudTrail tracks API calls but does not analyze system security."
-                ],
-                correct: "A",
-                explanation: "Amazon Inspector runs comprehensive assessments to identify potential vulnerabilities on EC2 instances."
-            },
-            {
-                id: 58,
-                question: "A financial company handles sensitive customer data in S3 buckets. The security team aims to reliably secure this data against threats. Which AWS service would meet this requirement?",
-                options: [
-                    "A) Amazon Macie uses machine learning to automatically discover, classify, and protect sensitive data stored in S3.",
-                    "B) AWS CloudTrail logs S3 access but does not analyze or classify the data itself.",
-                    "C) AWS Config monitors S3 bucket configurations but does not evaluate data security.",
-                    "D) AWS Trusted Advisor reviews best practices but does not analyze data content."
-                ],
-                correct: "A",
-                explanation: "Amazon Macie applies machine learning and pattern matching to automatically inspect S3 objects and identify sensitive data."
-            },
-            {
-                id: 59,
-                question: "A company is deploying critical applications across multiple Availability Zones in AWS. The engineering team wants to build a resilient architecture that minimizes downtime. Which AWS tool would provide the most valuable insights?",
-                options: [
-                    "A) AWS Reliability Hub continuously monitors the environment for potential faults, failures, and disruptions. It provides recommendations tailored to the architecture to proactively improve resilience.",
-                    "B) AWS Control Tower sets up core accounts and guardrails, but does not monitor real-time resilience metrics.",
-                    "C) AWS Trusted Advisor reviews best practices, but it does not provide resilience analysis customized to the workload.",
-                    "D) Amazon CloudWatch Dashboards visualize metrics, but do not offer resilience-specific insights."
-                ],
-                correct: "A",
-                explanation: "AWS Reliability Hub analyzes architecture configurations, dependencies, metrics, and disruptions in real-time to provide targeted recommendations."
-            },
-            {
-                id: 60,
-                question: "A financial company handles sensitive data and wants to encrypt it both in transit and at rest. The security team needs to reliably manage the encryption keys. Which AWS service would meet this requirement?",
-                options: [
-                    "A) AWS KMS allows creating, managing, and controlling access to encryption keys centrally for resources across AWS services.",
-                    "B) AWS CloudHSM provides dedicated hardware security modules but requires managing key material.",
-                    "C) AWS Secrets Manager stores secrets but does not generate or manage encryption keys.",
-                    "D) AWS Certificate Manager provisions SSL/TLS certificates but does not support data encryption keys."
-                ],
-                correct: "A",
-                explanation: "AWS KMS enables creating, rotating, disabling and managing access controls for encryption keys centrally across AWS services."
-            },
-            {
-                id: 61,
-                question: "A financial company handles highly sensitive data and needs dedicated hardware security modules (HSMs) to securely manage cryptographic keys. The security team aims to deploy CloudHSMs reliably. Which AWS capability would meet this requirement?",
-                options: [
-                    "A) CloudHSM allows deploying HSM clusters across Availability Zones with automatic failover. This provides high availability and fault tolerance for secure key management.",
-                    "B) AWS Key Management Service (KMS) offers secure key management using HSMs but does not support dedicated HSM clusters.",
-                    "C) AWS Secrets Manager stores secrets but does not provide dedicated HSM infrastructure.",
-                    "D) AWS Certificate Manager provisions SSL/TLS certificates but does not manage cryptographic keys."
-                ],
-                correct: "A",
-                explanation: "AWS CloudHSM allows deploying dedicated HSM clusters with automatic failover across Availability Zones for fault-tolerant secure key management."
-            },
-            {
-                id: 62,
-                question: "A company operates a public-facing website using HTTPS. The security team needs to reliably provision and renew SSL/TLS certificates. Which AWS service would meet this requirement?",
-                options: [
-                    "A) AWS Certificate Manager automates provisioning, renewal, and deployment of SSL/TLS certificates for supported AWS services.",
-                    "B) AWS CloudHSM can store private keys in hardware modules but requires manually managing the certificates.",
-                    "C) AWS Secrets Manager securely stores secrets but does not automate certificate management.",
-                    "D) AWS Artifact provides on-demand access to AWS compliance reports but does not provision certificates."
-                ],
-                correct: "A",
-                explanation: "AWS Certificate Manager automates management of public SSL/TLS certificates, enabling reliable and secure connectivity without certificate administration overhead."
-            },
-            {
-                id: 63,
-                question: "A company needs to issue internal TLS certificates for services accessed across VPCs and VPNs. The security team aims to reliably manage these certificates privately. Which AWS service would meet this requirement?",
-                options: [
-                    "A) AWS Private Certificate Authority creates a private CA to automate issuing, revoking, and managing private certificates within the organization.",
-                    "B) AWS Certificate Manager manages public SSL/TLS certificates only, not private CAs.",
-                    "C) AWS Secrets Manager securely stores certificate private keys but does not manage issuing certificates.",
-                    "D) AWS CloudHSM provides dedicated hardware modules but does not automate issuing and managing certificates."
-                ],
-                correct: "A",
-                explanation: "AWS Private Certificate Authority allows creating a private CA to reliably issue, manage and revoke private TLS certificates internally."
-            },
-            {
-                id: 64,
-                question: "A company stores database credentials in AWS Secrets Manager to access production databases in us-east-1. The reliability team needs to design a failover for database access if us-east-1 becomes unavailable. Which Secrets Manager capability would meet this requirement?",
-                options: [
-                    "A) Secrets Manager allows enabling automatic cross-region replication of secrets to create standbys in other regions for reliability.",
-                    "B) Secrets Manager can rotate secrets periodically but does not replicate them across regions.",
-                    "C) AWS Config can monitor resource configurations but does not replicate secrets.",
-                    "D) AWS Backup can backup secrets but does not provide automatic cross-region replication."
-                ],
-                correct: "A",
-                explanation: "Secrets Manager enables automatic cross-region replication of secrets to create hot standbys for failover support."
-            },
-            {
-                id: 65,
-                question: "A company is running applications across multiple VPCs and accounts. The security team wants to centrally manage firewall rules to reliably secure these resources. Which AWS capabilities could help meet this requirement?",
-                options: [
-                    "A) AWS Firewall Manager enables centrally defining and enforcing AWS WAF rules and security group rules across accounts and applications.",
-                    "B) AWS Config helps evaluate resource configurations but does not manage firewall rules.",
-                    "C) AWS CloudTrail tracks API calls but does not configure security groups or WAF rules.",
-                    "D) AWS Trusted Advisor reviews best practices but does not manage firewall policies."
-                ],
-                correct: "A",
-                explanation: "AWS Firewall Manager allows central administration of WAF rules and security group rules across multiple accounts and VPCs."
-            },
-            {
-                id: 66,
-                question: "A large enterprise wants to centrally collect and analyze security data from multiple AWS accounts and on-premises sources. The security team needs to reliably build this analytics capability. Which AWS service would meet this requirement?",
-                options: [
-                    "A) AWS Security Lake provides a reliable, scalable central repository that collects, aggregates, and analyzes security data from distributed sources.",
-                    "B) Amazon EventBridge can ingest some security data but does not provide data lake capabilities.",
-                    "C) Amazon S3 stores raw data but does not analyze or process it.",
-                    "D) AWS Lake Formation enables building data lakes but lacks native security analytics."
-                ],
-                correct: "A",
-                explanation: "AWS Security Lake reliably ingests, aggregates, and analyzes dispersed security telemetry in a central data lake."
-            },
-            {
-                id: 67,
-                question: "A company needs to automatically scale their Kinesis data stream for fluctuations in workload. How can Kinesis Data Streams help?",
-                options: [
-                    "A) By enabling auto scaling on data streams based on utilization",
-                    "B) Through multi-region stream replication",
-                    "C) Using the Kinesis Producer Library",
-                    "D) With enhanced fan-out to consumers"
-                ],
-                correct: "A",
-                explanation: "Kinesis Data Streams can automatically scale stream capacity up and down based on utilization to handle workload changes."
-            },
-            {
-                id: 68,
-                question: "A company has seasonal spikes in their Kinesis data streams. How can Kinesis Data Streams cost-effectively support this?",
-                options: [
-                    "A) By enabling on-demand mode to eliminate over-provisioning",
-                    "B) Using multi-region replication",
-                    "C) Through auto scaling stream capacity",
-                    "D) With enhanced fan-out consumers"
-                ],
-                correct: "A",
-                explanation: "Kinesis Data Streams on-demand mode allows paying per stream capacity unit on hourly time blocks, eliminating over-provisioning."
-            },
-            {
-                id: 69,
-                question: "A company needs to retain streaming data for compliance purposes in Kinesis Data Streams. What is the maximum data retention period available?",
-                options: [
-                    "A) 7 days",
-                    "B) 24 hours",
-                    "C) 1 year",
-                    "D) 365 days"
-                ],
-                correct: "D",
-                explanation: "Kinesis Data Streams allows configuring data retention up to a maximum of 365 days."
-            },
-            {
-                id: 70,
-                question: "A company needs to automatically detect and replace failed Kafka brokers in Amazon MSK. How does Amazon MSK provide this capability?",
-                options: [
-                    "A) Through its use of auto healing to automatically replace unhealthy brokers",
-                    "B) By caching data in Amazon ElastiCache",
-                    "C) Using Multi-AZ deployments",
-                    "D) With encryption in transit"
-                ],
-                correct: "A",
-                explanation: "Amazon MSK utilizes auto healing to automatically detect failed Kafka brokers in a cluster and replace them to maintain high availability."
-            },
-            {
-                id: 71,
-                question: "A company requires high availability for their Kafka workloads in Amazon MSK. How does Amazon MSK provide high availability?",
-                options: [
-                    "A) By deploying Kafka clusters across multiple Availability Zones",
-                    "B) Through asynchronous replication across regions",
-                    "C) Using automatic topic creation",
-                    "D) With automatic certificate renewal"
-                ],
-                correct: "A",
-                explanation: "Amazon MSK provides high availability by deploying Kafka clusters across multiple Availability Zones to protect against zone failures."
-            },
-            {
-                id: 72,
-                question: "A company needs to replicate their Amazon MSK clusters across regions. How does MSK support cross-region replication?",
-                options: [
-                    "A) Through asynchronous replication of clusters across regions",
-                    "B) By deploying clusters across Availability Zones",
-                    "C) Using automatic topic creation",
-                    "D) With automatic certificate renewal"
-                ],
-                correct: "A",
-                explanation: "Amazon MSK supports asynchronous replication of clusters across regions to provide disaster recovery."
-            },
-            {
-                id: 73,
-                question: "A company needs to ensure resilience of the Zookeeper nodes for their Amazon MSK cluster. How does MSK provide this?",
-                options: [
-                    "A) By tightly integrating and managing Zookeeper nodes as part of MSK clusters",
-                    "B) Through the use of data caching",
-                    "C) With automatic failure detection and recovery",
-                    "D) Using Multi-AZ deployments"
-                ],
-                correct: "A",
-                explanation: "Amazon MSK fully manages and tightly integrates Zookeeper nodes as part of MSK clusters, providing automated control plane resilience."
-            },
-            {
-                id: 74,
-                question: "A company needs to ensure continuity of ETL jobs in AWS Glue. How does AWS Glue provide reliability?",
-                options: [
-                    "A) Through automated retry of failed jobs",
-                    "B) By using Glue crawlers",
-                    "C) With Glue DataBrew",
-                    "D) Using zonal VPC endpoints"
-                ],
-                correct: "A",
-                explanation: "AWS Glue provides automated retry capabilities for failed ETL jobs to recover from transient failures and ensure workload continuity."
-            },
-            {
-                id: 75,
-                question: "A company needs to optimize costs for their AWS Glue ETL jobs. How can Glue help manage resources?",
-                options: [
-                    "A) By allocating Data Processing Units (DPUs) for optimal scaling",
-                    "B) Using zonal VPC endpoints",
-                    "C) Through automated job retries",
-                    "D) With Glue DataBrew"
-                ],
-                correct: "A",
-                explanation: "AWS Glue allows allocating appropriate Data Processing Units to scale resource usage up and down based on job requirements, optimizing costs."
-            },
-            {
-                id: 76,
-                question: "A company needs to improve availability of their Amazon EMR clusters. How can EMR support this?",
-                options: [
-                    "A) By enabling multiple primary nodes for HDFS NameNode redundancy",
-                    "B) Through EMR integration with AWS Glue",
-                    "C) Using EMR auto-termination of idle clusters",
-                    "D) With EMR integration with AWS Lake Formation"
-                ],
-                correct: "A",
-                explanation: "Amazon EMR supports configuring multiple primary nodes to provide redundancy for the HDFS NameNode and improve cluster availability."
-            },
-            {
-                id: 77,
-                question: "A company needs to improve reliability of resource management for their Amazon EMR clusters running Spark jobs. How can EMR help?",
-                options: [
-                    "A) By leveraging YARN as the cluster resource manager",
-                    "B) Through integration with AWS Glue Crawlers",
-                    "C) Using auto-termination of idle EMR clusters",
-                    "D) With EMR integration with Lake Formation"
-                ],
-                correct: "A",
-                explanation: "Amazon EMR uses YARN for cluster resource management, which provides high availability of the Resource Manager to reliably manage resources for Spark jobs."
-            },
-            {
-                id: 78,
-                question: "A company needs to improve fault tolerance for their Amazon EMR clusters. How can EMR provide increased resilience?",
-                options: [
-                    "A) By deploying clusters across multiple Availability Zones",
-                    "B) Through integration with AWS Lake Formation",
-                    "C) Using EMR auto-termination of idle clusters",
-                    "D) With EMR integration with AWS Glue crawlers"
-                ],
-                correct: "A",
-                explanation: "Amazon EMR allows deploying clusters across multiple Availability Zones to provide increased fault tolerance and resilience."
-            },
-            {
-                id: 79,
-                question: "A company runs analytics on datasets stored in Amazon S3 using Amazon EMR. How can EMR provide resilient access to S3 data?",
-                options: [
-                    "A) By using EMRFS to reliably access S3 from EMR clusters",
-                    "B) Through EMR integration with AWS Glue crawlers",
-                    "C) With EMR auto-scaling of cluster capacity",
-                    "D) Using multiple Availability Zones for EMR clusters"
-                ],
-                correct: "A",
-                explanation: "EMRFS provides Amazon EMR clusters with reliable, scalable access to data in Amazon S3."
-            },
-            {
-                id: 80,
-                question: "A company needs to monitor the health and reliability of their Amazon EMR clusters. What capability does EMR provide to support this?",
-                options: [
-                    "A) Integration with CloudWatch metrics for real-time visibility into cluster status",
-                    "B) EMR auto-termination of idle clusters",
-                    "C) Using EMRFS for access to data in S3",
-                    "D) Deploying EMR clusters across multiple Availability Zones"
-                ],
-                correct: "A",
-                explanation: "Amazon EMR integrates with CloudWatch metrics to provide real-time visibility into cluster health and performance for monitoring."
-            },
-            {
-                id: 81,
-                question: "A company needs to reliably prepare data at scale for analytics. How can AWS Glue DataBrew support this?",
-                options: [
-                    "A) By automatically retrying failed DataBrew jobs to ensure completion",
-                    "B) Through integration with AWS Lake Formation",
-                    "C) Using zonal VPC endpoints with Glue DataBrew",
-                    "D) With encryption of jobs artifacts"
-                ],
-                correct: "A",
-                explanation: "AWS Glue DataBrew provides automated retry capabilities to rerun failed data preparation jobs, enabling reliable execution at scale."
-            },
-            {
-                id: 82,
-                question: "A company needs to customize the number of automatic retry attempts for failed AWS Glue DataBrew jobs. How can this be configured?",
-                options: [
-                    "A) By setting the max number of retries per job in DataBrew settings",
-                    "B) Using Lake Formation policies",
-                    "C) Through zonal VPC endpoints",
-                    "D) With encrypted job artifacts"
-                ],
-                correct: "A",
-                explanation: "AWS Glue DataBrew allows setting the maximum number of automatic retry attempts per job to customize resilience."
-            },
-            {
-                id: 83,
-                question: "A company needs secure, reliable access to data in their data lake built on Amazon S3. How can AWS Lake Formation help?",
-                options: [
-                    "A) By enabling consistent access control and auditing across distributed S3 data",
-                    "B) Through the use of column-level security",
-                    "C) With automatic ETL job retries in AWS Glue",
-                    "D) Using encrypted data at rest"
-                ],
-                correct: "A",
-                explanation: "AWS Lake Formation provides consistent access controls and auditing which improves reliability of security for distributed data in Amazon S3 across a data lake."
-            },
-            {
-                id: 84,
-                question: "A company needs to be able to reliably query a large dataset in Amazon S3. Which service provides resilient query capability?",
-                options: [
-                    "A) Amazon Athena",
-                    "B) AWS Glue crawlers",
-                    "C) Amazon EMR",
-                    "D) Amazon Redshift"
-                ],
-                correct: "A",
-                explanation: "Amazon Athena provides reliable and resilient query capability directly against data in Amazon S3 without needing to move the data."
-            },
-            {
-                id: 85,
-                question: "A company needs to enable business analysts to reliably generate insights from data in Amazon S3. Which service can provide resilient analytics capabilities?",
-                options: [
-                    "A) Amazon QuickSight",
-                    "B) Amazon Athena",
-                    "C) Amazon EMR",
-                    "D) AWS Glue"
-                ],
-                correct: "A",
-                explanation: "Amazon QuickSight provides a resilient serverless analytics service that allows analysts to generate insights from data in Amazon S3 without moving or transforming data first."
-            },
-            {
-                id: 86,
-                question: "A machine learning engineer needs to reliably test multiple variants of a model. How can Amazon SageMaker help support this?",
-                options: [
-                    "A) By enabling A/B testing of different model variants",
-                    "B) Through integration with AWS Glue ETL",
-                    "C) Using SageMaker hyperparameter tuning",
-                    "D) With automatic rollout to production"
-                ],
-                correct: "A",
-                explanation: "Amazon SageMaker provides built-in support for A/B testing of machine learning models to reliably evaluate multiple variants."
-            },
-            {
-                id: 87,
-                question: "A machine learning engineer needs to reliably train ML models on large datasets. How can Amazon SageMaker support this?",
-                options: [
-                    "A) By distributing training jobs across multiple instances for resilience",
-                    "B) Using SageMaker hyperparameter tuning",
-                    "C) Through integration with AWS Glue ETL",
-                    "D) With automatic deployment of models"
-                ],
-                correct: "A",
-                explanation: "Amazon SageMaker allows distributing ML training jobs across multiple instances to provide resilience for large datasets and models."
-            },
-            {
-                id: 88,
-                question: "A biotech company is using Amazon SageMaker for sensitive genomic data analysis. Due to the confidential nature of the data, they require a highly secure environment with no internet access for their notebooks and training jobs. How can they configure SageMaker to operate in a 'No Internet' mode?",
-                options: [
-                    "A) Configure the SageMaker notebook instances and training jobs to use a VPC without an Internet Gateway",
-                    "B) Set the SageMaker notebooks and training jobs to 'Offline' mode in the SageMaker console.",
-                    "C) Use AWS Direct Connect to establish a private connection to SageMaker, bypassing the internet.",
-                    "D) Enable 'No Internet' mode by setting an IAM policy that blocks internet access for SageMaker resources."
-                ],
-                correct: "A",
-                explanation: "Configuring SageMaker instances to operate within a VPC without an Internet Gateway ensures all traffic stays within the AWS network and does not traverse the public internet."
-            },
-            {
-                id: 89,
-                question: "A company is building an image recognition application that analyzes photos uploaded by users to Amazon S3 and tags them. The application needs to reliably process a large volume of images with minimal delays. Which AWS service would provide the most resilient way to add image recognition capabilities?",
-                options: [
-                    "A) Use Amazon Rekognition image analysis to tag the user photos stored in Amazon S3",
-                    "B) Build a custom image recognition model using Amazon SageMaker",
-                    "C) Process the images using an AWS Lambda function",
-                    "D) Load the S3 images into an Amazon EMR cluster for distributed analysis"
-                ],
-                correct: "A",
-                explanation: "Amazon Rekognition provides a highly scalable and reliable fully managed image analysis service without needing to build and host a custom model."
-            },
-            {
-                id: 90,
-                question: "A company is building an audio book app that needs to convert large volumes of text from books into speech. The application requires reliably synthesizing speech for each chapter with minimal delays. Which AWS service would provide the most resilient way to add text-to-speech capabilities at scale?",
-                options: [
-                    "A) Use Amazon Polly to directly convert the book text to speech",
-                    "B) Build a custom text-to-speech model with Amazon SageMaker",
-                    "C) Process the text using an AWS Lambda function",
-                    "D) Load the text into an Amazon EMR cluster for distributed processing"
-                ],
-                correct: "A",
-                explanation: "Amazon Polly provides a highly scalable and resilient fully managed text-to-speech service to synthesize large volumes of text without infrastructure management."
-            },
-            {
-                id: 91,
-                question: "A company is building a customer service chatbot using Amazon Lex that needs to respond to a high volume of users with low latency. The operations team needs real-time visibility into availability and performance. Which approach would allow reliably monitoring the Amazon Lex chatbot?",
-                options: [
-                    "A) Enable CloudWatch metrics for the Lex bot to track real-time metrics such as latency and errors",
-                    "B) Review Lex logs using Amazon CloudWatch Logs insights",
-                    "C) Use AWS X-Ray tracing of Lex API calls",
-                    "D) Ping the Lex runtime API periodically from a scheduled Lambda function"
-                ],
-                correct: "A",
-                explanation: "Amazon Lex integrates with CloudWatch metrics for real-time visibility into bot performance and availability, tracking metrics like latency and errors."
-            },
-            {
-                id: 92,
-                question: "A company is using Amazon Comprehend for sentiment analysis on product reviews stored in Amazon S3. The data science team needs real-time visibility into availability and performance. Which approach would allow reliably monitoring Amazon Comprehend?",
-                options: [
-                    "A) Enable CloudWatch metrics for Comprehend to track real-time metrics such as invocation errors",
-                    "B) Review Comprehend logs using Amazon CloudWatch Logs Insights",
-                    "C) Use AWS X-Ray tracing of Comprehend API calls",
-                    "D) Ping the Comprehend endpoint periodically from a Lambda function"
-                ],
-                correct: "A",
-                explanation: "Amazon Comprehend integrates with CloudWatch metrics for real-time visibility into service performance and availability."
-            },
-            {
-                id: 93,
-                question: "A retail company is using Amazon Forecast to generate product demand predictions. The data science team needs real-time visibility into Forecast to monitor model accuracy and ensure availability. Which approach would allow reliably monitoring Amazon Forecast?",
-                options: [
-                    "A) Enable CloudWatch metrics for Forecast like prediction errors to track model accuracy",
-                    "B) Review Forecast logs using CloudWatch Logs Insights",
-                    "C) Use X-Ray tracing of Forecast API calls",
-                    "D) Invoke the Forecast API periodically from a Lambda function"
-                ],
-                correct: "A",
-                explanation: "Enabling CloudWatch metrics like prediction errors allows tracking model accuracy and operational health."
-            },
-            {
-                id: 94,
-                question: "A startup is building a machine learning model to analyze sentiment from customer support transcripts stored in Amazon S3. They need to consistently label thousands of hours of audio data for training. Which AWS service would allow reliably labeling this dataset at scale?",
-                options: [
-                    "A) Use Amazon A2I human review workflows to distribute labeling to multiple workers.",
-                    "B) Create an Amazon Mechanical Turk project for workers to label the transcripts.",
-                    "C) Process and label the data on an Amazon SageMaker notebook instance.",
-                    "D) Load the transcripts to Amazon Redshift and label using SQL queries."
-                ],
-                correct: "A",
-                explanation: "Amazon A2I provides managed and scalable human review workflows to reliably distribute labeling tasks across multiple workers."
-            },
-            {
-                id: 95,
-                question: "A bank needs to analyze credit card transactions in near real-time to detect fraudulent activity. They require a scalable fraud detection system that can reliably process high volumes of payment data with minimal latency. Which AWS service would best meet these requirements?",
-                options: [
-                    "A) Use Amazon Fraud Detector to monitor transactions and detect anomalies.",
-                    "B) Build a custom ML model on SageMaker to classify transactions.",
-                    "C) Analyze transactions in batches using an EMR cluster.",
-                    "D) Flag transactions from an AWS Lambda function."
-                ],
-                correct: "A",
-                explanation: "Amazon Fraud Detector provides a fully managed and scalable fraud detection service allowing near real-time analysis of transaction data."
-            },
-            {
-                id: 96,
-                question: "A media company is using Amazon Transcribe to automatically generate captions for thousands of hours of video content stored in S3. Transcribe must process the video backlog reliably without delays. How can the architecture be made resilient to zone outages?",
-                options: [
-                    "A) Nothing. It is already highly available.",
-                    "B) Deploy Transcribe in a single AZ and periodically take VM snapshots",
-                    "C) Use AWS Lambda functions with Auto Scaling for distributed processing",
-                    "D) Provision Transcribe in multiple regions and route traffic based on latency"
-                ],
-                correct: "A",
-                explanation: "Amazon Transcribe is built to be highly available by default across Availability Zones, requiring no manual multi-AZ configuration."
-            },
-            {
-                id: 97,
-                question: "A company is using Amazon Translate to localize support articles into multiple languages. The operations team needs real-time visibility into Translate's availability, latency, and accuracy. Which approach would allow reliably monitoring Amazon Translate?",
-                options: [
-                    "A) Enable CloudWatch metrics like translation errors and latency",
-                    "B) Review Translate logs using CloudWatch Logs Insights",
-                    "C) Use X-Ray tracing to analyze Translate API calls",
-                    "D) Invoke the Translate API periodically from a Lambda function"
-                ],
-                correct: "A",
-                explanation: "Amazon Translate integrates with CloudWatch metrics to monitor real-time service metrics including errors, latency, and throughput."
-            },
-            {
-                id: 98,
-                question: "A law firm is using Amazon Textract to automatically extract text and data from scanned legal contracts stored in S3. The operations team needs real-time visibility into Textract's availability, latency, and accuracy. Which approach would allow reliably monitoring Amazon Textract?",
-                options: [
-                    "A) Enable CloudWatch metrics like text extraction errors",
-                    "B) Review Textract logs using CloudWatch Logs Insights",
-                    "C) Use X-Ray tracing to analyze Textract API calls",
-                    "D) Invoke the Textract API periodically from a Lambda function"
-                ],
-                correct: "A",
-                explanation: "Amazon Textract integrates with CloudWatch metrics to monitor real-time service metrics including extraction errors and latency."
-            },
-            {
-                id: 99,
-                question: "A company is using Application Discovery Service to track on-premises servers and plan a migration to AWS. The operations team needs real-time visibility into Discovery Service availability and performance. Which approach would allow reliably monitoring Application Discovery Service?",
-                options: [
-                    "A) Enable CloudWatch metrics for Discovery Service such as agent health",
-                    "B) Review Discovery Service logs using CloudWatch Logs Insights",
-                    "C) Use X-Ray tracing to analyze Discovery Service API calls",
-                    "D) Poll discovered configuration data periodically with Lambda"
-                ],
-                correct: "A",
-                explanation: "Application Discovery Service integrates with CloudWatch metrics for real-time visibility into agent health, data collection status, and service performance."
-            },
-            {
-                id: 100,
-                question: "A Solutions Architect is designing a production environment for an IBM DB2 database that will run on Amazon RDS. Considering the need for high availability and resiliency, what deployment strategy should the Architect use when configuring the RDS DB instance for DB2?",
-                options: [
-                    "A) Configure a Multi-AZ deployment for the RDS DB2 instance to ensure synchronous data replication and automatic failover capabilities.",
-                    "B) Deploy the RDS DB2 instance in a single Availability Zone and rely on regular snapshots for recovery.",
-                    "C) Set up cross-region read replicas of the RDS DB2 instance to provide global scalability and resiliency.",
-                    "D) Use Amazon RDS on VMware to deploy the DB2 database across multiple on-premises data centers."
-                ],
-                correct: "A",
-                explanation: "Amazon RDS supports Multi-AZ deployments for high availability and resiliency, ensuring synchronous replication to a standby instance and automatic failover."
-            }
-        ];
+    {
+        "id": 1,
+        "question": "How does Amazon Keyspaces (for Apache Cassandra) utilize distributed storage to manage large-scale, globally distributed databases?",
+        "options": [
+            "A) Keyspaces relies on a centralized storage model with the option to manually distribute data across different Availability Zones.",
+            "B) The service employs a peer-to-peer distributed storage architecture, mirroring Apache Cassandra's design, to evenly distribute data across the cluster.",
+            "C) It uses a distributed, multi-AZ storage system that automatically partitions data across numerous nodes to enhance scalability and availability.",
+            "D) Amazon Keyspaces implements a master-slave storage architecture to distribute data across multiple nodes and regions."
+        ],
+        "correct": "C",
+        "explanation": "Amazon Keyspaces (for Apache Cassandra) uses a distributed, multi-AZ storage system that automatically partitions data across many nodes within an AWS Region. This design allows for seamless scalability and high availability, as data is distributed and replicated across multiple physical locations within the region.",
+        "type": "single"
+    },
+    {
+        "id": 2,
+        "question": "What redundancy features are inherent in Amazon Keyspaces to ensure data is protected against loss?",
+        "options": [
+            "A) Amazon Keyspaces automatically replicates data across three geographically distant AWS Regions.",
+            "B) Redundancy in Amazon Keyspaces is achieved by maintaining a single, durable copy of data with regular, user-initiated backups.",
+            "C) The service ensures data redundancy by replicating data across multiple Availability Zones within a single AWS Region.",
+            "D) It provides redundancy by creating and managing multiple copies of data within the same Availability Zone."
+        ],
+        "correct": "C",
+        "explanation": "Amazon Keyspaces (for Apache Cassandra) ensures data redundancy by replicating data automatically across multiple Availability Zones within the same AWS Region. This replication strategy is designed to provide high durability and availability for your data, protecting it against the loss of an Availability Zone.",
+        "type": "single"
+    },
+    {
+        "id": 3,
+        "question": "In what ways does Amazon Keyspaces maintain a reliable database service for users?",
+        "options": [
+            "A) Keyspaces achieves reliability by allowing users to manually switch between database instances in the event of a failure.",
+            "B) It maintains reliability through a shared responsibility model where AWS manages the infrastructure and the user is responsible for data replication strategies.",
+            "C) The service ensures reliability by automatically managing the provisioning, patching, and replication of data across multiple Availability Zones.",
+            "D) Reliability in Amazon Keyspaces is supported by providing dedicated hardware for each user to prevent noisy neighbor issues."
+        ],
+        "correct": "C",
+        "explanation": "Amazon Keyspaces (for Apache Cassandra) maintains a reliable database service by automatically handling the provisioning, patching, and replication of data. It abstracts the management of the underlying infrastructure, including data replication across multiple Availability Zones, which is crucial for achieving high availability and fault tolerance.",
+        "type": "single"
+    },
+    {
+        "id": 4,
+        "question": "How does Amazon Keyspaces ensure system resiliency, particularly in the face of infrastructure disruptions or failures?",
+        "options": [
+            "A) Amazon Keyspaces uses a fully managed infrastructure with built-in redundancy and failover capabilities across multiple Availability Zones.",
+            "B) The service ensures resiliency by leveraging AWS global infrastructure, offering cross-region replication and automated failover.",
+            "C) Keyspaces relies on user-configured database clustering and manual failover processes to maintain system resiliency.",
+            "D) It provides resiliency through automated backups and restoration capabilities that users can trigger in the event of system disruptions."
+        ],
+        "correct": "A",
+        "explanation": "Amazon Keyspaces is designed to ensure system resiliency by leveraging AWS's highly available infrastructure. It provides built-in redundancy and automated failover capabilities across multiple Availability Zones within an AWS Region. This means that in the event of a failure or disruption in one Availability Zone, the service can continue to operate seamlessly.",
+        "type": "single"
+    },
+    {
+        "id": 5,
+        "question": "A company is deploying a new application using Amazon Keyspaces (for Apache Cassandra). The data must remain available if an Availability Zone goes down. How can this be achieved?",
+        "options": [
+            "A) By automatically replicating data to replica nodes",
+            "B) By provisioning nodes in multiple subnets",
+            "C) By using S3 for data durability",
+            "D) By enabling cross-region replication"
+        ],
+        "correct": "A",
+        "explanation": "Amazon Keyspaces provides high availability across AZs by automatically replicating data to multiple replica nodes placed in different AZs. If one AZ becomes unavailable, reads and writes can be served from replicas in other AZs.",
+        "type": "single"
+    },
+    {
+        "id": 6,
+        "question": "A company is deploying a new graph database using Amazon Neptune. The database needs to remain available in the event of an Availability Zone outage. How does Neptune provide high availability?",
+        "options": [
+            "A) By caching query results in Amazon ElastiCache",
+            "B) By backing up data to Amazon S3",
+            "C) By replicating data synchronously across Availability Zones",
+            "D) By provisioning read replicas in a second region"
+        ],
+        "correct": "C",
+        "explanation": "Amazon Neptune provides high availability by synchronously replicating data across three Availability Zones. If one AZ becomes unavailable, Neptune can redirect reads and writes to the remaining AZs.",
+        "type": "single"
+    },
+    {
+        "id": 7,
+        "question": "A company is running a mission-critical graph database on Amazon Neptune. The database needs to remain available if an individual Neptune node fails. How can this be achieved?",
+        "options": [
+            "A) By restoring data for the node from a backup",
+            "B) By replicating data synchronously across nodes",
+            "C) By migrating the node to new hardware automatically",
+            "D) By redirecting requests to the nearest available node"
+        ],
+        "correct": "B",
+        "explanation": "Neptune synchronously replicates data across nodes in multiple Availability Zones. If a single node fails, Neptune will continue serving requests from the remaining replicas and automatically re-replicate data when the failed node recovers.",
+        "type": "single"
+    },
+    {
+        "id": 8,
+        "question": "A company needs to ensure the data in its Amazon QLDB ledger remains available if an Availability Zone outage occurs. How does QLDB provide resiliency against AZ outages?",
+        "options": [
+            "A) By replicating data synchronously across three AZs",
+            "B) By enabling Multi-AZ deployments in the QLDB settings",
+            "C) By backing up data continuously to Amazon S3",
+            "D) By caching data in Amazon ElastiCache for faster reads"
+        ],
+        "correct": "A",
+        "explanation": "Amazon QLDB synchronously replicates data across three Availability Zones to remain available during an AZ outage. The ledger will operate uninterrupted if one AZ becomes unavailable.",
+        "type": "single"
+    },
+    {
+        "id": 9,
+        "question": "A company is building a new application that streams data into Amazon QLDB. The data must be durably stored before further processing. How can the architecture ensure no data loss if a failure occurs when streaming data into QLDB?",
+        "options": [
+            "A) Stream data to an Amazon S3 bucket first before QLDB",
+            "B) Enable data replication from QLDB to Amazon DynamoDB",
+            "C) Use Amazon Kinesis Data Streams for retries on transient errors",
+            "D) Process the data synchronously instead of using streams"
+        ],
+        "correct": "C",
+        "explanation": "Streaming data into QLDB via Amazon Kinesis Data Streams allows configuring retries for transient errors, ensuring the data is eventually persisted durably in QLDB without loss.",
+        "type": "single"
+    },
+    {
+        "id": 10,
+        "question": "Which QLDB CloudWatch metric can help monitor availability and durability?",
+        "options": [
+            "A) JournalDiskUtilization",
+            "B) WriteIOs",
+            "C) ReadIOs",
+            "D) JournalS3DataSize"
+        ],
+        "correct": "B",
+        "explanation": "WriteIOs measures writes to the QLDB ledger, which can help monitor availability.",
+        "type": "single"
+    },
+    {
+        "id": 11,
+        "question": "A company is storing time series data in Amazon Timestream. The data must remain durable and available. How does Timestream provide reliability?",
+        "options": [
+            "A) By enabling Multi-AZ deployment during setup",
+            "B) By replicating data across Availability Zones",
+            "C) By caching hot data in Amazon ElastiCache",
+            "D) By uploading backups to Amazon S3 frequently"
+        ],
+        "correct": "B",
+        "explanation": "Amazon Timestream replicates data across Availability Zones to provide durable data storage and automatic failover in case of AZ outages.",
+        "type": "single"
+    },
+    {
+        "id": 12,
+        "question": "A company needs to analyze trends in data stored in Amazon Timestream. The analytics queries must be resilient to temporary Timestream errors. How can the company achieve this?",
+        "options": [
+            "A) Use Timestream's continuous backup to S3",
+            "B) Execute queries with retry logic in the application",
+            "C) Enable Multi-AZ deployment for Timestream",
+            "D) Cache the Timestream query results in Amazon ElastiCache"
+        ],
+        "correct": "B",
+        "explanation": "Implementing retries in the application logic allows queries to Timestream to be resilient to transient errors and temporary service disruptions.",
+        "type": "single"
+    },
+    {
+        "id": 13,
+        "question": "A company is migrating an existing application to use Amazon Timestream. The architecture must prevent cascading failures. How can the system be designed to minimize coupling?",
+        "options": [
+            "A) Store time series data in Amazon S3 before ingesting into Timestream",
+            "B) Cache Timestream data in Amazon ElastiCache",
+            "C) Implement Amazon SNS and SQS for asynchronous integration",
+            "D) Enable Multi-AZ deployment for Timestream"
+        ],
+        "correct": "C",
+        "explanation": "Using Amazon SNS and SQS allows loosely coupled asynchronous integration between the application and Timestream. This prevents cascading failures across services.",
+        "type": "single"
+    },
+    {
+        "id": 14,
+        "question": "A company is building a new application using Amazon Timestream to store time series data. The system must remain available if Timestream has an outage. How can the architecture achieve fault tolerance?",
+        "options": [
+            "A) Use cross-region replication for Timestream",
+            "B) Cache frequently accessed time series in Amazon ElastiCache",
+            "C) Implement retries and exponential backoff in the application",
+            "D) Enable Multi-AZ deployment for Timestream"
+        ],
+        "correct": "C",
+        "explanation": "Implementing retries with exponential backoff in the application logic allows it to gracefully handle Timestream errors and outages.",
+        "type": "single"
+    },
+    {
+        "id": 15,
+        "question": "A manufacturing company is using Amazon TimeStream to store time series data from its production line sensors. To ensure the optimal performance and health of their TimeStream database, they want to monitor specific metrics. Which metric should they prioritize monitoring to track data coming into the database?",
+        "options": [
+            "A) Active Connections: The number of active connections to the TimeStream database.",
+            "B) Memory Usage: The amount of memory used by TimeStream.",
+            "C) Query Duration: The time taken to execute a query.",
+            "D) Write Input Records: The number of records ingested into TimeStream."
+        ],
+        "correct": "D",
+        "explanation": "Amazon TimeStream is optimized for time-series data. Monitoring the ingestion rate, represented by the Write Input Records metric, is crucial to understand the data flow and ensure that all time-series data points are being captured correctly.",
+        "type": "single"
+    },
+    {
+        "id": 16,
+        "question": "A company is running a fleet of EC2 instances behind an Application Load Balancer. The application must remain available during instance failures. How can Auto Scaling help ensure reliability?",
+        "options": [
+            "A) By automatically launching new instances to replace failed ones",
+            "B) By distributing instances across multiple Availability Zones",
+            "C) By caching content in Amazon ElastiCache for lower latency",
+            "D) By enabling health checks on the Application Load Balancer"
+        ],
+        "correct": "A",
+        "explanation": "Auto Scaling automatically launches new instances to replace failed ones, ensuring a minimum number of healthy instances are always available to serve traffic.",
+        "type": "single"
+    },
+    {
+        "id": 17,
+        "question": "A company needs to improve the resiliency of the web tier running on EC2 instances behind an Application Load Balancer. The system must gracefully handle surges in traffic. How can Auto Scaling help make the architecture more resilient?",
+        "options": [
+            "A) By launching On-Demand Instances to handle traffic spikes",
+            "B) By distributing instances across multiple subnets",
+            "C) By caching content in Amazon ElastiCache for faster response times",
+            "D) By setting up Auto Scaling scheduled actions to scale out during events"
+        ],
+        "correct": "A",
+        "explanation": "Auto Scaling can automatically launch On-Demand instances to rapidly scale out and handle traffic spikes, improving architecture resilience.",
+        "type": "single"
+    },
+    {
+        "id": 18,
+        "question": "A company is deploying EC2 instances in an Auto Scaling group behind an Application Load Balancer. The architects want to prevent cascading failures. How can Auto Scaling help decouple components?",
+        "options": [
+            "A) By distributing instances across Availability Zones",
+            "B) By enabling ELB health checks for the ASG instances",
+            "C) By caching content in Amazon ElastiCache",
+            "D) By using multiple smaller Auto Scaling groups"
+        ],
+        "correct": "D",
+        "explanation": "Using multiple independent Auto Scaling groups decouples components to prevent cascading failures across layers.",
+        "type": "single"
+    },
+    {
+        "id": 19,
+        "question": "An Application Load Balancer is load balancing EC2 instances in Auto Scaling groups across multiple Availability Zones. The load balancer must automatically detect unhealthy instances. How can the ALB maintain availability?",
+        "options": [
+            "A) By integrating the ASG with CloudWatch alarms",
+            "B) By setting up multiple listeners",
+            "C) By enabling cross-zone load balancing",
+            "D) By implementing target group health checks"
+        ],
+        "correct": "D",
+        "explanation": "Application Load Balancer health checks can automatically detect unhealthy instances and stop routing traffic to them.",
+        "type": "single"
+    },
+    {
+        "id": 20,
+        "question": "A company is deploying an Application Load Balancer across multiple Availability Zones. The load balancer must continue serving traffic if an AZ has an outage. How can this resiliency requirement be met?",
+        "options": [
+            "A) By enabling connection draining",
+            "B) By enabling cross-zone load balancing",
+            "C) By setting up multiple target groups",
+            "D) By implementing health checks"
+        ],
+        "correct": "B",
+        "explanation": "Enabling cross-zone load balancing allows the ALB to continue routing traffic to instances in the remaining healthy AZs during an AZ outage.",
+        "type": "single"
+    },
+    {
+        "id": 21,
+        "question": "A company is deploying an Application Load Balancer. The load balancer must route HTTP and HTTPS traffic to different target groups. How can the ALB meet this requirement?",
+        "options": [
+            "A) By enabling cross-zone load balancing",
+            "B) By implementing multiple listeners",
+            "C) By using multiple target groups",
+            "D) By integrating with Amazon Cognito"
+        ],
+        "correct": "B",
+        "explanation": "Application Load Balancer supports multiple listeners, allowing different listeners for HTTP and HTTPS traffic mapped to different target groups.",
+        "type": "single"
+    },
+    {
+        "id": 22,
+        "question": "A financial technology company is deploying an Application Load Balancer (ALB) to handle traffic for its online banking portal. Due to the sensitive nature of the data being transmitted, they want to ensure that the data is encrypted during transit. However, they also want to optimize the performance of their backend servers. Which feature of the ALB can the company use to achieve these objectives?",
+        "options": [
+            "A) Use ALB's SSL termination feature to handle the SSL/TLS handshake and decrypt the traffic before sending it to the backend servers.",
+            "B) Enable SSL passthrough on the ALB to allow the backend servers to handle the SSL/TLS handshake and decryption.",
+            "C) Configure the ALB to use only HTTP/2 for encrypted and optimized communication.",
+            "D) Use ALB's SSL bridging feature to re-encrypt the traffic before sending it to the backend servers."
+        ],
+        "correct": "A",
+        "explanation": "SSL offloading, also known as SSL termination, refers to the process of decrypting SSL traffic at the load balancer level rather than at the backend servers, offloading the CPU-intensive handshake process.",
+        "type": "single"
+    },
+    {
+        "id": 23,
+        "question": "A global e-commerce platform is deploying an Application Load Balancer (ALB) to distribute incoming traffic across multiple EC2 instances. To ensure the optimal performance and Reliability of their application, they want to monitor their detailed traffic and any potential threats. Which monitoring and logging option is available with ALB?",
+        "options": [
+            "A) CloudWatch Metrics to monitor the operational performance of the ALB.",
+            "B) CloudTrail Logs to capture every API call made to the ALB.",
+            "C) VPC Flow Logs to monitor the IP traffic going to and from the ALB.",
+            "D) Access Logs to capture detailed information about requests sent to the ALB."
+        ],
+        "correct": "D",
+        "explanation": "Access Logs for the Application Load Balancer provide detailed information about requests sent to the load balancer, including client IP, request path, and response code.",
+        "type": "single"
+    },
+    {
+        "id": 24,
+        "question": "A company is deploying an Application Load Balancer across multiple Availability Zones. The architects want to ensure traffic is load balanced properly if EC2 instances fail. How can the architecture provide resiliency?",
+        "options": [
+            "A) By integrating the load balancer with Auto Scaling",
+            "B) By enabling sticky sessions",
+            "C) By configuring cross-zone load balancing",
+            "D) By setting up multiple target groups"
+        ],
+        "correct": "A",
+        "explanation": "Integrating the ALB with Auto Scaling allows failed instances to automatically be replaced, maintaining capacity.",
+        "type": "single"
+    },
+    {
+        "id": 25,
+        "question": "A company is running an application load balancer with autoscaling groups. The DevOps team needs to monitor metrics related to resilience particularly regarding the codes being returned from the backend servers. Which CloudWatch metric for the load balancer is relevant?",
+        "options": [
+            "A) RejectedConnectionCount",
+            "B) HealthyHostCount",
+            "C) HTTPCode_Target_5XX_Count",
+            "D) SurgeQueueLength"
+        ],
+        "correct": "C",
+        "explanation": "HTTPCode_Target_5XX_Count monitors 5XX errors from targets which helps identify issues reaching the backend instances.",
+        "type": "single"
+    },
+    {
+        "id": 26,
+        "question": "A company deployed a Network Load Balancer across multiple subnets in different Availability Zones. The NLB must remain available during AZ outages. How can the architecture achieve this?",
+        "options": [
+            "A) By integrating with Amazon Route 53",
+            "B) By enabling cross-zone load balancing",
+            "C) By implementing multiple target groups",
+            "D) By setting up Network ACL rules"
+        ],
+        "correct": "B",
+        "explanation": "Enabling cross-zone load balancing for the NLB allows it to remain available and route traffic across the remaining healthy AZs during an AZ outage.",
+        "type": "single"
+    },
+    {
+        "id": 27,
+        "question": "A company deployed a Network Load Balancer across multiple subnets. The NLB must detect unhealthy registered targets. How can the architecture meet this requirement?",
+        "options": [
+            "A) By integrating with Amazon CloudWatch metrics",
+            "B) By implementing target group health checks",
+            "C) By setting up Network ACL inbound rules",
+            "D) By enabling cross-zone load balancing"
+        ],
+        "correct": "B",
+        "explanation": "NLB target group health checks can automatically detect and stop routing traffic to unhealthy registered targets.",
+        "type": "single"
+    },
+    {
+        "id": 28,
+        "question": "A global e-commerce platform is deploying a Network Load Balancer (NLB) to handle their TCP traffic. They want to maintain detailed logs of the TLS requests made to the NLB. Which statement is true regarding access logs in Amazon Network Load Balancer?",
+        "options": [
+            "A) Access logs capture information only about non-TLS requests.",
+            "B) Access logs are enabled by default and capture all TCP requests.",
+            "C) Access logs can be stored in Amazon S3 and capture detailed information about the TLS requests made to the NLB.",
+            "D) Access logs need to be processed using third-party tools exclusively."
+        ],
+        "correct": "C",
+        "explanation": "Amazon Network Load Balancer provides access logs that capture detailed information about the TLS requests sent to the NLB, stored in S3.",
+        "type": "single"
+    },
+    {
+        "id": 29,
+        "question": "A company is using AWS CloudFormation to deploy resources for a multi-tier web application. The CloudFormation stacks occasionally fail during creation due to throttling errors. How can CloudFormation be configured to reliably provision the stacks?",
+        "options": [
+            "A) Enable a CloudFormation retry policy with exponential backoff to automatically re-attempt failures.",
+            "B) Create a Lambda function to monitor and re-run failed stacks manually.",
+            "C) Use separate stacks for each tier to isolate failures.",
+            "D) Set CloudWatch alarms on stack failures to trigger notifications."
+        ],
+        "correct": "A",
+        "explanation": "Enabling a CloudFormation retry policy with exponential backoff will automatically re-attempt any failed stack operations, providing reliable stack provisioning.",
+        "type": "single"
+    },
+    {
+        "id": 30,
+        "question": "A company is using AWS CDK to deploy infrastructure as code. The operations team needs visibility into resources created via CDK to troubleshoot reliability issues. Which CDK feature would enable this visibility?",
+        "options": [
+            "A) CDK can generate a CloudFormation template",
+            "B) Enable AWS X-Ray tracing in the CDK app code to trace infrastructure issues.",
+            "C) Add print statements in CDK code to output resource metadata.",
+            "D) CDK automatically tags all generated resources for discoverability."
+        ],
+        "correct": "A",
+        "explanation": "The CDK can synthesize a CloudFormation template from CDK app code providing full resource definitions for troubleshooting without having to dig into CDK code.",
+        "type": "single"
+    },
+    {
+        "id": 31,
+        "question": "A company is running a production application on AWS that is experiencing occasional performance issues. The operations team needs to monitor and troubleshoot the issues. Which CloudWatch feature would be most useful for troubleshooting?",
+        "options": [
+            "A) CloudWatch Alarms to trigger alerts when metrics cross thresholds",
+            "B) CloudWatch Logs to analyze application logs in real time",
+            "C) CloudWatch Dashboards to correlate performance metrics",
+            "D) CloudWatch Events to log state changes for resources"
+        ],
+        "correct": "C",
+        "explanation": "CloudWatch Dashboards allow correlating metrics, logs, and alarms across resources on a single pane of glass, enabling real-time troubleshooting.",
+        "type": "single"
+    },
+    {
+        "id": 32,
+        "question": "A company is running a mission-critical application on AWS that cannot experience any downtime. The operations team needs to proactively monitor the service health of the underlying AWS infrastructure. Which AWS tool would provide the most comprehensive visibility?",
+        "options": [
+            "A) The AWS Personal Health Dashboard provides real-time notifications, ongoing status, and historical information on AWS service health.",
+            "B) Enable AWS CloudTrail logging to audit API calls made to AWS services.",
+            "C) AWS Trusted Advisor checks can be enabled to monitor service quotas and best practices.",
+            "D) Amazon CloudWatch metrics and dashboards can be used to monitor AWS service metrics."
+        ],
+        "correct": "A",
+        "explanation": "The AWS Personal Health Dashboard gives comprehensive visibility into the health and status of all underlying AWS services powering an application.",
+        "type": "single"
+    },
+    {
+        "id": 33,
+        "question": "A large enterprise is planning to use Amazon Managed Service for Prometheus to monitor their containerized workloads. The company has a strong emphasis on Reliability and wants to ensure that the monitoring solution adheres to their Reliability policies. What are the key Reliability considerations?",
+        "options": [
+            "A) Rely solely on network firewalls for securing the Prometheus service.",
+            "B) Ignore encryption since Prometheus primarily deals with non-sensitive metric data.",
+            "C) Utilize IAM roles and policies to control access to the Prometheus service and its data.",
+            "D) Enable public access to all Prometheus endpoints for ease of integration and monitoring."
+        ],
+        "correct": "C",
+        "explanation": "Utilizing IAM roles and policies is the recommended approach to control who can access the Prometheus service and the data it handles, aligning with AWS best practices.",
+        "type": "single"
+    },
+    {
+        "id": 34,
+        "question": "A company is migrating its on-premises application monitoring stack to AWS. The monitoring dashboards need to be highly available to view application and system metrics. Which approach will meet the reliability requirements?",
+        "options": [
+            "A) Create CloudWatch dashboards to view application metrics and logs.",
+            "B) Deploy Grafana servers on EC2 instances across multiple Availability Zones.",
+            "C) Use Amazon Managed Service for Grafana which provides a fully managed, highly available Grafana service.",
+            "D) Use AWS Elastic Beanstalk which has integrated monitoring capabilities."
+        ],
+        "correct": "C",
+        "explanation": "Amazon Managed Service for Grafana provides a fully managed, highly available Grafana deployment that scales on demand.",
+        "type": "single"
+    },
+    {
+        "id": 35,
+        "question": "A company is running mission-critical applications on AWS and wants to improve their fault tolerance. The DevOps team needs a way to easily identify potential failure points. Which AWS tool would provide the most comprehensive recommendations?",
+        "options": [
+            "A) AWS X-Ray traces requests to visualize application dependencies.",
+            "B) Amazon CloudWatch Synthetics can simulate user requests to test failure scenarios.",
+            "C) AWS Trusted Advisor provides best practice checks across multiple categories including fault tolerance.",
+            "D) AWS Compute Optimizer identifies optimal resource configurations."
+        ],
+        "correct": "C",
+        "explanation": "AWS Trusted Advisor includes specific fault tolerance checks and recommendations across a range of categories to improve operational posture.",
+        "type": "single"
+    },
+    {
+        "id": 36,
+        "question": "A company is migrating their on-premises SAP system to AWS. They need to ensure the AWS environment meets the reliability requirements for SAP. Which approach would help improve reliability?",
+        "options": [
+            "A) Use AWS Elastic Beanstalk to deploy the SAP application stacks on optimized EC2 instances.",
+            "B) Use AWS Launch Wizard for SAP to automatically build a reliable and optimized VPC environment for SAP.",
+            "C) Manually deploy EC2 instances for SAP based on AWS documentation and best practices.",
+            "D) Set up autoscaling on the EC2 instances running SAP to improve fault tolerance."
+        ],
+        "correct": "B",
+        "explanation": "AWS Launch Wizard for SAP provides a reliable and optimized AWS environment tailored specifically for SAP workloads, incorporating best practices.",
+        "type": "single"
+    },
+    {
+        "id": 37,
+        "question": "A company is running production workloads on AWS but is experiencing occasional performance issues. The engineering team wants to ensure optimal EC2 resource configuration for reliability. Which AWS service would help provide recommendations?",
+        "options": [
+            "A) AWS Compute Optimizer analyzes EC2 usage and provides optimization recommendations to improve reliability.",
+            "B) AWS X-Ray traces requests but does not evaluate configurations.",
+            "C) Amazon CloudWatch metrics can be used to set performance alarms.",
+            "D) AWS Trusted Advisor checks some best practices but does not analyze resource configuration."
+        ],
+        "correct": "A",
+        "explanation": "AWS Compute Optimizer specifically analyzes EC2 configurations and usage metrics to generate optimization recommendations for higher performance and reliability.",
+        "type": "single"
+    },
+    {
+        "id": 38,
+        "question": "A company runs multiple business applications across different AWS accounts. The CTO wants to enforce policies and controls across accounts to improve reliability. Which AWS service would help achieve this?",
+        "options": [
+            "A) AWS CloudTrail can log events across accounts but does not manage policies.",
+            "B) AWS Organizations allows centrally managing policies, tags, and controls across multiple AWS accounts.",
+            "C) AWS Trusted Advisor checks best practices but does not enforce policies across accounts.",
+            "D) AWS Config can aggregate configuration data across accounts but does not enforce policies."
+        ],
+        "correct": "B",
+        "explanation": "AWS Organizations allows defining and enforcing policies, tags, service controls, and change management across multiple AWS accounts centrally.",
+        "type": "single"
+    },
+    {
+        "id": 39,
+        "question": "A large enterprise runs multiple business applications across dozens of AWS accounts and needs to enforce security, compliance, and operational standards. Which AWS service would help meet these reliability requirements?",
+        "options": [
+            "A) AWS Config can aggregate configuration data across accounts but does not enforce policies.",
+            "B) AWS Security Hub centralizes compliance scanning and monitoring but does not set up new accounts.",
+            "C) AWS Organizations allows policy management but requires building landing zones.",
+            "D) AWS Control Tower provides pre-built landing zones to set up new accounts with controls baked in following best practices for reliability."
+        ],
+        "correct": "D",
+        "explanation": "AWS Control Tower enables setting up new accounts as landing zones pre-configured with controls, guardrails, and best practices baked-in for reliability.",
+        "type": "single"
+    },
+    {
+        "id": 40,
+        "question": "A multinational corporation is looking to manage its fleet of EC2 instances and on-premises servers located in various geographical regions. The IT team needs a centralized solution to automate operational tasks, apply OS patches, and ensure compliance with the company's Reliability policies. What solutions or approach can the Solutions Architect choose?",
+        "options": [
+            "A) Deploy individual scripts manually on each EC2 instance and on-premises server for operational tasks and rely on third-party tools for patch management.",
+            "B) Utilize AWS Lambda for automating operational tasks and apply OS patches manually for each server and EC2 instance.",
+            "C) Limit the use of AWS Systems Manager to EC2 instances only and use different management tools for on-premises servers.",
+            "D) Use AWS Systems Manager to automate operational tasks, apply patches, and manage configurations across EC2 instances and on-premises servers from a central location."
+        ],
+        "correct": "D",
+        "explanation": "AWS Systems Manager offers a unified interface for managing AWS resources and on-premises servers, automating operational tasks and patching.",
+        "type": "single"
+    },
+    {
+        "id": 41,
+        "question": "A company wants to standardize deployment of AWS resources across different teams to improve reliability. Developers need a way to quickly deploy approved architectures. Which AWS service would help with this?",
+        "options": [
+            "A) AWS Control Tower builds landing zones but does not help with ongoing governance after environments are live.",
+            "B) AWS Organizations can centralize policies but does not provide standardized deployment catalog.",
+            "C) AWS Service Catalog allows administrators to create standardized, approved products that developers can easily deploy while staying within compliance.",
+            "D) AWS CloudFormation provides templates for deploy sets of resources but does not offer pre-approved products."
+        ],
+        "correct": "C",
+        "explanation": "AWS Service Catalog enables administrators to create pre-defined, approved products that comply with organizational standards for governed deployment.",
+        "type": "single"
+    },
+    {
+        "id": 42,
+        "question": "A company runs a mix of licensed and open-source software across 100 EC2 instances in production. The operations team needs to make sure they remain compliant with all software licenses. Which AWS service would help manage this reliability requirement?",
+        "options": [
+            "A) AWS License Manager provides centralized visibility and tracking of software licenses across EC2 instances, enabling compliance management.",
+            "B) AWS Organizations can enforce policies across accounts but does not track software licenses.",
+            "C) AWS Control Tower sets up new accounts with controls but does not monitor ongoing license usage.",
+            "D) AWS Config can aggregate configuration data but does not manage license compliance."
+        ],
+        "correct": "A",
+        "explanation": "AWS License Manager gives administrators a single view of license usage across EC2 instances, and tools to manage compliance.",
+        "type": "single"
+    },
+    {
+        "id": 43,
+        "question": "A company is deploying a new mission-critical application to AWS that requires high availability across multiple Availability Zones. The development team wants to use infrastructure-as-code best practices. Which service would best meet these requirements?",
+        "options": [
+            "A) AWS CloudFormation supports multi-AZ templates but does not have built-in code review capabilities.",
+            "B) AWS OpsWorks uses Chef and Puppet but is not designed for multi-AZ templates.",
+            "C) AWS Proton can deploy infrastructure templates to multiple AZs and supports pull request code reviews for reliability.",
+            "D) AWS Elastic Beanstalk will auto-scale across AZs but does not support IaC best practices."
+        ],
+        "correct": "C",
+        "explanation": "AWS Proton allows developers to create multi-AZ infrastructure templates following IaC best practices like code reviews.",
+        "type": "single"
+    },
+    {
+        "id": 44,
+        "question": "A company manages hundreds of EC2 instances running critical applications across multiple AWS accounts. The operations team needs an easy way to manage tags on resources consistently. Which tool would help improve reliability through better tag management?",
+        "options": [
+            "A) AWS Config can aggregate configuration data across accounts but does not manage tags.",
+            "B) The AWS Tag Editor provides a unified view and bulk tagging capabilities to standardize tags across resources and accounts.",
+            "C) AWS Trusted Advisor checks best practices but does not address tag consistency.",
+            "D) AWS License Manager centralizes license compliance but not general tags."
+        ],
+        "correct": "B",
+        "explanation": "The AWS Tag Editor gives administrators centralized visibility and bulk tagging abilities to standardize tags across accounts and resources.",
+        "type": "single"
+    },
+    {
+        "id": 45,
+        "question": "A large company has complex, multi-tier applications running on AWS across hundreds of resources. The operations team needs full visibility into resource relationships and configurations to ensure reliability. Which AWS tool would provide the most complete visibility?",
+        "options": [
+            "A) AWS Trusted Advisor checks best practices but does not map resource dependencies.",
+            "B) AWS Resource Explorer allows visualizing all AWS resources and relationships across accounts and regions for comprehensive visibility.",
+            "C) AWS X-Ray traces requests between resources but does not fully map architecture.",
+            "D) AWS Config provides configuration history and compliance data but does not visualize relationships."
+        ],
+        "correct": "B",
+        "explanation": "AWS Resource Explorer gives a centralized interactive view of all provisioned AWS resources and relationships across accounts and regions.",
+        "type": "single"
+    },
+    {
+        "id": 46,
+        "question": "A company manages hundreds of EC2 instances running critical applications across multiple AWS accounts and regions. The operations team needs an easy way to manage these resources as a group for reliability. Which AWS tool would help meet this requirement?",
+        "options": [
+            "A) AWS Trusted Advisor checks best practices but does not organize resources.",
+            "B) AWS Organizations can centralize policies across accounts but does not provide resource grouping.",
+            "C) AWS Resource Groups allows grouping resources across accounts and regions into custom-defined collections to simplify operations and management for reliability.",
+            "D) AWS Config aggregates configuration data across resources but does not group them."
+        ],
+        "correct": "C",
+        "explanation": "AWS Resource Groups enables creating custom collections of resources across accounts and regions that can be managed as a single unit.",
+        "type": "single"
+    },
+    {
+        "id": 47,
+        "question": "A company has multiple AWS accounts and wants to enable developers to access only the resources they need for their projects. The security team needs a way to control resource access across accounts. Which AWS service would meet this requirement?",
+        "options": [
+            "A) AWS IAM Identity Center supports SSO but does not manage resource access.",
+            "B) AWS Control Tower sets up central account baselines but does not granularly control access.",
+            "C) AWS Resource Access Manager allows managing access to resources across accounts without exposing full account credentials.",
+            "D) AWS Organizations can centralize policies across accounts but does not control resource access."
+        ],
+        "correct": "C",
+        "explanation": "AWS Resource Access Manager enables creating resource shares that provide access to specific AWS resources across accounts under least privilege.",
+        "type": "single"
+    },
+    {
+        "id": 48,
+        "question": "A company runs critical applications across multiple Availability Zones in AWS. The operations team needs real-time visibility into resilience issues to prevent outages. Which AWS service would provide the most valuable insights?",
+        "options": [
+            "A) AWS Trusted Advisor checks best practices but does not monitor real-time disruptions.",
+            "B) AWS Resilience Hub continuously monitors for disruptive events and provides alerts and recommendations to proactively improve resilience.",
+            "C) AWS Control Tower sets up central accounts but does not monitor real-time resilience.",
+            "D) Amazon CloudWatch Dashboards show operational metrics but no resilience-specific insights."
+        ],
+        "correct": "B",
+        "explanation": "AWS Resilience Hub monitors for disruptions in real-time and provides proactive resilience alerts and recommendations tailored to the environment.",
+        "type": "single"
+    },
+    {
+        "id": 49,
+        "question": "A company is running several critical applications on AWS. The security team needs to ensure only authorized users and roles have access to these resources. Which AWS service would help meet this reliability requirement?",
+        "options": [
+            "A) AWS Organizations can centralize policies across accounts but does not control identity-based access.",
+            "B) AWS IAM allows managing permissions through identity-based policies and role delegation for least-privilege access control.",
+            "C) AWS AppConfig provides configuration management capabilities but not fine-grained access control.",
+            "D) AWS Control Tower builds secure baseline environments but does not manage ongoing access."
+        ],
+        "correct": "B",
+        "explanation": "AWS IAM enables creating users, roles and policies to grant least-privilege and controlled access to AWS resources and APIs.",
+        "type": "single"
+    },
+    {
+        "id": 50,
+        "question": "A software development team is planning to use the AWS Cloud Development Kit (CDK) to define cloud infrastructure in code and deploy it through AWS IAM. What are the key components and features of the AWS Cloud Development Kit that the team should be aware of?",
+        "options": [
+            "A) The CDK exclusively uses JSON to define cloud resources and does not support traditional programming languages.",
+            "B) The CDK is a command-line tool that directly interacts with AWS services to deploy resources without using IAM.",
+            "C) The CDK is a visual tool that provides a drag-and-drop interface for designing cloud infrastructure.",
+            "D) The CDK allows defining cloud resources in familiar programming languages and compiles this into IAM templates."
+        ],
+        "correct": "D",
+        "explanation": "The AWS Cloud Development Kit (CDK) allows developers to use familiar programming languages (TypeScript, Python, Java, C#) to model and provision AWS resources via IAM templates.",
+        "type": "single"
+    },
+    {
+        "id": 51,
+        "question": "A company has a mobile app that enables users to access AWS resources after authenticating. The engineering team needs to implement secure sign-in with minimum backend coding. Which AWS service would meet this reliability requirement?",
+        "options": [
+            "A) AWS Amplify provides client libraries for web and mobile apps but does not include pre-built sign-in functionality.",
+            "B) AWS API Gateway can generate SDKs for accessing serverless backends but does not handle user authentication.",
+            "C) AWS IAM Identity Center supports identity management but requires custom coding of sign-in logic.",
+            "D) Amazon Cognito provides user identity management and sign-in capabilities for mobile apps with built-in security features."
+        ],
+        "correct": "D",
+        "explanation": "Amazon Cognito offers user authentication, authorization, and identity management capabilities with minimal coding needed for web and mobile apps.",
+        "type": "single"
+    },
+    {
+        "id": 52,
+        "question": "A company is migrating a critical application to AWS that interacts with many AWS services across multiple accounts. The security team needs to ensure the application has least-privilege permissions. Which AWS tool would meet this reliability requirement?",
+        "options": [
+            "A) AWS Trusted Advisor reviews best practices but does not optimize permissions specifically.",
+            "B) AWS IAM Access Analyzer checks for insecure permissions but does not provide customized policies.",
+            "C) AWS License Manager tracks license usage but does not address IAM permissions.",
+            "D) AWS Verified Permissions analyzes the actual API calls made and generates least-privilege IAM policies tailored to the workload."
+        ],
+        "correct": "D",
+        "explanation": "AWS Verified Permissions inspects API activity to generate customized, least-privilege IAM policies specific to the workload.",
+        "type": "single"
+    },
+    {
+        "id": 53,
+        "question": "A company is deploying a mission-critical application across multiple Availability Zones in AWS. The system architects need to design the system for high reliability. Which CloudWatch capability would allow detecting and resolving issues proactively?",
+        "options": [
+            "A) CloudWatch Alarms can monitor key operational metrics and send notifications when thresholds are crossed to take proactive actions.",
+            "B) CloudWatch Logs can aggregate log data but does not allow triggering actions on metrics.",
+            "C) CloudWatch Dashboards visualize metrics but do not actively trigger operational changes.",
+            "D) CloudWatch Events can schedule automated actions but is not used for monitoring metrics."
+        ],
+        "correct": "A",
+        "explanation": "CloudWatch Alarms allows setting thresholds on metrics and taking programmatic actions when alarms are triggered to proactively address reliability issues.",
+        "type": "single"
+    },
+    {
+        "id": 54,
+        "question": "A company is deploying a multi-tier web application across multiple accounts and regions on AWS. The operations team needs to design this architecture for high reliability. Which AWS Config capability would help meet this requirement?",
+        "options": [
+            "A) AWS Trusted Advisor checks best practices but does not evaluate configurations for compliance.",
+            "B) AWS Config continuously monitors resource configurations and allows evaluating compliance against desired baselines.",
+            "C) AWS Control Tower can set up core accounts with secure configurations but does not monitor ongoing drift.",
+            "D) AWS Health Dashboard shows events impacting services but does not assess infrastructure configurations."
+        ],
+        "correct": "B",
+        "explanation": "AWS Config continuously monitors and evaluates resource configurations for compliance against rules and desired baselines.",
+        "type": "single"
+    },
+    {
+        "id": 55,
+        "question": "A healthcare company is migrating sensitive applications to AWS that must comply with HIPAA regulations. The compliance team needs to ensure AWS infrastructure meets regulatory requirements. Which AWS tool would meet this need?",
+        "options": [
+            "A) AWS Trusted Advisor reviews best practices and optimizations but lacks compliance reports.",
+            "B) AWS Artifact provides on-demand access to AWS compliance reports and agreements to validate infrastructure compliance with regulations.",
+            "C) AWS Config checks resource configurations against desired settings but does not assess regulatory compliance.",
+            "D) AWS Health Dashboard shows events impacting services but does not document compliance controls."
+        ],
+        "correct": "B",
+        "explanation": "AWS Artifact allows accessing AWS compliance documents like audit reports to confirm infrastructure adheres to necessary regulations.",
+        "type": "single"
+    },
+    {
+        "id": 56,
+        "question": "A company is running critical applications on AWS that contain sensitive customer data. The security team aims to design a reliable system that proactively monitors for threats. Which AWS service would meet this requirement?",
+        "options": [
+            "A) AWS Trusted Advisor reviews best practices but does not monitor real-time user activity.",
+            "B) Amazon GuardDuty continuously monitors for malicious or unauthorized activity and provides threat detection alerts to respond quickly.",
+            "C) AWS Config monitors for resource configuration changes but does not detect malicious behavior.",
+            "D) AWS CloudTrail records API calls but does not analyze activity for threats."
+        ],
+        "correct": "B",
+        "explanation": "Amazon GuardDuty uses machine learning to analyze account and network activity patterns and identifies potential threats.",
+        "type": "single"
+    },
+    {
+        "id": 57,
+        "question": "A company is migrating a legacy application to AWS that will run on EC2 instances. The security team aims to assess the instances for vulnerabilities and securely configure them. Which AWS service would meet this requirement?",
+        "options": [
+            "A) Amazon Inspector performs automated vulnerability scans and provides a detailed report of security findings to securely configure systems.",
+            "B) AWS Trusted Advisor reviews best practices but does not scan for vulnerabilities.",
+            "C) AWS Config monitors for configuration changes but does not identify vulnerabilities.",
+            "D) AWS CloudTrail tracks API calls but does not analyze system security."
+        ],
+        "correct": "A",
+        "explanation": "Amazon Inspector runs comprehensive assessments to identify potential vulnerabilities on EC2 instances.",
+        "type": "single"
+    },
+    {
+        "id": 58,
+        "question": "A financial company handles sensitive customer data in S3 buckets. The security team aims to reliably secure this data against threats. Which AWS service would meet this requirement?",
+        "options": [
+            "A) AWS CloudTrail logs S3 access but does not analyze or classify the data itself.",
+            "B) Amazon Macie uses machine learning to automatically discover, classify, and protect sensitive data stored in S3.",
+            "C) AWS Config monitors S3 bucket configurations but does not evaluate data security.",
+            "D) AWS Trusted Advisor reviews best practices but does not analyze data content."
+        ],
+        "correct": "B",
+        "explanation": "Amazon Macie applies machine learning and pattern matching to automatically inspect S3 objects and identify sensitive data.",
+        "type": "single"
+    },
+    {
+        "id": 59,
+        "question": "A company is deploying critical applications across multiple Availability Zones in AWS. The engineering team wants to build a resilient architecture that minimizes downtime. Which AWS tool would provide the most valuable insights?",
+        "options": [
+            "A) Amazon CloudWatch Dashboards visualize metrics, but do not offer resilience-specific insights.",
+            "B) AWS Control Tower sets up core accounts and guardrails, but does not monitor real-time resilience metrics.",
+            "C) AWS Trusted Advisor reviews best practices, but it does not provide resilience analysis customized to the workload.",
+            "D) AWS Reliability Hub continuously monitors the environment for potential faults, failures, and disruptions. It provides recommendations tailored to the architecture to proactively improve resilience."
+        ],
+        "correct": "D",
+        "explanation": "AWS Reliability Hub analyzes architecture configurations, dependencies, metrics, and disruptions in real-time to provide targeted recommendations.",
+        "type": "single"
+    },
+    {
+        "id": 60,
+        "question": "A financial company handles sensitive data and wants to encrypt it both in transit and at rest. The security team needs to reliably manage the encryption keys. Which AWS service would meet this requirement?",
+        "options": [
+            "A) AWS CloudHSM provides dedicated hardware security modules but requires managing key material.",
+            "B) AWS Secrets Manager stores secrets but does not generate or manage encryption keys.",
+            "C) AWS Certificate Manager provisions SSL/TLS certificates but does not support data encryption keys.",
+            "D) AWS KMS allows creating, managing, and controlling access to encryption keys centrally for resources across AWS services."
+        ],
+        "correct": "D",
+        "explanation": "AWS KMS enables creating, rotating, disabling and managing access controls for encryption keys centrally across AWS services.",
+        "type": "single"
+    },
+    {
+        "id": 61,
+        "question": "A financial company handles highly sensitive data and needs dedicated hardware security modules (HSMs) to securely manage cryptographic keys. The security team aims to deploy CloudHSMs reliably. Which AWS capability would meet this requirement?",
+        "options": [
+            "A) AWS Key Management Service (KMS) offers secure key management using HSMs but does not support dedicated HSM clusters.",
+            "B) AWS Certificate Manager provisions SSL/TLS certificates but does not manage cryptographic keys.",
+            "C) AWS Secrets Manager stores secrets but does not provide dedicated HSM infrastructure.",
+            "D) CloudHSM allows deploying HSM clusters across Availability Zones with automatic failover. This provides high availability and fault tolerance for secure key management."
+        ],
+        "correct": "D",
+        "explanation": "AWS CloudHSM allows deploying dedicated HSM clusters with automatic failover across Availability Zones for fault-tolerant secure key management.",
+        "type": "single"
+    },
+    {
+        "id": 62,
+        "question": "A company operates a public-facing website using HTTPS. The security team needs to reliably provision and renew SSL/TLS certificates. Which AWS service would meet this requirement?",
+        "options": [
+            "A) AWS CloudHSM can store private keys in hardware modules but requires manually managing the certificates.",
+            "B) AWS Certificate Manager automates provisioning, renewal, and deployment of SSL/TLS certificates for supported AWS services.",
+            "C) AWS Secrets Manager securely stores secrets but does not automate certificate management.",
+            "D) AWS Artifact provides on-demand access to AWS compliance reports but does not provision certificates."
+        ],
+        "correct": "B",
+        "explanation": "AWS Certificate Manager automates management of public SSL/TLS certificates, enabling reliable and secure connectivity without certificate administration overhead.",
+        "type": "single"
+    },
+    {
+        "id": 63,
+        "question": "A company needs to issue internal TLS certificates for services accessed across VPCs and VPNs. The security team aims to reliably manage these certificates privately. Which AWS service would meet this requirement?",
+        "options": [
+            "A) AWS Certificate Manager manages public SSL/TLS certificates only, not private CAs.",
+            "B) AWS Private Certificate Authority creates a private CA to automate issuing, revoking, and managing private certificates within the organization.",
+            "C) AWS Secrets Manager securely stores certificate private keys but does not manage issuing certificates.",
+            "D) AWS CloudHSM provides dedicated hardware modules but does not automate issuing and managing certificates."
+        ],
+        "correct": "B",
+        "explanation": "AWS Private Certificate Authority allows creating a private CA to reliably issue, manage and revoke private TLS certificates internally.",
+        "type": "single"
+    },
+    {
+        "id": 64,
+        "question": "A company stores database credentials in AWS Secrets Manager to access production databases in us-east-1. The reliability team needs to design a failover for database access if us-east-1 becomes unavailable. Which Secrets Manager capability would meet this requirement?",
+        "options": [
+            "A) AWS Backup can backup secrets but does not provide automatic cross-region replication.",
+            "B) Secrets Manager allows enabling automatic cross-region replication of secrets to create standbys in other regions for reliability.",
+            "C) AWS Config can monitor resource configurations but does not replicate secrets.",
+            "D) Secrets Manager can rotate secrets periodically but does not replicate them across regions."
+        ],
+        "correct": "B",
+        "explanation": "Secrets Manager enables automatic cross-region replication of secrets to create hot standbys for failover support.",
+        "type": "single"
+    },
+    {
+        "id": 65,
+        "question": "A company is running applications across multiple VPCs and accounts. The security team wants to centrally manage firewall rules to reliably secure these resources. Which AWS capabilities could help meet this requirement?",
+        "options": [
+            "A) AWS Trusted Advisor reviews best practices but does not manage firewall policies.",
+            "B) AWS CloudTrail tracks API calls but does not configure security groups or WAF rules.",
+            "C) AWS Firewall Manager enables centrally defining and enforcing AWS WAF rules and security group rules across accounts and applications.",
+            "D) AWS Config helps evaluate resource configurations but does not manage firewall rules."
+        ],
+        "correct": "C",
+        "explanation": "AWS Firewall Manager allows central administration of WAF rules and security group rules across multiple accounts and VPCs.",
+        "type": "single"
+    },
+    {
+        "id": 66,
+        "question": "A large enterprise wants to centrally collect and analyze security data from multiple AWS accounts and on-premises sources. The security team needs to reliably build this analytics capability. Which AWS service would meet this requirement?",
+        "options": [
+            "A) AWS Security Lake provides a reliable, scalable central repository that collects, aggregates, and analyzes security data from distributed sources.",
+            "B) Amazon S3 stores raw data but does not analyze or process it.",
+            "C) Amazon EventBridge can ingest some security data but does not provide data lake capabilities.",
+            "D) AWS Lake Formation enables building data lakes but lacks native security analytics."
+        ],
+        "correct": "A",
+        "explanation": "AWS Security Lake reliably ingests, aggregates, and analyzes dispersed security telemetry in a central data lake.",
+        "type": "single"
+    },
+    {
+        "id": 67,
+        "question": "A company needs to automatically scale their Kinesis data stream for fluctuations in workload. How can Kinesis Data Streams help?",
+        "options": [
+            "A) Using the Kinesis Producer Library",
+            "B) Through multi-region stream replication",
+            "C) By enabling auto scaling on data streams based on utilization",
+            "D) With enhanced fan-out to consumers"
+        ],
+        "correct": "C",
+        "explanation": "Kinesis Data Streams can automatically scale stream capacity up and down based on utilization to handle workload changes.",
+        "type": "single"
+    },
+    {
+        "id": 68,
+        "question": "A company has seasonal spikes in their Kinesis data streams. How can Kinesis Data Streams cost-effectively support this?",
+        "options": [
+            "A) With enhanced fan-out consumers",
+            "B) Using multi-region replication",
+            "C) By enabling on-demand mode to eliminate over-provisioning",
+            "D) Through auto scaling stream capacity"
+        ],
+        "correct": "C",
+        "explanation": "Kinesis Data Streams on-demand mode allows paying per stream capacity unit on hourly time blocks, eliminating over-provisioning.",
+        "type": "single"
+    },
+    {
+        "id": 69,
+        "question": "A company needs to retain streaming data for compliance purposes in Kinesis Data Streams. What is the maximum data retention period available?",
+        "options": [
+            "A) 7 days",
+            "B) 1 year",
+            "C) 365 days",
+            "D) 24 hours"
+        ],
+        "correct": "C",
+        "explanation": "Kinesis Data Streams allows configuring data retention up to a maximum of 365 days.",
+        "type": "single"
+    },
+    {
+        "id": 70,
+        "question": "A company needs to automatically detect and replace failed Kafka brokers in Amazon MSK. How does Amazon MSK provide this capability?",
+        "options": [
+            "A) Through its use of auto healing to automatically replace unhealthy brokers",
+            "B) Using Multi-AZ deployments",
+            "C) By caching data in Amazon ElastiCache",
+            "D) With encryption in transit"
+        ],
+        "correct": "A",
+        "explanation": "Amazon MSK utilizes auto healing to automatically detect failed Kafka brokers in a cluster and replace them to maintain high availability.",
+        "type": "single"
+    },
+    {
+        "id": 71,
+        "question": "A company requires high availability for their Kafka workloads in Amazon MSK. How does Amazon MSK provide high availability?",
+        "options": [
+            "A) Using automatic topic creation",
+            "B) Through asynchronous replication across regions",
+            "C) By deploying Kafka clusters across multiple Availability Zones",
+            "D) With automatic certificate renewal"
+        ],
+        "correct": "C",
+        "explanation": "Amazon MSK provides high availability by deploying Kafka clusters across multiple Availability Zones to protect against zone failures.",
+        "type": "single"
+    },
+    {
+        "id": 72,
+        "question": "A company needs to replicate their Amazon MSK clusters across regions. How does MSK support cross-region replication?",
+        "options": [
+            "A) Using automatic topic creation",
+            "B) Through asynchronous replication of clusters across regions",
+            "C) By deploying clusters across Availability Zones",
+            "D) With automatic certificate renewal"
+        ],
+        "correct": "B",
+        "explanation": "Amazon MSK supports asynchronous replication of clusters across regions to provide disaster recovery.",
+        "type": "single"
+    },
+    {
+        "id": 73,
+        "question": "A company needs to ensure resilience of the Zookeeper nodes for their Amazon MSK cluster. How does MSK provide this?",
+        "options": [
+            "A) Through the use of data caching",
+            "B) Using Multi-AZ deployments",
+            "C) By tightly integrating and managing Zookeeper nodes as part of MSK clusters",
+            "D) With automatic failure detection and recovery"
+        ],
+        "correct": "C",
+        "explanation": "Amazon MSK fully manages and tightly integrates Zookeeper nodes as part of MSK clusters, providing automated control plane resilience.",
+        "type": "single"
+    },
+    {
+        "id": 74,
+        "question": "A company needs to ensure continuity of ETL jobs in AWS Glue. How does AWS Glue provide reliability?",
+        "options": [
+            "A) Using zonal VPC endpoints",
+            "B) With Glue DataBrew",
+            "C) Through automated retry of failed jobs",
+            "D) By using Glue crawlers"
+        ],
+        "correct": "C",
+        "explanation": "AWS Glue provides automated retry capabilities for failed ETL jobs to recover from transient failures and ensure workload continuity.",
+        "type": "single"
+    },
+    {
+        "id": 75,
+        "question": "A company needs to optimize costs for their AWS Glue ETL jobs. How can Glue help manage resources?",
+        "options": [
+            "A) By allocating Data Processing Units (DPUs) for optimal scaling",
+            "B) Using zonal VPC endpoints",
+            "C) Through automated job retries",
+            "D) With Glue DataBrew"
+        ],
+        "correct": "A",
+        "explanation": "AWS Glue allows allocating appropriate Data Processing Units to scale resource usage up and down based on job requirements, optimizing costs.",
+        "type": "single"
+    },
+    {
+        "id": 76,
+        "question": "A company needs to improve availability of their Amazon EMR clusters. How can EMR support this?",
+        "options": [
+            "A) Through EMR integration with AWS Glue",
+            "B) By enabling multiple primary nodes for HDFS NameNode redundancy",
+            "C) Using EMR auto-termination of idle clusters",
+            "D) With EMR integration with AWS Lake Formation"
+        ],
+        "correct": "B",
+        "explanation": "Amazon EMR supports configuring multiple primary nodes to provide redundancy for the HDFS NameNode and improve cluster availability.",
+        "type": "single"
+    },
+    {
+        "id": 77,
+        "question": "A company needs to improve reliability of resource management for their Amazon EMR clusters running Spark jobs. How can EMR help?",
+        "options": [
+            "A) Using auto-termination of idle EMR clusters",
+            "B) With EMR integration with Lake Formation",
+            "C) Through integration with AWS Glue Crawlers",
+            "D) By leveraging YARN as the cluster resource manager"
+        ],
+        "correct": "D",
+        "explanation": "Amazon EMR uses YARN for cluster resource management, which provides high availability of the Resource Manager to reliably manage resources for Spark jobs.",
+        "type": "single"
+    },
+    {
+        "id": 78,
+        "question": "A company needs to improve fault tolerance for their Amazon EMR clusters. How can EMR provide increased resilience?",
+        "options": [
+            "A) Through integration with AWS Lake Formation",
+            "B) By deploying clusters across multiple Availability Zones",
+            "C) With EMR integration with AWS Glue crawlers",
+            "D) Using EMR auto-termination of idle clusters"
+        ],
+        "correct": "B",
+        "explanation": "Amazon EMR allows deploying clusters across multiple Availability Zones to provide increased fault tolerance and resilience.",
+        "type": "single"
+    },
+    {
+        "id": 79,
+        "question": "A company runs analytics on datasets stored in Amazon S3 using Amazon EMR. How can EMR provide resilient access to S3 data?",
+        "options": [
+            "A) Using multiple Availability Zones for EMR clusters",
+            "B) Through EMR integration with AWS Glue crawlers",
+            "C) With EMR auto-scaling of cluster capacity",
+            "D) By using EMRFS to reliably access S3 from EMR clusters"
+        ],
+        "correct": "D",
+        "explanation": "EMRFS provides Amazon EMR clusters with reliable, scalable access to data in Amazon S3.",
+        "type": "single"
+    },
+    {
+        "id": 80,
+        "question": "A company needs to monitor the health and reliability of their Amazon EMR clusters. What capability does EMR provide to support this?",
+        "options": [
+            "A) Integration with CloudWatch metrics for real-time visibility into cluster status",
+            "B) Deploying EMR clusters across multiple Availability Zones",
+            "C) Using EMRFS for access to data in S3",
+            "D) EMR auto-termination of idle clusters"
+        ],
+        "correct": "A",
+        "explanation": "Amazon EMR integrates with CloudWatch metrics to provide real-time visibility into cluster health and performance for monitoring.",
+        "type": "single"
+    },
+    {
+        "id": 81,
+        "question": "A company needs to reliably prepare data at scale for analytics. How can AWS Glue DataBrew support this?",
+        "options": [
+            "A) Through integration with AWS Lake Formation",
+            "B) By automatically retrying failed DataBrew jobs to ensure completion",
+            "C) With encryption of jobs artifacts",
+            "D) Using zonal VPC endpoints with Glue DataBrew"
+        ],
+        "correct": "B",
+        "explanation": "AWS Glue DataBrew provides automated retry capabilities to rerun failed data preparation jobs, enabling reliable execution at scale.",
+        "type": "single"
+    },
+    {
+        "id": 82,
+        "question": "A company needs to customize the number of automatic retry attempts for failed AWS Glue DataBrew jobs. How can this be configured?",
+        "options": [
+            "A) Through zonal VPC endpoints",
+            "B) With encrypted job artifacts",
+            "C) Using Lake Formation policies",
+            "D) By setting the max number of retries per job in DataBrew settings"
+        ],
+        "correct": "D",
+        "explanation": "AWS Glue DataBrew allows setting the maximum number of automatic retry attempts per job to customize resilience.",
+        "type": "single"
+    },
+    {
+        "id": 83,
+        "question": "A company needs secure, reliable access to data in their data lake built on Amazon S3. How can AWS Lake Formation help?",
+        "options": [
+            "A) Through the use of column-level security",
+            "B) With automatic ETL job retries in AWS Glue",
+            "C) By enabling consistent access control and auditing across distributed S3 data",
+            "D) Using encrypted data at rest"
+        ],
+        "correct": "C",
+        "explanation": "AWS Lake Formation provides consistent access controls and auditing which improves reliability of security for distributed data in Amazon S3 across a data lake.",
+        "type": "single"
+    },
+    {
+        "id": 84,
+        "question": "A company needs to be able to reliably query a large dataset in Amazon S3. Which service provides resilient query capability?",
+        "options": [
+            "A) Amazon EMR",
+            "B) Amazon Redshift",
+            "C) AWS Glue crawlers",
+            "D) Amazon Athena"
+        ],
+        "correct": "D",
+        "explanation": "Amazon Athena provides reliable and resilient query capability directly against data in Amazon S3 without needing to move the data.",
+        "type": "single"
+    },
+    {
+        "id": 85,
+        "question": "A company needs to enable business analysts to reliably generate insights from data in Amazon S3. Which service can provide resilient analytics capabilities?",
+        "options": [
+            "A) AWS Glue",
+            "B) Amazon Athena",
+            "C) Amazon EMR",
+            "D) Amazon QuickSight"
+        ],
+        "correct": "D",
+        "explanation": "Amazon QuickSight provides a resilient serverless analytics service that allows analysts to generate insights from data in Amazon S3 without moving or transforming data first.",
+        "type": "single"
+    },
+    {
+        "id": 86,
+        "question": "A machine learning engineer needs to reliably test multiple variants of a model. How can Amazon SageMaker help support this?",
+        "options": [
+            "A) Through integration with AWS Glue ETL",
+            "B) By enabling A/B testing of different model variants",
+            "C) With automatic rollout to production",
+            "D) Using SageMaker hyperparameter tuning"
+        ],
+        "correct": "B",
+        "explanation": "Amazon SageMaker provides built-in support for A/B testing of machine learning models to reliably evaluate multiple variants.",
+        "type": "single"
+    },
+    {
+        "id": 87,
+        "question": "A machine learning engineer needs to reliably train ML models on large datasets. How can Amazon SageMaker support this?",
+        "options": [
+            "A) With automatic deployment of models",
+            "B) By distributing training jobs across multiple instances for resilience",
+            "C) Using SageMaker hyperparameter tuning",
+            "D) Through integration with AWS Glue ETL"
+        ],
+        "correct": "B",
+        "explanation": "Amazon SageMaker allows distributing ML training jobs across multiple instances to provide resilience for large datasets and models.",
+        "type": "single"
+    },
+    {
+        "id": 88,
+        "question": "A biotech company is using Amazon SageMaker for sensitive genomic data analysis. Due to the confidential nature of the data, they require a highly secure environment with no internet access for their notebooks and training jobs. How can they configure SageMaker to operate in a 'No Internet' mode?",
+        "options": [
+            "A) Enable 'No Internet' mode by setting an IAM policy that blocks internet access for SageMaker resources.",
+            "B) Configure the SageMaker notebook instances and training jobs to use a VPC without an Internet Gateway",
+            "C) Set the SageMaker notebooks and training jobs to 'Offline' mode in the SageMaker console.",
+            "D) Use AWS Direct Connect to establish a private connection to SageMaker, bypassing the internet."
+        ],
+        "correct": "B",
+        "explanation": "Configuring SageMaker instances to operate within a VPC without an Internet Gateway ensures all traffic stays within the AWS network and does not traverse the public internet.",
+        "type": "single"
+    },
+    {
+        "id": 89,
+        "question": "A company is building an image recognition application that analyzes photos uploaded by users to Amazon S3 and tags them. The application needs to reliably process a large volume of images with minimal delays. Which AWS service would provide the most resilient way to add image recognition capabilities?",
+        "options": [
+            "A) Load the S3 images into an Amazon EMR cluster for distributed analysis",
+            "B) Process the images using an AWS Lambda function",
+            "C) Build a custom image recognition model using Amazon SageMaker",
+            "D) Use Amazon Rekognition image analysis to tag the user photos stored in Amazon S3"
+        ],
+        "correct": "D",
+        "explanation": "Amazon Rekognition provides a highly scalable and reliable fully managed image analysis service without needing to build and host a custom model.",
+        "type": "single"
+    },
+    {
+        "id": 90,
+        "question": "A company is building an audio book app that needs to convert large volumes of text from books into speech. The application requires reliably synthesizing speech for each chapter with minimal delays. Which AWS service would provide the most resilient way to add text-to-speech capabilities at scale?",
+        "options": [
+            "A) Build a custom text-to-speech model with Amazon SageMaker",
+            "B) Process the text using an AWS Lambda function",
+            "C) Use Amazon Polly to directly convert the book text to speech",
+            "D) Load the text into an Amazon EMR cluster for distributed processing"
+        ],
+        "correct": "C",
+        "explanation": "Amazon Polly provides a highly scalable and resilient fully managed text-to-speech service to synthesize large volumes of text without infrastructure management.",
+        "type": "single"
+    },
+    {
+        "id": 91,
+        "question": "A company is building a customer service chatbot using Amazon Lex that needs to respond to a high volume of users with low latency. The operations team needs real-time visibility into availability and performance. Which approach would allow reliably monitoring the Amazon Lex chatbot?",
+        "options": [
+            "A) Review Lex logs using Amazon CloudWatch Logs insights",
+            "B) Use AWS X-Ray tracing of Lex API calls",
+            "C) Ping the Lex runtime API periodically from a scheduled Lambda function",
+            "D) Enable CloudWatch metrics for the Lex bot to track real-time metrics such as latency and errors"
+        ],
+        "correct": "D",
+        "explanation": "Amazon Lex integrates with CloudWatch metrics for real-time visibility into bot performance and availability, tracking metrics like latency and errors.",
+        "type": "single"
+    },
+    {
+        "id": 92,
+        "question": "A company is using Amazon Comprehend for sentiment analysis on product reviews stored in Amazon S3. The data science team needs real-time visibility into availability and performance. Which approach would allow reliably monitoring Amazon Comprehend?",
+        "options": [
+            "A) Review Comprehend logs using Amazon CloudWatch Logs Insights",
+            "B) Ping the Comprehend endpoint periodically from a Lambda function",
+            "C) Enable CloudWatch metrics for Comprehend to track real-time metrics such as invocation errors",
+            "D) Use AWS X-Ray tracing of Comprehend API calls"
+        ],
+        "correct": "C",
+        "explanation": "Amazon Comprehend integrates with CloudWatch metrics for real-time visibility into service performance and availability.",
+        "type": "single"
+    },
+    {
+        "id": 93,
+        "question": "A retail company is using Amazon Forecast to generate product demand predictions. The data science team needs real-time visibility into Forecast to monitor model accuracy and ensure availability. Which approach would allow reliably monitoring Amazon Forecast?",
+        "options": [
+            "A) Enable CloudWatch metrics for Forecast like prediction errors to track model accuracy",
+            "B) Invoke the Forecast API periodically from a Lambda function",
+            "C) Review Forecast logs using CloudWatch Logs Insights",
+            "D) Use X-Ray tracing of Forecast API calls"
+        ],
+        "correct": "A",
+        "explanation": "Enabling CloudWatch metrics like prediction errors allows tracking model accuracy and operational health.",
+        "type": "single"
+    },
+    {
+        "id": 94,
+        "question": "A startup is building a machine learning model to analyze sentiment from customer support transcripts stored in Amazon S3. They need to consistently label thousands of hours of audio data for training. Which AWS service would allow reliably labeling this dataset at scale?",
+        "options": [
+            "A) Load the transcripts to Amazon Redshift and label using SQL queries.",
+            "B) Process and label the data on an Amazon SageMaker notebook instance.",
+            "C) Create an Amazon Mechanical Turk project for workers to label the transcripts.",
+            "D) Use Amazon A2I human review workflows to distribute labeling to multiple workers."
+        ],
+        "correct": "D",
+        "explanation": "Amazon A2I provides managed and scalable human review workflows to reliably distribute labeling tasks across multiple workers.",
+        "type": "single"
+    },
+    {
+        "id": 95,
+        "question": "A bank needs to analyze credit card transactions in near real-time to detect fraudulent activity. They require a scalable fraud detection system that can reliably process high volumes of payment data with minimal latency. Which AWS service would best meet these requirements?",
+        "options": [
+            "A) Use Amazon Fraud Detector to monitor transactions and detect anomalies.",
+            "B) Flag transactions from an AWS Lambda function.",
+            "C) Analyze transactions in batches using an EMR cluster.",
+            "D) Build a custom ML model on SageMaker to classify transactions."
+        ],
+        "correct": "A",
+        "explanation": "Amazon Fraud Detector provides a fully managed and scalable fraud detection service allowing near real-time analysis of transaction data.",
+        "type": "single"
+    },
+    {
+        "id": 96,
+        "question": "A media company is using Amazon Transcribe to automatically generate captions for thousands of hours of video content stored in S3. Transcribe must process the video backlog reliably without delays. How can the architecture be made resilient to zone outages?",
+        "options": [
+            "A) Deploy Transcribe in a single AZ and periodically take VM snapshots",
+            "B) Nothing. It is already highly available.",
+            "C) Use AWS Lambda functions with Auto Scaling for distributed processing",
+            "D) Provision Transcribe in multiple regions and route traffic based on latency"
+        ],
+        "correct": "B",
+        "explanation": "Amazon Transcribe is built to be highly available by default across Availability Zones, requiring no manual multi-AZ configuration.",
+        "type": "single"
+    },
+    {
+        "id": 97,
+        "question": "A company is using Amazon Translate to localize support articles into multiple languages. The operations team needs real-time visibility into Translate's availability, latency, and accuracy. Which approach would allow reliably monitoring Amazon Translate?",
+        "options": [
+            "A) Enable CloudWatch metrics like translation errors and latency",
+            "B) Review Translate logs using CloudWatch Logs Insights",
+            "C) Invoke the Translate API periodically from a Lambda function",
+            "D) Use X-Ray tracing to analyze Translate API calls"
+        ],
+        "correct": "A",
+        "explanation": "Amazon Translate integrates with CloudWatch metrics to monitor real-time service metrics including errors, latency, and throughput.",
+        "type": "single"
+    },
+    {
+        "id": 98,
+        "question": "A law firm is using Amazon Textract to automatically extract text and data from scanned legal contracts stored in S3. The operations team needs real-time visibility into Textract's availability, latency, and accuracy. Which approach would allow reliably monitoring Amazon Textract?",
+        "options": [
+            "A) Enable CloudWatch metrics like text extraction errors",
+            "B) Use X-Ray tracing to analyze Textract API calls",
+            "C) Review Textract logs using CloudWatch Logs Insights",
+            "D) Invoke the Textract API periodically from a Lambda function"
+        ],
+        "correct": "A",
+        "explanation": "Amazon Textract integrates with CloudWatch metrics to monitor real-time service metrics including extraction errors and latency.",
+        "type": "single"
+    },
+    {
+        "id": 99,
+        "question": "A company is using Application Discovery Service to track on-premises servers and plan a migration to AWS. The operations team needs real-time visibility into Discovery Service availability and performance. Which approach would allow reliably monitoring Application Discovery Service?",
+        "options": [
+            "A) Poll discovered configuration data periodically with Lambda",
+            "B) Review Discovery Service logs using CloudWatch Logs Insights",
+            "C) Use X-Ray tracing to analyze Discovery Service API calls",
+            "D) Enable CloudWatch metrics for Discovery Service such as agent health"
+        ],
+        "correct": "D",
+        "explanation": "Application Discovery Service integrates with CloudWatch metrics for real-time visibility into agent health, data collection status, and service performance.",
+        "type": "single"
+    },
+    {
+        "id": 100,
+        "question": "A Solutions Architect is designing a production environment for an IBM DB2 database that will run on Amazon RDS. Considering the need for high availability and resiliency, what deployment strategy should the Architect use when configuring the RDS DB instance for DB2?",
+        "options": [
+            "A) Use Amazon RDS on VMware to deploy the DB2 database across multiple on-premises data centers.",
+            "B) Set up cross-region read replicas of the RDS DB2 instance to provide global scalability and resiliency.",
+            "C) Deploy the RDS DB2 instance in a single Availability Zone and rely on regular snapshots for recovery.",
+            "D) Configure a Multi-AZ deployment for the RDS DB2 instance to ensure synchronous data replication and automatic failover capabilities."
+        ],
+        "correct": "D",
+        "explanation": "Amazon RDS supports Multi-AZ deployments for high availability and resiliency, ensuring synchronous replication to a standby instance and automatic failover.",
+        "type": "single"
+    }
+];
 
-    // Theme Management: Default to dark theme as requested
+// Theme Management: Default to dark theme as requested
     let currentTheme = localStorage.getItem('quiz-theme') || 'dark';
     document.documentElement.setAttribute('data-theme', currentTheme);
     updateThemeUI(currentTheme);
@@ -1828,10 +1928,17 @@
         let html = '';
 
         quizData.forEach((q, index) => {
+            const isMulti = q.type === 'multi' || (Array.isArray(q.correct) ? q.correct.length > 1 : (typeof q.correct === 'string' && q.correct.includes(',')));
+            const reqCount = Array.isArray(q.correct) ? q.correct.length : (typeof q.correct === 'string' && q.correct.includes(',') ? q.correct.split(',').length : (isMulti ? 2 : 1));
+            const inputType = isMulti ? 'checkbox' : 'radio';
+
             html += `
-                <div class="question-card" id="card-${q.id}" data-id="${q.id}" data-correct="${q.correct}" data-status="unanswered">
+                <div class="question-card" id="card-${q.id}" data-id="${q.id}" data-type="${isMulti ? 'multi' : 'single'}" data-req="${reqCount}" data-status="unanswered">
                     <div class="question-header">
-                        <div class="question-title">${index + 1}. ${q.question}</div>
+                        <div class="question-title">
+                            ${index + 1}. ${q.question}
+                            ${isMulti ? `<span style="color: var(--accent-orange); font-weight: 700; margin-left: 8px;">(Select ${reqCount} options)</span>` : ''}
+                        </div>
                         <span class="status-badge correct">✓ Correct</span>
                         <span class="status-badge incorrect">✕ Incorrect</span>
                     </div>
@@ -1843,16 +1950,17 @@
                 html += `
                     <li class="option-item">
                         <label class="option-label" onclick="selectOption(this)">
-                            <input type="radio" name="question-${q.id}" value="${optLetter}">
+                            <input type="${inputType}" name="question-${q.id}" value="${optLetter}">
                             <span>${opt}</span>
                         </label>
                     </li>
                 `;
             });
 
+            const correctArg = JSON.stringify(q.correct).replace(/"/g, '&quot;');
             html += `
                     </ul>
-                    <button class="submit-btn" onclick="checkAnswer(${q.id}, '${q.correct}', \`${q.explanation.replace(/`/g, '\\`')}\`)">Submit Answer</button>
+                    <button class="submit-btn" onclick="checkAnswer(${q.id}, ${correctArg}, \`${q.explanation.replace(/`/g, '\`')}\`)">Submit Answer</button>
                     <div id="feedback-${q.id}" class="explanation"></div>
                 </div>
             `;
@@ -1865,42 +1973,81 @@
     function selectOption(labelElement) {
         const card = labelElement.closest('.question-card');
         if (!card) return;
-        card.querySelectorAll('.option-label').forEach(l => l.classList.remove('selected-opt'));
-        labelElement.classList.add('selected-opt');
+        const isMulti = card.getAttribute('data-type') === 'multi';
+        const reqCount = parseInt(card.getAttribute('data-req') || '1');
+
+        if (!isMulti) {
+            card.querySelectorAll('.option-label').forEach(l => l.classList.remove('selected-opt'));
+            labelElement.classList.add('selected-opt');
+        } else {
+            const chk = labelElement.querySelector('input[type="checkbox"]');
+            const checkedCount = card.querySelectorAll('input[type="checkbox"]:checked').length;
+            if (checkedCount > reqCount) {
+                if (chk) chk.checked = false;
+                labelElement.classList.remove('selected-opt');
+                alert(`You can only select ${reqCount} options for this question.`);
+                return;
+            }
+            if (chk && chk.checked) {
+                labelElement.classList.add('selected-opt');
+            } else {
+                labelElement.classList.remove('selected-opt');
+            }
+        }
     }
 
     function checkAnswer(questionId, correctAnswer, explanationText) {
         const card = document.getElementById(`card-${questionId}`);
-        const selectedOption = document.querySelector(`input[name="question-${questionId}"]:checked`);
+        const inputs = card.querySelectorAll(`input[name="question-${questionId}"]:checked`);
         const feedbackBox = document.getElementById(`feedback-${questionId}`);
         const labels = card.querySelectorAll('.option-label');
 
-        if (!selectedOption) {
+        const isMulti = card.getAttribute('data-type') === 'multi';
+        const reqCount = parseInt(card.getAttribute('data-req') || '1');
+
+        if (inputs.length === 0) {
             alert('Please select an option before submitting!');
             return;
         }
 
-        const userAnswer = selectedOption.value;
+        if (isMulti && inputs.length !== reqCount) {
+            alert(`Please select exactly ${reqCount} options before submitting!`);
+            return;
+        }
+
+        const selectedVals = Array.from(inputs).map(i => i.value);
+        let correctArray = Array.isArray(correctAnswer) ? correctAnswer : (typeof correctAnswer === 'string' && correctAnswer.includes(',') ? correctAnswer.split(',').map(s => s.trim()) : [String(correctAnswer)]);
+
+        let isCorrect = false;
+        if (!isMulti) {
+            isCorrect = (selectedVals[0] === correctArray[0]);
+        } else {
+            isCorrect = (selectedVals.length === correctArray.length) && selectedVals.every(val => correctArray.includes(val));
+        }
+
         feedbackBox.style.display = 'block';
 
         labels.forEach(label => {
             label.classList.remove('opt-correct', 'opt-incorrect');
-            const radio = label.querySelector('input[type="radio"]');
-            if (radio && radio.value === correctAnswer) {
+            const input = label.querySelector('input');
+            const val = input ? input.value : '';
+
+            if (correctArray.includes(val)) {
                 label.classList.add('opt-correct');
             }
-            if (radio && radio.value === userAnswer && userAnswer !== correctAnswer) {
+            if (selectedVals.includes(val) && !correctArray.includes(val)) {
                 label.classList.add('opt-incorrect');
             }
         });
 
-        if (userAnswer === correctAnswer) {
+        if (isCorrect) {
             feedbackBox.className = 'explanation correct-ans';
             feedbackBox.innerHTML = `<strong>Correct!</strong> ${explanationText}`;
             card.setAttribute('data-status', 'correct');
         } else {
             feedbackBox.className = 'explanation incorrect-ans';
-            feedbackBox.innerHTML = `<strong>Incorrect.</strong> The correct answer is <strong>${correctAnswer}</strong>. ${explanationText}`;
+            const correctStr = correctArray.join(', ');
+            feedbackBox.innerHTML = `<strong>Incorrect.</strong> The correct answer is <strong>${correctStr}</strong>. ${explanationText}`;
             card.setAttribute('data-status', 'incorrect');
         }
 
