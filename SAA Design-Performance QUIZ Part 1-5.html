@@ -1,0 +1,2256 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Solutions Architect Associate (SAA-C03) - Performance Quiz Master</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Light Theme */
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-sub-bg: #f1f5f9;
+            --card-hover-bg: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --border-color: #cbd5e1;
+            --accent-orange: #ff9900;
+            --accent-orange-hover: #e68a00;
+            --accent-orange-light: rgba(255, 153, 0, 0.12);
+            --accent-orange-glow: rgba(255, 153, 0, 0.25);
+            
+            --correct-bg: #d1fae5;
+            --correct-text: #065f46;
+            --correct-border: #34d399;
+            
+            --incorrect-bg: #ffe4e6;
+            --incorrect-text: #9f1239;
+            --incorrect-border: #fb7185;
+            
+            --sticky-bg: rgba(255, 255, 255, 0.92);
+            --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="dark"] {
+            /* Dark Theme */
+            --bg-color: #000000;
+            --card-bg: #09090b;
+            --card-sub-bg: #121215;
+            --card-hover-bg: #1c1c21;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --border-color: #27272a;
+            --accent-orange: #ff9900;
+            --accent-orange-hover: #ffaa22;
+            --accent-orange-light: rgba(255, 153, 0, 0.18);
+            --accent-orange-glow: rgba(255, 153, 0, 0.4);
+            
+            --correct-bg: rgba(16, 185, 129, 0.15);
+            --correct-text: #34d399;
+            --correct-border: rgba(52, 211, 153, 0.4);
+            
+            --incorrect-bg: rgba(244, 63, 94, 0.15);
+            --incorrect-text: #fb7185;
+            --incorrect-border: rgba(251, 113, 133, 0.4);
+            
+            --sticky-bg: rgba(0, 0, 0, 0.92);
+            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.8);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 60px;
+        }
+
+        /* Sticky Dashboard Header */
+        header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background: var(--sticky-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 12px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand img.logo-img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(255, 153, 0, 0.3));
+        }
+
+        .brand-text h1 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .brand-text p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mode-btn {
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 7px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .mode-btn.active {
+            background: var(--accent-orange);
+            color: #000;
+            border-color: var(--accent-orange);
+        }
+
+        .theme-toggle {
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 7px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+
+        .stat-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+        }
+
+        .stat-badge .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .dot.correct { background: #10b981; }
+        .dot.incorrect { background: #f43f5e; }
+        .dot.total { background: #60a5fa; }
+        .dot.accuracy { background: var(--accent-orange); }
+
+        .search-filter-box {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .search-input {
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            width: 180px;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 0 2px var(--accent-orange-light);
+        }
+
+        .filter-btn {
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .filter-btn.active {
+            background: var(--accent-orange-light);
+            color: var(--accent-orange);
+            border-color: var(--accent-orange);
+        }
+
+        .progress-line-container {
+            width: 100%;
+            height: 4px;
+            background: var(--card-sub-bg);
+            border-radius: 2px;
+            overflow: hidden;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .progress-line-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-orange), #10b981);
+            transition: width 0.3s ease;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            width: 92%;
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .module-banner {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .module-banner h2 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .module-banner p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Question Cards */
+        .question-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-shadow: var(--shadow-card);
+            position: relative;
+        }
+
+        .question-card.answered-correct {
+            border-left: 5px solid #10b981;
+        }
+
+        .question-card.answered-incorrect {
+            border-left: 5px solid #f43f5e;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .topic-pill {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: var(--accent-orange-light);
+            color: var(--accent-orange);
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 153, 0, 0.3);
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+
+        .question-title {
+            font-size: 1.02rem;
+            font-weight: 700;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .status-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            display: none;
+            flex-shrink: 0;
+        }
+
+        .status-badge.correct {
+            background: var(--correct-bg);
+            color: var(--correct-text);
+            border: 1px solid var(--correct-border);
+        }
+
+        .status-badge.incorrect {
+            background: var(--incorrect-bg);
+            color: var(--incorrect-text);
+            border: 1px solid var(--incorrect-border);
+        }
+
+        .options-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-item {
+            position: relative;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 16px;
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.92rem;
+            line-height: 1.45;
+            color: var(--text-primary);
+            user-select: none;
+        }
+
+        .option-label:hover {
+            background: var(--card-hover-bg);
+            border-color: var(--accent-orange);
+        }
+
+        .option-label input {
+            margin-top: 3px;
+            cursor: pointer;
+            accent-color: var(--accent-orange);
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        .option-label.selected-opt {
+            border-color: var(--accent-orange);
+            background: var(--accent-orange-light);
+        }
+
+        .option-label.correct-ans {
+            background: var(--correct-bg) !important;
+            border-color: var(--correct-border) !important;
+            color: var(--correct-text) !important;
+            font-weight: 600;
+        }
+
+        .option-label.incorrect-ans {
+            background: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-border) !important;
+            color: var(--incorrect-text) !important;
+        }
+
+        .submit-btn {
+            align-self: flex-start;
+            background: var(--accent-orange);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px var(--accent-orange-glow);
+        }
+
+        .submit-btn:hover {
+            background: var(--accent-orange-hover);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .explanation {
+            display: none;
+            background: var(--card-sub-bg);
+            border-left: 4px solid var(--accent-orange);
+            border-radius: 0 8px 8px 0;
+            padding: 14px 18px;
+            font-size: 0.88rem;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .explanation strong {
+            color: var(--accent-orange);
+        }
+
+        .card-watermark {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            opacity: 0.7;
+            padding-top: 8px;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        .card-watermark a {
+            color: var(--accent-orange);
+            text-decoration: none;
+        }
+
+        .card-watermark a:hover {
+            text-decoration: underline;
+        }
+
+        /* Exam Mode Specific Layout */
+        .exam-header-bar {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-card);
+        }
+
+        .exam-timer-display {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--accent-orange);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .exam-grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 20px;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .exam-grid-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .exam-palette-panel {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: var(--shadow-card);
+            position: sticky;
+            top: 120px;
+        }
+
+        .palette-header {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-primary);
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+            max-height: 380px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .palette-btn {
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 6px 0;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .palette-btn.active {
+            border-color: var(--accent-orange);
+            outline: 2px solid var(--accent-orange);
+        }
+
+        .palette-btn.answered {
+            background: #2563eb;
+            color: #ffffff;
+            border-color: #2563eb;
+        }
+
+        .palette-btn.flagged {
+            position: relative;
+        }
+
+        .palette-btn.flagged::after {
+            content: '🚩';
+            position: absolute;
+            top: -5px;
+            right: -3px;
+            font-size: 0.65rem;
+        }
+
+        .palette-legend {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 14px;
+            font-size: 0.72rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            padding-top: 10px;
+        }
+
+        .exam-nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+        }
+
+        .btn-nav {
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.88rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-nav:hover {
+            background: var(--card-hover-bg);
+            border-color: var(--accent-orange);
+        }
+
+        .btn-flag {
+            background: var(--card-sub-bg);
+            border: 1px solid #eab308;
+            color: #eab308;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.88rem;
+        }
+
+        .btn-flag.flagged-active {
+            background: #eab308;
+            color: #000;
+        }
+
+        .btn-finish-exam {
+            background: #10b981;
+            color: #ffffff;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
+
+        .btn-finish-exam:hover {
+            background: #059669;
+        }
+
+        /* Results Dashboard */
+        .results-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .results-score-box {
+            text-align: center;
+            padding: 24px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .results-score-box.pass {
+            background: rgba(16, 185, 129, 0.12);
+            border: 2px solid #10b981;
+            color: var(--text-primary);
+        }
+
+        .results-score-box.fail {
+            background: rgba(244, 63, 94, 0.12);
+            border: 2px solid #f43f5e;
+            color: var(--text-primary);
+        }
+
+        .score-big {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--accent-orange);
+        }
+
+        .score-status-badge {
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-export-json {
+            background: #3b82f6;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+        }
+
+        .btn-export-json:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-top">
+        <div class="brand">
+            <img src="saa-badge.png" alt="AWS Certified Solutions Architect Associate" class="logo-img">
+            <div class="brand-text">
+                <h1>AWS Solutions Architect Associate (SAA-C03) - Performance Quiz Master</h1>
+                <p>Designing for Performance Efficiency • 50 High-Yield Questions</p>
+            </div>
+        </div>
+        <div class="header-controls">
+            <button class="mode-btn active" id="btn-mode-practice" onclick="switchQuizMode('practice')">
+                📖 Practice Mode
+            </button>
+            <button class="mode-btn" id="btn-mode-exam" onclick="switchQuizMode('exam')">
+                ⏱️ AWS Exam Mode
+            </button>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <span id="theme-icon">☀️</span>
+                <span id="theme-text">Light Mode</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="header-bottom" id="practice-header-bottom">
+        <div class="stats-bar">
+            <div class="stat-badge"><span class="dot total"></span> Total: <span id="stat-total">50</span></div>
+            <div class="stat-badge"><span class="dot total"></span> Answered: <span id="stat-answered">0</span></div>
+            <div class="stat-badge"><span class="dot correct"></span> Correct: <span id="stat-correct">0</span></div>
+            <div class="stat-badge"><span class="dot incorrect"></span> Incorrect: <span id="stat-incorrect">0</span></div>
+            <div class="stat-badge"><span class="dot accuracy"></span> Accuracy: <span id="stat-accuracy">0%</span></div>
+        </div>
+        <div class="search-filter-box">
+            <input type="text" id="search-input" class="search-input" placeholder="Search #Q or keywords..." oninput="filterQuestions()">
+            <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
+            <button class="filter-btn" onclick="setFilter('unanswered', this)">Unanswered</button>
+            <button class="filter-btn" onclick="setFilter('correct', this)">Correct</button>
+            <button class="filter-btn" onclick="setFilter('incorrect', this)">Incorrect</button>
+        </div>
+    </div>
+
+    <div class="progress-line-container" id="practice-progress-bar">
+        <div class="progress-line-fill" id="progress-fill"></div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="module-banner" id="module-banner">
+        <h2>🚀 Performance Efficiency Domain Modules</h2>
+        <p>Master AWS performance optimization: Compute Right-Sizing, Auto Scaling, Elastic Load Balancing, CloudFront & Lambda@Edge Caching, Aurora Distributed Storage, ElastiCache, High-Performance Storage (EBS, EFS, FSx for Lustre), and Infrastructure as Code pipelines.</p>
+    </div>
+
+    <div id="quiz-container"></div>
+</div>
+
+<script>
+    const quizData = [
+    {
+        "id": 1,
+        "section": "PERFORMANCE",
+        "topic": "AWS Well-Architected Framework",
+        "subtopic": "Pillars of the Framework",
+        "type": "single",
+        "question": "The AWS Well-Architected Framework is based on six pillars designed to measure architectures against best practices. Which of the following is NOT one of the six pillars?",
+        "options": [
+            "A) Performance Efficiency (focusing on structured resource selection, monitoring, and scaling)",
+            "B) Sustainability (focusing on minimizing environmental impacts of running cloud workloads)",
+            "C) Operational Excellence (focusing on running and monitoring systems to deliver business value)",
+            "D) Agility and Elasticity (focusing on rapid speculative prototyping and unregulated growth)"
+        ],
+        "correct": "D",
+        "explanation": "The six pillars of the AWS Well-Architected Framework are Operational Excellence, Security, Reliability, Performance Efficiency, Cost Optimization, and Sustainability. Agility and Elasticity is not a distinct pillar."
+    },
+    {
+        "id": 2,
+        "section": "PERFORMANCE",
+        "topic": "Performance Design Principles",
+        "subtopic": "Mechanical Sympathy",
+        "type": "single",
+        "question": "An organization relies heavily on Amazon S3 to store rapidly mutating transactional SQL records, causing severe performance degradation. Which Performance Design Principle is explicitly being violated in this scenario?",
+        "options": [
+            "A) Consider mechanical sympathy (aligning workload access patterns with purpose-built storage technologies)",
+            "B) Democratize advanced technologies (delegating complex operational tasks to managed cloud vendor services)",
+            "C) Use serverless architectures (removing the operational requirement to manage physical compute instances)",
+            "D) Experiment more often (leveraging automation to conduct comparative benchmarking across instance families)"
+        ],
+        "correct": "A",
+        "explanation": "Mechanical sympathy means using a technology for what it was designed for. Using S3 (an object store) as a relational database violates this principle."
+    },
+    {
+        "id": 3,
+        "section": "PERFORMANCE",
+        "topic": "Performance Design Principles",
+        "subtopic": "Democratize Advanced Technologies",
+        "type": "single",
+        "question": "Which scenario best exemplifies the performance design principle 'Democratize advanced technologies'?",
+        "options": [
+            "A) Building, compiling, and hosting custom machine learning neural network software on unmanaged bare-metal servers",
+            "B) Consuming managed AI services like Amazon Rekognition or Lex rather than hosting and training custom infrastructure",
+            "C) Hardcoding static relational database connection pools inside application configuration files across all compute nodes",
+            "D) Provisioning dedicated physical hardware security modules in private subnets without enabling KMS integrations"
+        ],
+        "correct": "B",
+        "explanation": "Democratizing advanced technologies means consuming complex technologies (like ML, media transcoding, or managed databases) as services rather than having your team manage the underlying infrastructure."
+    },
+    {
+        "id": 4,
+        "section": "PERFORMANCE",
+        "topic": "Performance Design Principles",
+        "subtopic": "Five Design Principles",
+        "type": "multi",
+        "question": "Which TWO of the following are explicit Performance Design Principles defined in the AWS Well-Architected Framework? (Select 2)",
+        "options": [
+            "A) Go global in minutes (deploying workloads in multiple regions for lower latency and better user experience)",
+            "B) Use serverless architectures (reducing operational overhead and leveraging per-request dynamic scaling)",
+            "C) Mandate synchronous monolithic architectures (coupling application tiers to reduce network communication)",
+            "D) Restrict resource provisioning to a single Availability Zone (minimizing cross-zone network latency hops)"
+        ],
+        "correct": [
+            "A",
+            "B"
+        ],
+        "explanation": "The five Performance Efficiency design principles are: Democratize advanced technologies, Go global in minutes, Use serverless architectures, Experiment more often, and Consider mechanical sympathy."
+    },
+    {
+        "id": 5,
+        "section": "PERFORMANCE",
+        "topic": "Servered vs Serverless",
+        "subtopic": "Architectural Spectrum",
+        "type": "single",
+        "question": "When categorizing AWS compute options along the spectrum from 'Servered' to 'Serverless', which of the following is correctly positioned in the middle as a container service that manages servers but abstracts raw virtual machines?",
+        "options": [
+            "A) Amazon EC2 with dedicated hosts (providing full hardware-level virtualization control to the customer)",
+            "B) Amazon ECS or Amazon EKS on EC2 (providing container orchestration while managing worker node clusters)",
+            "C) AWS Lambda (providing fully event-driven execution without provisioning or managing server instances)",
+            "D) AWS Step Functions (providing visual serverless workflow orchestration across distributed microservices)"
+        ],
+        "correct": "B",
+        "explanation": "The compute spectrum moves from Servered (EC2, Beanstalk) to Containerized/Hybrid (ECS/EKS on EC2) to pure Serverless (Fargate, Lambda)."
+    },
+    {
+        "id": 6,
+        "section": "PERFORMANCE",
+        "topic": "Autoscaling vs Manual Scaling",
+        "subtopic": "Service Support Matrix",
+        "type": "single",
+        "question": "According to the AWS autoscaling support matrix, which compute service requires manual scaling rather than supporting native dynamic autoscaling policies?",
+        "options": [
+            "A) Amazon Lightsail (designed for simple fixed-price virtual private servers with manual instance resizing)",
+            "B) Amazon EC2 Auto Scaling (dynamically launching and terminating instances based on target tracking policies)",
+            "C) AWS App Runner (automatically scaling container instances up and down in response to incoming web traffic)",
+            "D) Amazon DynamoDB (automatically scaling provisioned read and write capacity units based on utilization)"
+        ],
+        "correct": "A",
+        "explanation": "Amazon Lightsail is designed as a simplified, fixed-bundle virtual private server platform and does not feature native dynamic autoscaling like EC2 ASG or App Runner."
+    },
+    {
+        "id": 7,
+        "section": "PERFORMANCE",
+        "topic": "Performance Categories",
+        "subtopic": "Four Major Categories",
+        "type": "multi",
+        "question": "Which TWO of the following are explicitly listed as major categories that all performance actions will affect within AWS? (Select 2)",
+        "options": [
+            "A) Compute and Hardware (evaluating CPU architecture, accelerators, memory ratios, and instance types)",
+            "B) Process and Culture (establishing benchmarking, load testing, metrics visibility, and automation KPIs)",
+            "C) Financial Budget Allocation (negotiating corporate commercial software volume licensing contracts)",
+            "D) Human Resources Recruitment (establishing developer hiring quotas and internal staffing models)"
+        ],
+        "correct": [
+            "A",
+            "B"
+        ],
+        "explanation": "The major categories for performance in AWS are Overall Architecture Selection, Compute and Hardware, Data Management, Networking and Content Delivery, and Process and Culture."
+    },
+    {
+        "id": 8,
+        "section": "PERFORMANCE",
+        "topic": "Architecture Selection",
+        "subtopic": "Best Practices (PERF01)",
+        "type": "single",
+        "question": "According to the Architecture Selection best practices (PERF01), which action is critical when deciding on an architectural approach to ensure business viability?",
+        "options": [
+            "A) Factor cost into architectural decisions to select solutions that meet throughput goals with minimal investment",
+            "B) Ensure every workload component is strictly deployed using serverless technologies regardless of runtime constraints",
+            "C) Migrate all enterprise data exclusively to third-party multi-tenant SaaS providers outside of the cloud environment",
+            "D) Disregard operational tradeoffs and cost constraints to prioritize absolute maximum compute clock speed"
+        ],
+        "correct": "A",
+        "explanation": "PERF01-BP03 explicitly states to 'Factor cost into architectural decisions' to find an approach that matches needs with the minimal amount of investment."
+    },
+    {
+        "id": 9,
+        "section": "PERFORMANCE",
+        "topic": "Compute Performance",
+        "subtopic": "Best Practices (PERF02)",
+        "type": "single",
+        "question": "A workload requires specialized mathematical processing that standard CPUs cannot handle efficiently. According to the Compute Performance best practices (PERF02), what should the architect do?",
+        "options": [
+            "A) Use optimized hardware-based compute accelerators (such as GPUs, AWS Inferentia, or AWS Trainium)",
+            "B) Scale compute resources manually instead of implementing dynamic autoscaling policies across instances",
+            "C) Provision baseline general-purpose EC2 instances and write custom assembly algorithms to bypass kernel calls",
+            "D) Downgrade the size and memory footprint of the compute instances to reduce total monthly infrastructure cost"
+        ],
+        "correct": "A",
+        "explanation": "PERF02-BP06 specifically recommends to 'Use optimized hardware-based compute accelerators' to optimize performance efficiency for specialized workloads."
+    },
+    {
+        "id": 10,
+        "section": "PERFORMANCE",
+        "topic": "Data Management Performance",
+        "subtopic": "Best Practices (PERF03)",
+        "type": "multi",
+        "question": "Which TWO of the following are considered Data Management Performance best practices (PERF03) according to the AWS Well-Architected Framework? (Select 2)",
+        "options": [
+            "A) Use a purpose-built data store that best supports your data access and storage requirements (PERF03-BP01)",
+            "B) Implement data access patterns that utilize caching to reduce latency and database read contention (PERF03-BP05)",
+            "C) Always utilize block storage instead of object storage to ensure sequential read performance for all workloads",
+            "D) Restrict all database writes strictly to a single Availability Zone to prevent cross-zone replication latency"
+        ],
+        "correct": [
+            "A",
+            "B"
+        ],
+        "explanation": "PERF03-BP01 (Use a purpose-built data store) and PERF03-BP05 (Implement data access patterns that utilize caching) are documented best practices for Data Management Performance."
+    },
+    {
+        "id": 11,
+        "section": "PERFORMANCE",
+        "topic": "Networking Performance",
+        "subtopic": "Reducing Latency and Jitter",
+        "type": "multi",
+        "question": "An architect is tasked with reducing network distance and jitter for a globally distributed workload. Which TWO AWS networking features are specifically highlighted in the framework to address this?",
+        "options": [
+            "A) Amazon Route 53 latency routing (routing client requests to the AWS region that provides the lowest latency)",
+            "B) AWS Global Accelerator (routing traffic over the congestion-free AWS global backbone via anycast IP endpoints)",
+            "C) Amazon EC2 network-optimized instances (providing up to 100 Gbps enhanced networking bandwidth per instance)",
+            "D) Amazon S3 Transfer Acceleration (enabling high-speed file uploads to S3 buckets over CloudFront edge locations)"
+        ],
+        "correct": [
+            "A",
+            "B"
+        ],
+        "explanation": "The framework differentiates between features that optimize network traffic (EC2 optimized instances, S3 transfer acceleration) and features that reduce network distance or jitter (Route 53 latency routing, VPC endpoints, Direct Connect, and Global Accelerator)."
+    },
+    {
+        "id": 12,
+        "section": "PERFORMANCE",
+        "topic": "Networking Performance",
+        "subtopic": "Traffic Optimization",
+        "type": "multi",
+        "question": "Which TWO of the following AWS product features are specifically categorized as optimizing network traffic (throughput/performance) rather than reducing network distance/jitter? (Select 2)",
+        "options": [
+            "A) Enhanced Networking (utilizing SR-IOV to provide high packet-per-second performance and low CPU utilization)",
+            "B) Amazon S3 Transfer Acceleration (accelerating data uploads across long geographic distances via edge locations)",
+            "C) Amazon VPC Endpoints (providing direct private connectivity to AWS services without traversing internet gateways)",
+            "D) AWS Direct Connect (establishing dedicated private fiber circuits between on-premises data centers and AWS)"
+        ],
+        "correct": [
+            "A",
+            "B"
+        ],
+        "explanation": "Enhanced Networking, EC2 networking optimized instances, S3 transfer acceleration, and CloudFront are categorized under optimizing network traffic. VPC endpoints and Direct Connect are categorized under reducing network distance/jitter."
+    },
+    {
+        "id": 13,
+        "section": "PERFORMANCE",
+        "topic": "Process and Culture",
+        "subtopic": "Load Generation",
+        "type": "single",
+        "question": "When generating load to test application performance, what characteristic should the test scripts possess to yield valid results?",
+        "options": [
+            "A) They should be idempotent and not coupled, accurately replicating the realistic usage behavior in production",
+            "B) They should execute queries exclusively against the database tier while bypassing the application tier completely",
+            "C) They should be heavily interdependent and coupled to ensure strict sequential transaction execution orders",
+            "D) They must execute strictly on physical on-premises hardware to avoid consuming cloud computing resources"
+        ],
+        "correct": "A",
+        "explanation": "The framework states that test scripts for load generation should replicate synthetic or prerecorded user journeys, and 'These scripts should be idempotent and not coupled' to yield valid results."
+    },
+    {
+        "id": 14,
+        "section": "PERFORMANCE",
+        "topic": "Process and Culture",
+        "subtopic": "Performance Visibility",
+        "type": "single",
+        "question": "According to the Process and Culture guidelines, why is it critical to focus on the 99.9th and 99.99th percentile for latency outliers rather than just average latency?",
+        "options": [
+            "A) Because extreme outlier latency experienced by even a small percentage of requests creates poor user experience at scale",
+            "B) Because average latency metrics cannot be calculated or displayed within Amazon CloudWatch dashboard widgets",
+            "C) Because calculating 99.9th percentile metrics requires significantly fewer CloudWatch metric mathematical operations",
+            "D) Because latency outliers indicate active distributed denial-of-service (DDoS) flood attacks at the network layer"
+        ],
+        "correct": "A",
+        "explanation": "AWS emphasizes focusing on latency outliers because 'if one in 100 of your requests causes extreme latency, it will eventually become a problem as your traffic grows', making the average latency an insufficient metric for customer experience."
+    },
+    {
+        "id": 15,
+        "section": "PERFORMANCE",
+        "topic": "Process and Culture",
+        "subtopic": "Best Practices (PERF05)",
+        "type": "multi",
+        "question": "Which TWO of the following are defined as Process and Culture best practices (PERF05) for performance efficiency? (Select 2)",
+        "options": [
+            "A) Establish key performance indicators (KPIs) to measure workload health, latency, and business efficiency (PERF05-BP01)",
+            "B) Use automation to proactively remediate performance-related issues and resource bottlenecks (PERF05-BP05)",
+            "C) Rely strictly on manual human execution and verification for all performance benchmark evaluations",
+            "D) Implement static instance hardware configurations and avoid automated dynamic scaling policies"
+        ],
+        "correct": [
+            "A",
+            "B"
+        ],
+        "explanation": "PERF05-BP01 (Establish KPIs) and PERF05-BP05 (Use automation to proactively remediate performance-related issues) are explicit best practices for Process and Culture."
+    },
+    {
+        "id": 16,
+        "section": "PERFORMANCE",
+        "topic": "Process and Culture",
+        "subtopic": "Anti-Patterns",
+        "type": "single",
+        "question": "Which of the following represents a major performance anti-pattern according to the Process and Culture best practices?",
+        "options": [
+            "A) Performing load tests and performance benchmarks only right before production launch or when critical issues occur",
+            "B) Integrating automated load testing suites directly into continuous integration and delivery (CI/CD) deployment pipelines",
+            "C) Using Amazon CloudWatch Synthetics canaries to continuously monitor REST API endpoints from multiple global regions",
+            "D) Implementing automated target tracking scaling policies based on average CPU utilization across EC2 instance fleets"
+        ],
+        "correct": "A",
+        "explanation": "Testing performance only right before launch (or reactively after outages) is a major anti-pattern. Performance testing should be continuous, automated, and driven throughout the development lifecycle."
+    },
+    {
+        "id": 17,
+        "section": "PERFORMANCE",
+        "topic": "Performance Design Principles",
+        "subtopic": "Experiment More Often",
+        "type": "single",
+        "question": "How does cloud computing enable teams to uphold the 'Experiment more often' performance design principle effectively?",
+        "options": [
+            "A) By allowing teams to quickly provision comparative infrastructure using automation, test performance, and delete resources",
+            "B) By requiring upfront multi-year capital expenditure investments for all exploratory proof-of-concept testing",
+            "C) By permanently locking hardware configurations once an initial CloudFormation stack deployment completes",
+            "D) By eliminating the need to monitor system metrics, transaction logs, or throughput benchmarks during experimentation"
+        ],
+        "correct": "A",
+        "explanation": "With cloud architectures and Infrastructure as Code, teams can provision diverse instance families and configurations in minutes, benchmark them against workloads, and de-provision them with zero ongoing commitment."
+    },
+    {
+        "id": 18,
+        "section": "PERFORMANCE",
+        "topic": "Compute Performance",
+        "subtopic": "Instance Sizing",
+        "type": "single",
+        "question": "An analytics workload processes batch datasets in memory. The CPU utilization remains below 20% while memory utilization consistently reaches 95%. Which Amazon EC2 instance family aligns best with mechanical sympathy for this workload?",
+        "options": [
+            "A) Memory-optimized instances (such as R-family or X-family instances providing high memory-to-vCPU ratios)",
+            "B) Compute-optimized instances (such as C-family instances providing high compute power and lower RAM capacity)",
+            "C) Storage-optimized instances (such as I-family instances providing high random IOPS on local NVMe SSD storage)",
+            "D) Accelerated computing instances (such as P-family or G-family instances providing hardware GPU accelerators)"
+        ],
+        "correct": "A",
+        "explanation": "Memory-optimized instances (R/X families) are purpose-built for workloads that process large datasets in memory (like high-performance databases, in-memory caches, and real-time big data analytics)."
+    },
+    {
+        "id": 19,
+        "section": "PERFORMANCE",
+        "topic": "Data Management Performance",
+        "subtopic": "Storage Tiers",
+        "type": "single",
+        "question": "A media rendering platform needs high-performance shared file storage accessible concurrently by hundreds of Linux EC2 instances with sub-millisecond latencies and high throughput. Which storage service should be chosen?",
+        "options": [
+            "A) Amazon FSx for Lustre or Amazon EFS with Provisioned Throughput to provide high-performance concurrent POSIX access",
+            "B) Amazon S3 Glacier Deep Archive mounted locally on compute instances using unbuffered user-space file drivers",
+            "C) Amazon EBS Provisioned IOPS io2 volumes formatted as single-instance local ext4 file systems across availability zones",
+            "D) AWS Storage Gateway Tape Gateway providing virtual tape library archives over public internet connections"
+        ],
+        "correct": "A",
+        "explanation": "Amazon FSx for Lustre and Amazon EFS provide high-throughput, concurrent shared POSIX storage optimized for compute-intensive analytics, media processing, and container workloads."
+    },
+    {
+        "id": 20,
+        "section": "PERFORMANCE",
+        "topic": "Offloading and Load Distribution",
+        "subtopic": "Database Read Replicas",
+        "type": "single",
+        "question": "A relational database experiences severe latency due to heavy read traffic from business intelligence reporting tools. How can read traffic be offloaded efficiently?",
+        "options": [
+            "A) Provision Amazon RDS Read Replicas to offload read-only analytical queries and reserve the primary DB instance for writes",
+            "B) Increase the size of the database storage volume to automatically double the maximum CPU clock frequency",
+            "C) Convert all relational database tables into static CSV files and store them in an Amazon S3 Glacier archive vault",
+            "D) Configure multi-AZ standby instances to process live read queries while the primary instance handles write operations"
+        ],
+        "correct": "A",
+        "explanation": "RDS Read Replicas offload read-intensive queries from the primary database instance, horizontally scaling read throughput and improving application write performance."
+    },
+    {
+        "id": 21,
+        "section": "PERFORMANCE",
+        "topic": "Offloading and Load Distribution",
+        "subtopic": "In-Memory Caching",
+        "type": "single",
+        "question": "Which AWS caching service provides sub-millisecond response times for frequently requested database queries and session state data?",
+        "options": [
+            "A) Amazon ElastiCache (Redis or Memcached) providing high-throughput in-memory caching to offload database load",
+            "B) Amazon CloudFront Regional Edge Caches storing static video files at global points of presence",
+            "C) Amazon S3 Standard-Infrequent Access storing backup archive snapshots with rapid retrieval options",
+            "D) AWS Storage Gateway Volume Gateway caching local block storage volumes inside on-premises data centers"
+        ],
+        "correct": "A",
+        "explanation": "Amazon ElastiCache is a fully managed in-memory data store service that provides sub-millisecond latencies for caching database query results and managing session state."
+    },
+    {
+        "id": 22,
+        "section": "PERFORMANCE",
+        "topic": "Offloading and Load Distribution",
+        "subtopic": "DynamoDB Accelerator (DAX)",
+        "type": "single",
+        "question": "A gaming application requires microsecond read latency for hot player profile records stored in Amazon DynamoDB. Which solution provides seamless, fully managed in-memory caching?",
+        "options": [
+            "A) Amazon DynamoDB Accelerator (DAX) providing a dedicated, fully managed in-memory cache with microsecond response times",
+            "B) Amazon ElastiCache for Memcached requiring custom application code changes to invalidate expired table cache keys",
+            "C) Amazon CloudFront configured with custom origin request policies to cache raw DynamoDB HTTP API responses",
+            "D) AWS AppConfig configured to deploy static database table records dynamically to running EC2 compute instances"
+        ],
+        "correct": "A",
+        "explanation": "DynamoDB Accelerator (DAX) is a fully managed, highly available, in-memory cache for DynamoDB that delivers up to a 10x performance improvement—from milliseconds to microseconds—without requiring application logic modifications."
+    },
+    {
+        "id": 23,
+        "section": "PERFORMANCE",
+        "topic": "Networking Performance",
+        "subtopic": "Content Delivery",
+        "type": "single",
+        "question": "How does Amazon CloudFront improve web application performance for globally distributed users?",
+        "options": [
+            "A) By caching static and dynamic content at global edge locations close to viewers, reducing origin round-trip latency",
+            "B) By compressing database table schemas automatically and storing them in local client web browser cookies",
+            "C) By re-encrypting network packets using unvalidated self-signed certificates at the edge to accelerate handshakes",
+            "D) By routing all user traffic through a single centralized corporate proxy server located in the primary AWS region"
+        ],
+        "correct": "A",
+        "explanation": "Amazon CloudFront speeds up distribution of static and dynamic web content by delivering it through a worldwide network of edge locations, terminating TLS closer to users and serving cached responses with minimal latency."
+    },
+    {
+        "id": 24,
+        "section": "PERFORMANCE",
+        "topic": "Networking Performance",
+        "subtopic": "Global Accelerator vs CloudFront",
+        "type": "single",
+        "question": "When should an architect choose AWS Global Accelerator over Amazon CloudFront for performance optimization?",
+        "options": [
+            "A) When routing non-HTTP/HTTPS protocols (like UDP/TCP gaming or VoIP) or when static anycast IP addresses are required",
+            "B) When caching static HTML, CSS, JavaScript, and video media files at global edge locations for web browsers",
+            "C) When building serverless single-page applications hosted entirely on static Amazon S3 website endpoints",
+            "D) When decrypting SSL/TLS certificates exclusively on backend Amazon EC2 instances in private subnets"
+        ],
+        "correct": "A",
+        "explanation": "Global Accelerator provides static anycast IP addresses and optimizes network paths over the AWS global network for both HTTP and non-HTTP (TCP/UDP) protocols without content caching, whereas CloudFront is designed for HTTP/HTTPS content delivery and caching."
+    },
+    {
+        "id": 25,
+        "section": "PERFORMANCE",
+        "topic": "Offloading and Load Distribution",
+        "subtopic": "CloudFront Functions",
+        "type": "single",
+        "question": "According to the AWS edge computing architecture, which lightweight compute service executes ultra-low-latency JavaScript code at CloudFront edge locations at the 'Viewer Request' phase before cache lookups?",
+        "options": [
+            "A) CloudFront Functions (executing lightweight sub-millisecond URL rewrites and header manipulations at edge locations)",
+            "B) Lambda@Edge (executing compute-intensive Node.js or Python code with full network access at regional edge caches)",
+            "C) AWS Step Functions (orchestrating distributed multi-step serverless state machines inside customer VPC subnets)",
+            "D) AWS Systems Manager Run Command (executing administrative shell scripts across fleets of managed EC2 instances)"
+        ],
+        "correct": "A",
+        "explanation": "CloudFront Functions is designed for lightweight, sub-millisecond edge processing (such as HTTP header manipulation, URL redirects, and cache key normalization) running at all CloudFront edge locations during Viewer Request/Response phases."
+    },
+    {
+        "id": 26,
+        "section": "PERFORMANCE",
+        "topic": "Offloading and Load Distribution",
+        "subtopic": "CloudFront Edge Caching",
+        "type": "single",
+        "question": "When a client initiates an HTTP request to Amazon CloudFront that requires executing lightweight edge compute logic to manipulate URL headers before evaluating the local edge cache, which compute feature handles this viewer-facing step?",
+        "options": [
+            "A) CloudFront Functions attached to the Viewer Request trigger at the edge",
+            "B) Lambda@Edge Functions attached to the Origin Request trigger in the VPC",
+            "C) API Gateway Method Request execution running behind Regional caches",
+            "D) NGINX Reverse Proxy sidecars deployed within local container clusters"
+        ],
+        "correct": "A",
+        "explanation": "CloudFront Functions operate at 450+ CloudFront edge points of presence (PoPs) specifically on Viewer Request and Viewer Response triggers before CloudFront checks or populates its local edge cache, providing sub-millisecond execution for URL rewrites and header transformations."
+    },
+    {
+        "id": 27,
+        "section": "PERFORMANCE",
+        "topic": "Offloading and Load Distribution",
+        "subtopic": "Lambda@Edge",
+        "type": "single",
+        "question": "In an advanced multi-tier CloudFront caching architecture, at which exact stage of the request lifecycle does a Lambda@Edge function execute an 'Origin Request' trigger?",
+        "options": [
+            "A) After a cache miss in the local Edge Cache but prior to forwarding traffic to Regional Edge Caches and Origins",
+            "B) Immediately upon receiving the viewer connection prior to evaluating local Edge Cache presence or edge routing",
+            "C) Directly after the origin server generates a response payload before reaching Regional Edge caching layers",
+            "D) Within the private customer VPC subnet following complete TLS termination at the Regional Application Load Balancer"
+        ],
+        "correct": "A",
+        "explanation": "Lambda@Edge Origin Request functions execute only upon a local edge cache miss, running before CloudFront forwards the request to the Regional Edge Cache or directly to the custom/S3 origin. This allows payload modification or dynamic origin routing without incurring execution costs on cache hits."
+    },
+    {
+        "id": 28,
+        "section": "PERFORMANCE",
+        "topic": "Offloading and Load Distribution",
+        "subtopic": "API Gateway Caching",
+        "type": "multi",
+        "question": "Which TWO backend targets can Amazon API Gateway directly integrate with to serve cached and uncached API responses according to the serverless performance offloading architecture? (Select 2)",
+        "options": [
+            "A) AWS Lambda serverless functions executing core business logic",
+            "B) Publicly accessible HTTP/HTTPS endpoints hosted on Amazon EC2 instances",
+            "C) On-premises tape storage targets accessed via AWS Storage Gateway VTL",
+            "D) Amazon DynamoDB Accelerator (DAX) hardware clusters via private subnets"
+        ],
+        "correct": [
+            "A",
+            "B"
+        ],
+        "explanation": "Amazon API Gateway natively supports integration with AWS Lambda functions, any publicly accessible HTTP/HTTPS endpoints (including applications hosted on EC2 instances or on-premises servers), and other AWS services, offloading compute and connection management through its built-in API caching tier."
+    },
+    {
+        "id": 29,
+        "section": "PERFORMANCE",
+        "topic": "Servered vs Serverless",
+        "subtopic": "Scaling Mechanics",
+        "type": "single",
+        "question": "Why does the AWS Well-Architected Framework explicitly advocate choosing serverless architectures to maximize performance efficiency during variable and unpredictable traffic surges?",
+        "options": [
+            "A) Serverless offerings scale automatically on a per-request basis without requiring pre-provisioned headroom",
+            "B) Serverless architectures eliminate all underlying data transfer egress fees between different AWS Regions",
+            "C) Serverless databases utilize cross-region synchronous master nodes that completely eliminate write contention",
+            "D) Serverless runtimes bypass hypervisor virtualization layers entirely to grant bare-metal performance"
+        ],
+        "correct": "A",
+        "explanation": "Serverless architectures (e.g., AWS Lambda, API Gateway, DynamoDB) scale automatically and granularly in direct response to incoming request volume, eliminating the latency, operational overhead, and potential under-provisioning bottlenecks associated with traditional fleet-based capacity scaling."
+    },
+    {
+        "id": 30,
+        "section": "PERFORMANCE",
+        "topic": "Servered vs Serverless",
+        "subtopic": "Aurora Configuration",
+        "type": "multi",
+        "question": "In an Amazon Aurora high-performance relational database topology spanning multiple Availability Zones, which TWO distinct instance node roles are provisioned across the shared storage layer? (Select 2)",
+        "options": [
+            "A) Primary Writer instance handling all database read/write transactions",
+            "B) Aurora Read Replica instances serving offloaded query traffic across AZs",
+            "C) Dedicated Redshift Leader Nodes orchestrating query parallelization plans",
+            "D) Distributed ElastiCache Master Nodes managing write-through cache eviction"
+        ],
+        "correct": [
+            "A",
+            "B"
+        ],
+        "explanation": "An Amazon Aurora cluster architecture consists of a single Primary (Writer) DB instance that handles all write operations, alongside up to 15 Aurora Read Replicas (Readers) deployed across multiple Availability Zones to offload read-heavy query workloads, all backed by a shared, self-healing distributed NVMe storage subsystem."
+    },
+    {
+        "id": 31,
+        "section": "PERFORMANCE",
+        "topic": "Process and Culture",
+        "subtopic": "Deployment Pipelines",
+        "type": "single",
+        "question": "According to the AWS Well-Architected Framework for Performance Efficiency, what is the primary operational advantage of implementing automated CI/CD deployment pipelines for cloud infrastructure?",
+        "options": [
+            "A) Enabling repeatable, consistent, and low-cost infrastructure iterations through automated pipelines",
+            "B) Automatically generating least-privilege IAM policies using heuristic machine learning analyzers",
+            "C) Forcing all inter-service VPC communications to employ MACsec Layer-2 hardware encryption",
+            "D) Eliminating architectural review stages and completely replacing software unit test validation"
+        ],
+        "correct": "A",
+        "explanation": "Implementing CI/CD deployment pipelines for Infrastructure as Code (IaC) ensures that infrastructure changes and performance optimizations can be tested, benchmarked, and deployed repeatedly and reliably with minimal risk and operational friction."
+    },
+    {
+        "id": 32,
+        "section": "PERFORMANCE",
+        "topic": "Process and Culture",
+        "subtopic": "Performance Testing",
+        "type": "single",
+        "question": "When automating performance load tests within continuous integration workflows, which strategy is recommended to prevent extensive benchmark suites from delaying standard developer pull request builds?",
+        "options": [
+            "A) Decoupling performance test execution asynchronously from fast builds and executing tests using Spot Instances",
+            "B) Halting the deployment pipeline synchronously until comprehensive 24-hour soak tests complete execution",
+            "C) Bypassing performance testing completely whenever application unit and integration tests achieve 100% coverage",
+            "D) Scheduling all heavy synthetic load generation suites directly against production environments during peak hours"
+        ],
+        "correct": "A",
+        "explanation": "AWS recommends decoupling long-running load and performance tests from the critical CI/CD build path by triggering them asynchronously (e.g., nightly or staged benchmark pipelines) and taking advantage of Amazon EC2 Spot Instances to generate massive load cost-effectively."
+    },
+    {
+        "id": 33,
+        "section": "PERFORMANCE",
+        "topic": "Architecture Selection",
+        "subtopic": "Benchmarking",
+        "type": "single",
+        "question": "Under the Architecture Selection pillar best practice PERF01-BP06, what is the recommended data-driven approach to select between competing AWS resource types (such as instance families or storage tiers)?",
+        "options": [
+            "A) Utilizing empirical benchmarking with workload-representative traffic to guide architectural decisions",
+            "B) Defaulting exclusively to the lowest-cost tier regardless of throughput limits and I/O latency profiles",
+            "C) Relying strictly on manual resource provisioning via the AWS Management Console to observe behavior",
+            "D) Restricting resource selection strictly to default AWS service quotas without conducting load evaluations"
+        ],
+        "correct": "A",
+        "explanation": "PERF01-BP06 states that teams should 'Use benchmarking to drive architectural decisions' by deploying candidate architectures, simulating realistic production access patterns, and analyzing objective performance and cost metrics."
+    },
+    {
+        "id": 34,
+        "section": "PERFORMANCE",
+        "topic": "Compute Performance",
+        "subtopic": "Data Collection",
+        "type": "single",
+        "question": "In accordance with Compute Performance best practice PERF02-BP03, what ongoing operational task must cloud architects perform to accurately right-size EC2 instances and container fleets over time?",
+        "options": [
+            "A) Continuously collect and analyze compute utilization metrics including CPU, memory, and I/O profiles",
+            "B) Disconnect all production compute instances from the internet to eliminate transient socket saturation",
+            "C) Configure Auto Scaling groups to maintain fixed capacity sizes without allowing scale-in operations",
+            "D) Apply static IAM permissions boundaries across all application container execution roles"
+        ],
+        "correct": "A",
+        "explanation": "PERF02-BP03 requires organizations to collect compute-related metrics (such as CPU utilization, memory pressure via CloudWatch agent, disk I/O, and network throughput) to evaluate actual workload behavior and right-size capacity over time."
+    },
+    {
+        "id": 35,
+        "section": "PERFORMANCE",
+        "topic": "Process and Culture",
+        "subtopic": "Visualization",
+        "type": "multi",
+        "question": "Which TWO visualization practices are recommended by the AWS Well-Architected Framework to accelerate root cause identification during performance bottleneck investigations? (Select 2)",
+        "options": [
+            "A) Overlaying real-time latency and throughput metrics directly across system architecture topology diagrams",
+            "B) Overlaying application execution profiling and timing metrics over call graphs and source code paths",
+            "C) Streaming raw, unparsed CloudWatch log events directly into unindexed terminal output consoles",
+            "D) Aggregating daily system averages while ignoring high-percentile (p99/p99.9) latency distribution curves"
+        ],
+        "correct": [
+            "A",
+            "B"
+        ],
+        "explanation": "Visualizing performance data by overlaying metrics on architectural diagrams and call graphs or source code enables engineers to instantly pinpoint bottlenecks, slow database calls, and saturated network paths across distributed microservices."
+    },
+    {
+        "id": 36,
+        "section": "PERFORMANCE",
+        "topic": "Data Management Performance",
+        "subtopic": "Data Store Selection",
+        "type": "single",
+        "question": "When evaluating database and storage engines for performance optimization, which factor is NOT a customer-managed architectural design criterion under the AWS Well-Architected Framework?",
+        "options": [
+            "A) The exact physical server rack location and chassis positioning within the AWS Availability Zone",
+            "B) The underlying data access patterns categorized as either high-throughput sequential or random I/O",
+            "C) The required frequency of access ranging between hot real-time online queries and cold archive tiers",
+            "D) The frequency and mutability of data updates contrasting dynamic transactions with WORM constraints"
+        ],
+        "correct": "A",
+        "explanation": "Architectural selection criteria for data stores focus on access patterns (random vs. sequential), access frequency, update frequency, consistency models, and throughput requirements. Physical rack positions and hardware chassis placements are fully abstracted and managed by AWS."
+    },
+    {
+        "id": 37,
+        "section": "PERFORMANCE",
+        "topic": "Networking Performance",
+        "subtopic": "Networking Protocols",
+        "type": "single",
+        "question": "Under Networking Performance best practice PERF04-BP05, which architectural action should teams implement to maximize network throughput and minimize connection establishment overhead?",
+        "options": [
+            "A) Evaluate and select optimal modern network protocols tailored to the workload communication profile",
+            "B) Force all internal microservice inter-VPC traffic to traverse an external public Internet Gateway",
+            "C) Cap maximum network interface bandwidth across all EC2 instances to 100 Mbps using traffic shapers",
+            "D) Disable IPv6 protocol stacks completely across all Virtual Private Clouds and Transit Gateways"
+        ],
+        "correct": "A",
+        "explanation": "PERF04-BP05 recommends selecting modern and optimized networking protocols (such as HTTP/2, HTTP/3/QUIC, gRPC over HTTP/2, UDP for real-time streaming, or SR-IOV/ENA with jumbo frames) to reduce latency and maximize transmission efficiency."
+    },
+    {
+        "id": 38,
+        "section": "PERFORMANCE",
+        "topic": "Autoscaling vs Manual Scaling",
+        "subtopic": "Elastic Load Balancing Integration",
+        "type": "single",
+        "question": "In a highly available autoscaled multi-tier web application architecture, how does the Application Load Balancer distribute incoming traffic across the fleet?",
+        "options": [
+            "A) Evenly across healthy registered target instances deployed in subnets across multiple Availability Zones",
+            "B) Exclusively to instances running in the public subnet of the primary Availability Zone during steady state",
+            "C) By bypassing EC2 Security Group inspection to route raw packets directly to instance loopback interfaces",
+            "D) By forcing all incoming HTTP/HTTPS connections through an intermediary private NAT Gateway instance"
+        ],
+        "correct": "A",
+        "explanation": "An Application Load Balancer (ALB) operates at Layer 7 and automatically balances incoming web traffic across healthy EC2 targets distributed evenly across multiple Availability Zones to ensure fault tolerance and responsive performance."
+    },
+    {
+        "id": 39,
+        "section": "PERFORMANCE",
+        "topic": "Process and Culture",
+        "subtopic": "Performance Review Process",
+        "type": "single",
+        "question": "What does the AWS Well-Architected Framework identify as the primary underlying cause when cloud architectures degrade in performance efficiency over time?",
+        "options": [
+            "A) The lack of a formalized, recurring performance review process to assess evolving cloud capabilities",
+            "B) The inevitable physical wear and tear of underlying hypervisor hardware in cloud data centers",
+            "C) The architectural adoption of serverless compute services in place of persistent EC2 fleets",
+            "D) Excessive utilization of Amazon CloudFront edge caching points of presence across global regions"
+        ],
+        "correct": "A",
+        "explanation": "The AWS Well-Architected Framework highlights that degrading performance is usually the result of a non-existent or irregular performance review process. Regular reviews allow teams to incorporate newly released AWS services, instance types, and optimization patterns."
+    },
+    {
+        "id": 40,
+        "section": "PERFORMANCE",
+        "topic": "Process and Culture",
+        "subtopic": "Infrastructure as Code",
+        "type": "single",
+        "question": "How does defining infrastructure using Infrastructure as Code (IaC) tools like AWS CloudFormation or Terraform directly enhance long-term system performance efficiency?",
+        "options": [
+            "A) By versioning infrastructure in source control alongside application code to enable rapid, safe iterations",
+            "B) By automatically encrypting attached EBS volumes without requiring AWS KMS key configurations",
+            "C) By completely replacing the need for relational database schema indexing and query optimization",
+            "D) By overclocking underlying physical CPU clock speeds when instances encounter compute saturation"
+        ],
+        "correct": "A",
+        "explanation": "Defining Infrastructure as Code (IaC) allows infrastructure to be maintained in source control, tested in CI/CD pipelines, and evolved using standard software development practices, enabling fast, repeatable experimentation and performance tuning."
+    },
+    {
+        "id": 41,
+        "section": "PERFORMANCE",
+        "topic": "Offloading and Load Distribution",
+        "subtopic": "NGINX Proxy",
+        "type": "multi",
+        "question": "In an enterprise multi-brand load distribution architecture routing public web traffic to specialized brand backends, which TWO intermediary components handle request routing before target ALBs? (Select 2)",
+        "options": [
+            "A) Fleet of reverse-proxy routing servers such as NGINX deployed in Auto Scaling groups",
+            "B) Initial front-facing Elastic Load Balancing tier terminating public client connections",
+            "C) Dedicated AWS Direct Connect Gateways terminating on-premises MPLS connections",
+            "D) Clustered Amazon ElastiCache Redis nodes providing write-through request proxying"
+        ],
+        "correct": [
+            "A",
+            "B"
+        ],
+        "explanation": "The multi-tier enterprise architecture routes incoming public traffic through an initial Elastic Load Balancer layer to a scalable tier of NGINX reverse proxy servers, which perform advanced path/brand rewriting and route traffic to brand-specific Application Load Balancers."
+    },
+    {
+        "id": 42,
+        "section": "PERFORMANCE",
+        "topic": "Offloading and Load Distribution",
+        "subtopic": "CloudFront Caching Tiers",
+        "type": "single",
+        "question": "To maximize performance and cache hit ratios for globally distributed users, which architectural component sits between local CloudFront Edge PoPs and the custom backend Origin?",
+        "options": [
+            "A) CloudFront Regional Edge Caches that consolidate cache misses across regional catchment areas",
+            "B) CloudFront Functions executing lightweight header rewrites on incoming Viewer Requests",
+            "C) DynamoDB Accelerator (DAX) clusters caching in-memory document data in private VPC subnets",
+            "D) Amazon Route 53 Geolocation DNS Resolvers performing authoritative name query lookups"
+        ],
+        "correct": "A",
+        "explanation": "CloudFront uses Regional Edge Caches located between local Edge Locations (PoPs) and the origin server. When a local PoP misses a cache entry, it queries the Regional Edge Cache before reaching the origin, dramatically improving cache hit ratios and reducing origin load."
+    },
+    {
+        "id": 43,
+        "section": "PERFORMANCE",
+        "topic": "Process and Culture",
+        "subtopic": "Business Metrics",
+        "type": "single",
+        "question": "When formulating Key Performance Indicators (KPIs) for a high-traffic production system, which metric represents a business-aligned indicator of performance financial efficiency?",
+        "options": [
+            "A) The aggregate cumulative infrastructure cost incurred per processed business transaction",
+            "B) The garbage collection frequency and pause duration metrics of the underlying Java Virtual Machine",
+            "C) The total count of active concurrent worker threads allocated within the web container pool",
+            "D) The raw Time-to-First-Byte (TTFB) duration recorded by regional edge monitoring probes"
+        ],
+        "correct": "A",
+        "explanation": "While thread count, TTFB, and GC pauses are technical metrics, 'aggregate cumulative cost per request or transaction' ties performance directly to business and financial efficiency, allowing teams to verify that scaling is economically sustainable."
+    },
+    {
+        "id": 44,
+        "section": "PERFORMANCE",
+        "topic": "Networking Performance",
+        "subtopic": "Physical Constraints",
+        "type": "single",
+        "question": "What mechanism does the AWS Well-Architected Framework recommend to mitigate the impact of physical network constraints (such as speed-of-light propagation latency over long geographic distances)?",
+        "options": [
+            "A) Deploying CloudFront edge locations, AWS Global Accelerator, or localized regional infrastructure",
+            "B) Upgrading physical RAM and solid-state drives across end-user desktop and mobile devices",
+            "C) Disabling all IPv6 routing across intermediate network transit providers and regional gateways",
+            "D) Rewriting all application backend code from managed languages like Java to native C++ binaries"
+        ],
+        "correct": "A",
+        "explanation": "Physical networking constraints (speed of light across fiber optic cables) cannot be eliminated, but their latency impact can be mitigated by placing resources closer to users via CloudFront Edge Locations, AWS Global Accelerator, Local Zones, or Outposts."
+    },
+    {
+        "id": 45,
+        "section": "PERFORMANCE",
+        "topic": "Autoscaling Support Matrix",
+        "subtopic": "Amazon EMR",
+        "type": "multi",
+        "question": "According to the AWS Autoscaling configuration matrix, which TWO management interfaces natively support configuring dynamic auto-scaling policies for Amazon EMR clusters? (Select 2)",
+        "options": [
+            "A) AWS Management Console interface enabling visual policy configuration",
+            "B) AWS Command Line Interface (CLI) supporting automated script execution",
+            "C) Hardware DIP switches located on physical AWS Outpost rack enclosures",
+            "D) Direct operating system root kernel configuration parameters via SSH"
+        ],
+        "correct": [
+            "A",
+            "B"
+        ],
+        "explanation": "Amazon EMR supports dynamic instance autoscaling configuration across all standard programmatic and visual AWS interfaces, including the AWS Management Console, AWS CLI, AWS SDKs, and AWS CloudFormation templates."
+    },
+    {
+        "id": 46,
+        "section": "PERFORMANCE",
+        "topic": "Offloading and Load Distribution",
+        "subtopic": "DocumentDB vs RDS",
+        "type": "single",
+        "question": "How does the Amazon DocumentDB clustering architecture parallel the high-performance read-scaling model of Amazon Aurora?",
+        "options": [
+            "A) Using a primary instance for writes and read replicas to offload queries across a shared storage volume",
+            "B) Requiring synchronous multi-master write replication across all database instances in every AZ",
+            "C) Restricting all replica instances to processing write transactions while the primary serves reads",
+            "D) Mandating an external Redis cache to persist all document collections in volatile RAM memory"
+        ],
+        "correct": "A",
+        "explanation": "Amazon DocumentDB separates compute and storage in the exact same manner as Amazon Aurora: a single primary compute instance processes all write operations, while up to 15 read replica instances offload read query traffic, all attached to a shared, fault-tolerant distributed storage cluster."
+    },
+    {
+        "id": 47,
+        "section": "PERFORMANCE",
+        "topic": "Applying Performance Design Principles",
+        "subtopic": "Database Technology Switch",
+        "type": "single",
+        "question": "An organization stores transactional relational data as flat objects in Amazon S3, causing severe query latency and locking issues. The architect proposes migrating to Amazon RDS. Which design principle guides this?",
+        "options": [
+            "A) Consider mechanical sympathy by aligning workload access patterns with purpose-built data technologies",
+            "B) Use serverless architectures to eliminate all server maintenance and operating system patching tasks",
+            "C) Go global in minutes by automatically deploying multi-region active-active database clusters",
+            "D) Democratize advanced technologies by delegating all SQL query optimization to AWS Managed Services"
+        ],
+        "correct": "A",
+        "explanation": "'Consider mechanical sympathy' means using the right tool for the job by understanding how cloud technologies work under the hood. Using S3 as an ad-hoc relational database is anti-pattern; switching to Amazon RDS aligns relational transactional workloads with an engine designed specifically for ACID queries."
+    },
+    {
+        "id": 48,
+        "section": "PERFORMANCE",
+        "topic": "Process and Culture",
+        "subtopic": "Load Generation Tools",
+        "type": "single",
+        "question": "To rigorously test application performance under extreme load without incurring massive permanent compute expenses, which compute strategy does AWS recommend for generating synthetic traffic?",
+        "options": [
+            "A) Utilizing Amazon EC2 Spot Instances and Marketplace load-testing tools to generate high-volume load cheaply",
+            "B) Purchasing dedicated bare-metal on-premises servers under multi-year fixed capital contracts",
+            "C) Employing manual browser interaction testing teams to simulate concurrent traffic loads",
+            "D) Executing load-generation test scripts directly within the AWS Management Console backend"
+        ],
+        "correct": "A",
+        "explanation": "AWS recommends taking advantage of Amazon EC2 Spot Instances (offering up to 90% cost savings over On-Demand) and AWS Marketplace distributed testing tools (e.g., Locust, JMeter) to spin up massive, cost-effective fleets for brief synthetic load test runs."
+    },
+    {
+        "id": 49,
+        "section": "PERFORMANCE",
+        "topic": "Performance Design Principles",
+        "subtopic": "Go Global in Minutes",
+        "type": "multi",
+        "question": "Which TWO architectural benefits are directly realized by adhering to the 'Go global in minutes' design principle of the Performance Efficiency pillar? (Select 2)",
+        "options": [
+            "A) Reducing latency for international users by deploying workloads across multiple geographic AWS Regions",
+            "B) Delivering an enhanced customer user experience worldwide while maintaining minimal infrastructure overhead",
+            "C) Enforcing that all corporate application data must reside exclusively within a single physical data center",
+            "D) Mandating manual deployment verification procedures across all localized regional edge environments"
+        ],
+        "correct": [
+            "A",
+            "B"
+        ],
+        "explanation": "The 'Go global in minutes' principle emphasizes leveraging AWS's global footprint (Regions, Availability Zones, Edge Locations) to deploy workloads close to end users worldwide, reducing latency and boosting performance without large upfront capital expenditures."
+    },
+    {
+        "id": 50,
+        "section": "PERFORMANCE",
+        "topic": "Design Challenge",
+        "subtopic": "Architecture Adjustments",
+        "type": "single",
+        "question": "An API backend experiences high latency and database CPU spikes because thousands of clients repeatedly request the exact same static reference data. Which architectural change resolves this most effectively?",
+        "options": [
+            "A) Implement an API Gateway Cache or Amazon ElastiCache layer to offload repetitive queries from the database",
+            "B) Expand the provisioned storage capacity of the backend database Amazon EBS General Purpose volume",
+            "C) Force all client applications to transmit API requests using unencrypted plain HTTP transport protocols",
+            "D) Migrate the backend relational database instance to a geographically distant secondary AWS Region"
+        ],
+        "correct": "A",
+        "explanation": "Caching static or infrequently changing query responses at the API Gateway caching tier or via an in-memory caching layer (Amazon ElastiCache Redis/Memcached) intercepts duplicate read requests, offloading the database and delivering sub-millisecond response times to clients."
+    }
+];
+
+    // Theme Management
+    let currentTheme = localStorage.getItem('quiz-theme') || 'light';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    updateThemeUI(currentTheme);
+
+    function toggleTheme() {
+        currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        localStorage.setItem('quiz-theme', currentTheme);
+        updateThemeUI(currentTheme);
+    }
+
+    function updateThemeUI(theme) {
+        const icon = document.getElementById('theme-icon');
+        const text = document.getElementById('theme-text');
+        if (icon && text) {
+            if (theme === 'dark') {
+                icon.textContent = '🌙';
+                text.textContent = 'Dark Mode';
+            } else {
+                icon.textContent = '☀️';
+                text.textContent = 'Light Mode';
+            }
+        }
+    }
+
+    let currentFilter = 'all';
+
+    function setFilter(filterType, btn) {
+        currentFilter = filterType;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        filterQuestions();
+    }
+
+    function filterQuestions() {
+        const query = document.getElementById('search-input').value.toLowerCase().trim();
+        const cards = document.querySelectorAll('.question-card');
+
+        cards.forEach(card => {
+            const qTitle = card.querySelector('.question-title') ? card.querySelector('.question-title').textContent : '';
+            const status = card.getAttribute('data-status') || 'unanswered';
+
+            let matchesFilter = false;
+            if (currentFilter === 'all') matchesFilter = true;
+            else if (currentFilter === 'unanswered' && status === 'unanswered') matchesFilter = true;
+            else if (currentFilter === 'correct' && status === 'correct') matchesFilter = true;
+            else if (currentFilter === 'incorrect' && status === 'incorrect') matchesFilter = true;
+
+            let matchesSearch = true;
+            if (query) {
+                if (query.startsWith('#')) {
+                    const num = query.substring(1).trim();
+                    matchesSearch = qTitle.startsWith(num + '.') || qTitle.includes(' ' + num + '.');
+                } else {
+                    matchesSearch = qTitle.toLowerCase().includes(query) || card.textContent.toLowerCase().includes(query);
+                }
+            }
+
+            if (matchesFilter && matchesSearch) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    function updateStats() {
+        const total = quizData.length;
+        const answeredCards = document.querySelectorAll('.question-card[data-status="correct"], .question-card[data-status="incorrect"]');
+        const correctCards = document.querySelectorAll('.question-card[data-status="correct"]');
+        const incorrectCards = document.querySelectorAll('.question-card[data-status="incorrect"]');
+
+        const answered = answeredCards.length;
+        const correct = correctCards.length;
+        const incorrect = incorrectCards.length;
+        const accuracy = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+
+        const statTotal = document.getElementById('stat-total');
+        const statAnswered = document.getElementById('stat-answered');
+        const statCorrect = document.getElementById('stat-correct');
+        const statIncorrect = document.getElementById('stat-incorrect');
+        const statAccuracy = document.getElementById('stat-accuracy');
+        const progressFill = document.getElementById('progress-fill');
+
+        if (statTotal) statTotal.textContent = total;
+        if (statAnswered) statAnswered.textContent = answered;
+        if (statCorrect) statCorrect.textContent = correct;
+        if (statIncorrect) statIncorrect.textContent = incorrect;
+        if (statAccuracy) statAccuracy.textContent = accuracy + '%';
+
+        if (progressFill) {
+            const pct = Math.round((answered / total) * 100);
+            progressFill.style.width = pct + '%';
+        }
+    }
+
+    function renderQuiz() {
+        const container = document.getElementById('quiz-container');
+        let html = '';
+
+        quizData.forEach((q, index) => {
+            const isMulti = q.type === 'multi' || (Array.isArray(q.correct) ? q.correct.length > 1 : (typeof q.correct === 'string' && q.correct.includes(',')));
+            const reqCount = Array.isArray(q.correct) ? q.correct.length : (typeof q.correct === 'string' && q.correct.includes(',') ? q.correct.split(',').length : (isMulti ? 2 : 1));
+            const inputType = isMulti ? 'checkbox' : 'radio';
+
+            let optionsHtml = '';
+            q.options.forEach((opt) => {
+                const optLetter = opt.charAt(0);
+                optionsHtml += '<li class="option-item">' +
+                    '<label class="option-label" onclick="selectOption(this)">' +
+                        '<input type="' + inputType + '" name="question-' + q.id + '" value="' + optLetter + '">' +
+                        '<span>' + opt + '</span>' +
+                    '</label>' +
+                '</li>';
+            });
+
+            html += '<div class="question-card" id="card-' + q.id + '" data-id="' + q.id + '" data-type="' + (isMulti ? 'multi' : 'single') + '" data-req="' + reqCount + '" data-status="unanswered">' +
+                '<div>' +
+                    '<span class="topic-pill">' + q.topic + (q.subtopic ? ' • ' + q.subtopic : '') + '</span>' +
+                    '<div class="question-header">' +
+                        '<div class="question-title">' +
+                            (index + 1) + '. ' + q.question +
+                            (isMulti ? '<span style="color: var(--accent-orange); font-weight: 700; margin-left: 8px;">(Select ' + reqCount + ' options)</span>' : '') +
+                        '</div>' +
+                        '<span class="status-badge correct">✓ Correct</span>' +
+                        '<span class="status-badge incorrect">✕ Incorrect</span>' +
+                    '</div>' +
+                '</div>' +
+                '<ul class="options-list">' +
+                    optionsHtml +
+                '</ul>' +
+                '<button class="submit-btn" onclick="checkAnswer(' + q.id + ')">Submit Answer</button>' +
+                '<div id="feedback-' + q.id + '" class="explanation"></div>' +
+                '<div class="card-watermark">' +
+                    '🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">AWS SAA-C03 Prep Tracker • github.com/borudeyash1</a>' +
+                '</div>' +
+            '</div>';
+        });
+
+        container.innerHTML = html;
+        updateStats();
+    }
+
+    function selectOption(labelElement) {
+        const card = labelElement.closest('.question-card');
+        if (!card) return;
+        const isMulti = card.getAttribute('data-type') === 'multi';
+        const reqCount = parseInt(card.getAttribute('data-req') || '1');
+
+        if (!isMulti) {
+            card.querySelectorAll('.option-label').forEach(l => l.classList.remove('selected-opt'));
+            labelElement.classList.add('selected-opt');
+        } else {
+            const chk = labelElement.querySelector('input[type="checkbox"]');
+            const checkedCount = card.querySelectorAll('input[type="checkbox"]:checked').length;
+            if (checkedCount > reqCount) {
+                if (chk) chk.checked = false;
+                labelElement.classList.remove('selected-opt');
+                alert('You can only select up to ' + reqCount + ' options for this question.');
+                return;
+            }
+            if (chk && chk.checked) {
+                labelElement.classList.add('selected-opt');
+            } else {
+                labelElement.classList.remove('selected-opt');
+            }
+        }
+    }
+
+    function checkAnswer(questionId) {
+        const q = quizData.find(item => item.id === questionId);
+        const card = document.getElementById('card-' + questionId);
+        if (!card || !q) return;
+
+        let correctVal = q.correct;
+        let correctArr = Array.isArray(correctVal) ? correctVal : (typeof correctVal === 'string' && correctVal.includes(',') ? correctVal.split(',').map(s => s.trim()) : [String(correctVal).trim()]);
+
+        const selectedInputs = card.querySelectorAll('input[name="question-' + questionId + '"]:checked');
+        if (selectedInputs.length === 0) {
+            alert("Please select an answer before submitting.");
+            return;
+        }
+
+        const selectedVals = Array.from(selectedInputs).map(i => i.value);
+        const isCorrect = (selectedVals.length === correctArr.length) && selectedVals.every(v => correctArr.includes(v));
+
+        const labels = card.querySelectorAll('.option-label');
+        labels.forEach(label => {
+            const input = label.querySelector('input');
+            if (correctArr.includes(input.value)) {
+                label.classList.add('correct-ans');
+            } else if (selectedVals.includes(input.value)) {
+                label.classList.add('incorrect-ans');
+            }
+            input.disabled = true;
+        });
+
+        const btn = card.querySelector('.submit-btn');
+        btn.disabled = true;
+
+        const badgeCorrect = card.querySelector('.status-badge.correct');
+        const badgeIncorrect = card.querySelector('.status-badge.incorrect');
+
+        if (isCorrect) {
+            card.setAttribute('data-status', 'correct');
+            card.classList.add('answered-correct');
+            card.classList.remove('answered-incorrect');
+            if (badgeCorrect) badgeCorrect.style.display = 'inline-block';
+            if (badgeIncorrect) badgeIncorrect.style.display = 'none';
+        } else {
+            card.setAttribute('data-status', 'incorrect');
+            card.classList.add('answered-incorrect');
+            card.classList.remove('answered-correct');
+            if (badgeIncorrect) badgeIncorrect.style.display = 'inline-block';
+            if (badgeCorrect) badgeCorrect.style.display = 'none';
+        }
+
+        const feedback = document.getElementById('feedback-' + questionId);
+        if (feedback) {
+            feedback.innerHTML = '<strong>' + (isCorrect ? '✓ Correct Answer!' : '✕ Incorrect.') + '</strong> ' + q.explanation;
+            feedback.style.display = 'block';
+        }
+
+        updateStats();
+    }
+
+    // Exam Mode Engine
+    let currentMode = 'practice';
+    let examData = [];
+    let currentExamIndex = 0;
+    let userAnswers = {};
+    let flaggedQuestions = new Set();
+    let examTimerInterval = null;
+    let examTimeRemaining = 0;
+    let lastExamResult = null;
+
+    function switchQuizMode(mode) {
+        if (mode === currentMode) return;
+
+        if (currentMode === 'exam' && mode === 'practice') {
+            if (!confirm('Exiting Exam Mode will end your timed session. Are you sure you want to return to Practice Mode?')) {
+                return;
+            }
+            stopExamTimer();
+        }
+
+        currentMode = mode;
+
+        document.getElementById('btn-mode-practice').classList.toggle('active', mode === 'practice');
+        document.getElementById('btn-mode-exam').classList.toggle('active', mode === 'exam');
+
+        const practiceBottom = document.getElementById('practice-header-bottom');
+        const practiceProgress = document.getElementById('practice-progress-bar');
+        const moduleBanner = document.getElementById('module-banner');
+
+        if (mode === 'practice') {
+            if (practiceBottom) practiceBottom.style.display = 'flex';
+            if (practiceProgress) practiceProgress.style.display = 'block';
+            if (moduleBanner) moduleBanner.style.display = 'flex';
+            renderQuiz();
+        } else {
+            if (practiceBottom) practiceBottom.style.display = 'none';
+            if (practiceProgress) practiceProgress.style.display = 'none';
+            if (moduleBanner) moduleBanner.style.display = 'none';
+            initExamMode();
+        }
+    }
+
+    function initExamMode() {
+        examData = JSON.parse(JSON.stringify(quizData));
+        currentExamIndex = 0;
+        userAnswers = {};
+        flaggedQuestions.clear();
+        lastExamResult = null;
+
+        examTimeRemaining = examData.length * 120; // 2 mins per question
+
+        renderExamLayout();
+        startExamTimer();
+    }
+
+    function startExamTimer() {
+        stopExamTimer();
+        updateTimerDisplay();
+        examTimerInterval = setInterval(() => {
+            examTimeRemaining--;
+            updateTimerDisplay();
+            if (examTimeRemaining <= 0) {
+                stopExamTimer();
+                alert('⏳ Time is up! Submitting your exam now.');
+                finishExamAndShowResults();
+            }
+        }, 1000);
+    }
+
+    function stopExamTimer() {
+        if (examTimerInterval) {
+            clearInterval(examTimerInterval);
+            examTimerInterval = null;
+        }
+    }
+
+    function updateTimerDisplay() {
+        const timerEl = document.getElementById('exam-timer');
+        if (!timerEl) return;
+        const hours = Math.floor(examTimeRemaining / 3600);
+        const mins = Math.floor((examTimeRemaining % 3600) / 60);
+        const secs = examTimeRemaining % 60;
+
+        const formatted = hours > 0 
+            ? hours + ':' + String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0')
+            : String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+
+        timerEl.textContent = '⏱️ ' + formatted;
+        if (examTimeRemaining < 300) {
+            timerEl.style.color = '#ef4444';
+        }
+    }
+
+    function renderExamLayout() {
+        const container = document.getElementById('quiz-container');
+        container.innerHTML = '<div class="exam-header-bar">' +
+            '<div>' +
+                '<strong style="color: var(--text-primary); font-size: 1.05rem;">AWS Solutions Architect Associate Exam Simulation</strong>' +
+                '<div style="font-size: 0.8rem; color: var(--text-secondary);">' + examData.length + ' Questions • Timed Real-Exam Mode</div>' +
+            '</div>' +
+            '<div class="exam-timer-display" id="exam-timer">⏱️ 00:00</div>' +
+            '<button class="btn-finish-exam" onclick="confirmFinishExam()">Submit Exam</button>' +
+        '</div>' +
+        '<div class="exam-grid-layout">' +
+            '<div id="exam-card-area"></div>' +
+            '<div id="exam-palette-area"></div>' +
+        '</div>';
+
+        renderExamCard();
+        renderQuestionPalette();
+    }
+
+    function renderExamCard() {
+        const cardArea = document.getElementById('exam-card-area');
+        if (!cardArea || !examData[currentExamIndex]) return;
+
+        const q = examData[currentExamIndex];
+        const isMulti = q.type === 'multi' || (Array.isArray(q.correct) ? q.correct.length > 1 : (typeof q.correct === 'string' && q.correct.includes(',')));
+        const reqCount = Array.isArray(q.correct) ? q.correct.length : (typeof q.correct === 'string' && q.correct.includes(',') ? q.correct.split(',').length : (isMulti ? 2 : 1));
+        const inputType = isMulti ? 'checkbox' : 'radio';
+
+        const currentAns = userAnswers[q.id] || [];
+        const isFlagged = flaggedQuestions.has(q.id);
+
+        let optionsHTML = '';
+        q.options.forEach(opt => {
+            const optLetter = opt.charAt(0);
+            const isChecked = currentAns.includes(optLetter);
+            optionsHTML += '<li class="option-item">' +
+                '<label class="option-label ' + (isChecked ? 'selected-opt' : '') + '" onclick="handleExamOptionClick(this, \'' + optLetter + '\', ' + isMulti + ', ' + reqCount + ')">' +
+                    '<input type="' + inputType + '" name="exam-q-' + q.id + '" value="' + optLetter + '" ' + (isChecked ? 'checked' : '') + '>' +
+                    '<span>' + opt + '</span>' +
+                '</label>' +
+            '</li>';
+        });
+
+        cardArea.innerHTML = '<div class="question-card" style="margin-top: 0;">' +
+            '<div>' +
+                '<span class="topic-pill">' + q.topic + (q.subtopic ? ' • ' + q.subtopic : '') + '</span>' +
+                '<div class="question-header">' +
+                    '<div class="question-title">' +
+                        'Question ' + (currentExamIndex + 1) + ' of ' + examData.length +
+                        '<div style="font-weight: 500; font-size: 0.95rem; margin-top: 8px;">' + q.question + '</div>' +
+                        (isMulti ? '<div style="color: var(--accent-orange); font-size: 0.85rem; font-weight: 700; margin-top: 4px;">(Select ' + reqCount + ' options)</div>' : '') +
+                    '</div>' +
+                '</div>' +
+            '</div>' +
+            '<ul class="options-list">' +
+                optionsHTML +
+            '</ul>' +
+            '<div class="exam-nav-bar">' +
+                '<button class="btn-nav" onclick="navExamQuestion(-1)" ' + (currentExamIndex === 0 ? 'disabled style="opacity: 0.4; cursor: not-allowed;"' : '') + '>' +
+                    '← Previous' +
+                '</button>' +
+                '<button class="btn-flag ' + (isFlagged ? 'flagged-active' : '') + '" onclick="toggleFlagQuestion(' + q.id + ')">' +
+                    (isFlagged ? '🚩 Flagged' : '🏳️ Flag for Review') +
+                '</button>' +
+                '<button class="btn-nav" onclick="navExamQuestion(1)" ' + (currentExamIndex === examData.length - 1 ? 'disabled style="opacity: 0.4; cursor: not-allowed;"' : '') + '>' +
+                    'Next →' +
+                '</button>' +
+            '</div>' +
+        '</div>';
+    }
+
+    function handleExamOptionClick(labelEl, optLetter, isMulti, reqCount) {
+        const q = examData[currentExamIndex];
+        if (!userAnswers[q.id]) userAnswers[q.id] = [];
+
+        if (!isMulti) {
+            userAnswers[q.id] = [optLetter];
+            document.querySelectorAll('.exam-grid-layout .option-label').forEach(l => l.classList.remove('selected-opt'));
+            labelEl.classList.add('selected-opt');
+            const radio = labelEl.querySelector('input[type="radio"]');
+            if (radio) radio.checked = true;
+        } else {
+            const chk = labelEl.querySelector('input[type="checkbox"]');
+            if (userAnswers[q.id].includes(optLetter)) {
+                userAnswers[q.id] = userAnswers[q.id].filter(l => l !== optLetter);
+                labelEl.classList.remove('selected-opt');
+                if (chk) chk.checked = false;
+            } else {
+                if (userAnswers[q.id].length >= reqCount) {
+                    alert('You can only select up to ' + reqCount + ' options.');
+                    if (chk) chk.checked = false;
+                    return;
+                }
+                userAnswers[q.id].push(optLetter);
+                labelEl.classList.add('selected-opt');
+                if (chk) chk.checked = true;
+            }
+        }
+        renderQuestionPalette();
+    }
+
+    function toggleFlagQuestion(qId) {
+        if (flaggedQuestions.has(qId)) {
+            flaggedQuestions.delete(qId);
+        } else {
+            flaggedQuestions.add(qId);
+        }
+        renderExamCard();
+        renderQuestionPalette();
+    }
+
+    function navExamQuestion(delta) {
+        const nextIdx = currentExamIndex + delta;
+        if (nextIdx >= 0 && nextIdx < examData.length) {
+            currentExamIndex = nextIdx;
+            renderExamCard();
+            renderQuestionPalette();
+        }
+    }
+
+    function jumpToExamQuestion(idx) {
+        if (idx >= 0 && idx < examData.length) {
+            currentExamIndex = idx;
+            renderExamCard();
+            renderQuestionPalette();
+        }
+    }
+
+    function renderQuestionPalette() {
+        const paletteContainer = document.getElementById('exam-palette-area');
+        if (!paletteContainer) return;
+
+        let answeredCount = 0;
+        let buttonsHTML = '';
+
+        examData.forEach((q, idx) => {
+            const isAnswered = userAnswers[q.id] && userAnswers[q.id].length > 0;
+            if (isAnswered) answeredCount++;
+            const isFlagged = flaggedQuestions.has(q.id);
+            const isActive = idx === currentExamIndex;
+
+            let classes = ['palette-btn'];
+            if (isActive) classes.push('active');
+            if (isAnswered) classes.push('answered');
+            if (isFlagged) classes.push('flagged');
+
+            buttonsHTML += '<button class="' + classes.join(' ') + '" onclick="jumpToExamQuestion(' + idx + ')">' +
+                (idx + 1) +
+            '</button>';
+        });
+
+        paletteContainer.innerHTML = '<div class="exam-palette-panel">' +
+            '<div class="palette-header">' +
+                '<span>Question Palette</span>' +
+                '<span style="font-size: 0.8rem; opacity: 0.8;">' + answeredCount + '/' + examData.length + ' Done</span>' +
+            '</div>' +
+            '<div class="palette-grid">' +
+                buttonsHTML +
+            '</div>' +
+            '<div class="palette-legend">' +
+                '<span><strong style="color: #60a5fa;">●</strong> Answered</span>' +
+                '<span><strong style="color: #fbbf24;">🚩</strong> Flagged</span>' +
+                '<span><strong>◯</strong> Unanswered</span>' +
+            '</div>' +
+        '</div>';
+    }
+
+    function confirmFinishExam() {
+        const unanswered = examData.length - Object.keys(userAnswers).filter(k => userAnswers[k] && userAnswers[k].length > 0).length;
+        let msg = 'Are you sure you want to finish and submit your exam?';
+        if (unanswered > 0) {
+            msg = '⚠️ You have ' + unanswered + ' unanswered question(s). Are you sure you want to finish and submit your exam now?';
+        }
+        if (confirm(msg)) {
+            finishExamAndShowResults();
+        }
+    }
+
+    function finishExamAndShowResults() {
+        stopExamTimer();
+
+        let correctCount = 0;
+        let incorrectQuestions = [];
+
+        examData.forEach((q, idx) => {
+            const userAns = userAnswers[q.id] || [];
+            let correctArray = Array.isArray(q.correct) ? q.correct : (typeof q.correct === 'string' && q.correct.includes(',') ? q.correct.split(',').map(s => s.trim()) : [String(q.correct)]);
+
+            const isCorrect = (userAns.length === correctArray.length) && userAns.every(val => correctArray.includes(val));
+
+            // Extract option text for rich results
+            const userAnsText = userAns.length > 0 
+                ? userAns.map(letter => {
+                    const opt = q.options.find(o => o.startsWith(letter));
+                    return opt || letter;
+                  }).join('<br>')
+                : 'None (Unanswered)';
+
+            const correctAnsText = correctArray.map(letter => {
+                const opt = q.options.find(o => o.startsWith(letter));
+                return opt || letter;
+            }).join('<br>');
+
+            if (isCorrect) {
+                correctCount++;
+            } else {
+                incorrectQuestions.push({
+                    number: idx + 1,
+                    id: q.id,
+                    question: q.question,
+                    options: q.options,
+                    userAnswer: userAns.length > 0 ? userAns.join(', ') : 'None (Unanswered)',
+                    userAnswerText: userAnsText,
+                    correctAnswer: correctArray.join(', '),
+                    correctAnswerText: correctAnsText,
+                    explanation: q.explanation || ''
+                });
+            }
+        });
+
+        const totalQs = examData.length;
+        const scorePct = Math.round((correctCount / totalQs) * 100);
+        const awsScaledScore = Math.round(100 + (scorePct / 100) * 900);
+        const isPass = awsScaledScore >= 720;
+
+        const timeSpentSecs = (examData.length * 120) - examTimeRemaining;
+        const spentMins = Math.floor(timeSpentSecs / 60);
+        const spentSecs = timeSpentSecs % 60;
+        const formattedTimeSpent = spentMins + 'm ' + spentSecs + 's';
+
+        const resultRecord = {
+            timestamp: new Date().toISOString(),
+            examTitle: 'AWS Solutions Architect Associate (SAA-C03) - Performance Quiz Master',
+            totalQuestions: totalQs,
+            correctCount: correctCount,
+            scorePercentage: scorePct,
+            awsScaledScore: awsScaledScore,
+            status: isPass ? 'PASS' : 'FAIL',
+            timeSpent: formattedTimeSpent,
+            incorrectQuestions: incorrectQuestions
+        };
+
+        lastExamResult = resultRecord;
+
+        try {
+            const existing = JSON.parse(localStorage.getItem('aws_saa_exam_history') || '[]');
+            existing.unshift(resultRecord);
+            localStorage.setItem('aws_saa_exam_history', JSON.stringify(existing));
+        } catch (e) {}
+
+        renderResultsDashboard(resultRecord);
+    }
+
+    function renderResultsDashboard(result) {
+        const container = document.getElementById('quiz-container');
+
+        let auditHTML = '';
+        if (result.incorrectQuestions.length === 0) {
+            auditHTML = '<div style="text-align: center; color: #10b981; font-weight: 700; padding: 20px;">🎉 Flawless Score! You answered every question correctly.</div>';
+        } else {
+            result.incorrectQuestions.forEach(item => {
+                auditHTML += '<div class="question-card" style="margin-bottom: 16px; border-left: 4px solid #ef4444;">' +
+                    '<div style="font-weight: 700; margin-bottom: 8px; color: var(--text-primary, #0f172a); font-size: 1rem;">' +
+                        '#' + item.number + '. ' + item.question +
+                    '</div>' +
+                    '<div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem; margin-bottom: 12px; background: var(--card-sub-bg); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">' +
+                        '<div style="color: #ef4444;">' +
+                            '❌ <strong>Your Answer:</strong><br>' + item.userAnswerText +
+                        '</div>' +
+                        '<div style="color: #10b981; border-top: 1px dashed var(--border-color); padding-top: 8px;">' +
+                            '✓ <strong>Correct Answer:</strong><br>' + item.correctAnswerText +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="explanation" style="display: block; margin-top: 8px;">' +
+                        '<strong>Explanation:</strong> ' + item.explanation +
+                    '</div>' +
+                '</div>';
+            });
+        }
+
+        container.innerHTML = '<div class="results-container">' +
+            '<div class="results-score-box ' + result.status.toLowerCase() + '">' +
+                '<div class="score-status-badge">' + (result.status === 'PASS' ? '🎉 CONGRATULATIONS - PASSED' : '⚠️ FAIL - NEEDS IMPROVEMENT') + '</div>' +
+                '<div class="score-big">' + result.awsScaledScore + ' / 1000</div>' +
+                '<div style="font-weight: 600; font-size: 1.1rem;">' +
+                    'Score: ' + result.correctCount + ' / ' + result.totalQuestions + ' (' + result.scorePercentage + '%) | Time Spent: ' + result.timeSpent +
+                '</div>' +
+                '<div style="font-size: 0.85rem; opacity: 0.8; margin-top: 4px;">(Passing Threshold: 720 / 1000)</div>' +
+            '</div>' +
+
+            '<div class="results-actions">' +
+                '<button class="btn-export-json" onclick="downloadExamResultsJSON()">' +
+                    '📥 Save Results JSON (exam_results.json)' +
+                '</button>' +
+                '<button class="btn-nav" onclick="initExamMode()">' +
+                    '🔄 Retake AWS Exam' +
+                '</button>' +
+                '<button class="btn-nav" onclick="switchQuizMode(\'practice\')">' +
+                    '📖 Return to Practice Mode' +
+                '</button>' +
+            '</div>' +
+
+            '<div style="margin-top: 32px;">' +
+                '<h3 style="color: var(--text-primary, #0f172a); margin-bottom: 16px;">🔍 Incorrect & Unanswered Questions Analysis (' + result.incorrectQuestions.length + ')</h3>' +
+                auditHTML +
+            '</div>' +
+        '</div>';
+    }
+
+    function downloadExamResultsJSON() {
+        if (!lastExamResult) return;
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(lastExamResult, null, 2));
+        const downloadAnchor = document.createElement('a');
+        downloadAnchor.setAttribute("href", dataStr);
+        downloadAnchor.setAttribute("download", "exam_results.json");
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        downloadAnchor.remove();
+        alert('Saved exam results to exam_results.json!');
+    }
+
+    // Initialize application on load
+    renderQuiz();
+</script>
+</body>
+</html>

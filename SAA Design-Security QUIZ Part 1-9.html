@@ -865,953 +865,889 @@
 <!-- Question 1 -->
 <div class="question-card" data-correct="2" data-req="1" data-type="single">
 <div class="question-title">1. A global e-commerce company is deploying a new application on AWS, catering to North America, Europe, and Asia with low-latency and regional compliance requirements. Which approach should they consider?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q1" type="radio" value="0"/> A. Deploy the application in a single VPC in Asia-Pacific (Singapore) and use AWS Global Accelerator.</label>
-<label onclick="selectSecurityOption(this)"><input name="q1" type="radio" value="1"/> B. Deploy the application in a single VPC in EU Central (Frankfurt) and use VPC peering.</label>
-<label onclick="selectSecurityOption(this)"><input name="q1" type="radio" value="2"/> C. Deploy the application in multiple VPCs, each in a region close to the target customer base, and use Amazon Route 53[cite: 2].</label>
-<label onclick="selectSecurityOption(this)"><input name="q1" type="radio" value="3"/> D. Deploy the application in a single VPC in US East (N. Virginia) and use Amazon CloudFront.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q1" type="radio" value="0"/> A. Deploy the application in a single centralized VPC in Asia-Pacific (Singapore) and use AWS Global Accelerator to route traffic globally</label>
+<label onclick="selectSecurityOption(this)"><input name="q1" type="radio" value="1"/> B. Deploy the application in a single centralized VPC in EU Central (Frankfurt) and configure inter-region VPC peering to secondary sites</label>
+<label onclick="selectSecurityOption(this)"><input name="q1" type="radio" value="2"/> C. Deploy the application in multiple regional VPCs close to target customers and use Amazon Route 53 latency and geolocation routing</label>
+<label onclick="selectSecurityOption(this)"><input name="q1" type="radio" value="3"/> D. Deploy the application in a single primary VPC in US East (N. Virginia) and rely exclusively on Amazon CloudFront edge caching</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 1)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp1"></div>
+<div class="result" id="res1"></div>
 </div>
-</div>
-<!-- Question 3 -->
+
 <div class="question-card" data-correct="0" data-req="1" data-type="single">
-<div class="question-title">3. A startup is developing a web application using AWS to handle sensitive data and transactions, wanting to minimize setup time for the VPC while ensuring security. What should they consider?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q3" type="radio" value="0"/> A. Use the Default VPC, but modify the security groups and NACLs to adhere to the principle of least privilege[cite: 2].</label>
-<label onclick="selectSecurityOption(this)"><input name="q3" type="radio" value="1"/> B. Create a new VPC and manually set up public/private subnets, security groups, NACLs, and a NAT gateway.</label>
-<label onclick="selectSecurityOption(this)"><input name="q3" type="radio" value="2"/> C. Use the Default VPC without making modifications since AWS ensures it is secure by default.</label>
-<label onclick="selectSecurityOption(this)"><input name="q3" type="radio" value="3"/> D. Use the Default VPC and place application and database servers in the same subnet.</label></div>
+<div class="question-title">3. A startup is developing a web application using AWS to handle sensitive customer transactions. They are evaluating whether to use the Default VPC or create a custom VPC. What security consideration should they keep in mind?</div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q3" type="radio" value="0"/> A. The Default VPC is convenient for quick testing, but custom VPCs with private subnets and strict NACLs provide proper isolation</label>
+<label onclick="selectSecurityOption(this)"><input name="q3" type="radio" value="1"/> B. Creating a new VPC requires deploying third-party virtual appliances because native AWS security groups cannot restrict subnet traffic</label>
+<label onclick="selectSecurityOption(this)"><input name="q3" type="radio" value="2"/> C. The Default VPC provides complete isolation by default without requiring custom route tables or security group modifications</label>
+<label onclick="selectSecurityOption(this)"><input name="q3" type="radio" value="3"/> D. The Default VPC places all compute and database resources inside isolated private subnets with default NAT gateway routing</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 3)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp3"></div>
+<div class="result" id="res3"></div>
 </div>
-</div>
-<!-- Question 5 -->
+
 <div class="question-card" data-correct="2" data-req="1" data-type="single">
 <div class="question-title">5. A retail company is deploying a multi-tier web application (web, app, database tiers) in a VPC. How should they ensure secure connectivity where internet users can access the web tier, but app and database tiers remain isolated?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q5" type="radio" value="0"/> A. Place all tiers in private subnets and use an Internet Gateway for web tier access.</label>
-<label onclick="selectSecurityOption(this)"><input name="q5" type="radio" value="1"/> B. Place web tier in a private subnet and application/database tiers in public subnets.</label>
-<label onclick="selectSecurityOption(this)"><input name="q5" type="radio" value="2"/> C. Place the web tier in a public subnet and application/database tiers in private subnets, configuring necessary route tables and NACLs[cite: 2].</label>
-<label onclick="selectSecurityOption(this)"><input name="q5" type="radio" value="3"/> D. Place all tiers in a public subnet and utilize security groups.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q5" type="radio" value="0"/> A. Place all tiers in private subnets and attach an Internet Gateway directly to the private routing table for web tier ingress</label>
+<label onclick="selectSecurityOption(this)"><input name="q5" type="radio" value="1"/> B. Place the web tier in a private subnet and place application and database tiers in public subnets with public IPv4 addressing</label>
+<label onclick="selectSecurityOption(this)"><input name="q5" type="radio" value="2"/> C. Place the web tier in public subnets and backend app/database tiers in private subnets, restricting traffic using security groups</label>
+<label onclick="selectSecurityOption(this)"><input name="q5" type="radio" value="3"/> D. Place all three application tiers inside a single public subnet and rely exclusively on operating system level firewall rules</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 5)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp5"></div>
+<div class="result" id="res5"></div>
 </div>
-</div>
-<!-- Question 7 -->
+
 <div class="question-card" data-correct="2" data-req="1" data-type="single">
 <div class="question-title">7. A software development company is deploying an application for developers over the internet, ensuring the application is not publicly accessible to general users. How should they configure access within a VPC?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q7" type="radio" value="0"/> A. Attach Internet Gateway and place application in a public subnet without SGs/NACLs.</label>
-<label onclick="selectSecurityOption(this)"><input name="q7" type="radio" value="1"/> B. Attach an Internet Gateway and configure route tables to allow all inbound/outbound traffic.</label>
-<label onclick="selectSecurityOption(this)"><input name="q7" type="radio" value="2"/> C. Attach an Internet Gateway to the VPC and configure security groups and NACLs to allow access only from developers' IP addresses[cite: 2].</label>
-<label onclick="selectSecurityOption(this)"><input name="q7" type="radio" value="3"/> D. Do not attach an Internet Gateway and use VPC Peering for developer access.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q7" type="radio" value="0"/> A. Attach an Internet Gateway and place application servers in a public subnet without configuring security groups or network ACLs</label>
+<label onclick="selectSecurityOption(this)"><input name="q7" type="radio" value="1"/> B. Attach an Internet Gateway and configure custom VPC route tables to allow unrestricted 0.0.0.0/0 inbound and outbound traffic</label>
+<label onclick="selectSecurityOption(this)"><input name="q7" type="radio" value="2"/> C. Attach an Internet Gateway to the VPC and configure security groups to restrict inbound access strictly to developer corporate IPs</label>
+<label onclick="selectSecurityOption(this)"><input name="q7" type="radio" value="3"/> D. Avoid using an Internet Gateway and require developers to connect via unencrypted public internet GRE tunnels to local instances</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 7)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp7"></div>
+<div class="result" id="res7"></div>
 </div>
-</div>
-<!-- Question 9 -->
+
 <div class="question-card" data-correct="1" data-req="1" data-type="single">
 <div class="question-title">9. A research institution is deploying an IPv6 application within a VPC that needs to download datasets from external IPv6 addresses on the internet while remaining completely inaccessible from the internet. What approach should they consider?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q9" type="radio" value="0"/> A. Deploy a NAT Gateway in a public subnet and configure route tables for IPv6 traffic.</label>
-<label onclick="selectSecurityOption(this)"><input name="q9" type="radio" value="1"/> B. Deploy an Egress-Only Internet Gateway in the VPC and configure route tables to direct all IPv6 traffic from the application through it[cite: 2].</label>
-<label onclick="selectSecurityOption(this)"><input name="q9" type="radio" value="2"/> C. Deploy a standard Internet Gateway in the VPC and route IPv6 traffic through it.</label>
-<label onclick="selectSecurityOption(this)"><input name="q9" type="radio" value="3"/> D. Restrict all outbound IPv6 traffic.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q9" type="radio" value="0"/> A. Deploy a standard NAT Gateway in a public subnet and configure custom VPC route tables to translate all outbound IPv6 traffic</label>
+<label onclick="selectSecurityOption(this)"><input name="q9" type="radio" value="1"/> B. Deploy an Egress-Only Internet Gateway in the VPC and update route tables to direct outbound IPv6 traffic from private subnets</label>
+<label onclick="selectSecurityOption(this)"><input name="q9" type="radio" value="2"/> C. Deploy a standard Internet Gateway in the VPC and assign public IPv4 Elastic IP addresses to all backend private instances</label>
+<label onclick="selectSecurityOption(this)"><input name="q9" type="radio" value="3"/> D. Disable all outbound IPv6 routing tables and require instances to use AWS PrivateLink endpoints for external internet downloads</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 9)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp9"></div>
+<div class="result" id="res9"></div>
 </div>
-</div>
-<!-- Question 11 -->
+
 <div class="question-card" data-correct="1" data-req="1" data-type="single">
 <div class="question-title">11. A startup deploying a web application on an EC2 instance wants to ensure the application retains its public IP address even after instance restarts while maintaining security best practices. What approach should they take?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q11" type="radio" value="0"/> A. Rely on VPN connectivity for customer access.</label>
-<label onclick="selectSecurityOption(this)"><input name="q11" type="radio" value="1"/> B. Allocate an Elastic IP address and associate it with the EC2 instance, ensuring security groups are configured to allow only necessary inbound traffic[cite: 2].</label>
-<label onclick="selectSecurityOption(this)"><input name="q11" type="radio" value="2"/> C. Allocate an Elastic IP address without configuring security groups to simplify access.</label>
-<label onclick="selectSecurityOption(this)"><input name="q11" type="radio" value="3"/> D. Utilize the public IP assigned by AWS and update DNS records each time.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q11" type="radio" value="0"/> A. Rely exclusively on AWS Site-to-Site VPN tunnels to route public customer web traffic from on-premises edge routers</label>
+<label onclick="selectSecurityOption(this)"><input name="q11" type="radio" value="1"/> B. Allocate an Elastic IP address, associate it with the EC2 instance, and configure security groups to allow only ports 80/443</label>
+<label onclick="selectSecurityOption(this)"><input name="q11" type="radio" value="2"/> C. Allocate an Elastic IP address and disable instance security groups to ensure incoming internet packets bypass firewall checks</label>
+<label onclick="selectSecurityOption(this)"><input name="q11" type="radio" value="3"/> D. Use the auto-assigned public IP address and write an automated Lambda script to update public DNS records upon every reboot</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 11)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp11"></div>
+<div class="result" id="res11"></div>
 </div>
-</div>
-<!-- Question 13 -->
+
 <div class="question-card" data-correct="0" data-req="1" data-type="single">
 <div class="question-title">13. A financial analytics company deploying a high-performance computing (HPC) application requires extremely low network latency and high throughput between multiple instances in a placement group securely. What approach should they use?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q13" type="radio" value="0"/> A. Attach an Elastic Fabric Adapter (EFA) to the EC2 instances and configure security groups to allow only necessary traffic between instances in the placement group[cite: 2].</label>
-<label onclick="selectSecurityOption(this)"><input name="q13" type="radio" value="1"/> B. Attach multiple ENAs to achieve required throughput.</label>
-<label onclick="selectSecurityOption(this)"><input name="q13" type="radio" value="2"/> C. Use standard network interfaces and rely on application-level optimizations.</label>
-<label onclick="selectSecurityOption(this)"><input name="q13" type="radio" value="3"/> D. Attach an EFA without configuring security groups.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q13" type="radio" value="0"/> A. Attach Elastic Fabric Adapters (EFA) to the EC2 instances and configure security group rules to allow required inter-node traffic</label>
+<label onclick="selectSecurityOption(this)"><input name="q13" type="radio" value="1"/> B. Attach multiple standard Elastic Network Interfaces (ENAs) to each instance and configure round-robin DNS routing across them</label>
+<label onclick="selectSecurityOption(this)"><input name="q13" type="radio" value="2"/> C. Deploy standard virtual network interfaces and implement application-level compression algorithms over public TCP connections</label>
+<label onclick="selectSecurityOption(this)"><input name="q13" type="radio" value="3"/> D. Attach an Elastic Fabric Adapter (EFA) and open all inbound ports to 0.0.0.0/0 to prevent handshake latency bottlenecks</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 13)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp13"></div>
+<div class="result" id="res13"></div>
 </div>
-</div>
-<!-- Question 15 -->
+
 <div class="question-card" data-correct="3" data-req="1" data-type="single">
 <div class="question-title">15. A financial technology company identified malicious IP addresses attempting unauthorized access to critical application instances in a private subnet. How should they deny access from these IP addresses using NACLs?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q15" type="radio" value="0"/> A. Use Security Groups to deny traffic from identified IP addresses.</label>
-<label onclick="selectSecurityOption(this)"><input name="q15" type="radio" value="1"/> B. Configure the NACL to include a DENY rule below the ALLOW rules.</label>
-<label onclick="selectSecurityOption(this)"><input name="q15" type="radio" value="2"/> C. Configure the NACL to include only ALLOW rules for legitimate IP addresses and omit malicious ones.</label>
-<label onclick="selectSecurityOption(this)"><input name="q15" type="radio" value="3"/> D. Configure the Network ACL associated with the private subnet to include a DENY rule for the identified IP addresses, placing the rule above any ALLOW rules[cite: 2].</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q15" type="radio" value="0"/> A. Create explicit DENY rules in the instance security groups targeting the offending source IPv4 addresses</label>
+<label onclick="selectSecurityOption(this)"><input name="q15" type="radio" value="1"/> B. Configure the subnet Network ACL to include a DENY rule numbered with a higher numerical value than default ALLOW rules</label>
+<label onclick="selectSecurityOption(this)"><input name="q15" type="radio" value="2"/> C. Delete the default ALLOW rule in the Network ACL and manually add ALLOW rules for all valid IP addresses across the internet</label>
+<label onclick="selectSecurityOption(this)"><input name="q15" type="radio" value="3"/> D. Add explicit DENY rules for the malicious IP addresses in the subnet Network ACL with lower rule numbers than any ALLOW rules</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 15)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp15"></div>
+<div class="result" id="res15"></div>
 </div>
-</div>
-<!-- Question 17 -->
+
 <div class="question-card" data-correct="0" data-req="1" data-type="single">
 <div class="question-title">17. A financial technology company deploying a payment gateway application wants to secure client-to-application communication using an Application Load Balancer (ALB) to handle SSL/TLS termination and offload decryption from backend EC2 instances. What approach should they use?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q17" type="radio" value="0"/> A. Deploy an ALB, enable SSL/TLS termination, and use an AWS Certificate Manager (ACM) certificate for secure communication between clients and the ALB[cite: 2].</label>
-<label onclick="selectSecurityOption(this)"><input name="q17" type="radio" value="1"/> B. Deploy an ALB without SSL/TLS termination and handle SSL decryption at backend instances.</label>
-<label onclick="selectSecurityOption(this)"><input name="q17" type="radio" value="2"/> C. Deploy an ALB with SSL/TLS termination using a self-signed certificate.</label>
-<label onclick="selectSecurityOption(this)"><input name="q17" type="radio" value="3"/> D. Do not use an ALB and handle all SSL/TLS termination directly at backend instances.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q17" type="radio" value="0"/> A. Deploy an ALB with an HTTPS listener using an AWS Certificate Manager (ACM) certificate to terminate SSL/TLS traffic</label>
+<label onclick="selectSecurityOption(this)"><input name="q17" type="radio" value="1"/> B. Deploy an Application Load Balancer in TCP passthrough mode and perform all cryptographic TLS handshakes on backend instances</label>
+<label onclick="selectSecurityOption(this)"><input name="q17" type="radio" value="2"/> C. Configure the Application Load Balancer with an unencrypted HTTP listener and rely on client-side RSA JavaScript libraries</label>
+<label onclick="selectSecurityOption(this)"><input name="q17" type="radio" value="3"/> D. Avoid using an Application Load Balancer and assign public Elastic IP addresses directly to each backend database server</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 17)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp17"></div>
+<div class="result" id="res17"></div>
 </div>
-</div>
-<!-- Question 19 -->
+
 <div class="question-card" data-correct="1" data-req="1" data-type="single">
 <div class="question-title">19. A global e-commerce company deploying virtual appliances to inspect and filter traffic in a VPC wants to use AWS Gateway Load Balancer uniformly to manage and scale appliances securely and compliantly. What approach should they take?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q19" type="radio" value="0"/> A. Avoid Gateway Load Balancer and manually manage virtual appliance scaling across multiple VPCs.</label>
-<label onclick="selectSecurityOption(this)"><input name="q19" type="radio" value="1"/> B. Implement Gateway Load Balancer, configure routing and target groups accurately mapping component dependencies, and secure configurations using IAM policies[cite: 2].</label>
-<label onclick="selectSecurityOption(this)"><input name="q19" type="radio" value="2"/> C. Deploy Gateway Load Balancer without considering dependencies and without CloudWatch metrics.</label>
-<label onclick="selectSecurityOption(this)"><input name="q19" type="radio" value="3"/> D. Implement Gateway Load Balancer and configure public write access to ensure high availability.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q19" type="radio" value="0"/> A. Avoid Gateway Load Balancers and deploy virtual firewall software directly on application compute hosts across subnets</label>
+<label onclick="selectSecurityOption(this)"><input name="q19" type="radio" value="1"/> B. Deploy a Gateway Load Balancer with target groups registering the virtual appliances and route VPC traffic via GWLB endpoints</label>
+<label onclick="selectSecurityOption(this)"><input name="q19" type="radio" value="2"/> C. Deploy a Gateway Load Balancer without registering health check target groups or configuring CloudWatch alarm metrics</label>
+<label onclick="selectSecurityOption(this)"><input name="q19" type="radio" value="3"/> D. Configure Gateway Load Balancer endpoints with open public write permissions to allow external unauthenticated inspection</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 19)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp19"></div>
+<div class="result" id="res19"></div>
 </div>
-</div>
-<!-- Question 21 -->
+
 <div class="question-card" data-correct="0" data-req="1" data-type="single">
-<div class="question-title">21. A multinational corporation transferring large amounts of data between on-premises data centers and AWS using Direct Connect wants to ensure the connection is reliable, consistent, and secure. What approach should they take?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q21" type="radio" value="0"/> A. Establish a Direct Connect connection and implement a VPN over Direct Connect to add an additional layer of network security for data in transit[cite: 2].</label>
-<label onclick="selectSecurityOption(this)"><input name="q21" type="radio" value="1"/> B. Establish a Direct Connect connection and use SFTP for file transfers.</label>
-<label onclick="selectSecurityOption(this)"><input name="q21" type="radio" value="2"/> C. Establish a Direct Connect connection and rely solely on the physical security of the dedicated line.</label>
-<label onclick="selectSecurityOption(this)"><input name="q21" type="radio" value="3"/> D. Transfer data over the public internet using HTTPS.</label></div>
+<div class="question-title">21. A multinational corporation transferring large amounts of sensitive financial data between an on-premises data center and AWS wants a dedicated private network connection that does not traverse the public internet. What approach should they take?</div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q21" type="radio" value="0"/> A. Provision an AWS Direct Connect dedicated connection with a private virtual interface and configure MACsec or IPsec encryption</label>
+<label onclick="selectSecurityOption(this)"><input name="q21" type="radio" value="1"/> B. Establish an AWS Site-to-Site VPN tunnel across the public internet using standard unencrypted BGP routing sessions</label>
+<label onclick="selectSecurityOption(this)"><input name="q21" type="radio" value="2"/> C. Configure an Internet Gateway in the VPC and use AWS Transfer Family with anonymous public SFTP access enabled</label>
+<label onclick="selectSecurityOption(this)"><input name="q21" type="radio" value="3"/> D. Deploy an AWS Storage Gateway Volume Gateway over public internet connections without configuring TLS encryption</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 21)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp21"></div>
+<div class="result" id="res21"></div>
 </div>
-</div>
-<!-- Question 23 -->
+
 <div class="question-card" data-correct="1" data-req="1" data-type="single">
-<div class="question-title">23. A retail company operating multiple VPCs (dev, test, prod) wants to simplify network architecture and centralize management using AWS Transit Gateway while ensuring secure traffic traversal. What approach should they take?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q23" type="radio" value="0"/> A. Establish Transit Gateway and allow all traffic between connected VPCs without additional security configurations.</label>
-<label onclick="selectSecurityOption(this)"><input name="q23" type="radio" value="1"/> B. Establish Transit Gateway and implement security groups and network ACLs in each VPC to control inbound and outbound traffic traversing through the Transit Gateway[cite: 2].</label>
-<label onclick="selectSecurityOption(this)"><input name="q23" type="radio" value="2"/> C. Avoid Transit Gateway and establish individual VPC peering connections between all VPCs.</label>
-<label onclick="selectSecurityOption(this)"><input name="q23" type="radio" value="3"/> D. Establish Transit Gateway and implement route tables in TGW alone.</label></div>
+<div class="question-title">23. A retail company operating multiple VPCs (dev, test, prod) across multiple AWS accounts needs to simplify network connectivity and centrally inspect east-west traffic between VPCs. What is the recommended architectural approach?</div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q23" type="radio" value="0"/> A. Establish full-mesh inter-VPC peering connections between every individual VPC pair across all member accounts</label>
+<label onclick="selectSecurityOption(this)"><input name="q23" type="radio" value="1"/> B. Deploy an AWS Transit Gateway to interconnect VPCs centrally and route cross-VPC traffic through an inspection VPC</label>
+<label onclick="selectSecurityOption(this)"><input name="q23" type="radio" value="2"/> C. Configure software VPN tunnels between EC2 instances in each VPC over the public internet with static route tables</label>
+<label onclick="selectSecurityOption(this)"><input name="q23" type="radio" value="3"/> D. Place all development, test, and production workloads inside a single shared public subnet in the management account</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 23)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp23"></div>
+<div class="result" id="res23"></div>
 </div>
-</div>
-<!-- Question 25 -->
+
 <div class="question-card" data-correct="2" data-req="1" data-type="single">
-<div class="question-title">25. A fintech company developing a microservices-based application needs to securely access AWS Secrets Manager to retrieve sensitive configuration data without exposure to the public internet. What approach should they consider?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q25" type="radio" value="0"/> A. Avoid using endpoints and access Secrets Manager directly over the public internet.</label>
-<label onclick="selectSecurityOption(this)"><input name="q25" type="radio" value="1"/> B. Create a VPC Interface Endpoint for Secrets Manager and allow all traffic without security configurations.</label>
-<label onclick="selectSecurityOption(this)"><input name="q25" type="radio" value="2"/> C. Create a VPC Interface Endpoint for Secrets Manager and associate it with a security group that restricts access to only approved application subnets and ports[cite: 2].</label>
-<label onclick="selectSecurityOption(this)"><input name="q25" type="radio" value="3"/> D. Associate the VPC Interface Endpoint with a network ACL only.</label></div>
+<div class="question-title">25. A fintech company developing a microservices-based application on EC2 instances wants private, secure access to Amazon DynamoDB without traversing the public internet or using NAT gateways. What should they configure?</div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q25" type="radio" value="0"/> A. Deploy an Interface VPC Endpoint (AWS PrivateLink) for DynamoDB and attach public Elastic IP addresses to compute instances</label>
+<label onclick="selectSecurityOption(this)"><input name="q25" type="radio" value="1"/> B. Deploy an Internet Gateway and configure Network ACLs to allow outbound HTTPS port 443 traffic to public DynamoDB endpoints</label>
+<label onclick="selectSecurityOption(this)"><input name="q25" type="radio" value="2"/> C. Create a Gateway VPC Endpoint for DynamoDB and associate it with the route tables of the private application subnets</label>
+<label onclick="selectSecurityOption(this)"><input name="q25" type="radio" value="3"/> D. Establish an AWS Site-to-Site VPN connection back to on-premises routers to proxy DynamoDB API requests over Direct Connect</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 25)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp25"></div>
+<div class="result" id="res25"></div>
 </div>
-</div>
-<!-- Question 27 -->
+
 <div class="question-card" data-correct="1" data-req="1" data-type="single">
-<div class="question-title">27. A global e-commerce platform utilizing Amazon CloudFront wants to execute lightweight, serverless functions to manipulate HTTP request/response data at edge locations securely. What approach should they use for CloudFront Functions?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q27" type="radio" value="0"/> A. Implement all data manipulation functions in the origin server.</label>
-<label onclick="selectSecurityOption(this)"><input name="q27" type="radio" value="1"/> B. Implement CloudFront Functions and ensure functions follow the principle of least privilege by only allowing necessary permissions and securely handling sensitive data[cite: 2].</label>
-<label onclick="selectSecurityOption(this)"><input name="q27" type="radio" value="2"/> C. Store sensitive data within the function code.</label>
-<label onclick="selectSecurityOption(this)"><input name="q27" type="radio" value="3"/> D. Allow functions to execute with full access to all AWS services and resources.</label></div>
+<div class="question-title">27. A global e-commerce platform utilizing Amazon CloudFront wants to ensure that static images and media stored in Amazon S3 can only be accessed through CloudFront and never directly via the public S3 bucket URL. What should they configure?</div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q27" type="radio" value="0"/> A. Configure public read permissions on the S3 bucket and use CloudFront signed URLs for user authentication checks</label>
+<label onclick="selectSecurityOption(this)"><input name="q27" type="radio" value="1"/> B. Configure Origin Access Control (OAC) in CloudFront and update the S3 bucket policy to allow access only from the CloudFront distribution</label>
+<label onclick="selectSecurityOption(this)"><input name="q27" type="radio" value="2"/> C. Place the Amazon S3 bucket inside a private VPC subnet and attach a Gateway Load Balancer endpoint to the distribution</label>
+<label onclick="selectSecurityOption(this)"><input name="q27" type="radio" value="3"/> D. Enable Amazon S3 Static Website Hosting and configure cross-origin resource sharing (CORS) rules to allow all domains</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 27)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp27"></div>
+<div class="result" id="res27"></div>
 </div>
-</div>
-<!-- Question 29 -->
+
 <div class="question-card" data-correct="3" data-req="1" data-type="single">
-<div class="question-title">29. A multinational corporation routing traffic for a global web application using Amazon Route 53 wants to ensure DNS configurations are secure and resilient against DDoS and tampering attacks. What approach should they consider?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q29" type="radio" value="0"/> A. Allow public write access to DNS records.</label>
-<label onclick="selectSecurityOption(this)"><input name="q29" type="radio" value="1"/> B. Utilize Route 53 Resolver rules to forward queries to on-premises resolvers.</label>
-<label onclick="selectSecurityOption(this)"><input name="q29" type="radio" value="2"/> C. Utilize a third-party DNS service without DDoS protection.</label>
-<label onclick="selectSecurityOption(this)"><input name="q29" type="radio" value="3"/> D. Implement Route 53, restrict access to DNS records using IAM policies, and enable DNSSEC to validate response authenticity[cite: 2].</label></div>
+<div class="question-title">29. A multinational corporation routing traffic for a global web application requires automated DDoS protection, edge TLS termination, and smart anycast IP routing to the closest healthy regional application endpoint. Which service should they choose?</div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q29" type="radio" value="0"/> A. Amazon Route 53 with weighted DNS records pointing directly to backend EC2 instances across private subnets</label>
+<label onclick="selectSecurityOption(this)"><input name="q29" type="radio" value="1"/> B. Amazon CloudFront configured exclusively with unencrypted HTTP origin request policies and standard caching</label>
+<label onclick="selectSecurityOption(this)"><input name="q29" type="radio" value="2"/> C. Elastic Load Balancing cross-zone load balancing deployed across separate standalone virtual private clouds</label>
+<label onclick="selectSecurityOption(this)"><input name="q29" type="radio" value="3"/> D. AWS Global Accelerator providing two static anycast IP addresses that route traffic over the AWS global network</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 29)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp29"></div>
+<div class="result" id="res29"></div>
 </div>
-</div>
-<!-- Question 31 -->
+
 <div class="question-card" data-correct="1" data-req="1" data-type="single">
-<div class="question-title">31. A leading e-commerce company deploying a multi-tier application on EC2 instances within a VPC wants to ensure secure administrative access using a bastion host. How should they set it up?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q31" type="radio" value="0"/> A. Deploy the bastion host in a private subnet and allow direct internet SSH access.</label>
-<label onclick="selectSecurityOption(this)"><input name="q31" type="radio" value="1"/> B. Deploy the bastion host in a public subnet, restrict SSH access to known IP addresses, and use it to jump to application servers in private subnets[cite: 3].</label>
-<label onclick="selectSecurityOption(this)"><input name="q31" type="radio" value="2"/> C. Deploy multiple bastion hosts in public subnets with unrestricted internet SSH access.</label>
-<label onclick="selectSecurityOption(this)"><input name="q31" type="radio" value="3"/> D. Avoid a bastion host and open SSH access on all EC2 instances.</label></div>
+<div class="question-title">31. A leading e-commerce company deploying a multi-tier application on EC2 instances in private subnets needs secure administrative terminal access without exposing instances to the public internet. What is the traditional bastion architecture?</div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q31" type="radio" value="0"/> A. Deploy the bastion host in a private subnet and allow direct inbound SSH access from 0.0.0.0/0 on the internet</label>
+<label onclick="selectSecurityOption(this)"><input name="q31" type="radio" value="1"/> B. Deploy the bastion host in a public subnet, restrict inbound SSH to authorized corporate IP ranges, and jump to private instances</label>
+<label onclick="selectSecurityOption(this)"><input name="q31" type="radio" value="2"/> C. Deploy multiple bastion hosts across public subnets with unrestricted SSH port 22 access enabled for all external clients</label>
+<label onclick="selectSecurityOption(this)"><input name="q31" type="radio" value="3"/> D. Avoid deploying bastion hosts and open SSH port 22 directly on all private application and database compute instances</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 31)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp31"></div>
+<div class="result" id="res31"></div>
 </div>
-</div>
-<!-- Question 33 -->
+
 <div class="question-card" data-correct="2" data-req="1" data-type="single">
 <div class="question-title">33. A healthcare company handling sensitive patient data on EC2 instances is considering AWS Systems Manager instead of traditional SSH/RDP. What is a key advantage of using Systems Manager?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q33" type="radio" value="0"/> A. Systems Manager replaces EC2 instances entirely.</label>
-<label onclick="selectSecurityOption(this)"><input name="q33" type="radio" value="1"/> B. Systems Manager requires EC2 instances to be publicly accessible.</label>
-<label onclick="selectSecurityOption(this)"><input name="q33" type="radio" value="2"/> C. Systems Manager provides a unified interface to access EC2 instances without opening inbound ports or managing SSH keys[cite: 3].</label>
-<label onclick="selectSecurityOption(this)"><input name="q33" type="radio" value="3"/> D. Systems Manager allows direct access to underlying hardware.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q33" type="radio" value="0"/> A. Systems Manager replaces EC2 instances entirely with serverless container tasks running on AWS Fargate clusters</label>
+<label onclick="selectSecurityOption(this)"><input name="q33" type="radio" value="1"/> B. Systems Manager requires EC2 instances to have public IP addresses and open inbound firewall ports 22 and 3389</label>
+<label onclick="selectSecurityOption(this)"><input name="q33" type="radio" value="2"/> C. Systems Manager Session Manager provides secure shell access without opening inbound ports or managing SSH key pairs</label>
+<label onclick="selectSecurityOption(this)"><input name="q33" type="radio" value="3"/> D. Systems Manager grants direct physical hardware console access to the underlying hypervisor in AWS facilities</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 33)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp33"></div>
+<div class="result" id="res33"></div>
 </div>
-</div>
-<!-- Question 35 -->
+
 <div class="question-card" data-correct="1" data-req="1" data-type="single">
 <div class="question-title">35. A global e-commerce company implementing AWS IAM Roles Anywhere for external workloads using X.509 certificates issued by their certificate authority (CA) wants a secure integration. What approach should they consider?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q35" type="radio" value="0"/> A. Use self-signed X.509 certificates without a trusted CA.</label>
-<label onclick="selectSecurityOption(this)"><input name="q35" type="radio" value="1"/> B. Register the CA with IAM Roles Anywhere as a trust anchor and establish trust between PKI and IAM Roles Anywhere[cite: 3].</label>
-<label onclick="selectSecurityOption(this)"><input name="q35" type="radio" value="2"/> C. Use long-term AWS credentials for external workloads.</label>
-<label onclick="selectSecurityOption(this)"><input name="q35" type="radio" value="3"/> D. Manage separate IAM users for each external workload.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q35" type="radio" value="0"/> A. Issue self-signed X.509 certificates without registering an authoritative certificate authority inside AWS IAM</label>
+<label onclick="selectSecurityOption(this)"><input name="q35" type="radio" value="1"/> B. Register the corporate CA as a trust anchor in IAM Roles Anywhere to establish trust and vend temporary STS credentials</label>
+<label onclick="selectSecurityOption(this)"><input name="q35" type="radio" value="2"/> C. Hardcode long-term AWS IAM user access keys directly inside external on-premises configuration files</label>
+<label onclick="selectSecurityOption(this)"><input name="q35" type="radio" value="3"/> D. Create individual IAM users for each external workload and disable multi-factor authentication requirements</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 35)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp35"></div>
+<div class="result" id="res35"></div>
 </div>
-</div>
-<!-- Question 37 -->
+
 <div class="question-card" data-correct="2" data-req="1" data-type="single">
 <div class="question-title">37. A global e-commerce company deploying EC2 instances across multiple AZs within a VPC recently suffered a DDoS attack and wants to re-evaluate routing to enhance security. What practice should they adopt?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q37" type="radio" value="0"/> A. Allow all inbound internet traffic directly to EC2 instances.</label>
-<label onclick="selectSecurityOption(this)"><input name="q37" type="radio" value="1"/> B. Disable all route tables associated with instances.</label>
-<label onclick="selectSecurityOption(this)"><input name="q37" type="radio" value="2"/> C. Implement a private subnet for EC2 instances and route traffic through a NAT gateway or NAT instance[cite: 3].</label>
-<label onclick="selectSecurityOption(this)"><input name="q37" type="radio" value="3"/> D. Use a public subnet for all EC2 instances making them directly accessible.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q37" type="radio" value="0"/> A. Assign public IP addresses to all backend database instances and allow all inbound internet traffic directly</label>
+<label onclick="selectSecurityOption(this)"><input name="q37" type="radio" value="1"/> B. Remove all route table associations from application subnets to isolate instances from VPC DNS resolvers</label>
+<label onclick="selectSecurityOption(this)"><input name="q37" type="radio" value="2"/> C. Place backend EC2 instances in private subnets and route outbound internet traffic through managed NAT Gateways</label>
+<label onclick="selectSecurityOption(this)"><input name="q37" type="radio" value="3"/> D. Deploy all EC2 instances inside a single public subnet with public IP addresses to simplify load balancer routing</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 37)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp37"></div>
+<div class="result" id="res37"></div>
 </div>
-</div>
-<!-- Question 39 -->
+
 <div class="question-card" data-correct="0" data-req="1" data-type="single">
 <div class="question-title">39. A gaming company deploying an online multiplayer game on EC2 instances requires high IOPS and low-latency storage for temporary data processing. What is accurate about EC2 instance store volumes?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q39" type="radio" value="0"/> A. Instance store volumes are designed for temporary storage, and data can be lost if the instance stops, terminates, or fails[cite: 3].</label>
-<label onclick="selectSecurityOption(this)"><input name="q39" type="radio" value="1"/> B. Data on instance store volumes is automatically backed up to Amazon S3.</label>
-<label onclick="selectSecurityOption(this)"><input name="q39" type="radio" value="2"/> C. Instance store volumes are encrypted by default.</label>
-<label onclick="selectSecurityOption(this)"><input name="q39" type="radio" value="3"/> D. Instance store volumes provide persistent primary database storage.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q39" type="radio" value="0"/> A. Instance store volumes provide high-performance ephemeral block storage, but data is lost if instances stop or terminate</label>
+<label onclick="selectSecurityOption(this)"><input name="q39" type="radio" value="1"/> B. Instance store volumes automatically synchronize and persist all block changes into Amazon S3 Standard buckets</label>
+<label onclick="selectSecurityOption(this)"><input name="q39" type="radio" value="2"/> C. Instance store volumes provide persistent multi-attach storage that can be shared concurrently across multiple instances</label>
+<label onclick="selectSecurityOption(this)"><input name="q39" type="radio" value="3"/> D. Instance store volumes retain all committed data across instance stop and start operations indefinitely</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 39)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp39"></div>
+<div class="result" id="res39"></div>
 </div>
-</div>
-<!-- Question 41 -->
+
 <div class="question-card" data-correct="3" data-req="1" data-type="single">
 <div class="question-title">41. A global retail company with a fleet of EC2 instances wants to use AWS Systems Manager Patch Manager to automate patching. What is accurate about Patch Manager?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q41" type="radio" value="0"/> A. Patch Manager increases instance vulnerability requiring public internet access.</label>
-<label onclick="selectSecurityOption(this)"><input name="q41" type="radio" value="1"/> B. Patch Manager requires manual restart of each instance without options.</label>
-<label onclick="selectSecurityOption(this)"><input name="q41" type="radio" value="2"/> C. Systems Manager Patch Manager can only patch Amazon Linux instances.</label>
-<label onclick="selectSecurityOption(this)"><input name="q41" type="radio" value="3"/> D. Patch Manager allows you to define patch baselines specifying which patches apply, and handles OS patches[cite: 3].</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q41" type="radio" value="0"/> A. Patch Manager requires opening inbound TCP port 22 and port 3389 to the public internet across all managed instances</label>
+<label onclick="selectSecurityOption(this)"><input name="q41" type="radio" value="1"/> B. Patch Manager forces an immediate, unconfigurable reboot of all managed instances simultaneously upon patch release</label>
+<label onclick="selectSecurityOption(this)"><input name="q41" type="radio" value="2"/> C. Systems Manager Patch Manager is restricted exclusively to Amazon Linux and cannot patch Windows or Debian instances</label>
+<label onclick="selectSecurityOption(this)"><input name="q41" type="radio" value="3"/> D. Patch Manager allows defining custom patch baselines with auto-approval rules and maintenance windows across fleets</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 41)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp41"></div>
+<div class="result" id="res41"></div>
 </div>
-</div>
-<!-- Question 43 -->
+
 <div class="question-card" data-correct="3" data-req="1" data-type="single">
 <div class="question-title">43. A healthcare company processing sensitive patient data on EC2 instances wants an isolated environment. What is accurate about AWS Nitro Enclaves?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q43" type="radio" value="0"/> A. Nitro Enclaves require a public IP address to communicate with the main instance.</label>
-<label onclick="selectSecurityOption(this)"><input name="q43" type="radio" value="1"/> B. Nitro Enclaves eliminate the need for instance-level encryption.</label>
-<label onclick="selectSecurityOption(this)"><input name="q43" type="radio" value="2"/> C. Nitro Enclaves run multiple EC2 instances within a single physical server for resource utilization.</label>
-<label onclick="selectSecurityOption(this)"><input name="q43" type="radio" value="3"/> D. Nitro Enclaves provide a virtualized environment separate from the main EC2 instance, ensuring data inside the enclave cannot be accessed from outside, even by the EC2 instance itself[cite: 3].</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q43" type="radio" value="0"/> A. Nitro Enclaves require public IPv4 addresses to communicate with parent EC2 instances over external networks</label>
+<label onclick="selectSecurityOption(this)"><input name="q43" type="radio" value="1"/> B. Nitro Enclaves disable all cryptographic encryption algorithms to accelerate CPU floating-point calculations</label>
+<label onclick="selectSecurityOption(this)"><input name="q43" type="radio" value="2"/> C. Nitro Enclaves share interactive user logins and persistent storage partitions directly with the host operating system</label>
+<label onclick="selectSecurityOption(this)"><input name="q43" type="radio" value="3"/> D. Nitro Enclaves provide isolated, hardened compute environments with no persistent storage or external network access</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 43)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp43"></div>
+<div class="result" id="res43"></div>
 </div>
-</div>
-<!-- Question 45 -->
+
 <div class="question-card" data-correct="3" data-req="1" data-type="single">
 <div class="question-title">45. A startup company wants to streamline building, testing, and deploying AMIs for EC2 instances using EC2 Image Builder. What is accurate about EC2 Image Builder?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q45" type="radio" value="0"/> A. It is primarily designed to optimize storage capacity of AMIs.</label>
-<label onclick="selectSecurityOption(this)"><input name="q45" type="radio" value="1"/> B. It allows users to manually patch AMIs ensuring they are up-to-date.</label>
-<label onclick="selectSecurityOption(this)"><input name="q45" type="radio" value="2"/> C. It automatically converts AMIs into container images for ECS.</label>
-<label onclick="selectSecurityOption(this)"><input name="q45" type="radio" value="3"/> D. It provides a fully managed service that simplifies the creation, maintenance, validation, and sharing of virtual machine or container images[cite: 3].</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q45" type="radio" value="0"/> A. EC2 Image Builder is primarily designed to compress and deduplicate static files stored inside Amazon S3 Glacier</label>
+<label onclick="selectSecurityOption(this)"><input name="q45" type="radio" value="1"/> B. EC2 Image Builder requires engineers to log in manually via SSH to validate installed software security packages</label>
+<label onclick="selectSecurityOption(this)"><input name="q45" type="radio" value="2"/> C. EC2 Image Builder is restricted exclusively to container images and cannot build Amazon Machine Images (AMIs)</label>
+<label onclick="selectSecurityOption(this)"><input name="q45" type="radio" value="3"/> D. EC2 Image Builder automates the creation, testing, hardening, and distribution of secure golden virtual machine images</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 45)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp45"></div>
+<div class="result" id="res45"></div>
 </div>
-</div>
-<!-- Question 47 -->
+
 <div class="question-card" data-correct="0" data-req="1" data-type="single">
 <div class="question-title">47. A startup developing a web app wants to deploy quickly using AWS Elastic Beanstalk while ensuring environment security and up-to-date runtime patching. What is a key security feature they leverage?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q47" type="radio" value="0"/> A. Elastic Beanstalk provides managed platform updates ensuring the runtime environment is up-to-date with latest patches[cite: 3].</label>
-<label onclick="selectSecurityOption(this)"><input name="q47" type="radio" value="1"/> B. Built-in Web Application Firewall (WAF).</label>
-<label onclick="selectSecurityOption(this)"><input name="q47" type="radio" value="2"/> C. Automatic encryption of all data at rest and in transit without user config.</label>
-<label onclick="selectSecurityOption(this)"><input name="q47" type="radio" value="3"/> D. Direct SSH access enabled by default.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q47" type="radio" value="0"/> A. Managed platform updates in Elastic Beanstalk automatically apply the latest operating system and runtime patches</label>
+<label onclick="selectSecurityOption(this)"><input name="q47" type="radio" value="1"/> B. Elastic Beanstalk automatically provisions dedicated physical hardware security modules inside customer subnets</label>
+<label onclick="selectSecurityOption(this)"><input name="q47" type="radio" value="2"/> C. Elastic Beanstalk disables all IAM instance profile permissions by default to prevent data extraction</label>
+<label onclick="selectSecurityOption(this)"><input name="q47" type="radio" value="3"/> D. Elastic Beanstalk enables direct, unauthenticated root SSH access across all backend application instances</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 47)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp47"></div>
+<div class="result" id="res47"></div>
 </div>
-</div>
-<!-- Question 49 -->
+
 <div class="question-card" data-correct="3" data-req="1" data-type="single">
 <div class="question-title">49. A fintech startup deploying a microservices application using Elastic Beanstalk wants to integrate AWS X-Ray for distributed tracing seamlessly and securely. What step should they take?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q49" type="radio" value="0"/> A. Modify application code to remove logging mechanisms.</label>
-<label onclick="selectSecurityOption(this)"><input name="q49" type="radio" value="1"/> B. Manually install X-Ray daemon on each EC2 instance.</label>
-<label onclick="selectSecurityOption(this)"><input name="q49" type="radio" value="2"/> C. Store X-Ray traces in an S3 bucket without encryption.</label>
-<label onclick="selectSecurityOption(this)"><input name="q49" type="radio" value="3"/> D. Enable X-Ray from Elastic Beanstalk environment configurations and ensure necessary IAM roles are in place[cite: 3].</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q49" type="radio" value="0"/> A. Modify application source code to completely remove all existing logging and telemetry frameworks</label>
+<label onclick="selectSecurityOption(this)"><input name="q49" type="radio" value="1"/> B. Deploy standalone unmanaged EC2 instances in public subnets to proxy trace data over unencrypted HTTP</label>
+<label onclick="selectSecurityOption(this)"><input name="q49" type="radio" value="2"/> C. Store raw X-Ray traces in a publicly accessible Amazon S3 bucket without server-side encryption enabled</label>
+<label onclick="selectSecurityOption(this)"><input name="q49" type="radio" value="3"/> D. Enable the X-Ray daemon in the Elastic Beanstalk configuration and ensure the instance profile has X-Ray permissions</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 49)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp49"></div>
+<div class="result" id="res49"></div>
 </div>
-</div>
-<!-- Question 51 -->
+
 <div class="question-card" data-correct="1" data-req="1" data-type="single">
 <div class="question-title">51. A media streaming company deploying a video processing app using Amazon ECS processing large video files stored in S3 wants the app to scale based on queue length securely. What is the best approach?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q51" type="radio" value="0"/> A. Deploy outside ECS on EC2 instances.</label>
-<label onclick="selectSecurityOption(this)"><input name="q51" type="radio" value="1"/> B. Deploy as an ECS service, integrate with CloudWatch alarms to scale tasks based on queue length, and use IAM roles for tasks to securely access S3[cite: 3].</label>
-<label onclick="selectSecurityOption(this)"><input name="q51" type="radio" value="2"/> C. Deploy as ECS service with fixed task count.</label>
-<label onclick="selectSecurityOption(this)"><input name="q51" type="radio" value="3"/> D. Deploy as ECS task and manually launch additional tasks.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q51" type="radio" value="0"/> A. Deploy container tasks on unmanaged standalone EC2 instances and write cron scripts to scale worker threads</label>
+<label onclick="selectSecurityOption(this)"><input name="q51" type="radio" value="1"/> B. Deploy as an ECS service with target tracking scaling on SQS queue depth, using IAM Roles for Tasks for S3 access</label>
+<label onclick="selectSecurityOption(this)"><input name="q51" type="radio" value="2"/> C. Deploy as a static ECS service with a fixed task count and hardcode permanent IAM access keys inside the image</label>
+<label onclick="selectSecurityOption(this)"><input name="q51" type="radio" value="3"/> D. Deploy individual ECS standalone tasks manually via the AWS Management Console whenever queue volume increases</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 51)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp51"></div>
+<div class="result" id="res51"></div>
 </div>
-</div>
-<!-- Question 53 -->
+
 <div class="question-card" data-correct="0" data-req="1" data-type="single">
 <div class="question-title">53. A media streaming company deploying an ECS video processing application wants to integrate an Application Load Balancer (ALB) to distribute traffic efficiently and ensure traffic between ALB and ECS tasks is encrypted. What approach should they take?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q53" type="radio" value="0"/> A. Deploy using ECS with an Application Load Balancer (ALB), and ensure the ALB listener is configured for HTTPS[cite: 3].</label>
-<label onclick="selectSecurityOption(this)"><input name="q53" type="radio" value="1"/> B. Deploy without a load balancer and rely on ECS service discovery.</label>
-<label onclick="selectSecurityOption(this)"><input name="q53" type="radio" value="2"/> C. Deploy using Classic Load Balancer.</label>
-<label onclick="selectSecurityOption(this)"><input name="q53" type="radio" value="3"/> D. Deploy using NLB with SSL termination.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q53" type="radio" value="0"/> A. Deploy the ECS service behind an Application Load Balancer configured with an HTTPS listener and SSL/TLS certificates</label>
+<label onclick="selectSecurityOption(this)"><input name="q53" type="radio" value="1"/> B. Deploy the ECS service without a load balancer and rely on public IP addressing and client-side round-robin DNS</label>
+<label onclick="selectSecurityOption(this)"><input name="q53" type="radio" value="2"/> C. Deploy a legacy Classic Load Balancer in front of ECS tasks and disable SSL/TLS certificate verification checks</label>
+<label onclick="selectSecurityOption(this)"><input name="q53" type="radio" value="3"/> D. Deploy a Network Load Balancer in TCP passthrough mode without configuring target group health check endpoints</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 53)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp53"></div>
+<div class="result" id="res53"></div>
 </div>
-</div>
-<!-- Question 55 -->
+
 <div class="question-card" data-correct="0" data-req="1" data-type="single">
 <div class="question-title">55. A media streaming company migrating to AWS wants to focus on app development without managing underlying infrastructure, considering Amazon ECS with Fargate launch type. What does Fargate provide?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q55" type="radio" value="0"/> A. Enables running containers without managing underlying EC2 instances, providing a serverless container experience[cite: 3].</label>
-<label onclick="selectSecurityOption(this)"><input name="q55" type="radio" value="1"/> B. Run containers directly on EC2 instances with granular OS control.</label>
-<label onclick="selectSecurityOption(this)"><input name="q55" type="radio" value="2"/> C. Requires managing underlying EC2 instances including patching.</label>
-<label onclick="selectSecurityOption(this)"><input name="q55" type="radio" value="3"/> D. Designed primarily for batch processing.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q55" type="radio" value="0"/> A. A serverless compute engine for containers that eliminates the need to provision, patch, and manage EC2 instances</label>
+<label onclick="selectSecurityOption(this)"><input name="q55" type="radio" value="1"/> B. A virtual machine management tool that grants direct root access to the underlying hypervisor operating system</label>
+<label onclick="selectSecurityOption(this)"><input name="q55" type="radio" value="2"/> C. A container orchestrator that requires administrators to manually manage EC2 AMI patching and cluster scaling</label>
+<label onclick="selectSecurityOption(this)"><input name="q55" type="radio" value="3"/> D. An on-premises hardware appliance that deploys dedicated container runtime servers in corporate server rooms</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 55)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp55"></div>
+<div class="result" id="res55"></div>
 </div>
-</div>
-<!-- Question 57 -->
+
 <div class="question-card" data-correct="1" data-req="1" data-type="single">
 <div class="question-title">57. A global retail company deploying applications on Amazon Elastic Kubernetes Service (EKS) wants to integrate an OpenID Connect (OIDC) identity provider with IAM to assign IAM roles to Kubernetes service accounts. What is essential for success?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q57" type="radio" value="0"/> A. Manually create an OIDC provider in IAM and associate it with EKS.</label>
-<label onclick="selectSecurityOption(this)"><input name="q57" type="radio" value="1"/> B. Enable OIDC for the EKS cluster and use the cluster's OIDC provider URL to create an IAM OIDC identity provider[cite: 3].</label>
-<label onclick="selectSecurityOption(this)"><input name="q57" type="radio" value="2"/> C. Use AWS SSO to integrate OIDC with IAM.</label>
-<label onclick="selectSecurityOption(this)"><input name="q57" type="radio" value="3"/> D. Directly associate IAM roles with EKS nodes.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q57" type="radio" value="0"/> A. Manually generate long-term AWS IAM access keys and embed them as Kubernetes secrets in each pod namespace</label>
+<label onclick="selectSecurityOption(this)"><input name="q57" type="radio" value="1"/> B. Enable the IAM OIDC provider for the EKS cluster and annotate Kubernetes ServiceAccounts with the IAM Role ARN (IRSA)</label>
+<label onclick="selectSecurityOption(this)"><input name="q57" type="radio" value="2"/> C. Use AWS IAM Identity Center to map Active Directory groups directly to Kubernetes cluster role bindings</label>
+<label onclick="selectSecurityOption(this)"><input name="q57" type="radio" value="3"/> D. Attach administrative IAM policies directly to the underlying EKS worker node instance profile roles</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 57)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp57"></div>
+<div class="result" id="res57"></div>
 </div>
-</div>
-<!-- Question 59 -->
+
 <div class="question-card" data-correct="2" data-req="1" data-type="single">
 <div class="question-title">59. A healthcare organization deploying a critical application on Amazon EKS needs to create an Amazon EKS cluster IAM role for the control plane to make API calls on their behalf. What are essential permissions for this role?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q59" type="radio" value="0"/> A. Permissions to manage user access within Kubernetes cluster.</label>
-<label onclick="selectSecurityOption(this)"><input name="q59" type="radio" value="1"/> B. Permissions to manage RDS databases and write to DynamoDB tables.</label>
-<label onclick="selectSecurityOption(this)"><input name="q59" type="radio" value="2"/> C. Permissions to allow the EKS control plane to create and manage AWS resources such as EC2 instances and Elastic Load Balancers for Kubernetes nodes[cite: 3].</label>
-<label onclick="selectSecurityOption(this)"><input name="q59" type="radio" value="3"/> D. Permissions to create/manage EC2 instances and read S3 bucket data.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q59" type="radio" value="0"/> A. Permissions to manage user authentication and internal role-based access control inside the Kubernetes cluster</label>
+<label onclick="selectSecurityOption(this)"><input name="q59" type="radio" value="1"/> B. Permissions to manage Amazon RDS database schemas and write clinical patient records to Amazon DynamoDB tables</label>
+<label onclick="selectSecurityOption(this)"><input name="q59" type="radio" value="2"/> C. Permissions allowing the EKS control plane to manage AWS resources such as Elastic Load Balancers and ENIs for nodes</label>
+<label onclick="selectSecurityOption(this)"><input name="q59" type="radio" value="3"/> D. Permissions granting full root administrator access across all AWS accounts within the parent AWS Organization</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 59)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp59"></div>
+<div class="result" id="res59"></div>
 </div>
-</div>
-<!-- Question 61 -->
+
 <div class="question-card" data-correct="2" data-req="1" data-type="single">
 <div class="question-title">61. A healthcare company running containerized apps on Amazon EKS using Fargate wants pods to securely access other AWS services using the Pod Execution Role. What best describes the use of this role?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q61" type="radio" value="0"/> A. Grants permissions to EKS worker nodes to join cluster.</label>
-<label onclick="selectSecurityOption(this)"><input name="q61" type="radio" value="1"/> B. Mandatory role every EKS cluster must have.</label>
-<label onclick="selectSecurityOption(this)"><input name="q61" type="radio" value="2"/> C. Allows individual pods to assume an IAM role and access AWS services directly without going through node IAM role[cite: 3].</label>
-<label onclick="selectSecurityOption(this)"><input name="q61" type="radio" value="3"/> D. Allows EKS control plane to make calls on behalf of user.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q61" type="radio" value="0"/> A. Grants permissions to physical EC2 worker nodes to register and join the Kubernetes cluster control plane</label>
+<label onclick="selectSecurityOption(this)"><input name="q61" type="radio" value="1"/> B. A mandatory account-wide administrator role required to create EKS clusters via the AWS Management Console</label>
+<label onclick="selectSecurityOption(this)"><input name="q61" type="radio" value="2"/> C. Allows the Fargate infrastructure to pull private container images from ECR and forward container logs to CloudWatch</label>
+<label onclick="selectSecurityOption(this)"><input name="q61" type="radio" value="3"/> D. A role assumed by human developers to execute interactive kubectl commands against cluster worker nodes</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 61)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp61"></div>
+<div class="result" id="res61"></div>
 </div>
-</div>
-<!-- Question 63 -->
+
 <div class="question-card" data-correct="0" data-req="1" data-type="single">
 <div class="question-title">63. A healthcare company deploying microservices on Amazon EKS considering EKS Managed Node Groups wants to ensure security alignment. What is a benefit of using EKS Managed Node Groups?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q63" type="radio" value="0"/> A. Managed Node Groups automatically apply latest security patches to operating system of worker nodes[cite: 3].</label>
-<label onclick="selectSecurityOption(this)"><input name="q63" type="radio" value="1"/> B. Allows running pods on Fargate eliminating EC2 instances.</label>
-<label onclick="selectSecurityOption(this)"><input name="q63" type="radio" value="2"/> C. Requires manual scaling and doesn't support auto scaling.</label>
-<label onclick="selectSecurityOption(this)"><input name="q63" type="radio" value="3"/> D. Uses custom-built OS not based on Amazon Linux 2.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q63" type="radio" value="0"/> A. Automates the provisioning, updating, and OS security patching of Kubernetes worker nodes without cluster downtime</label>
+<label onclick="selectSecurityOption(this)"><input name="q63" type="radio" value="1"/> B. Completely eliminates the use of EC2 instances by running all pods exclusively on serverless AWS Fargate profiles</label>
+<label onclick="selectSecurityOption(this)"><input name="q63" type="radio" value="2"/> C. Requires manual node patching and disables integration with EC2 Auto Scaling groups and launch templates</label>
+<label onclick="selectSecurityOption(this)"><input name="q63" type="radio" value="3"/> D. Uses unhardened open-source operating system images that bypass AWS shared responsibility security guidelines</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 63)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp63"></div>
+<div class="result" id="res63"></div>
 </div>
-</div>
-<!-- Question 65 -->
+
 <div class="question-card" data-correct="2" data-req="1" data-type="single">
-<div class="question-title">65. A multinational corporation evaluating Amazon EKS over hosting self-hosted Kubernetes on-premises wants to know primary advantages of using EKS. (Choose TWO)</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q65" type="radio" value="0"/> A. Self-hosted offers automatic scaling while EKS requires manual intervention.</label>
-<label onclick="selectSecurityOption(this)"><input name="q65" type="radio" value="1"/> B. EKS provides built-in integrations with CloudWatch, IAM, and VPC enhancing security and monitoring.</label>
-<label onclick="selectSecurityOption(this)"><input name="q65" type="radio" value="2"/> C. EKS automatically manages control plane ensuring high availability, backups, and patching, and provides built-in CloudWatch, IAM, and VPC integrations (A &amp; C)[cite: 3].</label>
-<label onclick="selectSecurityOption(this)"><input name="q65" type="radio" value="3"/> D. Needs manual configuration for integration with RDS, Lambda, S3.</label></div>
+<div class="question-title">65. A multinational corporation evaluating Amazon EKS over self-managed Kubernetes on EC2 wants to understand the division of operational security responsibilities. What is AWS responsible for in Amazon EKS?</div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q65" type="radio" value="0"/> A. Managing container application code security and writing pod network security policy definitions</label>
+<label onclick="selectSecurityOption(this)"><input name="q65" type="radio" value="1"/> B. Patching operating system dependencies and configuring firewall security groups on worker node instances</label>
+<label onclick="selectSecurityOption(this)"><input name="q65" type="radio" value="2"/> C. Provisioning, scaling, and managing the availability and security of the Kubernetes control plane nodes</label>
+<label onclick="selectSecurityOption(this)"><input name="q65" type="radio" value="3"/> D. Managing customer role-based access control (RBAC) user bindings inside individual Kubernetes namespaces</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 65)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp65"></div>
+<div class="result" id="res65"></div>
 </div>
-</div>
-<!-- Question 67 -->
+
 <div class="question-card" data-correct="2" data-req="1" data-type="single">
-<div class="question-title">67. A global financial institution deploying a mission-critical application on Amazon EKS needs comprehensive logging of activities within the EKS cluster (auditing user activities, authentication, control plane components). What step should they take?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q67" type="radio" value="0"/> A. Configure AWS Lambda to pull logs directly from nodes.</label>
-<label onclick="selectSecurityOption(this)"><input name="q67" type="radio" value="1"/> B. Enable AWS X-Ray for the cluster.</label>
-<label onclick="selectSecurityOption(this)"><input name="q67" type="radio" value="2"/> C. Enable Amazon CloudWatch Logs and select API, Audit, Authenticator, Controllermanager, and Scheduler log types[cite: 3].</label>
-<label onclick="selectSecurityOption(this)"><input name="q67" type="radio" value="3"/> D. Use Amazon Kinesis to stream all activities.</label></div>
+<div class="question-title">67. A global financial institution deploying a mission-critical banking application on Amazon EKS requires strict pod-to-pod network segmentation and least-privilege traffic flow controls within the cluster. Which solution should they deploy?</div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q67" type="radio" value="0"/> A. Configure standard VPC Network Access Control Lists (NACLs) targeting individual container IP addresses</label>
+<label onclick="selectSecurityOption(this)"><input name="q67" type="radio" value="1"/> B. Deploy all sensitive microservice pods inside dedicated public subnets and use Elastic IP security groups</label>
+<label onclick="selectSecurityOption(this)"><input name="q67" type="radio" value="2"/> C. Install the Amazon VPC CNI plugin and implement Kubernetes NetworkPolicies to restrict ingress/egress pod traffic</label>
+<label onclick="selectSecurityOption(this)"><input name="q67" type="radio" value="3"/> D. Deploy standalone AWS WAF Web ACLs in front of each internal Kubernetes ClusterIP service endpoint</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 67)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp67"></div>
+<div class="result" id="res67"></div>
 </div>
-</div>
-<!-- Question 69 -->
+
 <div class="question-card" data-correct="3" data-req="1" data-type="single">
-<div class="question-title">69. An e-commerce platform deploying microservices on Amazon EKS wants to enhance network security and implement fine-grained network policies at the pod level. What strategy should they implement?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q69" type="radio" value="0"/> A. Deploy all microservices in a single namespace using SGs.</label>
-<label onclick="selectSecurityOption(this)"><input name="q69" type="radio" value="1"/> B. Expose all services directly to internet using NodePorts.</label>
-<label onclick="selectSecurityOption(this)"><input name="q69" type="radio" value="2"/> C. Use third-party unintegrated networking tools.</label>
-<label onclick="selectSecurityOption(this)"><input name="q69" type="radio" value="3"/> D. Use Amazon VPC Container Network Interface (CNI) to assign each pod its own IP address from the VPC, allowing fine-grained network policies[cite: 3].</label></div>
+<div class="question-title">69. An e-commerce platform deploying microservices on Amazon EKS needs a centralized mechanism to manage incoming external HTTP/HTTPS traffic and route requests to backend Kubernetes services based on request path. What should they deploy?</div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q69" type="radio" value="0"/> A. Classic Load Balancers configured with manual TCP port forwarding rules pointing to worker nodes</label>
+<label onclick="selectSecurityOption(this)"><input name="q69" type="radio" value="1"/> B. Standalone Amazon Route 53 latency-based routing policies mapped directly to pod container IP addresses</label>
+<label onclick="selectSecurityOption(this)"><input name="q69" type="radio" value="2"/> C. AWS Gateway Load Balancers deployed in private subnets with GENEVE packet encapsulation tunneling</label>
+<label onclick="selectSecurityOption(this)"><input name="q69" type="radio" value="3"/> D. The AWS Load Balancer Controller to automatically provision Application Load Balancers from Kubernetes Ingress resources</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 69)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp69"></div>
+<div class="result" id="res69"></div>
 </div>
-</div>
-<!-- Question 71 -->
+
 <div class="question-card" data-correct="2" data-req="1" data-type="single">
-<div class="question-title">71. A global financial institution deploying applications on Amazon EKS with strict regulatory requirements for data protection wants end-to-end encryption for in-transit data within EKS clusters. Which service mesh solution should they implement?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q71" type="radio" value="0"/> A. Use AWS App Mesh without enabling encryption features.</label>
-<label onclick="selectSecurityOption(this)"><input name="q71" type="radio" value="1"/> B. Deploy custom-built service mesh without mTLS support.</label>
-<label onclick="selectSecurityOption(this)"><input name="q71" type="radio" value="2"/> C. Use AWS App Mesh and enable mutual Transport Layer Security (mTLS) for service-to-service communications[cite: 3].</label>
-<label onclick="selectSecurityOption(this)"><input name="q71" type="radio" value="3"/> D. Rely solely on EKS node-level encryption.</label></div>
+<div class="question-title">71. A global financial institution deploying applications on Amazon EKS wants to securely manage TLS certificates and automate certificate renewal for internal service endpoints. Which approach aligns with best practices?</div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q71" type="radio" value="0"/> A. Generate self-signed certificates manually on worker nodes and disable TLS certificate validation checks in clients</label>
+<label onclick="selectSecurityOption(this)"><input name="q71" type="radio" value="1"/> B. Hardcode private RSA encryption keys inside public GitHub source repositories and pull them during container build</label>
+<label onclick="selectSecurityOption(this)"><input name="q71" type="radio" value="2"/> C. Integrate AWS Certificate Manager (ACM) with the AWS Load Balancer Controller or use cert-manager with AWS Private CA</label>
+<label onclick="selectSecurityOption(this)"><input name="q71" type="radio" value="3"/> D. Require end users to download and install corporate root certificates on personal devices before every web session</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 71)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp71"></div>
+<div class="result" id="res71"></div>
 </div>
-</div>
-<!-- Question 73 -->
+
 <div class="question-card" data-correct="0" data-req="1" data-type="single">
-<div class="question-title">73. A global finance company deploying a data-intensive application on Amazon EKS with strict data-at-rest encryption requirements wants to ensure data stored on EBS volumes via the EKS CSI driver is encrypted at rest. What step should they take?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q73" type="radio" value="0"/> A. Use the EBS CSI driver to provision encrypted EBS volumes by setting the encrypted parameter to true in the StorageClass[cite: 3].</label>
-<label onclick="selectSecurityOption(this)"><input name="q73" type="radio" value="1"/> B. Use IAM policies to enforce encryption.</label>
-<label onclick="selectSecurityOption(this)"><input name="q73" type="radio" value="2"/> C. Manually encrypt data before writing to EBS.</label>
-<label onclick="selectSecurityOption(this)"><input name="q73" type="radio" value="3"/> D. Enable EBS encryption from AWS Console after CSI driver provisions volume.</label></div>
+<div class="question-title">73. A global finance company deploying a data-intensive application on Amazon EKS requires persistent block storage volumes with automatic volume encryption using customer-managed KMS keys. What configuration should they implement?</div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q73" type="radio" value="0"/> A. Deploy the Amazon EBS CSI driver and configure a Kubernetes StorageClass with `encrypted: true` and `kmsKeyId` specified</label>
+<label onclick="selectSecurityOption(this)"><input name="q73" type="radio" value="1"/> B. Attach unencrypted instance store volumes to worker nodes and use software-level LUKS encryption scripts in user data</label>
+<label onclick="selectSecurityOption(this)"><input name="q73" type="radio" value="2"/> C. Manually provision EBS volumes in the AWS Management Console and execute shell scripts inside pods to mount disks</label>
+<label onclick="selectSecurityOption(this)"><input name="q73" type="radio" value="3"/> D. Deploy Amazon S3 Glacier vaults and mount them as local block devices using third-party FUSE filesystem drivers</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 73)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp73"></div>
+<div class="result" id="res73"></div>
 </div>
-</div>
-<!-- Question 75 -->
+
 <div class="question-card" data-correct="1" data-req="1" data-type="single">
 <div class="question-title">75. A bioinformatics company running HPC workloads on Amazon EKS requiring a high-throughput, scalable file system for large-scale data processing integrated with FSx for Lustre should take what steps?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q75" type="radio" value="0"/> A. Directly mount FSx for Lustre file system on EKS node EC2 instances.</label>
-<label onclick="selectSecurityOption(this)"><input name="q75" type="radio" value="1"/> B. Use the FSx for Lustre CSI driver in the EKS cluster and specify required file system configurations in StorageClass or PersistentVolume specification[cite: 3].</label>
-<label onclick="selectSecurityOption(this)"><input name="q75" type="radio" value="2"/> C. Attach an IAM role with FSx full access to each pod.</label>
-<label onclick="selectSecurityOption(this)"><input name="q75" type="radio" value="3"/> D. Enable public access on FSx for Lustre file system.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q75" type="radio" value="0"/> A. Mount the FSx for Lustre file system directly onto individual EC2 worker nodes using custom operating system startup scripts</label>
+<label onclick="selectSecurityOption(this)"><input name="q75" type="radio" value="1"/> B. Install the AWS FSx for Lustre CSI driver in the EKS cluster and define dynamic PersistentVolumeClaims with the StorageClass</label>
+<label onclick="selectSecurityOption(this)"><input name="q75" type="radio" value="2"/> C. Attach an IAM policy granting full administrative access to Amazon FSx directly to the Kubernetes default service account</label>
+<label onclick="selectSecurityOption(this)"><input name="q75" type="radio" value="3"/> D. Configure public internet access on the Amazon FSx for Lustre file system and access files over unencrypted NFS protocols</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 75)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp75"></div>
+<div class="result" id="res75"></div>
 </div>
-</div>
-<!-- Question 77 -->
+
 <div class="question-card" data-correct="3" data-req="1" data-type="single">
 <div class="question-title">77. A healthcare software provider using Amazon ECR needs to maintain a detailed audit trail of all container image activities for compliance and quick troubleshooting. What should they implement?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q77" type="radio" value="0"/> A. Configure Amazon SNS notifications for ECR pushes/pulls.</label>
-<label onclick="selectSecurityOption(this)"><input name="q77" type="radio" value="1"/> B. Store container logs in an S3 bucket with versioning.</label>
-<label onclick="selectSecurityOption(this)"><input name="q77" type="radio" value="2"/> C. Use Amazon CloudWatch Logs to directly monitor container runtime logs.</label>
-<label onclick="selectSecurityOption(this)"><input name="q77" type="radio" value="3"/> D. Enable AWS CloudTrail for ECR to capture all API calls made on the ECR service[cite: 3].</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q77" type="radio" value="0"/> A. Configure Amazon SNS notifications to email developers whenever a Docker image push or pull request completes</label>
+<label onclick="selectSecurityOption(this)"><input name="q77" type="radio" value="1"/> B. Archive container stdout/stderr console logs in an Amazon S3 Standard bucket with S3 Object Lock compliance retention</label>
+<label onclick="selectSecurityOption(this)"><input name="q77" type="radio" value="2"/> C. Deploy custom monitoring agents on container worker nodes to capture local Docker daemon command execution histories</label>
+<label onclick="selectSecurityOption(this)"><input name="q77" type="radio" value="3"/> D. Enable AWS CloudTrail logging to record all ECR API calls (such as PutImage, GetDownloadUrlForLayer, and BatchGetImage)</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 77)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp77"></div>
+<div class="result" id="res77"></div>
 </div>
-</div>
-<!-- Question 79 -->
+
 <div class="question-card" data-correct="2" data-req="1" data-type="single">
 <div class="question-title">79. An e-commerce company that recently migrated backend services to AWS App Runner wants to integrate their App Runner service with an existing VPC ensuring traffic between VPC and App Runner remains private without traversing the public internet. What step should they take?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q79" type="radio" value="0"/> A. Deploy a VPN connection between VPC and App Runner.</label>
-<label onclick="selectSecurityOption(this)"><input name="q79" type="radio" value="1"/> B. Set up an AWS Direct Connect connection.</label>
-<label onclick="selectSecurityOption(this)"><input name="q79" type="radio" value="2"/> C. Configure VPC interface endpoints for AWS App Runner and ensure necessary routes are updated in VPC route tables[cite: 3].</label>
-<label onclick="selectSecurityOption(this)"><input name="q79" type="radio" value="3"/> D. Create a VPC peering connection between their VPC and App Runner VPC.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q79" type="radio" value="0"/> A. Deploy an AWS Site-to-Site IPsec VPN connection between the target VPC subnets and the App Runner service endpoint</label>
+<label onclick="selectSecurityOption(this)"><input name="q79" type="radio" value="1"/> B. Establish an AWS Direct Connect dedicated circuit with redundant private virtual interfaces to route traffic over fiber</label>
+<label onclick="selectSecurityOption(this)"><input name="q79" type="radio" value="2"/> C. Configure an App Runner VPC connector associated with private subnets and security groups to route egress traffic privately</label>
+<label onclick="selectSecurityOption(this)"><input name="q79" type="radio" value="3"/> D. Create a standard inter-VPC peering connection between the customer VPC and the underlying App Runner managed service VPC</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 79)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp79"></div>
+<div class="result" id="res79"></div>
 </div>
-</div>
-<!-- Question 81 -->
+
 <div class="question-card" data-correct="3" data-req="1" data-type="single">
 <div class="question-title">81. A pharmaceutical company leveraging AWS Batch to process large datasets for drug discovery with varying processing times wants to optimize costs while ensuring jobs process efficiently. Which strategy should they adopt for compute options?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q81" type="radio" value="0"/> A. Use Spot Instances for all jobs regardless of processing time.</label>
-<label onclick="selectSecurityOption(this)"><input name="q81" type="radio" value="1"/> B. Always use On-Demand Instances for all batch jobs.</label>
-<label onclick="selectSecurityOption(this)"><input name="q81" type="radio" value="2"/> C. Use dedicated hosts for all AWS Batch jobs.</label>
-<label onclick="selectSecurityOption(this)"><input name="q81" type="radio" value="3"/> D. Implement a hybrid approach: Use On-Demand Instances for critical, long-running jobs and Spot Instances for short, non-critical jobs[cite: 3].</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q81" type="radio" value="0"/> A. Configure compute environments to utilize Spot Instances exclusively for all batch jobs regardless of execution duration</label>
+<label onclick="selectSecurityOption(this)"><input name="q81" type="radio" value="1"/> B. Restrict all batch computing environments strictly to On-Demand compute instances to prevent any potential interruption</label>
+<label onclick="selectSecurityOption(this)"><input name="q81" type="radio" value="2"/> C. Provision dedicated Amazon EC2 physical hosts for all computational workflows to ensure single-tenant resource isolation</label>
+<label onclick="selectSecurityOption(this)"><input name="q81" type="radio" value="3"/> D. Create multiple compute environments: On-Demand for long-running critical jobs, and Spot for fault-tolerant, short-running jobs</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 81)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp81"></div>
+<div class="result" id="res81"></div>
 </div>
-</div>
-<!-- Question 83 -->
+
 <div class="question-card" data-correct="0" data-req="1" data-type="single">
 <div class="question-title">83. A pharmaceutical company using AWS Batch for complex simulations wants insights into the job execution lifecycle and troubleshooting issues. What approach helps achieve monitoring and logging objectives?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q83" type="radio" value="0"/> A. Integrate AWS Batch with Amazon CloudWatch Logs to capture logs and set up CloudWatch Alarms for specific error patterns[cite: 3].</label>
-<label onclick="selectSecurityOption(this)"><input name="q83" type="radio" value="1"/> B. Use AWS Lambda to periodically check job status.</label>
-<label onclick="selectSecurityOption(this)"><input name="q83" type="radio" value="2"/> C. Enable AWS Batch job retry strategy and increase retries.</label>
-<label onclick="selectSecurityOption(this)"><input name="q83" type="radio" value="3"/> D. Store outputs in S3 and manually review them.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q83" type="radio" value="0"/> A. Configure AWS Batch jobs to stream stdout/stderr logs directly to Amazon CloudWatch Logs and create metric alarms on errors</label>
+<label onclick="selectSecurityOption(this)"><input name="q83" type="radio" value="1"/> B. Schedule an AWS Lambda function to poll the AWS Batch DescribeJobs API endpoint every sixty seconds for job state changes</label>
+<label onclick="selectSecurityOption(this)"><input name="q83" type="radio" value="2"/> C. Increase the maximum job retry attempt counter in AWS Batch to ten retries without capturing application log streams</label>
+<label onclick="selectSecurityOption(this)"><input name="q83" type="radio" value="3"/> D. Write application logs to local EC2 instance storage and manually retrieve log files after batch compute environments terminate</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 83)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp83"></div>
+<div class="result" id="res83"></div>
 </div>
-</div>
-<!-- Question 85 -->
+
 <div class="question-card" data-correct="2" data-req="1" data-type="single">
 <div class="question-title">85. A fintech startup building a serverless application using AWS Lambda handling sensitive financial transactions wants to adhere to security best practices. Which action aligns with customer responsibility in the shared responsibility model?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q85" type="radio" value="0"/> A. Managing global infrastructure and foundational services.</label>
-<label onclick="selectSecurityOption(this)"><input name="q85" type="radio" value="1"/> B. Patching underlying infrastructure and Lambda service software.</label>
-<label onclick="selectSecurityOption(this)"><input name="q85" type="radio" value="2"/> C. Implementing proper IAM roles and permissions for Lambda functions to restrict unnecessary access[cite: 3].</label>
-<label onclick="selectSecurityOption(this)"><input name="q85" type="radio" value="3"/> D. Ensuring physical security of AWS data centers where Lambda executes.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q85" type="radio" value="0"/> A. Managing physical hardware server maintenance and environmental cooling across AWS Availability Zone data centers</label>
+<label onclick="selectSecurityOption(this)"><input name="q85" type="radio" value="1"/> B. Applying operating system security patches and firmware updates to the underlying virtualization hypervisor hosts</label>
+<label onclick="selectSecurityOption(this)"><input name="q85" type="radio" value="2"/> C. Implementing fine-grained IAM execution roles with least-privilege permissions and securing function code dependencies</label>
+<label onclick="selectSecurityOption(this)"><input name="q85" type="radio" value="3"/> D. Enforcing physical security access controls and biometric badge authentication for AWS data center facilities</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 85)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp85"></div>
+<div class="result" id="res85"></div>
 </div>
-</div>
-<!-- Question 87 -->
+
 <div class="question-card" data-correct="0" data-req="1" data-type="single">
 <div class="question-title">87. A fintech company deploying MariaDB on Amazon RDS wants to use AWS IAM for database authentication to streamline user management and enhance security. What step should they take?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q87" type="radio" value="0"/> A. Create an IAM policy that grants the rds-db:connect permission and associate it with database users[cite: 4].</label>
-<label onclick="selectSecurityOption(this)"><input name="q87" type="radio" value="1"/> B. Modify RDS instance to set IAM authentication option to true.</label>
-<label onclick="selectSecurityOption(this)"><input name="q87" type="radio" value="2"/> C. Create an IAM role with RDS permissions and assign it to the database.</label>
-<label onclick="selectSecurityOption(this)"><input name="q87" type="radio" value="3"/> D. Generate IAM access keys and use them as username/password.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q87" type="radio" value="0"/> A. Enable IAM database authentication on the RDS instance and grant the `rds-db:connect` permission to database IAM principals</label>
+<label onclick="selectSecurityOption(this)"><input name="q87" type="radio" value="1"/> B. Configure the Amazon RDS database instance security group to allow inbound unauthenticated MySQL connections on port 3306</label>
+<label onclick="selectSecurityOption(this)"><input name="q87" type="radio" value="2"/> C. Create a standard IAM role with administrative RDS permissions and attach it directly to the client database driver software</label>
+<label onclick="selectSecurityOption(this)"><input name="q87" type="radio" value="3"/> D. Generate permanent IAM access keys and configure them as static database user passwords in client connection strings</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 87)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp87"></div>
+<div class="result" id="res87"></div>
 </div>
-</div>
-<!-- Question 89 -->
+
 <div class="question-card" data-correct="1" data-req="1" data-type="single">
 <div class="question-title">89. A leading e-commerce company using Amazon RDS wants to implement automatic password rotation for RDS database instances without downtime. Which service should they use?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q89" type="radio" value="0"/> A. AWS Config</label>
-<label onclick="selectSecurityOption(this)"><input name="q89" type="radio" value="1"/> B. AWS Secrets Manager[cite: 4]</label>
-<label onclick="selectSecurityOption(this)"><input name="q89" type="radio" value="2"/> C. AWS Identity and Access Management (IAM)</label>
-<label onclick="selectSecurityOption(this)"><input name="q89" type="radio" value="3"/> D. AWS Key Management Service (KMS)</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q89" type="radio" value="0"/> A. AWS Config to record database configuration history and alert administrators via email when passwords exceed thirty days</label>
+<label onclick="selectSecurityOption(this)"><input name="q89" type="radio" value="1"/> B. AWS Secrets Manager with built-in automatic rotation using AWS Lambda to update credentials in both the database and secrets store</label>
+<label onclick="selectSecurityOption(this)"><input name="q89" type="radio" value="2"/> C. AWS Identity and Access Management (IAM) to manage account passwords and enforce complexity requirements across user groups</label>
+<label onclick="selectSecurityOption(this)"><input name="q89" type="radio" value="3"/> D. AWS Key Management Service (KMS) to generate symmetric data keys for client-side encryption of database connection strings</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 89)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp89"></div>
+<div class="result" id="res89"></div>
 </div>
-</div>
-<!-- Question 91 -->
+
 <div class="question-card" data-correct="0" data-req="1" data-type="single">
 <div class="question-title">91. A rapidly growing e-commerce company migrating to Amazon RDS expects high traffic during seasonal sales and needs a solution handling increased load while ensuring data security. Which DB instance type should they consider?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q91" type="radio" value="0"/> A. A memory-optimized instance to support database workloads processing large datasets in memory[cite: 4].</label>
-<label onclick="selectSecurityOption(this)"><input name="q91" type="radio" value="1"/> B. A standard instance</label>
-<label onclick="selectSecurityOption(this)"><input name="q91" type="radio" value="2"/> C. A micro instance</label>
-<label onclick="selectSecurityOption(this)"><input name="q91" type="radio" value="3"/> D. Burstable performance instance</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q91" type="radio" value="0"/> A. Memory-optimized DB instance classes (such as db.r6g) to support high-throughput database workloads caching large working sets in RAM</label>
+<label onclick="selectSecurityOption(this)"><input name="q91" type="radio" value="1"/> B. General-purpose DB instance classes (such as db.m6g) with baseline CPU allocation intended for moderate development workloads</label>
+<label onclick="selectSecurityOption(this)"><input name="q91" type="radio" value="2"/> C. Micro DB instance classes (such as db.t4g.micro) designed exclusively for low-cost sandbox testing and educational tutorials</label>
+<label onclick="selectSecurityOption(this)"><input name="q91" type="radio" value="3"/> D. Burstable performance DB instance classes configured with standard baseline credits and manual CPU throttling thresholds</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 91)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp91"></div>
+<div class="result" id="res91"></div>
 </div>
-</div>
-<!-- Question 93 -->
+
 <div class="question-card" data-correct="0" data-req="1" data-type="single">
 <div class="question-title">93. A rapidly growing e-commerce company using Amazon RDS wants to ensure optimal performance and availability by monitoring specific CloudWatch metrics. Which metric should they prioritize monitoring?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q93" type="radio" value="0"/> A. FreeableMemory: The amount of available random access memory[cite: 4].</label>
-<label onclick="selectSecurityOption(this)"><input name="q93" type="radio" value="1"/> B. DatabaseConnections</label>
-<label onclick="selectSecurityOption(this)"><input name="q93" type="radio" value="2"/> C. NetworkPacketsOut</label>
-<label onclick="selectSecurityOption(this)"><input name="q93" type="radio" value="3"/> D. VolumeQueueLength</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q93" type="radio" value="0"/> A. FreeableMemory to monitor available RAM capacity and detect when database workloads are nearing memory exhaustion thresholds</label>
+<label onclick="selectSecurityOption(this)"><input name="q93" type="radio" value="1"/> B. DatabaseConnections to count total active client sessions without monitoring underlying server memory or CPU utilization</label>
+<label onclick="selectSecurityOption(this)"><input name="q93" type="radio" value="2"/> C. NetworkPacketsOut to measure the total volume of network packets exiting the database network interface card per second</label>
+<label onclick="selectSecurityOption(this)"><input name="q93" type="radio" value="3"/> D. VolumeQueueLength to evaluate the number of outstanding input/output storage requests waiting to access attached disk storage</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 93)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp93"></div>
+<div class="result" id="res93"></div>
 </div>
-</div>
-<!-- Question 95 -->
+
 <div class="question-card" data-correct="2" data-req="1" data-type="single">
-<div class="question-title">95. A fintech startup using Amazon RDS experiencing performance bottlenecks wants to identify root causes. What is accurate about Amazon RDS Performance Insights?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q95" type="radio" value="0"/> A. Performance Insights only supports Amazon Aurora.</label>
-<label onclick="selectSecurityOption(this)"><input name="q95" type="radio" value="1"/> B. Performance Insights requires manual agent installation.</label>
-<label onclick="selectSecurityOption(this)"><input name="q95" type="radio" value="2"/> C. Performance Insights allows you to visualize database load and filter load by SQL statements, waits, hosts, or users[cite: 4].</label>
-<label onclick="selectSecurityOption(this)"><input name="q95" type="radio" value="3"/> D. Performance Insights provides CPU utilization metrics but not SQL queries.</label></div>
+<div class="question-title">95. A fintech startup using Amazon RDS experiencing performance issues during heavy reporting queries wants detailed wait-state analysis to identify slow queries. Which feature should they enable?</div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q95" type="radio" value="0"/> A. Amazon CloudWatch Logs metric filters to extract SQL statement strings from raw operating system database log files</label>
+<label onclick="selectSecurityOption(this)"><input name="q95" type="radio" value="1"/> B. AWS CloudTrail data events to log control-plane and data-plane API invocations across the database cluster volume</label>
+<label onclick="selectSecurityOption(this)"><input name="q95" type="radio" value="2"/> C. Amazon RDS Performance Insights to visualize database load, monitor active wait states, and identify bottleneck SQL queries</label>
+<label onclick="selectSecurityOption(this)"><input name="q95" type="radio" value="3"/> D. Amazon RDS Enhanced Monitoring to display real-time CPU utilization metrics for individual operating system processes</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 95)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp95"></div>
+<div class="result" id="res95"></div>
 </div>
-</div>
-<!-- Question 97 -->
+
 <div class="question-card" data-correct="1" data-req="1" data-type="single">
-<div class="question-title">97. A fintech company using Amazon RDS wants to receive real-time notifications about specific events related to their RDS instance to maintain high availability. What is the best approach?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q97" type="radio" value="0"/> A. Set up CloudWatch Alarms for RDS metric thresholds.</label>
-<label onclick="selectSecurityOption(this)"><input name="q97" type="radio" value="1"/> B. Use RDS Event Subscriptions to subscribe to specific RDS events and send notifications to an SNS topic[cite: 4].</label>
-<label onclick="selectSecurityOption(this)"><input name="q97" type="radio" value="2"/> C. Periodically analyze RDS logs.</label>
-<label onclick="selectSecurityOption(this)"><input name="q97" type="radio" value="3"/> D. Regularly poll the RDS API using Lambda.</label></div>
+<div class="question-title">97. A fintech company using Amazon RDS wants to receive real-time notifications when database events (such as failovers, parameter group changes, or backup completions) occur. Which feature should they configure?</div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q97" type="radio" value="0"/> A. Configure scheduled AWS Lambda functions to poll the Amazon RDS DescribeDBInstances API endpoint every two minutes</label>
+<label onclick="selectSecurityOption(this)"><input name="q97" type="radio" value="1"/> B. Create Amazon RDS Event Subscriptions integrated with Amazon SNS topics to publish automated notifications on critical events</label>
+<label onclick="selectSecurityOption(this)"><input name="q97" type="radio" value="2"/> C. Deploy Amazon CloudWatch Logs Insights queries to parse database audit logs and send SMS messages via external gateways</label>
+<label onclick="selectSecurityOption(this)"><input name="q97" type="radio" value="3"/> D. Enable AWS Systems Manager OpsCenter to generate operational incident tickets for routine database maintenance tasks</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 97)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp97"></div>
+<div class="result" id="res97"></div>
 </div>
-</div>
-<!-- Question 99 -->
+
 <div class="question-card" data-correct="1" data-req="1" data-type="single">
-<div class="question-title">99. A fintech startup storing sensitive financial data on Amazon RDS is mandated by regulations to ensure all data stored is encrypted at rest. What step should they take?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q99" type="radio" value="0"/> A. Use SSL/TLS for data in transit.</label>
-<label onclick="selectSecurityOption(this)"><input name="q99" type="radio" value="1"/> B. Use AWS Key Management Service (KMS) to create a customer-managed key and enable encryption at rest for the RDS instance[cite: 4].</label>
-<label onclick="selectSecurityOption(this)"><input name="q99" type="radio" value="2"/> C. Store encrypted data formatted by application.</label>
-<label onclick="selectSecurityOption(this)"><input name="q99" type="radio" value="3"/> D. Enable Transparent Data Encryption (TDE).</label></div>
+<div class="question-title">99. A fintech startup storing sensitive financial data on Amazon RDS wants to ensure data is encrypted at rest to meet regulatory standards with minimal operational complexity. What is the best approach?</div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q99" type="radio" value="0"/> A. Implement application-level client-side encryption using custom cryptographic libraries before writing data to database tables</label>
+<label onclick="selectSecurityOption(this)"><input name="q99" type="radio" value="1"/> B. Enable Amazon RDS encryption at rest using AWS KMS during instance creation to encrypt storage volumes, snapshots, and backups</label>
+<label onclick="selectSecurityOption(this)"><input name="q99" type="radio" value="2"/> C. Deploy third-party file system encryption software inside the underlying EC2 operating system hosting the RDS instance</label>
+<label onclick="selectSecurityOption(this)"><input name="q99" type="radio" value="3"/> D. Configure transparent database encryption (TDE) certificates manually on client workstations connecting over public endpoints</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 99)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp99"></div>
+<div class="result" id="res99"></div>
 </div>
-</div>
-<!-- Question 101 -->
+
 <div class="question-card" data-correct="3" data-req="1" data-type="single">
-<div class="question-title">101. A fintech startup considering migrating to Amazon Aurora wants to understand its basic architecture. Which statement accurately describes Amazon Aurora?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q101" type="radio" value="0"/> A. Uses a single master node and does not support read replicas.</label>
-<label onclick="selectSecurityOption(this)"><input name="q101" type="radio" value="1"/> B. Automatically replicates across multiple AZs with two copies in each zone.</label>
-<label onclick="selectSecurityOption(this)"><input name="q101" type="radio" value="2"/> C. Serverless database by default.</label>
-<label onclick="selectSecurityOption(this)"><input name="q101" type="radio" value="3"/> D. Divides database volume into 10GB segments spread across many disks, with each 10GB chunk replicated six ways across three AZs[cite: 4].</label></div>
+<div class="question-title">101. A fintech startup considering migrating to Amazon Aurora wants to know how Aurora provides high availability and fault-tolerant storage across Availability Zones. How is Aurora storage architected?</div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q101" type="radio" value="0"/> A. Stores a single primary database copy in one zone and takes asynchronous daily snapshots to an Amazon S3 Glacier vault</label>
+<label onclick="selectSecurityOption(this)"><input name="q101" type="radio" value="1"/> B. Maintains two active read/write master database nodes located in different Availability Zones using shared block storage</label>
+<label onclick="selectSecurityOption(this)"><input name="q101" type="radio" value="2"/> C. Mirrors data across three Availability Zones using third-party software clustering and manual failover DNS routing</label>
+<label onclick="selectSecurityOption(this)"><input name="q101" type="radio" value="3"/> D. Replicates six copies of data across three Availability Zones (2 copies per AZ) with automated self-healing storage volumes</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 101)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp101"></div>
+<div class="result" id="res101"></div>
 </div>
-</div>
-<!-- Question 103 -->
+
 <div class="question-card" data-correct="2" data-req="1" data-type="single">
-<div class="question-title">103. A healthcare company deploying a patient management system on Amazon Aurora wants to ensure the database is isolated and securely accessible only by specific applications within their VPC. How should they deploy it?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q103" type="radio" value="0"/> A. Deploy outside of a VPC using IAM policies.</label>
-<label onclick="selectSecurityOption(this)"><input name="q103" type="radio" value="1"/> B. Deploy in a VPC and use VPC peering.</label>
-<label onclick="selectSecurityOption(this)"><input name="q103" type="radio" value="2"/> C. Deploy the Aurora database in a private subnet within a VPC and use security group rules to allow access only from specific application instances[cite: 4].</label>
-<label onclick="selectSecurityOption(this)"><input name="q103" type="radio" value="3"/> D. Deploy in a public subnet with security group rules.</label></div>
+<div class="question-title">103. A healthcare company deploying a patient management system on Amazon Aurora needs to ensure that read traffic from analytical queries does not impact write performance on the primary DB instance. What should they configure?</div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q103" type="radio" value="0"/> A. Increase the primary DB instance compute size to the largest available instance class and disable database indexing</label>
+<label onclick="selectSecurityOption(this)"><input name="q103" type="radio" value="1"/> B. Deploy a separate Amazon RDS for MySQL standalone instance and write manual cron scripts to export and import table data</label>
+<label onclick="selectSecurityOption(this)"><input name="q103" type="radio" value="2"/> C. Provision Amazon Aurora Read Replicas and direct analytical reporting queries to the Aurora Reader endpoint</label>
+<label onclick="selectSecurityOption(this)"><input name="q103" type="radio" value="3"/> D. Place an Application Load Balancer directly in front of the database to balance SQL write queries across replica nodes</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 103)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp103"></div>
+<div class="result" id="res103"></div>
 </div>
-</div>
-<!-- Question 105 -->
+
 <div class="question-card" data-correct="0" data-req="1" data-type="single">
 <div class="question-title">105. A healthtech company deploying a system using Amazon Aurora wants the database to communicate securely and privately with other AWS services within their VPC without internet exposure. What should they set up?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q105" type="radio" value="0"/> A. Set up an Amazon Aurora VPC interface endpoint using AWS PrivateLink[cite: 4].</label>
-<label onclick="selectSecurityOption(this)"><input name="q105" type="radio" value="1"/> B. Configure an Aurora VPC gateway endpoint.</label>
-<label onclick="selectSecurityOption(this)"><input name="q105" type="radio" value="2"/> C. Use an Elastic Load Balancer.</label>
-<label onclick="selectSecurityOption(this)"><input name="q105" type="radio" value="3"/> D. Create a VPC peering connection.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q105" type="radio" value="0"/> A. Provision VPC Interface Endpoints (AWS PrivateLink) to connect to AWS services privately without requiring public internet access</label>
+<label onclick="selectSecurityOption(this)"><input name="q105" type="radio" value="1"/> B. Attach an Internet Gateway to private subnets and assign public IPv4 addresses to the underlying Amazon Aurora cluster nodes</label>
+<label onclick="selectSecurityOption(this)"><input name="q105" type="radio" value="2"/> C. Deploy a public Elastic Load Balancer to proxy communication between private database instances and external cloud APIs</label>
+<label onclick="selectSecurityOption(this)"><input name="q105" type="radio" value="3"/> D. Establish an inter-region VPC peering connection to route database traffic through an external third-party inspection proxy</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 105)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp105"></div>
+<div class="result" id="res105"></div>
 </div>
-</div>
-<!-- Question 107 -->
+
 <div class="question-card" data-correct="1" data-req="1" data-type="single">
 <div class="question-title">107. A healthcare company using Amazon Aurora wants to ensure confidentiality and integrity of patient data stored and transmitted. What steps should they take?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q107" type="radio" value="0"/> A. Enable Enhanced Monitoring.</label>
-<label onclick="selectSecurityOption(this)"><input name="q107" type="radio" value="1"/> B. Use Amazon Aurora's built-in encryption at rest feature and ensure connections use SSL/TLS[cite: 4].</label>
-<label onclick="selectSecurityOption(this)"><input name="q107" type="radio" value="2"/> C. Use Performance Insights.</label>
-<label onclick="selectSecurityOption(this)"><input name="q107" type="radio" value="3"/> D. Activate Database Activity Streams with encryption.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q107" type="radio" value="0"/> A. Enable CloudWatch Enhanced Monitoring and disable SSL/TLS certificate requirements in database connection strings</label>
+<label onclick="selectSecurityOption(this)"><input name="q107" type="radio" value="1"/> B. Enable Amazon Aurora encryption at rest with AWS KMS and enforce encrypted in-transit client connections using SSL/TLS</label>
+<label onclick="selectSecurityOption(this)"><input name="q107" type="radio" value="2"/> C. Enable Amazon RDS Performance Insights and export database audit log files to unencrypted Amazon S3 Standard buckets</label>
+<label onclick="selectSecurityOption(this)"><input name="q107" type="radio" value="3"/> D. Activate Database Activity Streams without encryption to allow external monitoring systems to inspect transaction payloads</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 107)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp107"></div>
+<div class="result" id="res107"></div>
 </div>
-</div>
-<!-- Question 109 -->
+
 <div class="question-card" data-correct="2" data-req="1" data-type="single">
 <div class="question-title">109. A fintech company experiencing intermittent database connectivity issues due to sudden traffic spikes on Amazon RDS is considering solutions to improve application resilience and database scalability. How can they address this?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q109" type="radio" value="0"/> A. Deploy multiple RDS instances and manually distribute traffic.</label>
-<label onclick="selectSecurityOption(this)"><input name="q109" type="radio" value="1"/> B. Increase RDS instance size to maximum.</label>
-<label onclick="selectSecurityOption(this)"><input name="q109" type="radio" value="2"/> C. Use Amazon RDS Proxy to manage database connections and distribute traffic to the RDS instance[cite: 4].</label>
-<label onclick="selectSecurityOption(this)"><input name="q109" type="radio" value="3"/> D. Use third-party database caching.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q109" type="radio" value="0"/> A. Deploy multiple standalone RDS instances and require developers to manually balance database connections in code</label>
+<label onclick="selectSecurityOption(this)"><input name="q109" type="radio" value="1"/> B. Increase the provisioned storage IOPS allocation on attached EBS volumes without modifying compute connection limits</label>
+<label onclick="selectSecurityOption(this)"><input name="q109" type="radio" value="2"/> C. Deploy Amazon RDS Proxy to pool and share database connections, improving scalability and reducing failover times</label>
+<label onclick="selectSecurityOption(this)"><input name="q109" type="radio" value="3"/> D. Deploy an external Memcached cluster to intercept all SQL write transactions before forwarding them to the database</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 109)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp109"></div>
+<div class="result" id="res109"></div>
 </div>
-</div>
-<!-- Question 111 -->
+
 <div class="question-card" data-correct="3" data-req="1" data-type="single">
 <div class="question-title">111. A fintech company using Amazon RDS wants to enhance connection security and integrate a solution that securely stores and manages database credentials using Amazon RDS Proxy. How should they achieve this?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q111" type="radio" value="0"/> A. Store credentials in an S3 bucket.</label>
-<label onclick="selectSecurityOption(this)"><input name="q111" type="radio" value="1"/> B. Use AWS KMS directly with RDS Proxy.</label>
-<label onclick="selectSecurityOption(this)"><input name="q111" type="radio" value="2"/> C. Store credentials in plaintext in app code.</label>
-<label onclick="selectSecurityOption(this)"><input name="q111" type="radio" value="3"/> D. Use Amazon RDS Proxy in conjunction with AWS Secrets Manager to securely store and retrieve database credentials[cite: 4].</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q111" type="radio" value="0"/> A. Store plaintext database passwords inside an unencrypted Amazon S3 bucket accessible by application servers</label>
+<label onclick="selectSecurityOption(this)"><input name="q111" type="radio" value="1"/> B. Hardcode administrative database credentials inside the RDS Proxy parameter group configuration settings</label>
+<label onclick="selectSecurityOption(this)"><input name="q111" type="radio" value="2"/> C. Store credentials in plaintext inside application source code repositories and disable credential rotation policies</label>
+<label onclick="selectSecurityOption(this)"><input name="q111" type="radio" value="3"/> D. Store database credentials in AWS Secrets Manager and grant Amazon RDS Proxy permissions to retrieve and manage them</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 111)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp111"></div>
+<div class="result" id="res111"></div>
 </div>
-</div>
-<!-- Question 113 -->
+
 <div class="question-card" data-correct="0" data-req="1" data-type="single">
 <div class="question-title">113. A company using Amazon RDS Proxy experiencing performance and compatibility issues wants detailed information about SQL statements for debugging purposes. Which feature should they enable?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q113" type="radio" value="0"/> A. Enable enhanced logging for RDS Proxy[cite: 4].</label>
-<label onclick="selectSecurityOption(this)"><input name="q113" type="radio" value="1"/> B. Adjust connection pool max connections.</label>
-<label onclick="selectSecurityOption(this)"><input name="q113" type="radio" value="2"/> C. Enable cross-AZ communication.</label>
-<label onclick="selectSecurityOption(this)"><input name="q113" type="radio" value="3"/> D. Modify network ACL for proxy subnet.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q113" type="radio" value="0"/> A. Enable enhanced logging for Amazon RDS Proxy to capture detailed SQL statement processing logs in CloudWatch Logs</label>
+<label onclick="selectSecurityOption(this)"><input name="q113" type="radio" value="1"/> B. Increase the maximum connection pool threshold in the target group configuration to allow unlimited client connections</label>
+<label onclick="selectSecurityOption(this)"><input name="q113" type="radio" value="2"/> C. Enable cross-AZ communication on proxy endpoints and disable SSL/TLS certificate validation across all client sessions</label>
+<label onclick="selectSecurityOption(this)"><input name="q113" type="radio" value="3"/> D. Modify the private subnet Network ACL rules to deny outbound TCP traffic returning from the database instance</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 113)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp113"></div>
+<div class="result" id="res113"></div>
 </div>
-</div>
-<!-- Question 115 -->
+
 <div class="question-card" data-correct="1" data-req="1" data-type="single">
 <div class="question-title">115. A financial analytics firm using Amazon Redshift wants to leverage AWS IAM for authenticating users to the Redshift cluster. Which statement is true regarding IAM authentication in Redshift?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q115" type="radio" value="0"/> A. Allows users to log in using AWS Management Console credentials.</label>
-<label onclick="selectSecurityOption(this)"><input name="q115" type="radio" value="1"/> B. With IAM authentication, users can generate temporary database credentials and use them to log in to the Redshift cluster[cite: 4].</label>
-<label onclick="selectSecurityOption(this)"><input name="q115" type="radio" value="2"/> C. Supports both password-based and role-based access.</label>
-<label onclick="selectSecurityOption(this)"><input name="q115" type="radio" value="3"/> D. Replaces the need for database users and permissions.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q115" type="radio" value="0"/> A. Users must log into the AWS Management Console and execute queries exclusively using the Redshift query editor</label>
+<label onclick="selectSecurityOption(this)"><input name="q115" type="radio" value="1"/> B. Users can obtain temporary database credentials via IAM authentication (using `GetClusterCredentials`) to connect securely</label>
+<label onclick="selectSecurityOption(this)"><input name="q115" type="radio" value="2"/> C. IAM authentication eliminates the concept of database users, tables, and internal database role permissions entirely</label>
+<label onclick="selectSecurityOption(this)"><input name="q115" type="radio" value="3"/> D. IAM authentication is only supported when connecting over public internet endpoints without VPC routing</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 115)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp115"></div>
+<div class="result" id="res115"></div>
 </div>
-</div>
-<!-- Question 117 -->
+
 <div class="question-card" data-correct="1" data-req="1" data-type="single">
 <div class="question-title">117. A financial services company using Amazon Redshift wants to ensure cluster traffic does not traverse the public internet using Amazon VPC Interface Endpoints. What is accurate?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q117" type="radio" value="0"/> A. Accessible via VPC Interface Endpoints by default without configuration.</label>
-<label onclick="selectSecurityOption(this)"><input name="q117" type="radio" value="1"/> B. VPC Interface Endpoints for Redshift allow connecting to the cluster without using a public IP, ensuring all traffic remains within the AWS network[cite: 4].</label>
-<label onclick="selectSecurityOption(this)"><input name="q117" type="radio" value="2"/> C. Redshift supports Gateway VPC Endpoints.</label>
-<label onclick="selectSecurityOption(this)"><input name="q117" type="radio" value="3"/> D. Primarily used to enhance performance by reducing latency hops.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q117" type="radio" value="0"/> A. Amazon Redshift clusters are automatically accessible via VPC Interface Endpoints without requiring any endpoint configuration</label>
+<label onclick="selectSecurityOption(this)"><input name="q117" type="radio" value="1"/> B. VPC Interface Endpoints (AWS PrivateLink) allow clients to connect to Amazon Redshift privately without assigning public IP addresses</label>
+<label onclick="selectSecurityOption(this)"><input name="q117" type="radio" value="2"/> C. Amazon Redshift exclusively supports Gateway VPC Endpoints and does not integrate with AWS PrivateLink interface endpoints</label>
+<label onclick="selectSecurityOption(this)"><input name="q117" type="radio" value="3"/> D. VPC Interface Endpoints are used exclusively to compress query result payloads and cannot provide private network connectivity</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 117)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp117"></div>
+<div class="result" id="res117"></div>
 </div>
-</div>
-<!-- Question 119 -->
+
 <div class="question-card" data-correct="3" data-req="1" data-type="single">
 <div class="question-title">119. A financial institution using Amazon Redshift wants to monitor and retain logs of all activities and performance metrics using Amazon CloudWatch Logs. What step should they take?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q119" type="radio" value="0"/> A. Use Redshift Spectrum to push logs.</label>
-<label onclick="selectSecurityOption(this)"><input name="q119" type="radio" value="1"/> B. Configure automatic export to S3 and monitor S3.</label>
-<label onclick="selectSecurityOption(this)"><input name="q119" type="radio" value="2"/> C. Set up AWS Lambda to pull logs.</label>
-<label onclick="selectSecurityOption(this)"><input name="q119" type="radio" value="3"/> D. Enable Amazon Redshift audit logging and integrate it with Amazon CloudWatch Logs[cite: 4].</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q119" type="radio" value="0"/> A. Use Redshift Spectrum to query external unencrypted log tables hosted on third-party on-premises file storage servers</label>
+<label onclick="selectSecurityOption(this)"><input name="q119" type="radio" value="1"/> B. Configure scheduled AWS Lambda functions to export query history logs manually to Amazon S3 buckets every twenty-four hours</label>
+<label onclick="selectSecurityOption(this)"><input name="q119" type="radio" value="2"/> C. Deploy custom logging daemons on leader nodes to scrape local text log files and forward them over unencrypted HTTP</label>
+<label onclick="selectSecurityOption(this)"><input name="q119" type="radio" value="3"/> D. Enable Amazon Redshift audit logging and configure export to Amazon CloudWatch Logs for connection, user, and user activity logs</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 119)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp119"></div>
+<div class="result" id="res119"></div>
 </div>
-</div>
-<!-- Question 121 -->
+
 <div class="question-card" data-correct="3" data-req="1" data-type="single">
 <div class="question-title">121. A startup building a serverless application considering Amazon DynamoDB for minimal operational overhead wants to know how DynamoDB caters to this requirement. How does it work?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q121" type="radio" value="0"/> A. Relies on third-party tools for backup.</label>
-<label onclick="selectSecurityOption(this)"><input name="q121" type="radio" value="1"/> B. Requires manual patching and updates.</label>
-<label onclick="selectSecurityOption(this)"><input name="q121" type="radio" value="2"/> C. Requires users to provision underlying infrastructure.</label>
-<label onclick="selectSecurityOption(this)"><input name="q121" type="radio" value="3"/> D. DynamoDB automatically scales its capacity up or down based on actual request traffic without intervention[cite: 4].</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q121" type="radio" value="0"/> A. Requires administrators to manage hypervisor patching, disk volume defragmentation, and database engine upgrades</label>
+<label onclick="selectSecurityOption(this)"><input name="q121" type="radio" value="1"/> B. Requires developers to provision dedicated database server clusters and manually scale read/write capacity units</label>
+<label onclick="selectSecurityOption(this)"><input name="q121" type="radio" value="2"/> C. Enforces single-AZ deployments and requires manual snapshot exports to achieve cross-availability zone durability</label>
+<label onclick="selectSecurityOption(this)"><input name="q121" type="radio" value="3"/> D. Automatically manages hardware provisioning, replication, patching, and scales on-demand to handle varying traffic workloads</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 121)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp121"></div>
+<div class="result" id="res121"></div>
 </div>
-</div>
-<!-- Question 123 -->
+
 <div class="question-card" data-correct="2" data-req="1" data-type="single">
 <div class="question-title">123. A retail company using Amazon DynamoDB wants to ensure EC2 instances in a VPC can securely access DynamoDB without traversing the public internet. What solution should they implement?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q123" type="radio" value="0"/> A. Create a VPC peering connection.</label>
-<label onclick="selectSecurityOption(this)"><input name="q123" type="radio" value="1"/> B. Use a VPN connection.</label>
-<label onclick="selectSecurityOption(this)"><input name="q123" type="radio" value="2"/> C. Create a VPC Gateway Endpoint for DynamoDB and add it to their route table[cite: 4].</label>
-<label onclick="selectSecurityOption(this)"><input name="q123" type="radio" value="3"/> D. Set up a NAT gateway.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q123" type="radio" value="0"/> A. Establish an inter-region VPC peering connection to route DynamoDB requests through an external transit hub VPC</label>
+<label onclick="selectSecurityOption(this)"><input name="q123" type="radio" value="1"/> B. Configure an AWS Site-to-Site VPN connection and route DynamoDB API requests through on-premises corporate firewalls</label>
+<label onclick="selectSecurityOption(this)"><input name="q123" type="radio" value="2"/> C. Create a Gateway VPC Endpoint for DynamoDB and associate it with the route tables of the private application subnets</label>
+<label onclick="selectSecurityOption(this)"><input name="q123" type="radio" value="3"/> D. Deploy managed NAT Gateways in each public subnet and assign public Elastic IP addresses to backend compute instances</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 123)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+<div class="explanation" id="exp123"></div>
+<div class="result" id="res123"></div>
 </div>
-</div>
-<!-- Question 125 -->
+
 <div class="question-card" data-correct="0" data-req="1" data-type="single">
 <div class="question-title">125. A gaming company using Amazon DynamoDB to store player profiles wants to monitor performance and health of tables to ensure optimal user experience. What is a recommended approach?</div>
-<div class="options"><label onclick="selectSecurityOption(this)"><input name="q125" type="radio" value="0"/> A. Use Amazon CloudWatch Metrics to monitor read and write capacity units of DynamoDB tables[cite: 4].</label>
-<label onclick="selectSecurityOption(this)"><input name="q125" type="radio" value="1"/> B. Enable AWS X-Ray.</label>
-<label onclick="selectSecurityOption(this)"><input name="q125" type="radio" value="2"/> C. Set up AWS Lambda to periodically query tables.</label>
-<label onclick="selectSecurityOption(this)"><input name="q125" type="radio" value="3"/> D. Use Amazon S3 to store logs.</label></div>
+<div class="options">
+<label onclick="selectSecurityOption(this)"><input name="q125" type="radio" value="0"/> A. Use Amazon CloudWatch Metrics to monitor consumed read/write capacity units, throttled requests, and system latency</label>
+<label onclick="selectSecurityOption(this)"><input name="q125" type="radio" value="1"/> B. Configure AWS X-Ray daemon agents on all client mobile gaming devices to trace local device memory usage in real time</label>
+<label onclick="selectSecurityOption(this)"><input name="q125" type="radio" value="2"/> C. Schedule an AWS Lambda function to execute continuous full table scan queries every thirty seconds to evaluate latency</label>
+<label onclick="selectSecurityOption(this)"><input name="q125" type="radio" value="3"/> D. Export entire DynamoDB table datasets nightly into Amazon S3 Standard buckets and run manual SQL integrity checks</label>
+</div>
 <button class="btn" onclick="checkAnswer(this, 125)">Submit Answer</button>
-<div class="explanation"></div>
-            <div class="card-watermark">
-    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
-</div>
-</div>
+<div class="explanation" id="exp125"></div>
+<div class="result" id="res125"></div>
 </div>
 </div>
 <script>
     const explanations = {
-        1: "Correct Answer: B. Deploying in multiple VPCs in different regions ensures proximity to customers for low latency and adheres to data residency requirements. Route 53 optimizes geographic routing[cite: 2].",
-        2: "Correct Answer: B. Separate VPCs per region with VPC peering enable secure cross-subsidiary communication while respecting data isolation[cite: 2].",
-        3: "Correct Answer: A. Default VPC provides a quick start, but security groups and NACLs must be customized to adhere to the principle of least privilege[cite: 2].",
-        4: "Correct Answer: B. Creating a new VPC with multiple subnets segregates application and database tiers securely[cite: 2].",
-        5: "Correct Answer: B. Web tier in public subnet and backend tiers in private subnets with route tables/NACLs ensures secure multi-tier architecture[cite: 2].",
-        6: "Correct Answer: B. Separate routing tables per subnet give granular control over tier communication and internet access paths[cite: 2].",
-        7: "Correct Answer: A. Internet Gateway provides routing, and security groups/NACLs restrict developer access to specific IPs[cite: 2].",
-        8: "Correct Answer: A. A NAT Gateway in a public subnet allows private instances to initiate outbound requests safely[cite: 2].",
-        9: "Correct Answer: A. An Egress-Only Internet Gateway permits outbound IPv6 communication while blocking inbound connections[cite: 2].",
-        10: "Correct Answer: A. Enabling DNS resolution and hostnames allows private instance communication via Amazon-provided DNS[cite: 2].",
-        11: "Correct Answer: A. Elastic IP addresses provide persistent public IPs, while security groups enforce least privilege access[cite: 2].",
-        12: "Correct Answer: A. ENA provides high throughput and low latency, secured via security groups and NACLs[cite: 2].",
-        13: "Correct Answer: A. EFA provides OS-bypass low latency for HPC workloads, secured with specific security group rules[cite: 2].",
-        14: "Correct Answer: C. NACLs on private subnets should allow specific inbound traffic from web server IPs and necessary outbound responses[cite: 2].",
-        15: "Correct Answer: A. DENY rules in NACLs must be placed above ALLOW rules because NACL rules are evaluated in numerical order[cite: 2].",
-        16: "Correct Answer: C. Stateless NACLs require allowing outbound traffic and inbound traffic from ephemeral ports (1024-65535) for response traffic[cite: 2].",
-        17: "Correct Answer: A. ALB handles SSL/TLS termination using trusted ACM certificates, offloading CPU load from backend instances[cite: 2].",
-        18: "Correct Answer: B. NLB Security Groups restrict traffic to specific gaming ports, while NACLs allow broad communication flow[cite: 2].",
-        19: "Correct Answer: C. Virtual appliances behind Gateway Load Balancers require precise target group mapping and IAM security controls[cite: 2].",
-        20: "Correct Answer: B. Site-to-Site VPN with dynamic routing (BGP) and encryption secures hybrid transit data[cite: 2].",
-        21: "Correct Answer: B. A VPN over Direct Connect adds an encryption layer over dedicated private connectivity[cite: 2].",
-        22: "Correct Answer: B. VPC peering connections must be explicitly established between target VPCs (transitive peering is not supported)[cite: 2].",
-        23: "Correct Answer: B. Security groups and NACLs in each VPC control traffic traversing through AWS Transit Gateway[cite: 2].",
-        24: "Correct Answer: C. VPC Endpoints enable private connectivity to external APIs or services without traversing the public internet[cite: 2].",
-        25: "Correct Answer: B. Interface endpoints associated with security groups restrict access to approved application subnets/ports[cite: 2].",
-        26: "Correct Answer: A. CloudFront field-level encryption specifies fields to encrypt using a customer-managed CMK in AWS KMS[cite: 2].",
-        27: "Correct Answer: B. CloudFront Functions should follow the principle of least privilege with minimal permissions and secure handling[cite: 2].",
-        28: "Correct Answer: B. Lambda@Edge functions must follow the principle of least privilege with minimal IAM permissions[cite: 2].",
-        29: "Correct Answer: C. IAM policies protect Route 53 record modifications, and DNSSEC validates DNS response authenticity[cite: 2].",
-        30: "Correct Answer: B. AWS is responsible for security *of* the cloud, and customers are responsible for security *in* the cloud[cite: 3].",
-        31: "Correct Answer: A. Bastion hosts reside in public subnets with restricted SSH IPs, jumping to private subnet app servers[cite: 3].",
-        32: "Correct Answer: B. Unique regional key pairs stored centrally and encrypted limit blast radius if compromised[cite: 3].",
-        33: "Correct Answer: B. Systems Manager provides a unified management interface without opening inbound SSH/RDP ports[cite: 3].",
-        34: "Correct Answer: C. EC2 instance roles provide temporary security credentials, avoiding hardcoded static keys[cite: 3].",
-        35: "Correct Answer: B. Registering a CA as a trust anchor in IAM Roles Anywhere establishes PKI trust for temporary credentials[cite: 3].",
-        36: "Correct Answer: B. Regularly patching OS and software mitigates known software vulnerabilities[cite: 3].",
-        37: "Correct Answer: C. Private subnets routing traffic through NAT gateways protect instances from direct public exposure[cite: 3].",
-        38: "Correct Answer: B. EBS encryption must be explicitly enabled using AWS or customer-managed KMS keys[cite: 3].",
-        39: "Correct Answer: C. Instance stores are ephemeral block storage; data is lost if instances stop, terminate, or fail[cite: 3].",
-        40: "Correct Answer: D. SSL termination offloads CPU decryption from EC2 and decrypts traffic at the load balancer level[cite: 3].",
-        41: "Correct Answer: B. Patch Manager defines patch baselines and handles OS-level updates[cite: 3].",
-        42: "Correct Answer: B. CloudTrail logs API events, which can be streamed to CloudWatch for alarms and monitoring[cite: 3].",
-        43: "Correct Answer: B. Nitro Enclaves provide isolated compute environments inaccessible even from the parent EC2 instance[cite: 3].",
-        44: "Correct Answer: C. Accelerated Computing instances use hardware co-processors for compute-intensive and parallel workloads[cite: 3].",
-        45: "Correct Answer: B. Image Builder is a fully managed service automating creation, maintenance, and sharing of AMIs[cite: 3].",
-        46: "Correct Answer: C. Automated pipelines in Image Builder build, test, and deploy custom secure images from defined recipes[cite: 3].",
-        47: "Correct Answer: C. Elastic Beanstalk provides managed platform updates keeping the runtime environment patched[cite: 3].",
-        48: "Correct Answer: B. Enhanced Health Reporting integrates with SNS for alerts and provides detailed console metrics[cite: 3].",
-        49: "Correct Answer: B. Enabling X-Ray in Beanstalk console configurations automatically installs the daemon with proper IAM roles[cite: 3].",
-        50: "Correct Answer: B. Manual snapshots and automatic backups in Lightsail ensure data durability[cite: 3].",
-        51: "Correct Answer: C. ECS services combined with CloudWatch alarms enable automatic queue-based scaling and secure S3 access via IAM roles[cite: 3].",
-        52: "Correct Answer: B. IAM roles for ECS tasks supply temporary credentials securely without embedding keys in container images[cite: 3].",
-        53: "Correct Answer: A. An ALB with an HTTPS listener distributes traffic and secures client communication via TLS[cite: 3].",
-        54: "Correct Answer: B. ECS services maintain task counts and enable service auto-scaling based on CloudWatch metrics[cite: 3].",
-        55: "Correct Answer: C. Fargate abstracts EC2 infrastructure, offering a serverless container execution model[cite: 3].",
-        56: "Correct Answer: C. CloudWatch provides native task-, service-, and container-level metrics for ECS monitoring[cite: 3].",
-        57: "Correct Answer: B. EKS cluster OIDC provider URLs are used to create IAM OIDC identity providers for service accounts[cite: 3].",
-        58: "Correct Answer: C. EKS associates IAM roles with Kubernetes service accounts for workload access to AWS services[cite: 3].",
-        59: "Correct Answer: C. Cluster IAM role allows the control plane to provision necessary EC2 nodes and Elastic Load Balancers[cite: 3].",
-        60: "Correct Answer: C. Node roles allow worker nodes to send logs/metrics to CloudWatch and pull container images from ECR[cite: 3].",
-        61: "Correct Answer: C. Pod Execution Roles permit individual pods to assume IAM roles directly at the pod level[cite: 3].",
-        62: "Correct Answer: C. IAM connector roles bridge Kubernetes RBAC systems with AWS IAM service accounts[cite: 3].",
-        63: "Correct Answer: B. Managed Node Groups automatically apply latest OS security patches to worker nodes[cite: 3].",
-        64: "Correct Answer: B. Self-managed nodes provide full EC2 control for custom configurations and compliance patches[cite: 3].",
-        65: "Correct Answer: A. EKS manages control plane availability/patching and includes built-in CloudWatch, IAM, and VPC integrations[cite: 3].",
-        66: "Correct Answer: A. EKS integrates with AWS KMS to provide envelope encryption for Kubernetes secrets[cite: 3].",
-        67: "Correct Answer: A. Selecting API, Audit, Authenticator, Controller manager, and Scheduler log types enables comprehensive EKS auditing[cite: 3].",
-        68: "Correct Answer: A. Separate clusters with VPCs or namespaces with RBAC provide robust multi-tenancy isolation[cite: 3].",
-        69: "Correct Answer: B. Amazon VPC CNI assigns dedicated VPC IP addresses to pods enabling fine-grained VPC security controls[cite: 3].",
-        70: "Correct Answer: B. Security Groups for Pods feature associates AWS Security Groups directly with Kubernetes namespaces/pods[cite: 3].",
-        71: "Correct Answer: A. AWS App Mesh with mutual TLS (mTLS) ensures secure end-to-end service-to-service communications[cite: 3].",
-        72: "Correct Answer: B. The ALB Ingress Controller automatically provisions and configures ALBs to route HTTP/HTTPS traffic to pods[cite: 3].",
-        73: "Correct Answer: B. Setting encrypted to true in the StorageClass enables automatic EBS volume encryption via CSI driver[cite: 3].",
-        74: "Correct Answer: B. EFS CSI driver uses specified access points in StorageClass specifications for secure pod-level file access[cite: 3].",
-        75: "Correct Answer: B. FSx for Lustre CSI driver integrates HPC file systems with Kubernetes PersistentVolume specs[cite: 3].",
-        76: "Correct Answer: B. IAM policies control access permissions, and automated image scanning detects container vulnerabilities[cite: 3].",
-        77: "Correct Answer: A. CloudTrail captures API calls for ECR actions for compliance auditing and troubleshooting[cite: 3].",
-        78: "Correct Answer: B. App Runner builds and deploys directly from source repositories with auto-scaling enabled[cite: 3].",
-        79: "Correct Answer: C. VPC interface endpoints for App Runner keep traffic private within the AWS network[cite: 3].",
-        80: "Correct Answer: C. App Runner provides built-in encryption at rest and enforces HTTPS for data in transit[cite: 3].",
-        81: "Correct Answer: C. Hybrid approach uses On-Demand for long-running critical jobs and Spot Instances for short non-critical jobs[cite: 3].",
-        82: "Correct Answer: B. Granular IAM policies restrict team access to specific job queues and definitions following least privilege[cite: 3].",
-        83: "Correct Answer: B. Integrating AWS Batch with CloudWatch Logs captures execution output and sets up alarms for error patterns[cite: 3].",
-        84: "Correct Answer: B. Splitting large video files into chunks prevents Lambda execution timeouts[cite: 3].",
-        85: "Correct Answer: C. Implementing proper IAM roles and permissions for Lambda functions falls under customer responsibility[cite: 3].",
-        86: "Correct Answer: B. Lambda built-in environment variable encryption automatically uses AWS KMS for secure variable decryption during execution[cite: 3].",
-        87: "Correct Answer: D. To use IAM authentication with Amazon RDS, you must create an IAM policy granting rds-db:connect and associate it with users or roles[cite: 4].",
-        88: "Correct Answer: B. Amazon RDS for PostgreSQL supports native and Kerberos authentication using AWS Directory Service[cite: 4].",
-        89: "Correct Answer: C. AWS Secrets Manager automatically rotates database credentials without downtime[cite: 4].",
-        90: "Correct Answer: C. Amazon RDS Security Groups act as a virtual firewall controlling inbound/outbound IP traffic[cite: 4].",
-        91: "Correct Answer: B. Memory-optimized instances deliver optimal performance for memory-bound high-traffic databases[cite: 4].",
-        92: "Correct Answer: C. AWS Secrets Manager securely stores DB credentials retrieved via IAM roles assigned to EC2 instances[cite: 4].",
-        93: "Correct Answer: A. FreeableMemory monitors available random access memory to prevent performance degradation[cite: 4].",
-        94: "Correct Answer: A. Enhanced Monitoring provides real-time access to OS-level metrics for RDS instances[cite: 4].",
-        95: "Correct Answer: C. Performance Insights visualizes database load and filters by SQL statements, waits, hosts, or users[cite: 4].",
-        96: "Correct Answer: C. Amazon RDS allows viewing, watching, and downloading database logs directly from the RDS console[cite: 4].",
-        97: "Correct Answer: B. RDS Event Subscriptions notify users in real-time through Amazon SNS when specific RDS events occur[cite: 4].",
-        98: "Correct Answer: B. AWS Trusted Advisor identifies underutilized RDS instances to help optimize costs[cite: 4].",
-        99: "Correct Answer: B. Amazon RDS encrypts data at rest using customer-managed or AWS-managed keys via AWS KMS[cite: 4].",
-        100: "Correct Answer: A. Enabling SSL/TLS encryption for RDS instances ensures data is encrypted in transit[cite: 4].",
-        101: "Correct Answer: C. Aurora divides storage volumes into 10GB chunks replicated six ways across three Availability Zones[cite: 4].",
-        102: "Correct Answer: B. Amazon Aurora supports both IAM-based and database-native authentication methods[cite: 4].",
-        103: "Correct Answer: C. Deploying Aurora in a private subnet within a VPC with restrictive SGs ensures network isolation[cite: 4].",
-        104: "Correct Answer: B. Setting Public Accessibility to No ensures the database has no public IP and is isolated from the internet[cite: 4].",
-        105: "Correct Answer: B. VPC interface endpoints using AWS PrivateLink provide private, secure communication to Aurora within the VPC[cite: 4].",
-        106: "Correct Answer: C. Amazon Aurora Database Activity Streams provide a real-time stream for monitoring and auditing database activity[cite: 4].",
-        107: "Correct Answer: B. Aurora provides built-in encryption at rest via KMS and supports SSL/TLS for encryption in transit[cite: 4].",
-        108: "Correct Answer: B. Aurora Serverless supports built-in encryption at rest and TLS for data in transit[cite: 4].",
-        109: "Correct Answer: B. Amazon RDS Proxy manages and pools database connections, increasing scalability and resilience during traffic spikes[cite: 4].",
-        110: "Correct Answer: C. RDS Proxy pools database connections, preventing exhaustion during traffic bursts[cite: 4].",
-        111: "Correct Answer: B. RDS Proxy integrates with AWS Secrets Manager to securely retrieve database credentials[cite: 4].",
-        112: "Correct Answer: C. Security groups can be attached to RDS Proxy to control incoming traffic rules relative to the database[cite: 4].",
-        113: "Correct Answer: B. Enhanced logging in RDS Proxy provides detailed information about processed SQL statements for debugging[cite: 4].",
-        114: "Correct Answer: C. Amazon Redshift divides cluster architecture into leader nodes for coordination and compute nodes for execution[cite: 4].",
-        115: "Correct Answer: C. Redshift integrates with IAM to allow users to generate temporary database credentials[cite: 4].",
-        116: "Correct Answer: A. Redshift security groups act as a stateful firewall specifying inbound and outbound rules[cite: 4].",
-        117: "Correct Answer: A. Interface VPC endpoints allow connection to Redshift clusters without public IPs inside the AWS network[cite: 4].",
-        118: "Correct Answer: C. Amazon Redshift supports native audit logging directly to an specified Amazon S3 bucket[cite: 4].",
-        119: "Correct Answer: A. Redshift audit logging integrates natively with Amazon CloudWatch Logs[cite: 4].",
-        120: "Correct Answer: A. Redshift provides a user activity logging feature to track all executed SQL queries[cite: 4].",
-        121: "Correct Answer: B. DynamoDB automatically scales capacity up or down based on request traffic without operational overhead[cite: 4].",
-        122: "Correct Answer: A. DynamoDB integrates with IAM to control fine-grained access actions on specific tables via IAM policies[cite: 4].",
-        123: "Correct Answer: C. VPC Gateway Endpoints allow private, direct access to DynamoDB within the AWS network[cite: 4].",
-        124: "Correct Answer: A. VPC Interface Endpoints using AWS PrivateLink provide private connectivity to DynamoDB from within a VPC[cite: 4].",
-        125: "Correct Answer: A. CloudWatch Metrics provides metrics on read/write capacity units and request latency for DynamoDB[cite: 4].",
-        126: "Correct Answer: B. DynamoDB Streams capture time-ordered item-level modifications for near real-time processing[cite: 4]."
-    };
+    "1": "Correct Answer: C. Deploying in multiple VPCs in different regions ensures proximity to customers for low latency and adheres to data residency requirements. Route 53 optimizes geographic and latency-based routing.",
+    "3": "Correct Answer: A. Default VPC provides a quick start, but security groups and NACLs must be customized to adhere to the principle of least privilege.",
+    "5": "Correct Answer: C. Web tier in public subnet and backend tiers in private subnets with route tables and security groups ensures secure multi-tier architecture.",
+    "7": "Correct Answer: C. Internet Gateway provides internet routing, while security groups enforce least privilege by restricting access strictly to authorized developer IP addresses.",
+    "9": "Correct Answer: B. An Egress-Only Internet Gateway permits outbound IPv6 communication for private instances while preventing inbound connections initiated from the internet.",
+    "11": "Correct Answer: B. Elastic IP addresses provide persistent public IPs across reboots, while security groups enforce least privilege access.",
+    "13": "Correct Answer: A. EFA provides OS-bypass low latency for HPC workloads, secured with specific security group rules allowing communication within the cluster.",
+    "15": "Correct Answer: D. Network ACLs evaluate rules in ascending numerical order, so explicit DENY rules must have lower rule numbers than broad ALLOW rules to take effect.",
+    "17": "Correct Answer: A. ALB handles SSL/TLS termination using trusted ACM certificates, offloading CPU load from backend instances and ensuring encrypted client communication.",
+    "19": "Correct Answer: B. Virtual appliances behind Gateway Load Balancers scale transparently while GWLB endpoints in consumer VPCs route traffic securely through GENEVE encapsulation.",
+    "21": "Correct Answer: A. AWS Direct Connect provides dedicated private network connectivity bypassing the public internet, which can be secured with MACsec or IPsec over Direct Connect.",
+    "23": "Correct Answer: B. AWS Transit Gateway acts as a central hub simplifying multi-VPC topologies and facilitating centralized traffic inspection between environments.",
+    "25": "Correct Answer: C. A Gateway VPC Endpoint provides free, private, high-throughput access to Amazon DynamoDB and Amazon S3 directly from VPC route tables without NAT gateways.",
+    "27": "Correct Answer: B. Origin Access Control (OAC) secures S3 origins by restricting S3 bucket access exclusively to authorized CloudFront distributions.",
+    "29": "Correct Answer: D. AWS Global Accelerator provides static anycast IP addresses and routes client traffic over the congested-free AWS global backbone to healthy application endpoints.",
+    "31": "Correct Answer: B. Bastion hosts reside in public subnets with tightly restricted source IP security groups, acting as jump servers to private instances.",
+    "33": "Correct Answer: C. Systems Manager Session Manager provides secure, auditable console and shell access via TLS without requiring open inbound security group ports or bastion hosts.",
+    "35": "Correct Answer: B. Registering an X.509 CA as a trust anchor in IAM Roles Anywhere allows external workloads to exchange certificate signatures for temporary AWS credentials.",
+    "37": "Correct Answer: C. Placing instances in private subnets and routing egress traffic through NAT gateways prevents direct public exposure and protects against inbound attacks.",
+    "39": "Correct Answer: A. Instance store volumes are physically attached ephemeral disks providing ultra-high IOPS, but data is lost when instances stop, terminate, or experience hardware failure.",
+    "41": "Correct Answer: D. Patch Manager automates OS patching against customizable patch baselines and maintenance windows without requiring interactive logins or open inbound ports.",
+    "43": "Correct Answer: D. AWS Nitro Enclaves create isolated compute environments with no persistent storage, interactive access, or external networking, communicating only via local vsock channels.",
+    "45": "Correct Answer: D. EC2 Image Builder is a managed service that automates the building, testing, and deployment of hardened, compliant AMIs and container images.",
+    "47": "Correct Answer: A. Elastic Beanstalk managed platform updates automatically apply OS, web server, and runtime security patches with configurable maintenance windows.",
+    "49": "Correct Answer: D. Enabling X-Ray in Elastic Beanstalk environment configurations installs the X-Ray daemon, requiring the AWSXRayDaemonWriteAccess policy on the instance profile.",
+    "51": "Correct Answer: B. Amazon ECS services integrated with target tracking scaling on SQS queue depth provide automated scaling, while IAM Roles for Tasks grant least-privilege S3 access.",
+    "53": "Correct Answer: A. An Application Load Balancer with an HTTPS listener using ACM certificates terminates client TLS securely and distributes requests to ECS container targets.",
+    "55": "Correct Answer: A. AWS Fargate provides serverless container execution for ECS and EKS, eliminating the operational overhead of provisioning, configuring, and scaling EC2 instances.",
+    "57": "Correct Answer: B. IAM Roles for Service Accounts (IRSA) uses the cluster's OIDC provider to vend temporary, scoped AWS credentials to specific Kubernetes pods.",
+    "59": "Correct Answer: C. The Amazon EKS Cluster IAM role allows the managed Kubernetes control plane to provision and configure AWS infrastructure resources (like load balancers and ENIs).",
+    "61": "Correct Answer: C. The EKS Fargate Pod Execution Role allows the Fargate compute infrastructure to pull images from Amazon ECR and forward pod logs to Amazon CloudWatch Logs.",
+    "63": "Correct Answer: A. EKS Managed Node Groups automate worker node lifecycle management, including graceful draining and updating of Amazon Linux and Bottlerocket AMIs.",
+    "65": "Correct Answer: C. Under the AWS shared responsibility model for Amazon EKS, AWS manages the availability, scalability, and security of the Kubernetes control plane instances and etcd storage.",
+    "67": "Correct Answer: C. Kubernetes NetworkPolicies (supported via Amazon VPC CNI or Calico) allow fine-grained layer-3/4 packet filtering between pods inside the EKS cluster.",
+    "69": "Correct Answer: D. The AWS Load Balancer Controller provisions and configures Application Load Balancers (ALBs) dynamically based on Kubernetes Ingress definitions for path-based routing.",
+    "71": "Correct Answer: C. Integrating ACM with the AWS Load Balancer Controller or using cert-manager with AWS Private CA provides automated issuance, deployment, and rotation of TLS certificates.",
+    "73": "Correct Answer: A. The Amazon EBS Container Storage Interface (CSI) driver dynamically provisions EBS volumes defined in a StorageClass with KMS encryption enabled.",
+    "75": "Correct Answer: B. The AWS FSx for Lustre CSI driver allows Kubernetes pods to dynamically mount high-throughput Lustre file systems via standard PersistentVolume claims.",
+    "77": "Correct Answer: D. AWS CloudTrail automatically records API activity for Amazon ECR, providing comprehensive audit trails of container repository operations for compliance and security forensics.",
+    "79": "Correct Answer: C. AWS App Runner VPC connectors enable App Runner compute instances to securely access databases and backend services in private VPC subnets without internet traversal.",
+    "81": "Correct Answer: D. Using a tiered compute strategy with On-Demand instances for time-critical jobs and Spot Instances for resilient workloads minimizes cost while preventing deadline breaches.",
+    "83": "Correct Answer: A. AWS Batch integrates natively with Amazon CloudWatch Logs to capture container execution logs, enabling real-time alerting and troubleshooting via CloudWatch Alarms.",
+    "85": "Correct Answer: C. Under the AWS Shared Responsibility Model for serverless, AWS manages the runtime infrastructure, while the customer is responsible for IAM policies, code security, and data protection.",
+    "87": "Correct Answer: A. Enabling IAM DB Authentication generates temporary authentication tokens signed with SigV4, requiring the `rds-db:connect` IAM permission policy.",
+    "89": "Correct Answer: B. AWS Secrets Manager natively integrates with Amazon RDS to provide automated, zero-downtime credential rotation using managed Lambda rotation functions.",
+    "91": "Correct Answer: A. Memory-optimized instance classes (R-family) provide large RAM allocations essential for high-throughput transactional database workloads.",
+    "93": "Correct Answer: A. FreeableMemory is a critical metric for database health; low freeable memory indicates memory pressure that can cause swapping, slow queries, and database restarts.",
+    "95": "Correct Answer: C. Performance Insights provides an interactive dashboard that breaks down database load by wait states, hosts, users, and specific SQL queries.",
+    "97": "Correct Answer: B. Amazon RDS Event Subscriptions notify subscribers via Amazon SNS when specific event categories (such as failover, maintenance, or configuration changes) occur.",
+    "99": "Correct Answer: B. Amazon RDS provides built-in encryption at rest using AWS KMS, encrypting the underlying storage, automated backups, read replicas, and snapshots seamlessly.",
+    "101": "Correct Answer: D. Amazon Aurora features a distributed, self-healing storage system that automatically replicates six copies of data across three Availability Zones.",
+    "103": "Correct Answer: C. Aurora Read Replicas share the same underlying cluster storage with minimal replication lag; routing read queries to the Reader endpoint isolates reporting load.",
+    "105": "Correct Answer: A. VPC Interface Endpoints powered by AWS PrivateLink enable private, secure connectivity between VPC resources and supported AWS services without an Internet Gateway.",
+    "107": "Correct Answer: B. Comprehensive Aurora security requires enabling AWS KMS encryption at rest and enforcing SSL/TLS encryption for all client-to-database network connections.",
+    "109": "Correct Answer: C. Amazon RDS Proxy pools and shares database connections efficiently, preventing connection storms during traffic surges and reducing database failover time.",
+    "111": "Correct Answer: D. Amazon RDS Proxy integrates natively with AWS Secrets Manager to securely retrieve database credentials, eliminating hardcoded passwords in client applications.",
+    "113": "Correct Answer: A. Enhanced logging in Amazon RDS Proxy provides detailed transaction information and SQL statement execution logs in CloudWatch for troubleshooting.",
+    "115": "Correct Answer: B. Amazon Redshift supports IAM authentication via the `GetClusterCredentials` API, generating temporary, scoped database credentials dynamically.",
+    "117": "Correct Answer: B. Interface VPC Endpoints powered by AWS PrivateLink enable private, secure connectivity to Amazon Redshift from within a VPC or on-premises networks.",
+    "119": "Correct Answer: D. Amazon Redshift audit logging can export connection logs, user logs, and user activity logs directly to Amazon CloudWatch Logs for real-time analysis and compliance retention.",
+    "121": "Correct Answer: D. Amazon DynamoDB is a fully managed serverless NoSQL database that automatically handles hardware provisioning, setup, configuration, replication, software patching, and scaling.",
+    "123": "Correct Answer: C. A Gateway VPC Endpoint allows instances in private subnets to access Amazon DynamoDB directly over the AWS private network without traversing the internet or incurring NAT charges.",
+    "125": "Correct Answer: A. Amazon CloudWatch provides native metrics for DynamoDB (such as ConsumedReadCapacityUnits, ThrottledRequests, and Latency) to monitor table health and performance."
+};
 
     // Theme Management: Default to dark theme as requested
     let currentTheme = localStorage.getItem('quiz-theme') || 'light';

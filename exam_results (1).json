@@ -1,0 +1,345 @@
+{
+  "timestamp": "2026-09-23T12:05:24.498Z",
+  "examTitle": "🎓 65-Q Full AWS SAA-C03 Exam (Domain Weighted)",
+  "totalQuestions": 65,
+  "correctCount": 52,
+  "scorePercentage": 80,
+  "awsScaledScore": 820,
+  "status": "PASS",
+  "timeSpent": "43m 0s",
+  "domainBreakdown": {
+    "Amazon EventBridge": {
+      "total": 3,
+      "correct": 1
+    },
+    "Amazon Redshift": {
+      "total": 6,
+      "correct": 5
+    },
+    "Amazon EMR": {
+      "total": 1,
+      "correct": 1
+    },
+    "Amazon SQS": {
+      "total": 2,
+      "correct": 1
+    },
+    "Amazon Kinesis": {
+      "total": 2,
+      "correct": 1
+    },
+    "Amazon ElastiCache": {
+      "total": 3,
+      "correct": 2
+    },
+    "Amazon EC2 Auto Scaling": {
+      "total": 3,
+      "correct": 2
+    },
+    "AWS WAF": {
+      "total": 3,
+      "correct": 3
+    },
+    "Amazon GuardDuty": {
+      "total": 1,
+      "correct": 1
+    },
+    "Amazon Inspector": {
+      "total": 2,
+      "correct": 2
+    },
+    "Amazon VPC": {
+      "total": 5,
+      "correct": 4
+    },
+    "Amazon CloudFront": {
+      "total": 2,
+      "correct": 2
+    },
+    "Amazon SNS": {
+      "total": 2,
+      "correct": 2
+    },
+    "AWS Organizations": {
+      "total": 1,
+      "correct": 1
+    },
+    "Amazon S3": {
+      "total": 1,
+      "correct": 1
+    },
+    "Amazon Cognito": {
+      "total": 2,
+      "correct": 2
+    },
+    "Amazon EFS": {
+      "total": 1,
+      "correct": 0
+    },
+    "AWS IAM": {
+      "total": 4,
+      "correct": 4
+    },
+    "AWS Command Line Interface (CLI)": {
+      "total": 1,
+      "correct": 1
+    },
+    "Amazon API Gateway": {
+      "total": 2,
+      "correct": 1
+    },
+    "AWS Data Exchange": {
+      "total": 2,
+      "correct": 2
+    },
+    "AWS AppSync": {
+      "total": 1,
+      "correct": 1
+    },
+    "AWS Security Hub": {
+      "total": 3,
+      "correct": 2
+    },
+    "Amazon ECS": {
+      "total": 1,
+      "correct": 1
+    },
+    "AWS Lake Formation": {
+      "total": 2,
+      "correct": 2
+    },
+    "AWS Free Tier": {
+      "total": 1,
+      "correct": 1
+    },
+    "Amazon Athena": {
+      "total": 1,
+      "correct": 1
+    },
+    "Amazon CloudWatch": {
+      "total": 1,
+      "correct": 1
+    },
+    "Amazon Route 53": {
+      "total": 1,
+      "correct": 1
+    },
+    "AWS Shield": {
+      "total": 1,
+      "correct": 0
+    },
+    "AWS Trusted Advisor": {
+      "total": 1,
+      "correct": 1
+    },
+    "AWS Key Management Service (AWS KMS)": {
+      "total": 1,
+      "correct": 0
+    },
+    "Elastic Load Balancing (ELB)": {
+      "total": 1,
+      "correct": 1
+    },
+    "AWS IAM Identity Center (formerly AWS SSO)": {
+      "total": 1,
+      "correct": 1
+    }
+  },
+  "incorrectQuestions": [
+    {
+      "number": 1,
+      "id": 1,
+      "topic": "Amazon EventBridge",
+      "question": "Which TWO types of event buses does Amazon EventBridge support? (Select 2)",
+      "options": [
+        "A) Default Event Bus automatically receiving events from AWS services in the account",
+        "B) Custom Event Bus for application-specific events from internal or external sources",
+        "C) Ephemeral Hyper-Bus dynamically created and destroyed per Lambda invocation",
+        "D) System Event Bus reserved exclusively for inter-region replication traffic"
+      ],
+      "userAnswer": "C, D",
+      "correctAnswer": "A, B",
+      "explanation": "EventBridge provides a Default Bus for AWS service events and Custom Buses for application events."
+    },
+    {
+      "number": 2,
+      "id": 2,
+      "topic": "Amazon Redshift",
+      "question": "How does Amazon Redshift handle automated backups?",
+      "options": [
+        "A) Automated snapshots taken every 24 hours stored in Amazon Glacier for 30-year retention by default",
+        "B) Automated snapshots taken continuously and stored in S3 with a default 1-day retention period",
+        "C) Manual snapshots only; Redshift does not support automated backup without custom Lambda scripts",
+        "D) Automated backups stored exclusively on EBS volumes attached to the cluster leader node"
+      ],
+      "userAnswer": "A",
+      "correctAnswer": "B",
+      "explanation": "Redshift continuously backs up to S3 with a default retention of 1 day, configurable up to 35 days."
+    },
+    {
+      "number": 5,
+      "id": 5,
+      "topic": "Amazon SQS",
+      "question": "What is the maximum delay period configurable for an Amazon SQS Delay Queue?",
+      "options": [
+        "A) 15 minutes, making initial message delivery invisible for up to 900 seconds",
+        "B) 24 hours, providing a full business day delay for scheduled message processing",
+        "C) 12 hours, balancing long-term delay with daily processing window requirements",
+        "D) 14 days, matching the maximum message retention period for alignment"
+      ],
+      "userAnswer": "B",
+      "correctAnswer": "A",
+      "explanation": "SQS Delay Queues support a maximum delay of 15 minutes (900 seconds) before making messages visible."
+    },
+    {
+      "number": 6,
+      "id": 6,
+      "topic": "Amazon Kinesis",
+      "question": "What is the primary role of a Partition Key when writing records to Amazon Kinesis Data Streams?",
+      "options": [
+        "A) Automatically compresses the record payload using gzip before writing it to the destination shard",
+        "B) Determines which specific shard receives the record by hashing the key to a sequence number range",
+        "C) Triggers cross-region replication of the record to a backup Kinesis stream in a DR region",
+        "D) Encrypts the record payload with a customer-managed KMS key before persisting it to the shard"
+      ],
+      "userAnswer": "A",
+      "correctAnswer": "B",
+      "explanation": "Kinesis uses the MD5 hash of the partition key to map incoming records to specific shards in the stream[cite: 8]."
+    },
+    {
+      "number": 9,
+      "id": 9,
+      "topic": "Amazon EC2 Auto Scaling",
+      "question": "What do EC2 Auto Scaling Lifecycle Hooks enable?",
+      "options": [
+        "A) Pausing instances in a pending or terminating state to perform custom actions before transition",
+        "B) Automatically renewing SSL certificates on instances being replaced during scale-in",
+        "C) Rerouting instance traffic to a standby ELB target group during scale-out events",
+        "D) Synchronizing EBS volume snapshots across all instances in the group on each scaling event"
+      ],
+      "userAnswer": "B",
+      "correctAnswer": "A",
+      "explanation": "Lifecycle Hooks pause launch/terminate transitions, allowing custom logic like draining connections or installing software."
+    },
+    {
+      "number": 24,
+      "id": 24,
+      "topic": "Amazon VPC",
+      "question": "Which TWO statements accurately contrast AWS NAT Gateways with legacy customer-managed NAT Instances? (Select 2)",
+      "options": [
+        "A) NAT Gateway is fully managed, highly available within its AZ, and automatically scales bandwidth up to 100 Gbps",
+        "B) NAT Instances are individual EC2 instances requiring manual OS patching, software updates, and custom failover scripts",
+        "C) NAT Gateways must be deployed inside private subnets without route table access to an Internet Gateway",
+        "D) NAT Instances automatically scale bandwidth up to 100 Gbps without administrative intervention"
+      ],
+      "userAnswer": "A",
+      "correctAnswer": "A, B",
+      "explanation": "NAT Gateways are AWS-managed, highly available within an AZ, scale up to 100 Gbps, and require no OS patching. NAT Instances are customer-managed EC2 instances requiring manual patching and failover configuration."
+    },
+    {
+      "number": 25,
+      "id": 25,
+      "topic": "Amazon EFS",
+      "question": "Which throughput mode in Amazon EFS is recommended for spiky, unpredictable workloads with unknown peak throughput requirements?",
+      "options": [
+        "A) Elastic throughput mode, which scales throughput automatically up to 3 GiB/s read and 1 GiB/s write with pay-per-use billing",
+        "B) Provisioned throughput mode, which fixes maximum throughput to a dedicated megabyte-per-second limit with hourly fees",
+        "C) Bursting throughput mode, which relies entirely on accumulated burst credit balances that exhaust under sustained load",
+        "D) Reserved throughput mode, which requires 3-year upfront non-refundable financial commitments per mount target"
+      ],
+      "userAnswer": "B",
+      "correctAnswer": "A",
+      "explanation": "EFS Elastic throughput mode automatically scales throughput dynamically based on workload activity (paying only for data transferred), making it ideal for unpredictable or spiky application patterns."
+    },
+    {
+      "number": 31,
+      "id": 31,
+      "topic": "Amazon API Gateway",
+      "question": "Which AWS security service can be associated directly with an API Gateway REST API stage to protect against common web exploits like SQL injection and cross-site scripting (XSS)?",
+      "options": [
+        "A) AWS Shield Advanced (without WAF web ACL association) for Layer 3/4 network DDoS protection",
+        "B) AWS Network Firewall deployed as stateful inspection endpoints in VPC transit subnets",
+        "C) AWS Security Hub providing automated compliance posture scanning across AWS accounts",
+        "D) AWS WAF configured with Web ACL rules to inspect HTTP/HTTPS request bodies and headers"
+      ],
+      "userAnswer": "A",
+      "correctAnswer": "D",
+      "explanation": "AWS WAF can be attached directly to Amazon API Gateway REST API stages to filter malicious HTTP/HTTPS traffic, block SQL injection and XSS attacks, and enforce rate limits."
+    },
+    {
+      "number": 34,
+      "id": 34,
+      "topic": "Amazon EventBridge",
+      "question": "What do Amazon EventBridge API Destinations enable?",
+      "options": [
+        "A) Connecting VPC subnets to external partners via dedicated Layer 2 VLAN segments",
+        "B) Deploying Amazon Route 53 health check endpoints for multi-region failover routing",
+        "C) Routing events directly to external HTTP endpoints with OAuth and API key authentication",
+        "D) Bypassing IAM role evaluation for all EventBridge-initiated internal AWS API calls"
+      ],
+      "userAnswer": "A",
+      "correctAnswer": "C",
+      "explanation": "API Destinations route events to external HTTP endpoints outside AWS with support for auth mechanisms."
+    },
+    {
+      "number": 49,
+      "id": 49,
+      "topic": "Amazon ElastiCache",
+      "question": "Which TWO features are supported by ElastiCache for Redis but NOT supported by ElastiCache for Memcached? (Select 2)",
+      "options": [
+        "A) Multi-threaded CPU core execution architecture for handling massive parallel read throughput",
+        "B) Data persistence, automated snapshot backups, and point-in-time recovery to Amazon S3",
+        "C) Multi-AZ replication groups with automated primary node failover for high availability",
+        "D) Pure ephemeral volatile caching without persistent state or snapshot capabilities"
+      ],
+      "userAnswer": "A, C",
+      "correctAnswer": "B, C",
+      "explanation": "ElastiCache for Redis supports complex data structures, persistence, snapshot backups, and Multi-AZ automatic failover. Memcached is a simple, multi-threaded volatile cache without persistence or Multi-AZ failover."
+    },
+    {
+      "number": 50,
+      "id": 50,
+      "topic": "AWS Security Hub",
+      "question": "Which TWO industry security standards are evaluated by automated checks in AWS Security Hub? (Select 2)",
+      "options": [
+        "A) CIS AWS Foundations Benchmark for foundational infrastructure security controls",
+        "B) AWS Foundational Security Best Practices (FSBP) standard developed by AWS security experts",
+        "C) IEEE 802.3 Ethernet standard for physical local area network cabling integrity",
+        "D) ISO 9001 standard for corporate commercial manufacturing quality management"
+      ],
+      "userAnswer": "B, C",
+      "correctAnswer": "A, B",
+      "explanation": "Security Hub evaluates compliance against CIS AWS Foundations Benchmark, AWS Foundational Security Best Practices (FSBP), PCI DSS, and NIST SP 800-53."
+    },
+    {
+      "number": 55,
+      "id": 55,
+      "topic": "AWS Shield",
+      "question": "Which TWO AWS resources can be explicitly protected with AWS Shield Advanced? (Select 2)",
+      "options": [
+        "A) Amazon CloudFront distributions and Amazon Route 53 hosted zones",
+        "B) Elastic Load Balancers (Application Load Balancers and Network Load Balancers)",
+        "C) Amazon EBS storage volumes attached to private internal EC2 instances",
+        "D) Amazon S3 Glacier Flexible Retrieval tape archive storage vaults"
+      ],
+      "userAnswer": "A, C",
+      "correctAnswer": "A, B",
+      "explanation": "Shield Advanced protects CloudFront distributions, Route 53 hosted zones, Elastic Load Balancers (ALB/NLB), and AWS Global Accelerators."
+    },
+    {
+      "number": 57,
+      "id": 57,
+      "topic": "AWS Key Management Service (AWS KMS)",
+      "question": "What operational caveat applies when importing external key material into an AWS KMS customer-managed key?",
+      "options": [
+        "A) Imported key material cannot be used to encrypt Amazon EBS volumes or Amazon S3 storage buckets",
+        "B) Automatic annual key rotation is not supported; administrators must rotate imported keys manually",
+        "C) The imported key material is automatically exported to public key repositories upon expiration",
+        "D) Imported keys do not support AWS CloudTrail audit logging for cryptographic API operations"
+      ],
+      "userAnswer": "C",
+      "correctAnswer": "B",
+      "explanation": "KMS cannot automatically rotate imported key material; users must create new keys and update aliases manually to rotate."
+    }
+  ]
+}

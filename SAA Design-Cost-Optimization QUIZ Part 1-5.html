@@ -1,0 +1,2259 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Solutions Architect Associate (SAA-C03) - Cost Optimization Quiz Master</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Light Theme */
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-sub-bg: #f1f5f9;
+            --card-hover-bg: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --border-color: #cbd5e1;
+            --accent-orange: #ff9900;
+            --accent-orange-hover: #e68a00;
+            --accent-orange-light: rgba(255, 153, 0, 0.12);
+            --accent-orange-glow: rgba(255, 153, 0, 0.25);
+            
+            --correct-bg: #d1fae5;
+            --correct-text: #065f46;
+            --correct-border: #34d399;
+            
+            --incorrect-bg: #ffe4e6;
+            --incorrect-text: #9f1239;
+            --incorrect-border: #fb7185;
+            
+            --sticky-bg: rgba(255, 255, 255, 0.92);
+            --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="dark"] {
+            /* Dark Theme */
+            --bg-color: #000000;
+            --card-bg: #09090b;
+            --card-sub-bg: #121215;
+            --card-hover-bg: #1c1c21;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --border-color: #27272a;
+            --accent-orange: #ff9900;
+            --accent-orange-hover: #ffaa22;
+            --accent-orange-light: rgba(255, 153, 0, 0.18);
+            --accent-orange-glow: rgba(255, 153, 0, 0.4);
+            
+            --correct-bg: rgba(16, 185, 129, 0.15);
+            --correct-text: #34d399;
+            --correct-border: rgba(52, 211, 153, 0.4);
+            
+            --incorrect-bg: rgba(244, 63, 94, 0.15);
+            --incorrect-text: #fb7185;
+            --incorrect-border: rgba(251, 113, 133, 0.4);
+            
+            --sticky-bg: rgba(0, 0, 0, 0.92);
+            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.8);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 60px;
+        }
+
+        /* Sticky Dashboard Header */
+        header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background: var(--sticky-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 12px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand img.logo-img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(255, 153, 0, 0.3));
+        }
+
+        .brand-text h1 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .brand-text p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mode-btn {
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 7px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .mode-btn.active {
+            background: var(--accent-orange);
+            color: #000;
+            border-color: var(--accent-orange);
+        }
+
+        .theme-toggle {
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 7px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+
+        .stat-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+        }
+
+        .stat-badge .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .dot.correct { background: #10b981; }
+        .dot.incorrect { background: #f43f5e; }
+        .dot.total { background: #60a5fa; }
+        .dot.accuracy { background: var(--accent-orange); }
+
+        .search-filter-box {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .search-input {
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            width: 180px;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 0 2px var(--accent-orange-light);
+        }
+
+        .filter-btn {
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .filter-btn.active {
+            background: var(--accent-orange-light);
+            color: var(--accent-orange);
+            border-color: var(--accent-orange);
+        }
+
+        .progress-line-container {
+            width: 100%;
+            height: 4px;
+            background: var(--card-sub-bg);
+            border-radius: 2px;
+            overflow: hidden;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .progress-line-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-orange), #10b981);
+            transition: width 0.3s ease;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            width: 92%;
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .module-banner {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .module-banner h2 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .module-banner p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Question Cards */
+        .question-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-shadow: var(--shadow-card);
+            position: relative;
+        }
+
+        .question-card.answered-correct {
+            border-left: 5px solid #10b981;
+        }
+
+        .question-card.answered-incorrect {
+            border-left: 5px solid #f43f5e;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .topic-pill {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: var(--accent-orange-light);
+            color: var(--accent-orange);
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 153, 0, 0.3);
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+
+        .question-title {
+            font-size: 1.02rem;
+            font-weight: 700;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .status-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            display: none;
+            flex-shrink: 0;
+        }
+
+        .status-badge.correct {
+            background: var(--correct-bg);
+            color: var(--correct-text);
+            border: 1px solid var(--correct-border);
+        }
+
+        .status-badge.incorrect {
+            background: var(--incorrect-bg);
+            color: var(--incorrect-text);
+            border: 1px solid var(--incorrect-border);
+        }
+
+        .options-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-item {
+            position: relative;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 16px;
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.92rem;
+            line-height: 1.45;
+            color: var(--text-primary);
+            user-select: none;
+        }
+
+        .option-label:hover {
+            background: var(--card-hover-bg);
+            border-color: var(--accent-orange);
+        }
+
+        .option-label input {
+            margin-top: 3px;
+            cursor: pointer;
+            accent-color: var(--accent-orange);
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        .option-label.selected-opt {
+            border-color: var(--accent-orange);
+            background: var(--accent-orange-light);
+        }
+
+        .option-label.correct-ans {
+            background: var(--correct-bg) !important;
+            border-color: var(--correct-border) !important;
+            color: var(--correct-text) !important;
+            font-weight: 600;
+        }
+
+        .option-label.incorrect-ans {
+            background: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-border) !important;
+            color: var(--incorrect-text) !important;
+        }
+
+        .submit-btn {
+            align-self: flex-start;
+            background: var(--accent-orange);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px var(--accent-orange-glow);
+        }
+
+        .submit-btn:hover {
+            background: var(--accent-orange-hover);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .explanation {
+            display: none;
+            background: var(--card-sub-bg);
+            border-left: 4px solid var(--accent-orange);
+            border-radius: 0 8px 8px 0;
+            padding: 14px 18px;
+            font-size: 0.88rem;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .explanation strong {
+            color: var(--accent-orange);
+        }
+
+        .card-watermark {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            opacity: 0.7;
+            padding-top: 8px;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        .card-watermark a {
+            color: var(--accent-orange);
+            text-decoration: none;
+        }
+
+        .card-watermark a:hover {
+            text-decoration: underline;
+        }
+
+        /* Exam Mode Specific Layout */
+        .exam-header-bar {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-card);
+        }
+
+        .exam-timer-display {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--accent-orange);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .exam-grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 20px;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .exam-grid-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .exam-palette-panel {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: var(--shadow-card);
+            position: sticky;
+            top: 120px;
+        }
+
+        .palette-header {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-primary);
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+            max-height: 380px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .palette-btn {
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 6px 0;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .palette-btn.active {
+            border-color: var(--accent-orange);
+            outline: 2px solid var(--accent-orange);
+        }
+
+        .palette-btn.answered {
+            background: #2563eb;
+            color: #ffffff;
+            border-color: #2563eb;
+        }
+
+        .palette-btn.flagged {
+            position: relative;
+        }
+
+        .palette-btn.flagged::after {
+            content: '🚩';
+            position: absolute;
+            top: -5px;
+            right: -3px;
+            font-size: 0.65rem;
+        }
+
+        .palette-legend {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 14px;
+            font-size: 0.72rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            padding-top: 10px;
+        }
+
+        .exam-nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+        }
+
+        .btn-nav {
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.88rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-nav:hover {
+            background: var(--card-hover-bg);
+            border-color: var(--accent-orange);
+        }
+
+        .btn-flag {
+            background: var(--card-sub-bg);
+            border: 1px solid #eab308;
+            color: #eab308;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.88rem;
+        }
+
+        .btn-flag.flagged-active {
+            background: #eab308;
+            color: #000;
+        }
+
+        .btn-finish-exam {
+            background: #10b981;
+            color: #ffffff;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
+
+        .btn-finish-exam:hover {
+            background: #059669;
+        }
+
+        /* Results Dashboard */
+        .results-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .results-score-box {
+            text-align: center;
+            padding: 24px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .results-score-box.pass {
+            background: rgba(16, 185, 129, 0.12);
+            border: 2px solid #10b981;
+            color: var(--text-primary);
+        }
+
+        .results-score-box.fail {
+            background: rgba(244, 63, 94, 0.12);
+            border: 2px solid #f43f5e;
+            color: var(--text-primary);
+        }
+
+        .score-big {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--accent-orange);
+        }
+
+        .score-status-badge {
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-export-json {
+            background: #3b82f6;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+        }
+
+        .btn-export-json:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-top">
+        <div class="brand">
+            <img src="saa-badge.png" alt="AWS Certified Solutions Architect Associate" class="logo-img">
+            <div class="brand-text">
+                <h1>AWS Solutions Architect Associate (SAA-C03) - Cost Optimization Quiz Master</h1>
+                <p>Designing for Cost Optimization & Cloud Financial Management • 50 High-Yield Questions</p>
+            </div>
+        </div>
+        <div class="header-controls">
+            <button class="mode-btn active" id="btn-mode-practice" onclick="switchQuizMode('practice')">
+                📖 Practice Mode
+            </button>
+            <button class="mode-btn" id="btn-mode-exam" onclick="switchQuizMode('exam')">
+                ⏱️ AWS Exam Mode
+            </button>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <span id="theme-icon">☀️</span>
+                <span id="theme-text">Light Mode</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="header-bottom" id="practice-header-bottom">
+        <div class="stats-bar">
+            <div class="stat-badge"><span class="dot total"></span> Total: <span id="stat-total">50</span></div>
+            <div class="stat-badge"><span class="dot total"></span> Answered: <span id="stat-answered">0</span></div>
+            <div class="stat-badge"><span class="dot correct"></span> Correct: <span id="stat-correct">0</span></div>
+            <div class="stat-badge"><span class="dot incorrect"></span> Incorrect: <span id="stat-incorrect">0</span></div>
+            <div class="stat-badge"><span class="dot accuracy"></span> Accuracy: <span id="stat-accuracy">0%</span></div>
+        </div>
+        <div class="search-filter-box">
+            <input type="text" id="search-input" class="search-input" placeholder="Search #Q or keywords..." oninput="filterQuestions()">
+            <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
+            <button class="filter-btn" onclick="setFilter('unanswered', this)">Unanswered</button>
+            <button class="filter-btn" onclick="setFilter('correct', this)">Correct</button>
+            <button class="filter-btn" onclick="setFilter('incorrect', this)">Incorrect</button>
+        </div>
+    </div>
+
+    <div class="progress-line-container" id="practice-progress-bar">
+        <div class="progress-line-fill" id="progress-fill"></div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="module-banner" id="module-banner">
+        <h2>💰 Cost Optimization & Cloud Financial Management Domain Modules</h2>
+        <p>Master AWS Cost Optimization: Cloud Financial Management (See, Save, Plan, Run), Savings Plans & Reserved Instances, EC2 Spot Fleets, Serverless Economics, Storage Lifecycle Transitions, AWS Budgets & Anomaly Detection, Cost and Usage Report (CUR), and TCO/ROI frameworks.</p>
+    </div>
+
+    <div id="quiz-container"></div>
+</div>
+
+<script>
+    const quizData = [
+    {
+        "id": 1,
+        "section": "COST OPTIMIZATION",
+        "topic": "Cloud Financial Management (CFM)",
+        "subtopic": "CFM Pillars - See",
+        "type": "single",
+        "question": "Under the AWS Cloud Financial Management (CFM) Framework, which collection of AWS services and governance capabilities is categorized under the 'See' pillar to establish cost allocation and resource visibility?",
+        "options": [
+            "A) AWS Control Tower, AWS Organizations, Cost Allocation Tags, and AWS Cost and Usage Reports (CUR)",
+            "B) AWS Cost Explorer forecasting models, AWS Budgets threshold alerts, and CloudWatch Billing Alarms",
+            "C) Amazon EC2 Auto Scaling target tracking, Spot Instance Fleets, and Compute Savings Plans commitments",
+            "D) AWS Service Catalog portfolios, Cost Anomaly Detection monitors, and Service Control Policies (SCPs)"
+        ],
+        "correct": "A",
+        "explanation": "The 'See' pillar focuses on foundational organizational structure, resource hierarchy, and tagging visibility using AWS Control Tower, AWS Organizations, Cost Allocation Tags, Resource Groups, Cost Categories, and detailed AWS Cost and Usage Reports (CUR)."
+    },
+    {
+        "id": 2,
+        "section": "COST OPTIMIZATION",
+        "topic": "Cloud Financial Management (CFM)",
+        "subtopic": "CFM Pillars - Save",
+        "type": "single",
+        "question": "Which set of cost-reduction levers and capacity purchasing models is categorized under the 'Save' pillar of the Cloud Financial Management Framework?",
+        "options": [
+            "A) Right-sizing compute instances, utilizing EC2 Spot Fleets, and purchasing Savings Plans or Reservations",
+            "B) Configuring AWS Cost Categories, establishing resource tag hierarchies, and reviewing consolidated invoices",
+            "C) Setting up AWS Budgets threshold alerts, evaluating Cost Explorer forecasts, and defining quarterly targets",
+            "D) Deploying AWS Service Catalog guardrails, managing SCPs, and operating Cost Anomaly Detection monitors"
+        ],
+        "correct": "A",
+        "explanation": "The 'Save' pillar of CFM focuses on active cost optimization mechanisms, such as rightsizing idle compute resources, leveraging ephemeral Spot instances for fault-tolerant workloads, and securing commitment discounts via Savings Plans and Reserved Instances."
+    },
+    {
+        "id": 3,
+        "section": "COST OPTIMIZATION",
+        "topic": "Cloud Financial Management (CFM)",
+        "subtopic": "CFM Pillars - Run",
+        "type": "single",
+        "question": "Under the 'Run' pillar of Cloud Financial Management, which governance mechanisms ensure continuous operational cost control across multi-account enterprise environments?",
+        "options": [
+            "A) AWS Service Catalog portfolio enforcement, Cost Anomaly Detection, and Service Control Policies (SCPs)",
+            "B) Implementing AWS Cost Allocation Tags, configuring Resource Groups, and downloading monthly CUR files",
+            "C) Enforcing 3-year All Upfront Compute Savings Plans and converting all on-demand fleets to Spot instances",
+            "D) Setting up AWS Pricing Calculator estimates and building Greenfield total cost of ownership spreadsheets"
+        ],
+        "correct": "A",
+        "explanation": "The 'Run' pillar focuses on governance, continuous monitoring, and organizational guardrails through AWS Service Catalog, AWS Cost Anomaly Detection, Service Control Policies (SCPs), and automated FinOps operational reviews."
+    },
+    {
+        "id": 4,
+        "section": "COST OPTIMIZATION",
+        "topic": "Design Principles",
+        "subtopic": "Consumption Model",
+        "type": "single",
+        "question": "How does adopting a consumption model benefit an organization transitioning from traditional on-premises data centers to AWS, in accordance with the Cost Optimization pillar?",
+        "options": [
+            "A) Organizations pay only for the compute and storage resources consumed, scaling capacity dynamically with demand",
+            "B) Organizations must pre-pay for 5 years of peak hardware capacity in advance to secure favorable bulk discounts",
+            "C) Organizations convert all operational variable expenses (OpEx) into depreciable fixed capital expenses (CapEx)",
+            "D) Organizations eliminate the requirement to manage software licensing compliance across all virtual instances"
+        ],
+        "correct": "A",
+        "explanation": "The 'Adopt a consumption model' design principle allows businesses to pay only for computing resources actually consumed and adapt capacity automatically based on business requirements rather than building for static peak forecasts."
+    },
+    {
+        "id": 5,
+        "section": "COST OPTIMIZATION",
+        "topic": "Design Principles",
+        "subtopic": "Measure Overall Efficiency",
+        "type": "single",
+        "question": "According to the Cost Optimization design principle 'Measure overall efficiency', what is the recommended metric to evaluate cloud economic productivity?",
+        "options": [
+            "A) Measure business output gains and transaction volume relative to the total cloud infrastructure cost incurred",
+            "B) Track the total raw gigabytes of archived data stored in Amazon S3 Glacier Flexible Retrieval tiers",
+            "C) Calculate the percentage of EC2 instances running Linux distributions versus Windows Server environments",
+            "D) Measure the reduction in physical server rack square footage achieved within private on-premises facilities"
+        ],
+        "correct": "A",
+        "explanation": "Measuring overall efficiency involves measuring the business output of the workload (e.g., revenue, active users, completed transactions) against the associated cloud infrastructure costs to ensure scaling is economically advantageous."
+    },
+    {
+        "id": 6,
+        "section": "COST OPTIMIZATION",
+        "topic": "Design Principles",
+        "subtopic": "Managed Services",
+        "type": "single",
+        "question": "Why does the AWS Well-Architected Framework emphasize leveraging managed services (like Amazon RDS, DynamoDB, or S3) to lower Total Cost of Ownership (TCO)?",
+        "options": [
+            "A) Managed services eliminate customer operational overhead for server racking, OS patching, and hardware maintenance",
+            "B) Managed services eliminate all network data transfer fees between different AWS Regions across the globe",
+            "C) Managed services guarantee zero latency regardless of the geographic location of querying client devices",
+            "D) Managed services provide free unlimited storage capacity across all relational database table partitions"
+        ],
+        "correct": "A",
+        "explanation": "Managed services operate at cloud scale, removing the undifferentiated heavy lifting of managing servers, operating system updates, database replication, backups, and physical hardware, thereby drastically reducing operational labor expenses."
+    },
+    {
+        "id": 7,
+        "section": "COST OPTIMIZATION",
+        "topic": "Licensing Models & Options",
+        "subtopic": "Savings Plans Types",
+        "type": "multi",
+        "question": "Which TWO distinct Savings Plans commitment types are available within AWS to reduce compute expenditures in exchange for hourly spend commitments? (Select 2)",
+        "options": [
+            "A) Compute Savings Plans providing maximum flexibility across EC2, AWS Fargate, and AWS Lambda",
+            "B) EC2 Instance Savings Plans providing up to 72% discounts on specific instance families within a Region",
+            "C) Database Storage Savings Plans discounting Amazon Aurora provisioned I/O storage capacity blocks",
+            "D) Network Gateway Savings Plans discounting cross-AZ transit traffic traversing AWS Transit Gateways"
+        ],
+        "correct": [
+            "A",
+            "B"
+        ],
+        "explanation": "AWS offers Compute Savings Plans (flexible across EC2 families, Regions, OS, Fargate, and Lambda) and EC2 Instance Savings Plans (providing higher discounts committed to a specific instance family in a chosen AWS Region). There are also SageMaker Savings Plans."
+    },
+    {
+        "id": 8,
+        "section": "COST OPTIMIZATION",
+        "topic": "Licensing Models & Options",
+        "subtopic": "Services Supporting Reservations",
+        "type": "multi",
+        "question": "Beyond Amazon EC2, which TWO managed AWS services natively offer node/instance reservation commitments to provide significant cost discounts? (Select 2)",
+        "options": [
+            "A) Amazon OpenSearch Service dedicated master and data nodes",
+            "B) Amazon ElastiCache clustered in-memory caching nodes",
+            "C) AWS Lambda serverless event execution invocation units",
+            "D) AWS Fargate serverless container task runtime vCPUs"
+        ],
+        "correct": [
+            "A",
+            "B"
+        ],
+        "explanation": "Amazon OpenSearch Service, Amazon ElastiCache, Amazon RDS, Amazon Redshift, and Amazon DynamoDB (reserved capacity) support reservation models for their dedicated instances/nodes. AWS Lambda and Fargate are covered under Compute Savings Plans, not reservations."
+    },
+    {
+        "id": 9,
+        "section": "COST OPTIMIZATION",
+        "topic": "Billing Tools",
+        "subtopic": "Cost Explorer vs Pricing Calculator",
+        "type": "single",
+        "question": "An enterprise is architecting a brand-new 'Greenfield' workload on AWS with zero prior deployment history. Which tool must they use to estimate upcoming costs and why?",
+        "options": [
+            "A) AWS Pricing Calculator, because Cost Explorer requires historical account consumption data to generate forecasts",
+            "B) AWS Cost Explorer, because it contains synthetic machine learning forecasting models for greenfield projects",
+            "C) AWS Budgets, because it automatically creates predictive spending plans without requiring resource inputs",
+            "D) AWS Cost and Usage Report (CUR), because it generates baseline billing templates for unlaunched services"
+        ],
+        "correct": "A",
+        "explanation": "AWS Cost Explorer requires historical account billing data to generate spending graphs and future forecasts. For new Greenfield projects without historical data, the AWS Pricing Calculator is the designated tool for estimating infrastructure costs."
+    },
+    {
+        "id": 10,
+        "section": "COST OPTIMIZATION",
+        "topic": "Billing Tools",
+        "subtopic": "Cost and Usage Report (CUR)",
+        "type": "single",
+        "question": "What is the delivery mechanism and standard update frequency of the AWS Cost and Usage Report (CUR) when configured for deep billing analysis?",
+        "options": [
+            "A) Delivered as detailed CSV/Parquet files to an Amazon S3 bucket, updated by AWS up to three times per day",
+            "B) Streamed as real-time JSON events directly into an Amazon DynamoDB table at sub-second intervals",
+            "C) Emailed as an encrypted PDF summary document to the account root email at the end of each billing cycle",
+            "D) Ingested directly into Amazon RDS MySQL instances hourly via automated AWS Lambda background triggers"
+        ],
+        "correct": "A",
+        "explanation": "The AWS Cost and Usage Report (CUR) delivers comprehensive itemized billing data (in CSV or Parquet format) to a designated Amazon S3 bucket, and AWS updates these report files up to three times a day."
+    },
+    {
+        "id": 11,
+        "section": "COST OPTIMIZATION",
+        "topic": "Billing Tools",
+        "subtopic": "AWS Budgets Actions",
+        "type": "multi",
+        "question": "When a cost or usage threshold in AWS Budgets is forecasted to be breached, which TWO automated actions can be executed to prevent unintended expenditures? (Select 2)",
+        "options": [
+            "A) Automatically attach a restrictive IAM policy that denies permissions to provision additional cloud resources",
+            "B) Emit an automated event to Amazon EventBridge or SSM to stop specific Amazon EC2 or RDS instances",
+            "C) Automatically upgrade the support tier to Enterprise Support to request retroactive billing waivers",
+            "D) Permanently purge all Amazon S3 versioned objects to instantly eliminate object storage charges"
+        ],
+        "correct": [
+            "A",
+            "B"
+        ],
+        "explanation": "AWS Budgets Actions allows configuring automated governance responses when budget thresholds are exceeded, including applying restrictive IAM policies to users/roles/groups or triggering target actions (such as stopping EC2/RDS instances via SSM or EventBridge)."
+    },
+    {
+        "id": 12,
+        "section": "COST OPTIMIZATION",
+        "topic": "Billing Tools",
+        "subtopic": "AWS Budgets Refresh Rate",
+        "type": "single",
+        "question": "How frequently is budget tracking information updated within AWS Budgets to reflect newly incurred costs and usage metrics?",
+        "options": [
+            "A) Up to three times a day, with updates typically occurring every 8 to 12 hours after usage processing",
+            "B) Continuously in real-time, reflecting individual API calls within 500 milliseconds of execution",
+            "C) Exclusively once per calendar month upon official closure and invoicing of the monthly billing cycle",
+            "D) Every 60 minutes continuously, synchronized precisely at the beginning of each UTC calendar hour"
+        ],
+        "correct": "A",
+        "explanation": "AWS Budgets receives updated cost and usage data up to three times a day, typically lagging usage by approximately 8 to 12 hours as billing records are collected and processed."
+    },
+    {
+        "id": 13,
+        "section": "COST OPTIMIZATION",
+        "topic": "ROI and TCO",
+        "subtopic": "The 'All In' Cloud Concept",
+        "type": "single",
+        "question": "According to AWS cloud economics best practices, treating AWS merely as a 'lift-and-shift virtual data center' without adopting managed services leads to which financial outcome?",
+        "options": [
+            "A) Suboptimal Return on Investment (ROI) due to continued operational overhead and static resource provisioning",
+            "B) Automatic revocation of volume tiered discounts across Amazon S3 storage and CloudFront data egress",
+            "C) Inability to configure AWS Organizations consolidated billing and multi-account cost allocation tags",
+            "D) Mandatory transition from pay-as-you-go billing to multi-year upfront capital commitment contracts"
+        ],
+        "correct": "A",
+        "explanation": "Treating AWS as just another data center (running static VMs without auto scaling, managed services, or modernization) fails to capture cloud economic advantages and results in poor ROI and high ongoing operational costs."
+    },
+    {
+        "id": 14,
+        "section": "COST OPTIMIZATION",
+        "topic": "ROI and TCO",
+        "subtopic": "Soft Costs",
+        "type": "single",
+        "question": "When conducting a comprehensive Total Cost of Ownership (TCO) evaluation between on-premises and AWS, which 'soft costs' strongly tilt the economic advantage in favor of cloud adoption?",
+        "options": [
+            "A) Reduced operational labor overhead, increased business agility, and faster time-to-market for new features",
+            "B) The physical scrap metal salvage and resale value of depreciated on-premises server chassis hardware",
+            "C) The raw kilowatt-hour utility rate differences between municipal power grids and AWS facilities",
+            "D) The comparative cost per megabit of private IPv4 network addresses versus public IPv6 subnets"
+        ],
+        "correct": "A",
+        "explanation": "TCO comparisons often look close on raw compute/storage hardware dollars, but AWS overwhelmingly wins when quantifying soft costs: reduction in operational administrative labor, elimination of unplanned downtime, and business agility to launch products rapidly."
+    },
+    {
+        "id": 15,
+        "section": "COST OPTIMIZATION",
+        "topic": "Areas of Cloud Cost Optimization",
+        "subtopic": "Manage Demand and Supply",
+        "type": "single",
+        "question": "Under the 'Manage demand and supply resources' best practice (COST09-BP02), which architectural pattern prevents expensive overprovisioning during intermittent traffic bursts?",
+        "options": [
+            "A) Decoupling application tiers using buffers, queues (Amazon SQS), or throttling to smooth out variable load",
+            "B) Assigning static Elastic IP addresses and deploying dedicated NAT Gateways in every private subnet",
+            "C) Configuring synchronous multi-region database replication across inter-continental AWS Regions",
+            "D) Migrating all application microservices to single-tenant EC2 Dedicated Hosts with fixed capacity"
+        ],
+        "correct": "A",
+        "explanation": "Using message queues (such as Amazon SQS), rate limiters, or buffers decouples spiky traffic from backend processing fleets, allowing workloads to process requests at a steady, cost-effective rate without sizing fleets for extreme peak spikes."
+    },
+    {
+        "id": 16,
+        "section": "COST OPTIMIZATION",
+        "topic": "Areas of Cloud Cost Optimization",
+        "subtopic": "Optimize Over Time",
+        "type": "multi",
+        "question": "Which TWO operational practices are recommended under the foundational 'Optimize Over Time' pillar to maintain low long-term cloud expenditures? (Select 2)",
+        "options": [
+            "A) Proactively identify and decommission obsolete resources, unattached EBS volumes, and abandoned test stacks",
+            "B) Automate routine operations using custom scripts, AWS CLI, SDKs, or EventBridge to reduce human labor overhead",
+            "C) Purchase 3-year All Upfront Reserved Instances for all newly launched exploratory developer sandbox accounts",
+            "D) Disable AWS Cost Explorer and Cost Anomaly Detection to avoid operational alert fatigue across teams"
+        ],
+        "correct": [
+            "A",
+            "B"
+        ],
+        "explanation": "Optimizing over time requires continuously auditing and decommissioning unneeded resources (idle instances, unattached EBS volumes, obsolete snapshots) and automating operational tasks to reduce manual labor and human error."
+    },
+    {
+        "id": 17,
+        "section": "COST OPTIMIZATION",
+        "topic": "Billing Tools",
+        "subtopic": "AWS Budgets Tracking",
+        "type": "single",
+        "question": "When configuring a commitment utilization or coverage budget in AWS Budgets, which specific pricing models can be tracked to ensure purchased commitments are not sitting idle?",
+        "options": [
+            "A) Reserved Instances (RIs) and Savings Plans commitment utilization and coverage percentages",
+            "B) Spot Instance Fleet request fulfillments and interruption frequency rates across Availability Zones",
+            "C) On-Demand Capacity Reservations and dedicated hardware allocation limits within a Region",
+            "D) AWS Marketplace third-party AMI subscription renewal schedules and license seat usage"
+        ],
+        "correct": "A",
+        "explanation": "AWS Budgets provides dedicated budget types for tracking the Utilization (how much of your commitment is being used) and Coverage (how much of your eligible usage is covered by commitments) for both Reserved Instances and Savings Plans."
+    },
+    {
+        "id": 18,
+        "section": "COST OPTIMIZATION",
+        "topic": "Design Principles",
+        "subtopic": "Analyze and Attribute Expenditure",
+        "type": "single",
+        "question": "What is the primary architectural and financial benefit of implementing the 'Analyze and attribute expenditure' design principle in a multi-tenant cloud environment?",
+        "options": [
+            "A) It attributes cloud costs accurately to individual business units and product owners to measure exact ROI",
+            "B) It automatically waives data egress charges for traffic exchanged between peered Virtual Private Clouds",
+            "C) It replaces all role-based access control policies with automated financial spending limits per user",
+            "D) It converts all variable AWS operational expenses into fixed capitalized assets on financial balance sheets"
+        ],
+        "correct": "A",
+        "explanation": "Attributing expenditure via tags, cost categories, and multi-account structures allows organizations to measure Return on Investment (ROI) per product or department, fostering cost accountability and driving efficient resource consumption."
+    },
+    {
+        "id": 19,
+        "section": "COST OPTIMIZATION",
+        "topic": "Cost-Effective Resources",
+        "subtopic": "Cost Analysis (COST05)",
+        "type": "multi",
+        "question": "When architecting cost-effective workloads, which TWO critical cost vectors must be analyzed in addition to basic compute and storage pricing? (Select 2)",
+        "options": [
+            "A) Data transfer costs across Availability Zones, Regions, and internet egress boundaries",
+            "B) Software licensing models and third-party license portability options (COST05-BP04)",
+            "C) Physical data center rack power distribution unit (PDU) redundancy ratings",
+            "D) Operating system hardware interrupt request (IRQ) line allocation tables"
+        ],
+        "correct": [
+            "A",
+            "B"
+        ],
+        "explanation": "Creating cost-effective resources requires analyzing inter-AZ and inter-Region network data transfer charges as well as selecting cost-effective software licensing models (e.g., open source vs. commercial BYOL vs. license-included)."
+    },
+    {
+        "id": 20,
+        "section": "COST OPTIMIZATION",
+        "topic": "Cloud Financial Management",
+        "subtopic": "Best Practices (COST01)",
+        "type": "multi",
+        "question": "Which TWO organizational best practices are officially recommended under Cloud Financial Management best practice COST01? (Select 2)",
+        "options": [
+            "A) Establish clear organizational ownership and accountability for cloud cost optimization (COST01-BP01)",
+            "B) Foster a cost-aware culture across engineering, architecture, and product management teams (COST01-BP08)",
+            "C) Completely isolate finance personnel from software engineering teams to prevent development delays",
+            "D) Mandate rigid annual waterfall budget approvals that strictly prevent mid-cycle architectural iterations"
+        ],
+        "correct": [
+            "A",
+            "B"
+        ],
+        "explanation": "COST01 emphasizes establishing designated ownership for cloud cost management and building a cost-aware engineering culture where architects and developers treat cost as a primary architectural metric."
+    },
+    {
+        "id": 21,
+        "section": "COST OPTIMIZATION",
+        "topic": "Billing Tools",
+        "subtopic": "Cost and Usage Report API",
+        "type": "single",
+        "question": "In addition to downloading AWS Cost and Usage Report (CUR) CSV files for spreadsheet analysis, how can automated internal billing platforms ingest this raw billing data programmatically?",
+        "options": [
+            "A) By accessing and querying the generated report files directly from Amazon S3 using the Amazon S3 API or Athena",
+            "B) By subscribing to a dedicated Amazon SNS billing topic that streams every itemized line item as JSON",
+            "C) By executing polling requests against the AWS Billing Dashboard REST API endpoint once every minute",
+            "D) By using the AWS Cost Explorer graphical UI to export scheduled browser screenshot attachments"
+        ],
+        "correct": "A",
+        "explanation": "Because the Cost and Usage Report is published directly to a customer-owned Amazon S3 bucket, applications and analytics pipelines (such as Amazon Athena, Amazon QuickSight, or custom tools) can query the files programmatically via standard S3 APIs or SQL."
+    },
+    {
+        "id": 22,
+        "section": "COST OPTIMIZATION",
+        "topic": "Billing Tools",
+        "subtopic": "AWS Budgets Cost Configurations",
+        "type": "multi",
+        "question": "Which TWO financial cost metrics can be natively tracked when creating a cost budget in AWS Budgets? (Select 2)",
+        "options": [
+            "A) Unblended and Blended cost metrics reflecting consolidated billing configurations",
+            "B) Amortized cost metrics that distribute upfront reservation and Savings Plans fees evenly",
+            "C) Sub-millisecond CPU thermal dissipation cost index values across compute clusters",
+            "D) Speculative financial market currency exchange hedge fluctuations against AWS pricing"
+        ],
+        "correct": [
+            "A",
+            "B"
+        ],
+        "explanation": "AWS Budgets natively tracks unblended costs (actual cash paid per account), blended costs (averaged rates across consolidated organizations), and amortized costs (spreading upfront reservation/Savings Plans fees evenly across the commitment term)."
+    },
+    {
+        "id": 23,
+        "section": "COST OPTIMIZATION",
+        "topic": "Licensing Models",
+        "subtopic": "Serverless Databases",
+        "type": "single",
+        "question": "While provisioned Amazon RDS and OpenSearch instances support Reserved Instances for long-term discounts, how does the billing commitment model function for serverless equivalents (e.g., Aurora Serverless v2)?",
+        "options": [
+            "A) Serverless database engines operate on a consumption-based ACU/request model and do not use standard Reserved Instances",
+            "B) Serverless database engines require purchasing 3-year EC2 Instance Savings Plans tied to the primary database AZ",
+            "C) Serverless database engines require purchasing dedicated physical hardware nodes under a 5-year lease contract",
+            "D) Serverless database engines are billed exclusively at a fixed monthly flat rate regardless of capacity scaling"
+        ],
+        "correct": "A",
+        "explanation": "Serverless database offerings (like Aurora Serverless v2 or OpenSearch Serverless) scale capacity units dynamically on demand (e.g., Aurora Capacity Units - ACUs) and are billed based on per-second consumption rather than traditional instance node reservations."
+    },
+    {
+        "id": 24,
+        "section": "COST OPTIMIZATION",
+        "topic": "Licensing Models",
+        "subtopic": "CloudFront Savings",
+        "type": "single",
+        "question": "An enterprise wants to reduce recurring expenses across global content delivery, edge computing, and web application firewall security. Which AWS commitment bundle is specifically designed for this?",
+        "options": [
+            "A) The AWS CloudFront Security Savings Bundle, providing up to 30% savings on CloudFront and AWS WAF charges",
+            "B) The Compute Savings Plan, which automatically covers all CloudFront CDN bandwidth and edge egress charges",
+            "C) Dedicated Hosts for CloudFront Edge Locations deployed across major global metropolitan data centers",
+            "D) Convertible Reserved Instances provisioned specifically for Amazon API Gateway Regional Edge endpoints"
+        ],
+        "correct": "A",
+        "explanation": "The AWS CloudFront Security Savings Bundle provides up to 30% savings on CloudFront data transfer and request fees in exchange for a 1-year monthly spend commitment, and includes AWS WAF usage (up to 10% of the committed amount) at no additional charge."
+    },
+    {
+        "id": 25,
+        "section": "COST OPTIMIZATION",
+        "topic": "Licensing Models",
+        "subtopic": "Dedicated Instances vs Hosts",
+        "type": "single",
+        "question": "When evaluating tenancy options for strict regulatory and software licensing requirements, what is the key architectural difference between EC2 Dedicated Instances and EC2 Dedicated Hosts?",
+        "options": [
+            "A) Dedicated Hosts provide physical server visibility (sockets/cores) for BYOL licensing compliance, while Dedicated Instances only guarantee hardware isolation",
+            "B) Dedicated Hosts guarantee 100% sustained CPU burstability, while Dedicated Instances restrict instances to baseline performance",
+            "C) Dedicated Hosts are billed strictly per millisecond, while Dedicated Instances require upfront multi-year reservation commitments",
+            "D) Dedicated Hosts span multiple Availability Zones simultaneously, while Dedicated Instances are restricted to a single subnet"
+        ],
+        "correct": "A",
+        "explanation": "Both options provide dedicated physical hardware isolation from other AWS customers, but Dedicated Hosts give customers visibility and control over physical sockets and cores, which is essential for meeting Bring-Your-Own-License (BYOL) per-socket/per-core licensing agreements."
+    },
+    {
+        "id": 26,
+        "section": "PERFORMANCE",
+        "topic": "Design Principles",
+        "subtopic": "Go Global in Minutes",
+        "type": "single",
+        "question": "How does adhering to the 'Go global in minutes' design principle of the Performance Efficiency pillar directly enhance end-user experience for distributed systems?",
+        "options": [
+            "A) By deploying workloads in multiple AWS Regions closer to end users, drastically reducing latency at minimal cost",
+            "B) By automatically translating application user interface strings across multiple global languages in real time",
+            "C) By enforcing synchronous multi-region database replication to guarantee zero RPO across all continents",
+            "D) By routing all global user traffic through a single centralized API Gateway deployed in the primary AWS Region"
+        ],
+        "correct": "A",
+        "explanation": "Deploying workloads across multiple AWS Regions and Edge Locations places computation and cached content geographically close to users, reducing network transit hops and propagation latency while avoiding large upfront capital investments."
+    },
+    {
+        "id": 27,
+        "section": "PERFORMANCE",
+        "topic": "Process and Culture",
+        "subtopic": "Continual Optimization",
+        "type": "single",
+        "question": "An enterprise deployed a cloud workload three years ago that still functions adequately, but the team has never performed an architectural review. Which operational practice are they neglecting?",
+        "options": [
+            "A) Establishing a regular performance review process and adopting an organizational culture of continual optimization",
+            "B) Executing uncoordinated manual load-generation tests directly against production databases during peak hours",
+            "C) Purchasing 3-year All Upfront Reserved Instances to prevent automatic infrastructure scaling events",
+            "D) Disabling detailed Amazon CloudWatch metrics collection to eliminate ongoing monitoring expenditure"
+        ],
+        "correct": "A",
+        "explanation": "AWS emphasizes that architectures degrade in relative efficiency over time without a structured performance review process. Regularly evaluating architectures ensures workloads adopt newer AWS instance generations, serverless options, and cost-efficient optimizations."
+    },
+    {
+        "id": 28,
+        "section": "PERFORMANCE",
+        "topic": "Data Management Performance",
+        "subtopic": "Purpose-Built Data Stores",
+        "type": "single",
+        "question": "When applying the principle of Mechanical Sympathy to database engine selection, why is Amazon DynamoDB the optimal choice over Amazon RDS for extreme scale key-value workloads?",
+        "options": [
+            "A) It provides a fully managed NoSQL engine delivering predictable single-digit millisecond latency at any scale",
+            "B) It natively executes complex multi-table SQL JOIN queries and enforces strict relational foreign key constraints",
+            "C) It requires manual provisioning and striping of Amazon EBS gp3 storage volumes for fine-grained IOPS tuning",
+            "D) It functions as a POSIX-compliant distributed network file system attached directly to EC2 compute instances"
+        ],
+        "correct": "A",
+        "explanation": "Amazon DynamoDB is a purpose-built, fully managed distributed NoSQL database designed specifically for key-value and document data access patterns, delivering consistent single-digit millisecond latency regardless of request volume or dataset size."
+    },
+    {
+        "id": 29,
+        "section": "PERFORMANCE",
+        "topic": "Offloading and Load Distribution",
+        "subtopic": "Caching Beyond Databases",
+        "type": "single",
+        "question": "An architect needs to offload heavy read traffic from an origin compute cluster handling dynamic REST API requests. Which edge networking service provides built-in caching for API responses?",
+        "options": [
+            "A) Amazon API Gateway built-in API Caching tier configured per stage to cache endpoint responses",
+            "B) AWS Direct Connect dedicated private virtual interfaces configured for jumbo frame routing",
+            "C) Amazon Route 53 Geolocation DNS latency-based routing policies without edge proxy layers",
+            "D) AWS Transit Gateway multicast domain routing tables terminating IPsec VPN client tunnels"
+        ],
+        "correct": "A",
+        "explanation": "Amazon API Gateway offers stage-level response caching, allowing responses from backend integrations (such as AWS Lambda, EC2, or custom HTTP backends) to be cached in memory, offloading backend compute fleets and accelerating client responses."
+    },
+    {
+        "id": 30,
+        "section": "PERFORMANCE",
+        "topic": "Networking Performance",
+        "subtopic": "Location and Protocols",
+        "type": "multi",
+        "question": "Which TWO best practices under Networking Performance (PERF04) are recommended to mitigate physical latency constraints and optimize data in transit? (Select 2)",
+        "options": [
+            "A) Strategically choose workload location based on network and latency requirements (PERF04-BP06)",
+            "B) Select modern, high-performance network protocols tailored to the workload profile (PERF04-BP05)",
+            "C) Confine all application assets and storage backends exclusively within a single isolated Availability Zone",
+            "D) Enforce unencrypted raw UDP packet transport protocols across all public internet transaction APIs"
+        ],
+        "correct": [
+            "A",
+            "B"
+        ],
+        "explanation": "PERF04-BP06 advises placing resources close to users via Regions, Local Zones, or CloudFront edge locations, while PERF04-BP05 recommends choosing optimal networking protocols (such as HTTP/2, HTTP/3/QUIC, or SR-IOV/ENA) to minimize latency."
+    },
+    {
+        "id": 31,
+        "section": "COST OPTIMIZATION",
+        "topic": "Expenditure and Usage Awareness",
+        "subtopic": "Governance",
+        "type": "multi",
+        "question": "According to cost governance best practices (COST02), which TWO structural mechanisms are recommended to track cloud consumption and enforce spending accountability across teams? (Select 2)",
+        "options": [
+            "A) Implement a multi-account organization structure aligned with business units (COST02-BP03)",
+            "B) Implement IAM groups, roles, and permission boundaries for access governance (COST02-BP04)",
+            "C) Enforce a complete prohibition on adopting any third-party AWS Marketplace software solutions",
+            "D) Provision a single shared root IAM credential across all engineering teams to streamline access"
+        ],
+        "correct": [
+            "A",
+            "B"
+        ],
+        "explanation": "COST02-BP03 and COST02-BP04 recommend implementing a structured multi-account AWS Organizations topology and configuring role-based IAM access control to isolate workloads, track cost allocation, and enforce expenditure boundaries."
+    },
+    {
+        "id": 32,
+        "section": "COST OPTIMIZATION",
+        "topic": "TCO Analysis",
+        "subtopic": "Cloud Agility",
+        "type": "single",
+        "question": "When evaluating Total Cost of Ownership (TCO) for an enterprise migration, how does 'Increased Agility and Speed' generate quantifiable financial value for the business?",
+        "options": [
+            "A) By shortening development cycles and accelerating feature releases to capture new market opportunities rapidly",
+            "B) By automatically reducing all monthly AWS data egress and storage charges by an unmetered 20% discount",
+            "C) By allowing the enterprise to liquidate depreciated physical hardware assets on secondary salvage markets",
+            "D) By replacing all software engineering and QA personnel with fully autonomous AWS managed hypervisors"
+        ],
+        "correct": "A",
+        "explanation": "Cloud agility allows organizations to provision environments in minutes rather than months, accelerating time-to-market, enabling rapid experimentation, and allowing businesses to respond quickly to market changes and revenue opportunities."
+    },
+    {
+        "id": 33,
+        "section": "PERFORMANCE",
+        "topic": "Process and Culture",
+        "subtopic": "Deployment Pipeline",
+        "type": "single",
+        "question": "Why does the AWS Well-Architected Framework advocate deploying cloud infrastructure using automated Continuous Integration / Continuous Deployment (CI/CD) pipelines?",
+        "options": [
+            "A) It allows infrastructure to be tested, benchmarked, and deployed in a repeatable, consistent, and low-cost manner",
+            "B) It permanently eliminates the need for computing and storage capacity charges across non-production environments",
+            "C) It automatically replaces all database schema migration scripts with real-time heuristic index generation",
+            "D) It completely eliminates the necessity for software unit testing and security code scanning validations"
+        ],
+        "correct": "A",
+        "explanation": "Deploying infrastructure via CI/CD pipelines ensures that infrastructure changes are version-controlled, auditable, consistently reproducible, and low risk, allowing teams to iterate rapidly and test performance optimizations safely."
+    },
+    {
+        "id": 34,
+        "section": "PERFORMANCE",
+        "topic": "Compute Performance",
+        "subtopic": "Scaling vs Resizing",
+        "type": "multi",
+        "question": "Which TWO operational practices under Compute Performance (PERF02) ensure compute capacity precisely tracks fluctuating workload demand without overprovisioning? (Select 2)",
+        "options": [
+            "A) Configure and right-size compute resources based on measured utilization metrics (PERF02-BP04)",
+            "B) Scale compute resources dynamically using automated Auto Scaling policies (PERF02-BP05)",
+            "C) Assign static private IP configurations to instances to prevent ephemeral termination events",
+            "D) Maintain 100% constant CPU utilization across all compute fleets by disabling horizontal scaling"
+        ],
+        "correct": [
+            "A",
+            "B"
+        ],
+        "explanation": "PERF02-BP04 focuses on right-sizing compute instance families and sizes to workload characteristics, while PERF02-BP05 focuses on dynamic horizontal auto scaling to add and remove capacity in direct proportion to real-time demand."
+    },
+    {
+        "id": 35,
+        "section": "PERFORMANCE",
+        "topic": "Data Management Performance",
+        "subtopic": "Query Optimization",
+        "type": "single",
+        "question": "If a relational database encounters severe performance bottlenecks during complex read queries, which Data Management best practice (PERF03-BP04) should the team execute first?",
+        "options": [
+            "A) Implement database-level query optimization techniques such as indexing, partitioning, or read replicas",
+            "B) Immediately migrate the database back to an on-premises physical bare-metal database server appliance",
+            "C) Permanently purge historical transaction records from the database tables to shrink disk allocation",
+            "D) Export database tables to an offline physical AWS Snowball Edge device for batch query execution"
+        ],
+        "correct": "A",
+        "explanation": "PERF03-BP04 recommends improving query performance within the data store by creating appropriate indexes, optimizing SQL query execution plans, partitioning large tables, utilizing materialized views, or offloading read queries to read replicas."
+    },
+    {
+        "id": 36,
+        "section": "COST OPTIMIZATION",
+        "topic": "Billing Tools",
+        "subtopic": "Usage Types",
+        "type": "single",
+        "question": "What level of granularity does the AWS Cost and Usage Report (CUR) provide to assist financial teams with fine-grained cost allocation?",
+        "options": [
+            "A) Individual line items for each unique combination of AWS product, usage type, operation, and resource tag",
+            "B) A single high-level monthly aggregate invoice figure without breakdown by service or operational usage",
+            "C) The specific line numbers of application source code that initiated individual programmatic API calls",
+            "D) The physical serial numbers and chassis designations of underlying host hypervisors in AWS facilities"
+        ],
+        "correct": "A",
+        "explanation": "The AWS Cost and Usage Report (CUR) provides the most detailed billing dataset available in AWS, listing itemized line items broken down by hourly or daily usage, service product, usage type, operation, resource ID, and cost allocation tags."
+    },
+    {
+        "id": 37,
+        "section": "COST OPTIMIZATION",
+        "topic": "Supply and Demand",
+        "subtopic": "Cost-Effective Supply",
+        "type": "single",
+        "question": "What is the primary economic advantage of implementing a 'just-in-time' resource supply strategy in AWS over traditional static capacity planning?",
+        "options": [
+            "A) Eliminating wasteful and expensive overprovisioning by provisioning capacity exactly when demand requires it",
+            "B) Allowing cloud data centers to operate without consuming underlying electrical power or cooling resources",
+            "C) Bypassing third-party commercial software licensing fees across all provisioned operating systems",
+            "D) Permanently preventing physical server hardware failures across all regional Availability Zones"
+        ],
+        "correct": "A",
+        "explanation": "Just-in-time provisioning dynamically aligns resource capacity with real-time demand (using Auto Scaling, serverless architectures, and dynamic scheduling), eliminating the costly buffer capacity historically required in on-premises environments."
+    },
+    {
+        "id": 38,
+        "section": "COST OPTIMIZATION",
+        "topic": "Optimize Over Time",
+        "subtopic": "New Service Reviews",
+        "type": "single",
+        "question": "Why does the 'Optimize Over Time' foundational category mandate periodically evaluating newly released AWS services and instance types?",
+        "options": [
+            "A) Because new AWS services and modern Graviton instance generations often offer higher performance at lower cost",
+            "B) Because previous AWS service offerings are automatically terminated and deprecated within 6 months of release",
+            "C) Because adopting new AWS services automatically grants an unmetered 50% discount on entire monthly billing",
+            "D) Because international financial regulations strictly require annual cloud infrastructure software re-architectures"
+        ],
+        "correct": "A",
+        "explanation": "AWS continually innovates, releasing more cost-effective instance generations (e.g., AWS Graviton processors offering up to 40% better price-performance), new storage tiers, and managed serverless services that lower Total Cost of Ownership."
+    },
+    {
+        "id": 39,
+        "section": "PERFORMANCE",
+        "topic": "Process and Culture",
+        "subtopic": "Fault Isolated Zonal Deployment",
+        "type": "single",
+        "question": "When deploying application software updates across a multi-AZ architecture, what deployment rule limits the blast radius of potential deployment failures?",
+        "options": [
+            "A) Avoid deploying changes to multiple Availability Zones within an AWS Region simultaneously",
+            "B) Deploy updates simultaneously to all global AWS Regions to maintain identical software release parity",
+            "C) Schedule all major deployment pipeline executions exclusively during peak daytime customer traffic hours",
+            "D) Deregister and terminate all Application Load Balancers prior to executing minor application binary updates"
+        ],
+        "correct": "A",
+        "explanation": "Zonal fault-isolated deployment principles dictate updating one Availability Zone at a time, validating health and performance metrics before proceeding to the next zone, ensuring that an issue in a release only affects a single AZ."
+    },
+    {
+        "id": 40,
+        "section": "PERFORMANCE",
+        "topic": "Process and Culture",
+        "subtopic": "Operational Readiness Reviews",
+        "type": "multi",
+        "question": "Which TWO operational criteria are rigorously evaluated during an Operational Readiness Review (ORR) before deploying a workload to production? (Select 2)",
+        "options": [
+            "A) The completeness of end-to-end testing and the effectiveness of real-time monitoring and alerting",
+            "B) The ability of the workload to meet and audit performance Service Level Agreements (SLAs) during disruptions",
+            "C) The physical security clearance badges and biometric credentials of data center facility engineers",
+            "D) The specific frontend CSS styling frameworks and JavaScript minification algorithms used by developers"
+        ],
+        "correct": [
+            "A",
+            "B"
+        ],
+        "explanation": "Operational Readiness Reviews (ORRs) evaluate whether a workload is truly production-ready by examining test completeness, telemetry/monitoring visibility, operational runbooks, failure recovery procedures, and SLA compliance during degradation."
+    },
+    {
+        "id": 41,
+        "section": "PERFORMANCE",
+        "topic": "Process and Culture",
+        "subtopic": "Feature Flags",
+        "type": "single",
+        "question": "How does implementing Feature Flags (Feature Toggles) improve release safety and performance risk management during production deployments?",
+        "options": [
+            "A) By allowing new code to be deployed in a disabled state and gradually rolled out or disabled instantly without rollbacks",
+            "B) By physically disconnecting backend VPC subnets from public internet gateways during deployment windows",
+            "C) By automatically rewriting relational database schemas upon detecting transient application HTTP 500 errors",
+            "D) By compressing Docker container image layers to decrease cold-start provisioning latency in AWS Lambda"
+        ],
+        "correct": "A",
+        "explanation": "Feature flags decouple code deployment from feature release, enabling dark launches, gradual percentage-based traffic routing, and instant kill-switch deactivation if latency or error spikes occur without requiring emergency code rollbacks."
+    },
+    {
+        "id": 42,
+        "section": "PERFORMANCE",
+        "topic": "Application Architecture",
+        "subtopic": "Distributed Systems Interconnection",
+        "type": "multi",
+        "question": "To prevent transient network failures or latency spikes from cascading through a distributed microservices workload, which TWO architectural practices should be adopted? (Select 2)",
+        "options": [
+            "A) Implement loosely coupled asynchronous dependencies between services using queues or events (REL04-BP02)",
+            "B) Ensure API operations and message processing logic are designed to be idempotent (REL04-BP04)",
+            "C) Mandate that all inter-service communications execute via synchronous, blocking RPC connections",
+            "D) Configure application clients to retry failed API calls indefinitely without exponential backoff"
+        ],
+        "correct": [
+            "A",
+            "B"
+        ],
+        "explanation": "Designing resilient distributed systems requires loose coupling (via asynchronous queues/events) and idempotent APIs (so retrying transient failures does not cause duplicate side effects or data corruption)."
+    },
+    {
+        "id": 43,
+        "section": "PERFORMANCE",
+        "topic": "Application Architecture",
+        "subtopic": "Graceful Degradation",
+        "type": "single",
+        "question": "An e-commerce product page calls multiple microservices. If the 'Personalized Recommendations' service fails, the page still renders core product details and checkout buttons. Which design principle does this demonstrate?",
+        "options": [
+            "A) Implementing graceful degradation by converting non-critical hard dependencies into resilient soft dependencies",
+            "B) Enforcing infinite client connection timeouts to guarantee eventual microservice response delivery",
+            "C) Maintaining in-memory state on the frontend web instances to eliminate backend database communication",
+            "D) Executing continuous constant-work algorithms to keep CPU utilization identical across all hours"
+        ],
+        "correct": "A",
+        "explanation": "Graceful degradation converts hard dependencies (which crash the whole page if unavailable) into soft dependencies (which fail gracefully or show fallbacks, allowing the core application to continue functioning)."
+    },
+    {
+        "id": 44,
+        "section": "COST OPTIMIZATION",
+        "topic": "ROI and TCO",
+        "subtopic": "Energy Efficiency",
+        "type": "single",
+        "question": "How does migrating from legacy on-premises data centers to AWS cloud infrastructure directly advance corporate sustainability and TCO goals?",
+        "options": [
+            "A) AWS data centers operate with significantly higher energy efficiency and renewable energy usage, reducing carbon footprint",
+            "B) AWS physically collects and refurbishes all customer on-premises server racks free of charge upon contract signing",
+            "C) AWS provides enterprise customers with dedicated solar panel installations for their corporate headquarters",
+            "D) AWS cloud hardware hypervisors operate completely without electrical power consumption using quantum caching"
+        ],
+        "correct": "A",
+        "explanation": "AWS infrastructure is significantly more energy-efficient than typical on-premises data centers due to purpose-built hardware, advanced cooling, high server utilization, and a commitment to powering operations with 100% renewable energy."
+    },
+    {
+        "id": 45,
+        "section": "COST OPTIMIZATION",
+        "topic": "ROI and TCO",
+        "subtopic": "Automation",
+        "type": "single",
+        "question": "In terms of long-term operational expenditure, what primary financial advantage does cloud automation provide over manual systems administration?",
+        "options": [
+            "A) It minimizes routine manual administrative tasks, lowering labor expenses and drastically reducing human error",
+            "B) It eliminates the need for IT engineering, security, and architectural personnel across the entire organization",
+            "C) It automatically negotiates lower third-party commercial software licensing contracts with external vendors",
+            "D) It automatically replaces all compiled backend application code with autonomous machine learning routines"
+        ],
+        "correct": "A",
+        "explanation": "Automating cloud operations (using CloudFormation, Systems Manager, Lambda, and EventBridge) eliminates repetitive manual tasks, reducing ongoing labor costs, accelerating deployment cycles, and preventing costly human errors and outages."
+    },
+    {
+        "id": 46,
+        "section": "PERFORMANCE",
+        "topic": "Offloading and Load Distribution",
+        "subtopic": "Database Replicas",
+        "type": "single",
+        "question": "When deploying Amazon RDS Read Replicas to offload intensive read query workloads from the Primary DB instance, which replication mechanism is utilized between the database nodes?",
+        "options": [
+            "A) Asynchronous replication from the Primary instance to the Read Replicas with potential minor replication lag",
+            "B) Synchronous replication ensuring zero-millisecond replication lag between all instances across all AZs",
+            "C) Multi-master bi-directional active-active write replication across all provisioned database instances",
+            "D) Periodic nightly batch snapshot restoration creating read-only copies at 24-hour intervals"
+        ],
+        "correct": "A",
+        "explanation": "Amazon RDS Read Replicas utilize asynchronous replication native to the database engine (MySQL, PostgreSQL, MariaDB, Oracle). The primary writes immediately to disk and streams transaction logs asynchronously to replicas."
+    },
+    {
+        "id": 47,
+        "section": "PERFORMANCE",
+        "topic": "Autoscaling vs Manual Scaling",
+        "subtopic": "Service Support",
+        "type": "single",
+        "question": "According to the AWS Autoscaling capabilities matrix, which container orchestration service natively supports target-tracking, step scaling, and scheduled auto-scaling policies?",
+        "options": [
+            "A) Amazon Elastic Container Service (Amazon ECS) managing container tasks across EC2 and AWS Fargate",
+            "B) Amazon Lightsail standalone virtual private server instances hosting monolithic web stacks",
+            "C) AWS Elastic Beanstalk Worker Tiers running single-instance batch background worker threads",
+            "D) AWS Storage Gateway virtual appliances deployed within on-premises VMware vSphere hypervisors"
+        ],
+        "correct": "A",
+        "explanation": "Amazon ECS natively supports Service Auto Scaling (target tracking, step scaling, scheduled scaling) using Application Auto Scaling to dynamically adjust task counts across both EC2 container instances and AWS Fargate serverless compute."
+    },
+    {
+        "id": 48,
+        "section": "COST OPTIMIZATION",
+        "topic": "Cloud Financial Management",
+        "subtopic": "The 'Plan' Pillar",
+        "type": "single",
+        "question": "An organization is developing dynamic forecasting models to quantify business value and establish flexible budgeting for an upcoming cloud migration. Which CFM pillar does this represent?",
+        "options": [
+            "A) Plan, which focuses on dynamic forecasting, flexible budgeting, and quantifying business value generation",
+            "B) See, which focuses exclusively on tagging taxonomy and organizational resource hierarchy visibility",
+            "C) Save, which focuses strictly on executing compute right-sizing and purchasing Savings Plans commitments",
+            "D) Run, which focuses on operational governance guardrails and Service Control Policy enforcement"
+        ],
+        "correct": "A",
+        "explanation": "The 'Plan' pillar of Cloud Financial Management centers on improving financial planning through dynamic forecasting, flexible budgeting, cloud economics modeling, and quantifying business value metrics."
+    },
+    {
+        "id": 49,
+        "section": "COST OPTIMIZATION",
+        "topic": "Licensing Models",
+        "subtopic": "ElastiCache Reservations",
+        "type": "single",
+        "question": "A company operating high-throughput in-memory Redis clusters commits to a 1-year Reserved Node agreement in Amazon ElastiCache. What specific resource parameter defines this reservation?",
+        "options": [
+            "A) Specific Reserved Cache Node Types (e.g., cache.r6g.large) provisioned within a specific AWS Region",
+            "B) Provisioned Read and Write Capacity Units (RCUs/WCUs) allocated across in-memory key spaces",
+            "C) Aggregate gigabytes of volatile memory storage allocated across multi-threaded cluster partitions",
+            "D) The maximum total count of API cache GET and SET operations processed per calendar billing month"
+        ],
+        "correct": "A",
+        "explanation": "Amazon ElastiCache Reserved Nodes provide a significant discount off On-Demand rates when committing to a 1-year or 3-year term for specific cache node types (e.g., cache.r6g.xlarge) in a chosen AWS Region."
+    },
+    {
+        "id": 50,
+        "section": "PERFORMANCE",
+        "topic": "Process and Culture",
+        "subtopic": "Failure Mitigation (REL05)",
+        "type": "multi",
+        "question": "Which TWO architectural mechanisms are recommended under the AWS Reliability and Performance guidelines (REL05) to prevent queue exhaustion and mitigate cascading system failures? (Select 2)",
+        "options": [
+            "A) Implement rate limiting and request throttling to shed excess load gracefully (REL05-BP02)",
+            "B) Implement emergency levers and circuit breakers to selectively disable non-critical functionality (REL05-BP07)",
+            "C) Maintain state continuously in all microservice containers to eliminate external database queries",
+            "D) Increase client request timeouts infinitely to prevent client applications from dropping connections"
+        ],
+        "correct": [
+            "A",
+            "B"
+        ],
+        "explanation": "REL05 best practices for limiting queues and mitigating cascading failure include throttling excess requests (REL05-BP02), failing fast, setting sensible client timeouts, making services stateless, and implementing emergency levers/circuit breakers (REL05-BP07)."
+    }
+];
+
+    // Theme Management
+    let currentTheme = localStorage.getItem('quiz-theme') || 'light';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    updateThemeUI(currentTheme);
+
+    function toggleTheme() {
+        currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        localStorage.setItem('quiz-theme', currentTheme);
+        updateThemeUI(currentTheme);
+    }
+
+    function updateThemeUI(theme) {
+        const icon = document.getElementById('theme-icon');
+        const text = document.getElementById('theme-text');
+        if (icon && text) {
+            if (theme === 'dark') {
+                icon.textContent = '🌙';
+                text.textContent = 'Dark Mode';
+            } else {
+                icon.textContent = '☀️';
+                text.textContent = 'Light Mode';
+            }
+        }
+    }
+
+    let currentFilter = 'all';
+
+    function setFilter(filterType, btn) {
+        currentFilter = filterType;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        filterQuestions();
+    }
+
+    function filterQuestions() {
+        const query = document.getElementById('search-input').value.toLowerCase().trim();
+        const cards = document.querySelectorAll('.question-card');
+
+        cards.forEach(card => {
+            const qTitle = card.querySelector('.question-title') ? card.querySelector('.question-title').textContent : '';
+            const status = card.getAttribute('data-status') || 'unanswered';
+
+            let matchesFilter = false;
+            if (currentFilter === 'all') matchesFilter = true;
+            else if (currentFilter === 'unanswered' && status === 'unanswered') matchesFilter = true;
+            else if (currentFilter === 'correct' && status === 'correct') matchesFilter = true;
+            else if (currentFilter === 'incorrect' && status === 'incorrect') matchesFilter = true;
+
+            let matchesSearch = true;
+            if (query) {
+                if (query.startsWith('#')) {
+                    const num = query.substring(1).trim();
+                    matchesSearch = qTitle.startsWith(num + '.') || qTitle.includes(' ' + num + '.');
+                } else {
+                    matchesSearch = qTitle.toLowerCase().includes(query) || card.textContent.toLowerCase().includes(query);
+                }
+            }
+
+            if (matchesFilter && matchesSearch) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    function updateStats() {
+        const total = quizData.length;
+        const answeredCards = document.querySelectorAll('.question-card[data-status="correct"], .question-card[data-status="incorrect"]');
+        const correctCards = document.querySelectorAll('.question-card[data-status="correct"]');
+        const incorrectCards = document.querySelectorAll('.question-card[data-status="incorrect"]');
+
+        const answered = answeredCards.length;
+        const correct = correctCards.length;
+        const incorrect = incorrectCards.length;
+        const accuracy = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+
+        const statTotal = document.getElementById('stat-total');
+        const statAnswered = document.getElementById('stat-answered');
+        const statCorrect = document.getElementById('stat-correct');
+        const statIncorrect = document.getElementById('stat-incorrect');
+        const statAccuracy = document.getElementById('stat-accuracy');
+        const progressFill = document.getElementById('progress-fill');
+
+        if (statTotal) statTotal.textContent = total;
+        if (statAnswered) statAnswered.textContent = answered;
+        if (statCorrect) statCorrect.textContent = correct;
+        if (statIncorrect) statIncorrect.textContent = incorrect;
+        if (statAccuracy) statAccuracy.textContent = accuracy + '%';
+
+        if (progressFill) {
+            const pct = Math.round((answered / total) * 100);
+            progressFill.style.width = pct + '%';
+        }
+    }
+
+    function renderQuiz() {
+        const container = document.getElementById('quiz-container');
+        let html = '';
+
+        quizData.forEach((q, index) => {
+            const isMulti = q.type === 'multi' || (Array.isArray(q.correct) ? q.correct.length > 1 : (typeof q.correct === 'string' && q.correct.includes(',')));
+            const reqCount = Array.isArray(q.correct) ? q.correct.length : (typeof q.correct === 'string' && q.correct.includes(',') ? q.correct.split(',').length : (isMulti ? 2 : 1));
+            const inputType = isMulti ? 'checkbox' : 'radio';
+
+            let optionsHtml = '';
+            q.options.forEach((opt) => {
+                const optLetter = opt.charAt(0);
+                optionsHtml += '<li class="option-item">' +
+                    '<label class="option-label" onclick="selectOption(this)">' +
+                        '<input type="' + inputType + '" name="question-' + q.id + '" value="' + optLetter + '">' +
+                        '<span>' + opt + '</span>' +
+                    '</label>' +
+                '</li>';
+            });
+
+            html += '<div class="question-card" id="card-' + q.id + '" data-id="' + q.id + '" data-type="' + (isMulti ? 'multi' : 'single') + '" data-req="' + reqCount + '" data-status="unanswered">' +
+                '<div>' +
+                    '<span class="topic-pill">' + q.topic + (q.subtopic ? ' • ' + q.subtopic : '') + '</span>' +
+                    '<div class="question-header">' +
+                        '<div class="question-title">' +
+                            (index + 1) + '. ' + q.question +
+                            (isMulti ? '<span style="color: var(--accent-orange); font-weight: 700; margin-left: 8px;">(Select ' + reqCount + ' options)</span>' : '') +
+                        '</div>' +
+                        '<span class="status-badge correct">✓ Correct</span>' +
+                        '<span class="status-badge incorrect">✕ Incorrect</span>' +
+                    '</div>' +
+                '</div>' +
+                '<ul class="options-list">' +
+                    optionsHtml +
+                '</ul>' +
+                '<button class="submit-btn" onclick="checkAnswer(' + q.id + ')">Submit Answer</button>' +
+                '<div id="feedback-' + q.id + '" class="explanation"></div>' +
+                '<div class="card-watermark">' +
+                    '🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">AWS SAA-C03 Prep Tracker • github.com/borudeyash1</a>' +
+                '</div>' +
+            '</div>';
+        });
+
+        container.innerHTML = html;
+        updateStats();
+    }
+
+    function selectOption(labelElement) {
+        const card = labelElement.closest('.question-card');
+        if (!card) return;
+        const isMulti = card.getAttribute('data-type') === 'multi';
+        const reqCount = parseInt(card.getAttribute('data-req') || '1');
+
+        if (!isMulti) {
+            card.querySelectorAll('.option-label').forEach(l => l.classList.remove('selected-opt'));
+            labelElement.classList.add('selected-opt');
+        } else {
+            const chk = labelElement.querySelector('input[type="checkbox"]');
+            const checkedCount = card.querySelectorAll('input[type="checkbox"]:checked').length;
+            if (checkedCount > reqCount) {
+                if (chk) chk.checked = false;
+                labelElement.classList.remove('selected-opt');
+                alert('You can only select up to ' + reqCount + ' options for this question.');
+                return;
+            }
+            if (chk && chk.checked) {
+                labelElement.classList.add('selected-opt');
+            } else {
+                labelElement.classList.remove('selected-opt');
+            }
+        }
+    }
+
+    function checkAnswer(questionId) {
+        const q = quizData.find(item => item.id === questionId);
+        const card = document.getElementById('card-' + questionId);
+        if (!card || !q) return;
+
+        let correctVal = q.correct;
+        let correctArr = Array.isArray(correctVal) ? correctVal : (typeof correctVal === 'string' && correctVal.includes(',') ? correctVal.split(',').map(s => s.trim()) : [String(correctVal).trim()]);
+
+        const selectedInputs = card.querySelectorAll('input[name="question-' + questionId + '"]:checked');
+        if (selectedInputs.length === 0) {
+            alert("Please select an answer before submitting.");
+            return;
+        }
+
+        const selectedVals = Array.from(selectedInputs).map(i => i.value);
+        const isCorrect = (selectedVals.length === correctArr.length) && selectedVals.every(v => correctArr.includes(v));
+
+        const labels = card.querySelectorAll('.option-label');
+        labels.forEach(label => {
+            const input = label.querySelector('input');
+            if (correctArr.includes(input.value)) {
+                label.classList.add('correct-ans');
+            } else if (selectedVals.includes(input.value)) {
+                label.classList.add('incorrect-ans');
+            }
+            input.disabled = true;
+        });
+
+        const btn = card.querySelector('.submit-btn');
+        btn.disabled = true;
+
+        const badgeCorrect = card.querySelector('.status-badge.correct');
+        const badgeIncorrect = card.querySelector('.status-badge.incorrect');
+
+        if (isCorrect) {
+            card.setAttribute('data-status', 'correct');
+            card.classList.add('answered-correct');
+            card.classList.remove('answered-incorrect');
+            if (badgeCorrect) badgeCorrect.style.display = 'inline-block';
+            if (badgeIncorrect) badgeIncorrect.style.display = 'none';
+        } else {
+            card.setAttribute('data-status', 'incorrect');
+            card.classList.add('answered-incorrect');
+            card.classList.remove('answered-correct');
+            if (badgeIncorrect) badgeIncorrect.style.display = 'inline-block';
+            if (badgeCorrect) badgeCorrect.style.display = 'none';
+        }
+
+        const feedback = document.getElementById('feedback-' + questionId);
+        if (feedback) {
+            feedback.innerHTML = '<strong>' + (isCorrect ? '✓ Correct Answer!' : '✕ Incorrect.') + '</strong> ' + q.explanation;
+            feedback.style.display = 'block';
+        }
+
+        updateStats();
+    }
+
+    // Exam Mode Engine
+    let currentMode = 'practice';
+    let examData = [];
+    let currentExamIndex = 0;
+    let userAnswers = {};
+    let flaggedQuestions = new Set();
+    let examTimerInterval = null;
+    let examTimeRemaining = 0;
+    let lastExamResult = null;
+
+    function switchQuizMode(mode) {
+        if (mode === currentMode) return;
+
+        if (currentMode === 'exam' && mode === 'practice') {
+            if (!confirm('Exiting Exam Mode will end your timed session. Are you sure you want to return to Practice Mode?')) {
+                return;
+            }
+            stopExamTimer();
+        }
+
+        currentMode = mode;
+
+        document.getElementById('btn-mode-practice').classList.toggle('active', mode === 'practice');
+        document.getElementById('btn-mode-exam').classList.toggle('active', mode === 'exam');
+
+        const practiceBottom = document.getElementById('practice-header-bottom');
+        const practiceProgress = document.getElementById('practice-progress-bar');
+        const moduleBanner = document.getElementById('module-banner');
+
+        if (mode === 'practice') {
+            if (practiceBottom) practiceBottom.style.display = 'flex';
+            if (practiceProgress) practiceProgress.style.display = 'block';
+            if (moduleBanner) moduleBanner.style.display = 'flex';
+            renderQuiz();
+        } else {
+            if (practiceBottom) practiceBottom.style.display = 'none';
+            if (practiceProgress) practiceProgress.style.display = 'none';
+            if (moduleBanner) moduleBanner.style.display = 'none';
+            initExamMode();
+        }
+    }
+
+    function initExamMode() {
+        examData = JSON.parse(JSON.stringify(quizData));
+        currentExamIndex = 0;
+        userAnswers = {};
+        flaggedQuestions.clear();
+        lastExamResult = null;
+
+        examTimeRemaining = examData.length * 120; // 2 mins per question
+
+        renderExamLayout();
+        startExamTimer();
+    }
+
+    function startExamTimer() {
+        stopExamTimer();
+        updateTimerDisplay();
+        examTimerInterval = setInterval(() => {
+            examTimeRemaining--;
+            updateTimerDisplay();
+            if (examTimeRemaining <= 0) {
+                stopExamTimer();
+                alert('⏳ Time is up! Submitting your exam now.');
+                finishExamAndShowResults();
+            }
+        }, 1000);
+    }
+
+    function stopExamTimer() {
+        if (examTimerInterval) {
+            clearInterval(examTimerInterval);
+            examTimerInterval = null;
+        }
+    }
+
+    function updateTimerDisplay() {
+        const timerEl = document.getElementById('exam-timer');
+        if (!timerEl) return;
+        const hours = Math.floor(examTimeRemaining / 3600);
+        const mins = Math.floor((examTimeRemaining % 3600) / 60);
+        const secs = examTimeRemaining % 60;
+
+        const formatted = hours > 0 
+            ? hours + ':' + String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0')
+            : String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+
+        timerEl.textContent = '⏱️ ' + formatted;
+        if (examTimeRemaining < 300) {
+            timerEl.style.color = '#ef4444';
+        }
+    }
+
+    function renderExamLayout() {
+        const container = document.getElementById('quiz-container');
+        container.innerHTML = '<div class="exam-header-bar">' +
+            '<div>' +
+                '<strong style="color: var(--text-primary); font-size: 1.05rem;">AWS Solutions Architect Associate Exam Simulation</strong>' +
+                '<div style="font-size: 0.8rem; color: var(--text-secondary);">' + examData.length + ' Questions • Timed Real-Exam Mode</div>' +
+            '</div>' +
+            '<div class="exam-timer-display" id="exam-timer">⏱️ 00:00</div>' +
+            '<button class="btn-finish-exam" onclick="confirmFinishExam()">Submit Exam</button>' +
+        '</div>' +
+        '<div class="exam-grid-layout">' +
+            '<div id="exam-card-area"></div>' +
+            '<div id="exam-palette-area"></div>' +
+        '</div>';
+
+        renderExamCard();
+        renderQuestionPalette();
+    }
+
+    function renderExamCard() {
+        const cardArea = document.getElementById('exam-card-area');
+        if (!cardArea || !examData[currentExamIndex]) return;
+
+        const q = examData[currentExamIndex];
+        const isMulti = q.type === 'multi' || (Array.isArray(q.correct) ? q.correct.length > 1 : (typeof q.correct === 'string' && q.correct.includes(',')));
+        const reqCount = Array.isArray(q.correct) ? q.correct.length : (typeof q.correct === 'string' && q.correct.includes(',') ? q.correct.split(',').length : (isMulti ? 2 : 1));
+        const inputType = isMulti ? 'checkbox' : 'radio';
+
+        const currentAns = userAnswers[q.id] || [];
+        const isFlagged = flaggedQuestions.has(q.id);
+
+        let optionsHTML = '';
+        q.options.forEach(opt => {
+            const optLetter = opt.charAt(0);
+            const isChecked = currentAns.includes(optLetter);
+            optionsHTML += '<li class="option-item">' +
+                '<label class="option-label ' + (isChecked ? 'selected-opt' : '') + '" onclick="handleExamOptionClick(this, \'' + optLetter + '\', ' + isMulti + ', ' + reqCount + ')">' +
+                    '<input type="' + inputType + '" name="exam-q-' + q.id + '" value="' + optLetter + '" ' + (isChecked ? 'checked' : '') + '>' +
+                    '<span>' + opt + '</span>' +
+                '</label>' +
+            '</li>';
+        });
+
+        cardArea.innerHTML = '<div class="question-card" style="margin-top: 0;">' +
+            '<div>' +
+                '<span class="topic-pill">' + q.topic + (q.subtopic ? ' • ' + q.subtopic : '') + '</span>' +
+                '<div class="question-header">' +
+                    '<div class="question-title">' +
+                        'Question ' + (currentExamIndex + 1) + ' of ' + examData.length +
+                        '<div style="font-weight: 500; font-size: 0.95rem; margin-top: 8px;">' + q.question + '</div>' +
+                        (isMulti ? '<div style="color: var(--accent-orange); font-size: 0.85rem; font-weight: 700; margin-top: 4px;">(Select ' + reqCount + ' options)</div>' : '') +
+                    '</div>' +
+                '</div>' +
+            '</div>' +
+            '<ul class="options-list">' +
+                optionsHTML +
+            '</ul>' +
+            '<div class="exam-nav-bar">' +
+                '<button class="btn-nav" onclick="navExamQuestion(-1)" ' + (currentExamIndex === 0 ? 'disabled style="opacity: 0.4; cursor: not-allowed;"' : '') + '>' +
+                    '← Previous' +
+                '</button>' +
+                '<button class="btn-flag ' + (isFlagged ? 'flagged-active' : '') + '" onclick="toggleFlagQuestion(' + q.id + ')">' +
+                    (isFlagged ? '🚩 Flagged' : '🏳️ Flag for Review') +
+                '</button>' +
+                '<button class="btn-nav" onclick="navExamQuestion(1)" ' + (currentExamIndex === examData.length - 1 ? 'disabled style="opacity: 0.4; cursor: not-allowed;"' : '') + '>' +
+                    'Next →' +
+                '</button>' +
+            '</div>' +
+        '</div>';
+    }
+
+    function handleExamOptionClick(labelEl, optLetter, isMulti, reqCount) {
+        const q = examData[currentExamIndex];
+        if (!userAnswers[q.id]) userAnswers[q.id] = [];
+
+        if (!isMulti) {
+            userAnswers[q.id] = [optLetter];
+            document.querySelectorAll('.exam-grid-layout .option-label').forEach(l => l.classList.remove('selected-opt'));
+            labelEl.classList.add('selected-opt');
+            const radio = labelEl.querySelector('input[type="radio"]');
+            if (radio) radio.checked = true;
+        } else {
+            const chk = labelEl.querySelector('input[type="checkbox"]');
+            if (userAnswers[q.id].includes(optLetter)) {
+                userAnswers[q.id] = userAnswers[q.id].filter(l => l !== optLetter);
+                labelEl.classList.remove('selected-opt');
+                if (chk) chk.checked = false;
+            } else {
+                if (userAnswers[q.id].length >= reqCount) {
+                    alert('You can only select up to ' + reqCount + ' options.');
+                    if (chk) chk.checked = false;
+                    return;
+                }
+                userAnswers[q.id].push(optLetter);
+                labelEl.classList.add('selected-opt');
+                if (chk) chk.checked = true;
+            }
+        }
+        renderQuestionPalette();
+    }
+
+    function toggleFlagQuestion(qId) {
+        if (flaggedQuestions.has(qId)) {
+            flaggedQuestions.delete(qId);
+        } else {
+            flaggedQuestions.add(qId);
+        }
+        renderExamCard();
+        renderQuestionPalette();
+    }
+
+    function navExamQuestion(delta) {
+        const nextIdx = currentExamIndex + delta;
+        if (nextIdx >= 0 && nextIdx < examData.length) {
+            currentExamIndex = nextIdx;
+            renderExamCard();
+            renderQuestionPalette();
+        }
+    }
+
+    function jumpToExamQuestion(idx) {
+        if (idx >= 0 && idx < examData.length) {
+            currentExamIndex = idx;
+            renderExamCard();
+            renderQuestionPalette();
+        }
+    }
+
+    function renderQuestionPalette() {
+        const paletteContainer = document.getElementById('exam-palette-area');
+        if (!paletteContainer) return;
+
+        let answeredCount = 0;
+        let buttonsHTML = '';
+
+        examData.forEach((q, idx) => {
+            const isAnswered = userAnswers[q.id] && userAnswers[q.id].length > 0;
+            if (isAnswered) answeredCount++;
+            const isFlagged = flaggedQuestions.has(q.id);
+            const isActive = idx === currentExamIndex;
+
+            let classes = ['palette-btn'];
+            if (isActive) classes.push('active');
+            if (isAnswered) classes.push('answered');
+            if (isFlagged) classes.push('flagged');
+
+            buttonsHTML += '<button class="' + classes.join(' ') + '" onclick="jumpToExamQuestion(' + idx + ')">' +
+                (idx + 1) +
+            '</button>';
+        });
+
+        paletteContainer.innerHTML = '<div class="exam-palette-panel">' +
+            '<div class="palette-header">' +
+                '<span>Question Palette</span>' +
+                '<span style="font-size: 0.8rem; opacity: 0.8;">' + answeredCount + '/' + examData.length + ' Done</span>' +
+            '</div>' +
+            '<div class="palette-grid">' +
+                buttonsHTML +
+            '</div>' +
+            '<div class="palette-legend">' +
+                '<span><strong style="color: #60a5fa;">●</strong> Answered</span>' +
+                '<span><strong style="color: #fbbf24;">🚩</strong> Flagged</span>' +
+                '<span><strong>◯</strong> Unanswered</span>' +
+            '</div>' +
+        '</div>';
+    }
+
+    function confirmFinishExam() {
+        const unanswered = examData.length - Object.keys(userAnswers).filter(k => userAnswers[k] && userAnswers[k].length > 0).length;
+        let msg = 'Are you sure you want to finish and submit your exam?';
+        if (unanswered > 0) {
+            msg = '⚠️ You have ' + unanswered + ' unanswered question(s). Are you sure you want to finish and submit your exam now?';
+        }
+        if (confirm(msg)) {
+            finishExamAndShowResults();
+        }
+    }
+
+    function finishExamAndShowResults() {
+        stopExamTimer();
+
+        let correctCount = 0;
+        let incorrectQuestions = [];
+
+        examData.forEach((q, idx) => {
+            const userAns = userAnswers[q.id] || [];
+            let correctArray = Array.isArray(q.correct) ? q.correct : (typeof q.correct === 'string' && q.correct.includes(',') ? q.correct.split(',').map(s => s.trim()) : [String(q.correct)]);
+
+            const isCorrect = (userAns.length === correctArray.length) && userAns.every(val => correctArray.includes(val));
+
+            // Extract option text for rich results
+            const userAnsText = userAns.length > 0 
+                ? userAns.map(letter => {
+                    const opt = q.options.find(o => o.startsWith(letter));
+                    return opt || letter;
+                  }).join('<br>')
+                : 'None (Unanswered)';
+
+            const correctAnsText = correctArray.map(letter => {
+                const opt = q.options.find(o => o.startsWith(letter));
+                return opt || letter;
+            }).join('<br>');
+
+            if (isCorrect) {
+                correctCount++;
+            } else {
+                incorrectQuestions.push({
+                    number: idx + 1,
+                    id: q.id,
+                    question: q.question,
+                    options: q.options,
+                    userAnswer: userAns.length > 0 ? userAns.join(', ') : 'None (Unanswered)',
+                    userAnswerText: userAnsText,
+                    correctAnswer: correctArray.join(', '),
+                    correctAnswerText: correctAnsText,
+                    explanation: q.explanation || ''
+                });
+            }
+        });
+
+        const totalQs = examData.length;
+        const scorePct = Math.round((correctCount / totalQs) * 100);
+        const awsScaledScore = Math.round(100 + (scorePct / 100) * 900);
+        const isPass = awsScaledScore >= 720;
+
+        const timeSpentSecs = (examData.length * 120) - examTimeRemaining;
+        const spentMins = Math.floor(timeSpentSecs / 60);
+        const spentSecs = timeSpentSecs % 60;
+        const formattedTimeSpent = spentMins + 'm ' + spentSecs + 's';
+
+        const resultRecord = {
+            timestamp: new Date().toISOString(),
+            examTitle: 'AWS Solutions Architect Associate (SAA-C03) - Cost Optimization Quiz Master',
+            totalQuestions: totalQs,
+            correctCount: correctCount,
+            scorePercentage: scorePct,
+            awsScaledScore: awsScaledScore,
+            status: isPass ? 'PASS' : 'FAIL',
+            timeSpent: formattedTimeSpent,
+            incorrectQuestions: incorrectQuestions
+        };
+
+        lastExamResult = resultRecord;
+
+        try {
+            const existing = JSON.parse(localStorage.getItem('aws_saa_exam_history') || '[]');
+            existing.unshift(resultRecord);
+            localStorage.setItem('aws_saa_exam_history', JSON.stringify(existing));
+        } catch (e) {}
+
+        renderResultsDashboard(resultRecord);
+    }
+
+    function renderResultsDashboard(result) {
+        const container = document.getElementById('quiz-container');
+
+        let auditHTML = '';
+        if (result.incorrectQuestions.length === 0) {
+            auditHTML = '<div style="text-align: center; color: #10b981; font-weight: 700; padding: 20px;">🎉 Flawless Score! You answered every question correctly.</div>';
+        } else {
+            result.incorrectQuestions.forEach(item => {
+                auditHTML += '<div class="question-card" style="margin-bottom: 16px; border-left: 4px solid #ef4444;">' +
+                    '<div style="font-weight: 700; margin-bottom: 8px; color: var(--text-primary, #0f172a); font-size: 1rem;">' +
+                        '#' + item.number + '. ' + item.question +
+                    '</div>' +
+                    '<div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem; margin-bottom: 12px; background: var(--card-sub-bg); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">' +
+                        '<div style="color: #ef4444;">' +
+                            '❌ <strong>Your Answer:</strong><br>' + item.userAnswerText +
+                        '</div>' +
+                        '<div style="color: #10b981; border-top: 1px dashed var(--border-color); padding-top: 8px;">' +
+                            '✓ <strong>Correct Answer:</strong><br>' + item.correctAnswerText +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="explanation" style="display: block; margin-top: 8px;">' +
+                        '<strong>Explanation:</strong> ' + item.explanation +
+                    '</div>' +
+                '</div>';
+            });
+        }
+
+        container.innerHTML = '<div class="results-container">' +
+            '<div class="results-score-box ' + result.status.toLowerCase() + '">' +
+                '<div class="score-status-badge">' + (result.status === 'PASS' ? '🎉 CONGRATULATIONS - PASSED' : '⚠️ FAIL - NEEDS IMPROVEMENT') + '</div>' +
+                '<div class="score-big">' + result.awsScaledScore + ' / 1000</div>' +
+                '<div style="font-weight: 600; font-size: 1.1rem;">' +
+                    'Score: ' + result.correctCount + ' / ' + result.totalQuestions + ' (' + result.scorePercentage + '%) | Time Spent: ' + result.timeSpent +
+                '</div>' +
+                '<div style="font-size: 0.85rem; opacity: 0.8; margin-top: 4px;">(Passing Threshold: 720 / 1000)</div>' +
+            '</div>' +
+
+            '<div class="results-actions">' +
+                '<button class="btn-export-json" onclick="downloadExamResultsJSON()">' +
+                    '📥 Save Results JSON (exam_results.json)' +
+                '</button>' +
+                '<button class="btn-nav" onclick="initExamMode()">' +
+                    '🔄 Retake AWS Exam' +
+                '</button>' +
+                '<button class="btn-nav" onclick="switchQuizMode(\'practice\')">' +
+                    '📖 Return to Practice Mode' +
+                '</button>' +
+            '</div>' +
+
+            '<div style="margin-top: 32px;">' +
+                '<h3 style="color: var(--text-primary, #0f172a); margin-bottom: 16px;">🔍 Incorrect & Unanswered Questions Analysis (' + result.incorrectQuestions.length + ')</h3>' +
+                auditHTML +
+            '</div>' +
+        '</div>';
+    }
+
+    function downloadExamResultsJSON() {
+        if (!lastExamResult) return;
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(lastExamResult, null, 2));
+        const downloadAnchor = document.createElement('a');
+        downloadAnchor.setAttribute("href", dataStr);
+        downloadAnchor.setAttribute("download", "exam_results.json");
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        downloadAnchor.remove();
+        alert('Saved exam results to exam_results.json!');
+    }
+
+    // Initialize application on load
+    renderQuiz();
+</script>
+</body>
+</html>
