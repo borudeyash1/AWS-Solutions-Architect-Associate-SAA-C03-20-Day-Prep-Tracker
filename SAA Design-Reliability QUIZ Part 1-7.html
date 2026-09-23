@@ -489,6 +489,38 @@
             color: var(--incorrect-text);
             border: 1px solid var(--incorrect-border);
         }
+    
+        /* Subtle Card Watermark */
+        .card-watermark {
+            margin-top: 14px;
+            padding-top: 8px;
+            border-top: 1px dashed var(--border-color, #1f2937);
+            font-size: 0.73rem;
+            color: var(--text-muted, #94a3b8);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 4px;
+            opacity: 0.6;
+            transition: opacity 0.2s ease;
+            word-break: break-all;
+        }
+
+        .card-watermark:hover {
+            opacity: 1;
+        }
+
+        .card-watermark a {
+            color: var(--text-secondary, #94a3b8);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .card-watermark a:hover {
+            color: var(--aws-orange, #ff9900);
+            text-decoration: underline;
+        }
+
     </style>
 </head>
 <body>
@@ -1962,6 +1994,9 @@
                     </ul>
                     <button class="submit-btn" onclick="checkAnswer(${q.id}, ${correctArg}, \`${q.explanation.replace(/`/g, '\`')}\`)">Submit Answer</button>
                     <div id="feedback-${q.id}" class="explanation"></div>
+                    <div class="card-watermark">
+    🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker</a>
+</div>
                 </div>
             `;
         });
