@@ -710,6 +710,74 @@
         .btn-export-json:hover {
             background: #2563eb;
         }
+    
+    /* ======================== QUESTION NAVIGATOR PANEL ======================== */
+    #practice-nav-btn {
+        position: fixed;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 9000;
+        background: linear-gradient(135deg, #ff9900, #e07b00);
+        color: #fff;
+        border: none;
+        border-radius: 10px 0 0 10px;
+        padding: 12px 10px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        cursor: pointer;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        letter-spacing: 1.5px;
+        box-shadow: -3px 0 18px rgba(255,153,0,0.45);
+        transition: background 0.2s, box-shadow 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    #practice-nav-btn:hover { background: linear-gradient(135deg, #ffaa22, #ff9900); box-shadow: -4px 0 24px rgba(255,153,0,0.6); }
+    #practice-nav-panel {
+        position: fixed;
+        right: -340px;
+        top: 0;
+        height: 100vh;
+        width: 320px;
+        background: var(--card-bg, #111827);
+        border-left: 2px solid #ff9900;
+        box-shadow: -6px 0 40px rgba(0,0,0,0.5);
+        z-index: 8999;
+        display: flex;
+        flex-direction: column;
+        transition: right 0.32s cubic-bezier(0.4,0,0.2,1);
+        overflow: hidden;
+    }
+    #practice-nav-panel.open { right: 0; }
+    #practice-nav-panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 18px;
+        background: linear-gradient(135deg, rgba(255,153,0,0.15), rgba(255,153,0,0.05));
+        border-bottom: 1px solid var(--border-color, #e2e8f0);
+    }
+    #practice-nav-panel-header h3 { margin: 0; font-size: 1rem; font-weight: 700; color: #ff9900; }
+    #practice-nav-close { background: none; border: none; color: var(--text-secondary, #6b7280); font-size: 1.4rem; cursor: pointer; line-height: 1; padding: 2px 6px; border-radius: 4px; transition: color 0.2s; }
+    #practice-nav-close:hover { color: var(--text-primary, #111); }
+    #practice-nav-legend { display: flex; gap: 12px; padding: 10px 18px 8px; border-bottom: 1px solid var(--border-color, #e2e8f0); flex-wrap: wrap; }
+    .nav-legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.75rem; color: var(--text-secondary, #6b7280); }
+    .nav-legend-dot { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+    .nav-legend-dot.unanswered { background: var(--card-sub-bg, #f1f5f9); border: 1px solid var(--border-color, #cbd5e1); }
+    .nav-legend-dot.correct { background: rgba(16,185,129,0.25); border: 1px solid #10b981; }
+    .nav-legend-dot.incorrect { background: rgba(239,68,68,0.25); border: 1px solid #ef4444; }
+    #practice-nav-stats { padding: 8px 18px; font-size: 0.8rem; color: var(--text-secondary, #6b7280); border-bottom: 1px solid var(--border-color, #e2e8f0); }
+    #practice-nav-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; padding: 14px; overflow-y: auto; flex: 1; }
+    .nav-q-btn { aspect-ratio: 1; border-radius: 5px; border: 1px solid var(--border-color, #cbd5e1); background: var(--card-sub-bg, #f1f5f9); color: var(--text-secondary, #6b7280); font-size: 0.68rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+    .nav-q-btn:hover { background: rgba(255,153,0,0.15); border-color: #ff9900; color: #ff9900; transform: scale(1.08); }
+    .nav-q-btn.status-correct { background: rgba(16,185,129,0.18); border-color: #10b981; color: #10b981; }
+    .nav-q-btn.status-incorrect { background: rgba(239,68,68,0.18); border-color: #ef4444; color: #ef4444; }
+    /* Order buttons */
+    .order-btn-group { display: inline-flex; gap: 5px; margin-left: 10px; padding-left: 10px; border-left: 1px solid var(--border-color, #cbd5e1); }
+
     </style>
 </head>
 <body>
@@ -778,12 +846,12 @@
         "type": "single",
         "question": "Under the AWS Cloud Financial Management (CFM) Framework, which collection of AWS services and governance capabilities is categorized under the 'See' pillar to establish cost allocation and resource visibility?",
         "options": [
-            "A) AWS Control Tower, AWS Organizations, Cost Allocation Tags, and AWS Cost and Usage Reports (CUR)",
-            "B) AWS Cost Explorer forecasting models, AWS Budgets threshold alerts, and CloudWatch Billing Alarms",
+            "A) AWS Service Catalog portfolios, Cost Anomaly Detection monitors, and Service Control Policies (SCPs)",
+            "B) AWS Control Tower, AWS Organizations, Cost Allocation Tags, and AWS Cost and Usage Reports (CUR)",
             "C) Amazon EC2 Auto Scaling target tracking, Spot Instance Fleets, and Compute Savings Plans commitments",
-            "D) AWS Service Catalog portfolios, Cost Anomaly Detection monitors, and Service Control Policies (SCPs)"
+            "D) AWS Cost Explorer forecasting models, AWS Budgets threshold alerts, and CloudWatch Billing Alarms"
         ],
-        "correct": "A",
+        "correct": "B",
         "explanation": "The 'See' pillar focuses on foundational organizational structure, resource hierarchy, and tagging visibility using AWS Control Tower, AWS Organizations, Cost Allocation Tags, Resource Groups, Cost Categories, and detailed AWS Cost and Usage Reports (CUR)."
     },
     {
@@ -795,8 +863,8 @@
         "question": "Which set of cost-reduction levers and capacity purchasing models is categorized under the 'Save' pillar of the Cloud Financial Management Framework?",
         "options": [
             "A) Right-sizing compute instances, utilizing EC2 Spot Fleets, and purchasing Savings Plans or Reservations",
-            "B) Configuring AWS Cost Categories, establishing resource tag hierarchies, and reviewing consolidated invoices",
-            "C) Setting up AWS Budgets threshold alerts, evaluating Cost Explorer forecasts, and defining quarterly targets",
+            "B) Setting up AWS Budgets threshold alerts, evaluating Cost Explorer forecasts, and defining quarterly targets",
+            "C) Configuring AWS Cost Categories, establishing resource tag hierarchies, and reviewing consolidated invoices",
             "D) Deploying AWS Service Catalog guardrails, managing SCPs, and operating Cost Anomaly Detection monitors"
         ],
         "correct": "A",
@@ -810,12 +878,12 @@
         "type": "single",
         "question": "Under the 'Run' pillar of Cloud Financial Management, which governance mechanisms ensure continuous operational cost control across multi-account enterprise environments?",
         "options": [
-            "A) AWS Service Catalog portfolio enforcement, Cost Anomaly Detection, and Service Control Policies (SCPs)",
-            "B) Implementing AWS Cost Allocation Tags, configuring Resource Groups, and downloading monthly CUR files",
-            "C) Enforcing 3-year All Upfront Compute Savings Plans and converting all on-demand fleets to Spot instances",
-            "D) Setting up AWS Pricing Calculator estimates and building Greenfield total cost of ownership spreadsheets"
+            "A) Implementing AWS Cost Allocation Tags, configuring Resource Groups, and downloading monthly CUR files",
+            "B) Enforcing 3-year All Upfront Compute Savings Plans and converting all on-demand fleets to Spot instances",
+            "C) Setting up AWS Pricing Calculator estimates and building Greenfield total cost of ownership spreadsheets",
+            "D) AWS Service Catalog portfolio enforcement, Cost Anomaly Detection, and Service Control Policies (SCPs)"
         ],
-        "correct": "A",
+        "correct": "D",
         "explanation": "The 'Run' pillar focuses on governance, continuous monitoring, and organizational guardrails through AWS Service Catalog, AWS Cost Anomaly Detection, Service Control Policies (SCPs), and automated FinOps operational reviews."
     },
     {
@@ -826,12 +894,12 @@
         "type": "single",
         "question": "How does adopting a consumption model benefit an organization transitioning from traditional on-premises data centers to AWS, in accordance with the Cost Optimization pillar?",
         "options": [
-            "A) Organizations pay only for the compute and storage resources consumed, scaling capacity dynamically with demand",
-            "B) Organizations must pre-pay for 5 years of peak hardware capacity in advance to secure favorable bulk discounts",
-            "C) Organizations convert all operational variable expenses (OpEx) into depreciable fixed capital expenses (CapEx)",
-            "D) Organizations eliminate the requirement to manage software licensing compliance across all virtual instances"
+            "A) Organizations must pre-pay for 5 years of peak hardware capacity in advance to secure favorable bulk discounts",
+            "B) Organizations convert all operational variable expenses (OpEx) into depreciable fixed capital expenses (CapEx)",
+            "C) Organizations eliminate the requirement to manage software licensing compliance across all virtual instances",
+            "D) Organizations pay only for the compute and storage resources consumed, scaling capacity dynamically with demand"
         ],
-        "correct": "A",
+        "correct": "D",
         "explanation": "The 'Adopt a consumption model' design principle allows businesses to pay only for computing resources actually consumed and adapt capacity automatically based on business requirements rather than building for static peak forecasts."
     },
     {
@@ -842,12 +910,12 @@
         "type": "single",
         "question": "According to the Cost Optimization design principle 'Measure overall efficiency', what is the recommended metric to evaluate cloud economic productivity?",
         "options": [
-            "A) Measure business output gains and transaction volume relative to the total cloud infrastructure cost incurred",
-            "B) Track the total raw gigabytes of archived data stored in Amazon S3 Glacier Flexible Retrieval tiers",
-            "C) Calculate the percentage of EC2 instances running Linux distributions versus Windows Server environments",
-            "D) Measure the reduction in physical server rack square footage achieved within private on-premises facilities"
+            "A) Calculate the percentage of EC2 instances running Linux distributions versus Windows Server environments",
+            "B) Measure the reduction in physical server rack square footage achieved within private on-premises facilities",
+            "C) Measure business output gains and transaction volume relative to the total cloud infrastructure cost incurred",
+            "D) Track the total raw gigabytes of archived data stored in Amazon S3 Glacier Flexible Retrieval tiers"
         ],
-        "correct": "A",
+        "correct": "C",
         "explanation": "Measuring overall efficiency involves measuring the business output of the workload (e.g., revenue, active users, completed transactions) against the associated cloud infrastructure costs to ensure scaling is economically advantageous."
     },
     {
@@ -858,12 +926,12 @@
         "type": "single",
         "question": "Why does the AWS Well-Architected Framework emphasize leveraging managed services (like Amazon RDS, DynamoDB, or S3) to lower Total Cost of Ownership (TCO)?",
         "options": [
-            "A) Managed services eliminate customer operational overhead for server racking, OS patching, and hardware maintenance",
+            "A) Managed services guarantee zero latency regardless of the geographic location of querying client devices",
             "B) Managed services eliminate all network data transfer fees between different AWS Regions across the globe",
-            "C) Managed services guarantee zero latency regardless of the geographic location of querying client devices",
+            "C) Managed services eliminate customer operational overhead for server racking, OS patching, and hardware maintenance",
             "D) Managed services provide free unlimited storage capacity across all relational database table partitions"
         ],
-        "correct": "A",
+        "correct": "C",
         "explanation": "Managed services operate at cloud scale, removing the undifferentiated heavy lifting of managing servers, operating system updates, database replication, backups, and physical hardware, thereby drastically reducing operational labor expenses."
     },
     {
@@ -874,14 +942,13 @@
         "type": "multi",
         "question": "Which TWO distinct Savings Plans commitment types are available within AWS to reduce compute expenditures in exchange for hourly spend commitments? (Select 2)",
         "options": [
-            "A) Compute Savings Plans providing maximum flexibility across EC2, AWS Fargate, and AWS Lambda",
+            "A) Database Storage Savings Plans discounting Amazon Aurora provisioned I/O storage capacity blocks",
             "B) EC2 Instance Savings Plans providing up to 72% discounts on specific instance families within a Region",
-            "C) Database Storage Savings Plans discounting Amazon Aurora provisioned I/O storage capacity blocks",
+            "C) Compute Savings Plans providing maximum flexibility across EC2, AWS Fargate, and AWS Lambda",
             "D) Network Gateway Savings Plans discounting cross-AZ transit traffic traversing AWS Transit Gateways"
         ],
         "correct": [
-            "A",
-            "B"
+            "C"
         ],
         "explanation": "AWS offers Compute Savings Plans (flexible across EC2 families, Regions, OS, Fargate, and Lambda) and EC2 Instance Savings Plans (providing higher discounts committed to a specific instance family in a chosen AWS Region). There are also SageMaker Savings Plans."
     },
@@ -894,13 +961,12 @@
         "question": "Beyond Amazon EC2, which TWO managed AWS services natively offer node/instance reservation commitments to provide significant cost discounts? (Select 2)",
         "options": [
             "A) Amazon OpenSearch Service dedicated master and data nodes",
-            "B) Amazon ElastiCache clustered in-memory caching nodes",
-            "C) AWS Lambda serverless event execution invocation units",
+            "B) AWS Lambda serverless event execution invocation units",
+            "C) Amazon ElastiCache clustered in-memory caching nodes",
             "D) AWS Fargate serverless container task runtime vCPUs"
         ],
         "correct": [
-            "A",
-            "B"
+            "A"
         ],
         "explanation": "Amazon OpenSearch Service, Amazon ElastiCache, Amazon RDS, Amazon Redshift, and Amazon DynamoDB (reserved capacity) support reservation models for their dedicated instances/nodes. AWS Lambda and Fargate are covered under Compute Savings Plans, not reservations."
     },
@@ -913,9 +979,9 @@
         "question": "An enterprise is architecting a brand-new 'Greenfield' workload on AWS with zero prior deployment history. Which tool must they use to estimate upcoming costs and why?",
         "options": [
             "A) AWS Pricing Calculator, because Cost Explorer requires historical account consumption data to generate forecasts",
-            "B) AWS Cost Explorer, because it contains synthetic machine learning forecasting models for greenfield projects",
-            "C) AWS Budgets, because it automatically creates predictive spending plans without requiring resource inputs",
-            "D) AWS Cost and Usage Report (CUR), because it generates baseline billing templates for unlaunched services"
+            "B) AWS Cost and Usage Report (CUR), because it generates baseline billing templates for unlaunched services",
+            "C) AWS Cost Explorer, because it contains synthetic machine learning forecasting models for greenfield projects",
+            "D) AWS Budgets, because it automatically creates predictive spending plans without requiring resource inputs"
         ],
         "correct": "A",
         "explanation": "AWS Cost Explorer requires historical account billing data to generate spending graphs and future forecasts. For new Greenfield projects without historical data, the AWS Pricing Calculator is the designated tool for estimating infrastructure costs."
@@ -928,12 +994,12 @@
         "type": "single",
         "question": "What is the delivery mechanism and standard update frequency of the AWS Cost and Usage Report (CUR) when configured for deep billing analysis?",
         "options": [
-            "A) Delivered as detailed CSV/Parquet files to an Amazon S3 bucket, updated by AWS up to three times per day",
-            "B) Streamed as real-time JSON events directly into an Amazon DynamoDB table at sub-second intervals",
-            "C) Emailed as an encrypted PDF summary document to the account root email at the end of each billing cycle",
-            "D) Ingested directly into Amazon RDS MySQL instances hourly via automated AWS Lambda background triggers"
+            "A) Streamed as real-time JSON events directly into an Amazon DynamoDB table at sub-second intervals",
+            "B) Delivered as detailed CSV/Parquet files to an Amazon S3 bucket, updated by AWS up to three times per day",
+            "C) Ingested directly into Amazon RDS MySQL instances hourly via automated AWS Lambda background triggers",
+            "D) Emailed as an encrypted PDF summary document to the account root email at the end of each billing cycle"
         ],
-        "correct": "A",
+        "correct": "B",
         "explanation": "The AWS Cost and Usage Report (CUR) delivers comprehensive itemized billing data (in CSV or Parquet format) to a designated Amazon S3 bucket, and AWS updates these report files up to three times a day."
     },
     {
@@ -945,13 +1011,12 @@
         "question": "When a cost or usage threshold in AWS Budgets is forecasted to be breached, which TWO automated actions can be executed to prevent unintended expenditures? (Select 2)",
         "options": [
             "A) Automatically attach a restrictive IAM policy that denies permissions to provision additional cloud resources",
-            "B) Emit an automated event to Amazon EventBridge or SSM to stop specific Amazon EC2 or RDS instances",
-            "C) Automatically upgrade the support tier to Enterprise Support to request retroactive billing waivers",
-            "D) Permanently purge all Amazon S3 versioned objects to instantly eliminate object storage charges"
+            "B) Permanently purge all Amazon S3 versioned objects to instantly eliminate object storage charges",
+            "C) Emit an automated event to Amazon EventBridge or SSM to stop specific Amazon EC2 or RDS instances",
+            "D) Automatically upgrade the support tier to Enterprise Support to request retroactive billing waivers"
         ],
         "correct": [
-            "A",
-            "B"
+            "A"
         ],
         "explanation": "AWS Budgets Actions allows configuring automated governance responses when budget thresholds are exceeded, including applying restrictive IAM policies to users/roles/groups or triggering target actions (such as stopping EC2/RDS instances via SSM or EventBridge)."
     },
@@ -963,12 +1028,12 @@
         "type": "single",
         "question": "How frequently is budget tracking information updated within AWS Budgets to reflect newly incurred costs and usage metrics?",
         "options": [
-            "A) Up to three times a day, with updates typically occurring every 8 to 12 hours after usage processing",
-            "B) Continuously in real-time, reflecting individual API calls within 500 milliseconds of execution",
+            "A) Continuously in real-time, reflecting individual API calls within 500 milliseconds of execution",
+            "B) Up to three times a day, with updates typically occurring every 8 to 12 hours after usage processing",
             "C) Exclusively once per calendar month upon official closure and invoicing of the monthly billing cycle",
             "D) Every 60 minutes continuously, synchronized precisely at the beginning of each UTC calendar hour"
         ],
-        "correct": "A",
+        "correct": "B",
         "explanation": "AWS Budgets receives updated cost and usage data up to three times a day, typically lagging usage by approximately 8 to 12 hours as billing records are collected and processed."
     },
     {
@@ -979,12 +1044,12 @@
         "type": "single",
         "question": "According to AWS cloud economics best practices, treating AWS merely as a 'lift-and-shift virtual data center' without adopting managed services leads to which financial outcome?",
         "options": [
-            "A) Suboptimal Return on Investment (ROI) due to continued operational overhead and static resource provisioning",
+            "A) Inability to configure AWS Organizations consolidated billing and multi-account cost allocation tags",
             "B) Automatic revocation of volume tiered discounts across Amazon S3 storage and CloudFront data egress",
-            "C) Inability to configure AWS Organizations consolidated billing and multi-account cost allocation tags",
+            "C) Suboptimal Return on Investment (ROI) due to continued operational overhead and static resource provisioning",
             "D) Mandatory transition from pay-as-you-go billing to multi-year upfront capital commitment contracts"
         ],
-        "correct": "A",
+        "correct": "C",
         "explanation": "Treating AWS as just another data center (running static VMs without auto scaling, managed services, or modernization) fails to capture cloud economic advantages and results in poor ROI and high ongoing operational costs."
     },
     {
@@ -995,12 +1060,12 @@
         "type": "single",
         "question": "When conducting a comprehensive Total Cost of Ownership (TCO) evaluation between on-premises and AWS, which 'soft costs' strongly tilt the economic advantage in favor of cloud adoption?",
         "options": [
-            "A) Reduced operational labor overhead, increased business agility, and faster time-to-market for new features",
-            "B) The physical scrap metal salvage and resale value of depreciated on-premises server chassis hardware",
-            "C) The raw kilowatt-hour utility rate differences between municipal power grids and AWS facilities",
-            "D) The comparative cost per megabit of private IPv4 network addresses versus public IPv6 subnets"
+            "A) The comparative cost per megabit of private IPv4 network addresses versus public IPv6 subnets",
+            "B) The raw kilowatt-hour utility rate differences between municipal power grids and AWS facilities",
+            "C) Reduced operational labor overhead, increased business agility, and faster time-to-market for new features",
+            "D) The physical scrap metal salvage and resale value of depreciated on-premises server chassis hardware"
         ],
-        "correct": "A",
+        "correct": "C",
         "explanation": "TCO comparisons often look close on raw compute/storage hardware dollars, but AWS overwhelmingly wins when quantifying soft costs: reduction in operational administrative labor, elimination of unplanned downtime, and business agility to launch products rapidly."
     },
     {
@@ -1011,12 +1076,12 @@
         "type": "single",
         "question": "Under the 'Manage demand and supply resources' best practice (COST09-BP02), which architectural pattern prevents expensive overprovisioning during intermittent traffic bursts?",
         "options": [
-            "A) Decoupling application tiers using buffers, queues (Amazon SQS), or throttling to smooth out variable load",
-            "B) Assigning static Elastic IP addresses and deploying dedicated NAT Gateways in every private subnet",
-            "C) Configuring synchronous multi-region database replication across inter-continental AWS Regions",
-            "D) Migrating all application microservices to single-tenant EC2 Dedicated Hosts with fixed capacity"
+            "A) Migrating all application microservices to single-tenant EC2 Dedicated Hosts with fixed capacity",
+            "B) Configuring synchronous multi-region database replication across inter-continental AWS Regions",
+            "C) Assigning static Elastic IP addresses and deploying dedicated NAT Gateways in every private subnet",
+            "D) Decoupling application tiers using buffers, queues (Amazon SQS), or throttling to smooth out variable load"
         ],
-        "correct": "A",
+        "correct": "D",
         "explanation": "Using message queues (such as Amazon SQS), rate limiters, or buffers decouples spiky traffic from backend processing fleets, allowing workloads to process requests at a steady, cost-effective rate without sizing fleets for extreme peak spikes."
     },
     {
@@ -1027,14 +1092,13 @@
         "type": "multi",
         "question": "Which TWO operational practices are recommended under the foundational 'Optimize Over Time' pillar to maintain low long-term cloud expenditures? (Select 2)",
         "options": [
-            "A) Proactively identify and decommission obsolete resources, unattached EBS volumes, and abandoned test stacks",
+            "A) Disable AWS Cost Explorer and Cost Anomaly Detection to avoid operational alert fatigue across teams",
             "B) Automate routine operations using custom scripts, AWS CLI, SDKs, or EventBridge to reduce human labor overhead",
             "C) Purchase 3-year All Upfront Reserved Instances for all newly launched exploratory developer sandbox accounts",
-            "D) Disable AWS Cost Explorer and Cost Anomaly Detection to avoid operational alert fatigue across teams"
+            "D) Proactively identify and decommission obsolete resources, unattached EBS volumes, and abandoned test stacks"
         ],
         "correct": [
-            "A",
-            "B"
+            "D"
         ],
         "explanation": "Optimizing over time requires continuously auditing and decommissioning unneeded resources (idle instances, unattached EBS volumes, obsolete snapshots) and automating operational tasks to reduce manual labor and human error."
     },
@@ -1046,12 +1110,12 @@
         "type": "single",
         "question": "When configuring a commitment utilization or coverage budget in AWS Budgets, which specific pricing models can be tracked to ensure purchased commitments are not sitting idle?",
         "options": [
-            "A) Reserved Instances (RIs) and Savings Plans commitment utilization and coverage percentages",
-            "B) Spot Instance Fleet request fulfillments and interruption frequency rates across Availability Zones",
-            "C) On-Demand Capacity Reservations and dedicated hardware allocation limits within a Region",
-            "D) AWS Marketplace third-party AMI subscription renewal schedules and license seat usage"
+            "A) AWS Marketplace third-party AMI subscription renewal schedules and license seat usage",
+            "B) On-Demand Capacity Reservations and dedicated hardware allocation limits within a Region",
+            "C) Reserved Instances (RIs) and Savings Plans commitment utilization and coverage percentages",
+            "D) Spot Instance Fleet request fulfillments and interruption frequency rates across Availability Zones"
         ],
-        "correct": "A",
+        "correct": "C",
         "explanation": "AWS Budgets provides dedicated budget types for tracking the Utilization (how much of your commitment is being used) and Coverage (how much of your eligible usage is covered by commitments) for both Reserved Instances and Savings Plans."
     },
     {
@@ -1064,8 +1128,8 @@
         "options": [
             "A) It attributes cloud costs accurately to individual business units and product owners to measure exact ROI",
             "B) It automatically waives data egress charges for traffic exchanged between peered Virtual Private Clouds",
-            "C) It replaces all role-based access control policies with automated financial spending limits per user",
-            "D) It converts all variable AWS operational expenses into fixed capitalized assets on financial balance sheets"
+            "C) It converts all variable AWS operational expenses into fixed capitalized assets on financial balance sheets",
+            "D) It replaces all role-based access control policies with automated financial spending limits per user"
         ],
         "correct": "A",
         "explanation": "Attributing expenditure via tags, cost categories, and multi-account structures allows organizations to measure Return on Investment (ROI) per product or department, fostering cost accountability and driving efficient resource consumption."
@@ -1078,14 +1142,13 @@
         "type": "multi",
         "question": "When architecting cost-effective workloads, which TWO critical cost vectors must be analyzed in addition to basic compute and storage pricing? (Select 2)",
         "options": [
-            "A) Data transfer costs across Availability Zones, Regions, and internet egress boundaries",
+            "A) Operating system hardware interrupt request (IRQ) line allocation tables",
             "B) Software licensing models and third-party license portability options (COST05-BP04)",
             "C) Physical data center rack power distribution unit (PDU) redundancy ratings",
-            "D) Operating system hardware interrupt request (IRQ) line allocation tables"
+            "D) Data transfer costs across Availability Zones, Regions, and internet egress boundaries"
         ],
         "correct": [
-            "A",
-            "B"
+            "D"
         ],
         "explanation": "Creating cost-effective resources requires analyzing inter-AZ and inter-Region network data transfer charges as well as selecting cost-effective software licensing models (e.g., open source vs. commercial BYOL vs. license-included)."
     },
@@ -1098,13 +1161,12 @@
         "question": "Which TWO organizational best practices are officially recommended under Cloud Financial Management best practice COST01? (Select 2)",
         "options": [
             "A) Establish clear organizational ownership and accountability for cloud cost optimization (COST01-BP01)",
-            "B) Foster a cost-aware culture across engineering, architecture, and product management teams (COST01-BP08)",
-            "C) Completely isolate finance personnel from software engineering teams to prevent development delays",
-            "D) Mandate rigid annual waterfall budget approvals that strictly prevent mid-cycle architectural iterations"
+            "B) Mandate rigid annual waterfall budget approvals that strictly prevent mid-cycle architectural iterations",
+            "C) Foster a cost-aware culture across engineering, architecture, and product management teams (COST01-BP08)",
+            "D) Completely isolate finance personnel from software engineering teams to prevent development delays"
         ],
         "correct": [
-            "A",
-            "B"
+            "A"
         ],
         "explanation": "COST01 emphasizes establishing designated ownership for cloud cost management and building a cost-aware engineering culture where architects and developers treat cost as a primary architectural metric."
     },
@@ -1116,12 +1178,12 @@
         "type": "single",
         "question": "In addition to downloading AWS Cost and Usage Report (CUR) CSV files for spreadsheet analysis, how can automated internal billing platforms ingest this raw billing data programmatically?",
         "options": [
-            "A) By accessing and querying the generated report files directly from Amazon S3 using the Amazon S3 API or Athena",
-            "B) By subscribing to a dedicated Amazon SNS billing topic that streams every itemized line item as JSON",
+            "A) By subscribing to a dedicated Amazon SNS billing topic that streams every itemized line item as JSON",
+            "B) By using the AWS Cost Explorer graphical UI to export scheduled browser screenshot attachments",
             "C) By executing polling requests against the AWS Billing Dashboard REST API endpoint once every minute",
-            "D) By using the AWS Cost Explorer graphical UI to export scheduled browser screenshot attachments"
+            "D) By accessing and querying the generated report files directly from Amazon S3 using the Amazon S3 API or Athena"
         ],
-        "correct": "A",
+        "correct": "D",
         "explanation": "Because the Cost and Usage Report is published directly to a customer-owned Amazon S3 bucket, applications and analytics pipelines (such as Amazon Athena, Amazon QuickSight, or custom tools) can query the files programmatically via standard S3 APIs or SQL."
     },
     {
@@ -1132,14 +1194,13 @@
         "type": "multi",
         "question": "Which TWO financial cost metrics can be natively tracked when creating a cost budget in AWS Budgets? (Select 2)",
         "options": [
-            "A) Unblended and Blended cost metrics reflecting consolidated billing configurations",
-            "B) Amortized cost metrics that distribute upfront reservation and Savings Plans fees evenly",
-            "C) Sub-millisecond CPU thermal dissipation cost index values across compute clusters",
-            "D) Speculative financial market currency exchange hedge fluctuations against AWS pricing"
+            "A) Sub-millisecond CPU thermal dissipation cost index values across compute clusters",
+            "B) Speculative financial market currency exchange hedge fluctuations against AWS pricing",
+            "C) Unblended and Blended cost metrics reflecting consolidated billing configurations",
+            "D) Amortized cost metrics that distribute upfront reservation and Savings Plans fees evenly"
         ],
         "correct": [
-            "A",
-            "B"
+            "C"
         ],
         "explanation": "AWS Budgets natively tracks unblended costs (actual cash paid per account), blended costs (averaged rates across consolidated organizations), and amortized costs (spreading upfront reservation/Savings Plans fees evenly across the commitment term)."
     },
@@ -1168,9 +1229,9 @@
         "question": "An enterprise wants to reduce recurring expenses across global content delivery, edge computing, and web application firewall security. Which AWS commitment bundle is specifically designed for this?",
         "options": [
             "A) The AWS CloudFront Security Savings Bundle, providing up to 30% savings on CloudFront and AWS WAF charges",
-            "B) The Compute Savings Plan, which automatically covers all CloudFront CDN bandwidth and edge egress charges",
+            "B) Convertible Reserved Instances provisioned specifically for Amazon API Gateway Regional Edge endpoints",
             "C) Dedicated Hosts for CloudFront Edge Locations deployed across major global metropolitan data centers",
-            "D) Convertible Reserved Instances provisioned specifically for Amazon API Gateway Regional Edge endpoints"
+            "D) The Compute Savings Plan, which automatically covers all CloudFront CDN bandwidth and edge egress charges"
         ],
         "correct": "A",
         "explanation": "The AWS CloudFront Security Savings Bundle provides up to 30% savings on CloudFront data transfer and request fees in exchange for a 1-year monthly spend commitment, and includes AWS WAF usage (up to 10% of the committed amount) at no additional charge."
@@ -1183,12 +1244,12 @@
         "type": "single",
         "question": "When evaluating tenancy options for strict regulatory and software licensing requirements, what is the key architectural difference between EC2 Dedicated Instances and EC2 Dedicated Hosts?",
         "options": [
-            "A) Dedicated Hosts provide physical server visibility (sockets/cores) for BYOL licensing compliance, while Dedicated Instances only guarantee hardware isolation",
-            "B) Dedicated Hosts guarantee 100% sustained CPU burstability, while Dedicated Instances restrict instances to baseline performance",
+            "A) Dedicated Hosts guarantee 100% sustained CPU burstability, while Dedicated Instances restrict instances to baseline performance",
+            "B) Dedicated Hosts provide physical server visibility (sockets/cores) for BYOL licensing compliance, while Dedicated Instances only guarantee hardware isolation",
             "C) Dedicated Hosts are billed strictly per millisecond, while Dedicated Instances require upfront multi-year reservation commitments",
             "D) Dedicated Hosts span multiple Availability Zones simultaneously, while Dedicated Instances are restricted to a single subnet"
         ],
-        "correct": "A",
+        "correct": "B",
         "explanation": "Both options provide dedicated physical hardware isolation from other AWS customers, but Dedicated Hosts give customers visibility and control over physical sockets and cores, which is essential for meeting Bring-Your-Own-License (BYOL) per-socket/per-core licensing agreements."
     },
     {
@@ -1200,9 +1261,9 @@
         "question": "How does adhering to the 'Go global in minutes' design principle of the Performance Efficiency pillar directly enhance end-user experience for distributed systems?",
         "options": [
             "A) By deploying workloads in multiple AWS Regions closer to end users, drastically reducing latency at minimal cost",
-            "B) By automatically translating application user interface strings across multiple global languages in real time",
+            "B) By routing all global user traffic through a single centralized API Gateway deployed in the primary AWS Region",
             "C) By enforcing synchronous multi-region database replication to guarantee zero RPO across all continents",
-            "D) By routing all global user traffic through a single centralized API Gateway deployed in the primary AWS Region"
+            "D) By automatically translating application user interface strings across multiple global languages in real time"
         ],
         "correct": "A",
         "explanation": "Deploying workloads across multiple AWS Regions and Edge Locations places computation and cached content geographically close to users, reducing network transit hops and propagation latency while avoiding large upfront capital investments."
@@ -1216,8 +1277,8 @@
         "question": "An enterprise deployed a cloud workload three years ago that still functions adequately, but the team has never performed an architectural review. Which operational practice are they neglecting?",
         "options": [
             "A) Establishing a regular performance review process and adopting an organizational culture of continual optimization",
-            "B) Executing uncoordinated manual load-generation tests directly against production databases during peak hours",
-            "C) Purchasing 3-year All Upfront Reserved Instances to prevent automatic infrastructure scaling events",
+            "B) Purchasing 3-year All Upfront Reserved Instances to prevent automatic infrastructure scaling events",
+            "C) Executing uncoordinated manual load-generation tests directly against production databases during peak hours",
             "D) Disabling detailed Amazon CloudWatch metrics collection to eliminate ongoing monitoring expenditure"
         ],
         "correct": "A",
@@ -1232,9 +1293,9 @@
         "question": "When applying the principle of Mechanical Sympathy to database engine selection, why is Amazon DynamoDB the optimal choice over Amazon RDS for extreme scale key-value workloads?",
         "options": [
             "A) It provides a fully managed NoSQL engine delivering predictable single-digit millisecond latency at any scale",
-            "B) It natively executes complex multi-table SQL JOIN queries and enforces strict relational foreign key constraints",
-            "C) It requires manual provisioning and striping of Amazon EBS gp3 storage volumes for fine-grained IOPS tuning",
-            "D) It functions as a POSIX-compliant distributed network file system attached directly to EC2 compute instances"
+            "B) It requires manual provisioning and striping of Amazon EBS gp3 storage volumes for fine-grained IOPS tuning",
+            "C) It functions as a POSIX-compliant distributed network file system attached directly to EC2 compute instances",
+            "D) It natively executes complex multi-table SQL JOIN queries and enforces strict relational foreign key constraints"
         ],
         "correct": "A",
         "explanation": "Amazon DynamoDB is a purpose-built, fully managed distributed NoSQL database designed specifically for key-value and document data access patterns, delivering consistent single-digit millisecond latency regardless of request volume or dataset size."
@@ -1247,12 +1308,12 @@
         "type": "single",
         "question": "An architect needs to offload heavy read traffic from an origin compute cluster handling dynamic REST API requests. Which edge networking service provides built-in caching for API responses?",
         "options": [
-            "A) Amazon API Gateway built-in API Caching tier configured per stage to cache endpoint responses",
-            "B) AWS Direct Connect dedicated private virtual interfaces configured for jumbo frame routing",
-            "C) Amazon Route 53 Geolocation DNS latency-based routing policies without edge proxy layers",
-            "D) AWS Transit Gateway multicast domain routing tables terminating IPsec VPN client tunnels"
+            "A) AWS Direct Connect dedicated private virtual interfaces configured for jumbo frame routing",
+            "B) AWS Transit Gateway multicast domain routing tables terminating IPsec VPN client tunnels",
+            "C) Amazon API Gateway built-in API Caching tier configured per stage to cache endpoint responses",
+            "D) Amazon Route 53 Geolocation DNS latency-based routing policies without edge proxy layers"
         ],
-        "correct": "A",
+        "correct": "C",
         "explanation": "Amazon API Gateway offers stage-level response caching, allowing responses from backend integrations (such as AWS Lambda, EC2, or custom HTTP backends) to be cached in memory, offloading backend compute fleets and accelerating client responses."
     },
     {
@@ -1269,8 +1330,7 @@
             "D) Enforce unencrypted raw UDP packet transport protocols across all public internet transaction APIs"
         ],
         "correct": [
-            "A",
-            "B"
+            "A"
         ],
         "explanation": "PERF04-BP06 advises placing resources close to users via Regions, Local Zones, or CloudFront edge locations, while PERF04-BP05 recommends choosing optimal networking protocols (such as HTTP/2, HTTP/3/QUIC, or SR-IOV/ENA) to minimize latency."
     },
@@ -1283,13 +1343,12 @@
         "question": "According to cost governance best practices (COST02), which TWO structural mechanisms are recommended to track cloud consumption and enforce spending accountability across teams? (Select 2)",
         "options": [
             "A) Implement a multi-account organization structure aligned with business units (COST02-BP03)",
-            "B) Implement IAM groups, roles, and permission boundaries for access governance (COST02-BP04)",
+            "B) Provision a single shared root IAM credential across all engineering teams to streamline access",
             "C) Enforce a complete prohibition on adopting any third-party AWS Marketplace software solutions",
-            "D) Provision a single shared root IAM credential across all engineering teams to streamline access"
+            "D) Implement IAM groups, roles, and permission boundaries for access governance (COST02-BP04)"
         ],
         "correct": [
-            "A",
-            "B"
+            "A"
         ],
         "explanation": "COST02-BP03 and COST02-BP04 recommend implementing a structured multi-account AWS Organizations topology and configuring role-based IAM access control to isolate workloads, track cost allocation, and enforce expenditure boundaries."
     },
@@ -1301,12 +1360,12 @@
         "type": "single",
         "question": "When evaluating Total Cost of Ownership (TCO) for an enterprise migration, how does 'Increased Agility and Speed' generate quantifiable financial value for the business?",
         "options": [
-            "A) By shortening development cycles and accelerating feature releases to capture new market opportunities rapidly",
-            "B) By automatically reducing all monthly AWS data egress and storage charges by an unmetered 20% discount",
-            "C) By allowing the enterprise to liquidate depreciated physical hardware assets on secondary salvage markets",
+            "A) By allowing the enterprise to liquidate depreciated physical hardware assets on secondary salvage markets",
+            "B) By shortening development cycles and accelerating feature releases to capture new market opportunities rapidly",
+            "C) By automatically reducing all monthly AWS data egress and storage charges by an unmetered 20% discount",
             "D) By replacing all software engineering and QA personnel with fully autonomous AWS managed hypervisors"
         ],
-        "correct": "A",
+        "correct": "B",
         "explanation": "Cloud agility allows organizations to provision environments in minutes rather than months, accelerating time-to-market, enabling rapid experimentation, and allowing businesses to respond quickly to market changes and revenue opportunities."
     },
     {
@@ -1317,12 +1376,12 @@
         "type": "single",
         "question": "Why does the AWS Well-Architected Framework advocate deploying cloud infrastructure using automated Continuous Integration / Continuous Deployment (CI/CD) pipelines?",
         "options": [
-            "A) It allows infrastructure to be tested, benchmarked, and deployed in a repeatable, consistent, and low-cost manner",
-            "B) It permanently eliminates the need for computing and storage capacity charges across non-production environments",
+            "A) It permanently eliminates the need for computing and storage capacity charges across non-production environments",
+            "B) It completely eliminates the necessity for software unit testing and security code scanning validations",
             "C) It automatically replaces all database schema migration scripts with real-time heuristic index generation",
-            "D) It completely eliminates the necessity for software unit testing and security code scanning validations"
+            "D) It allows infrastructure to be tested, benchmarked, and deployed in a repeatable, consistent, and low-cost manner"
         ],
-        "correct": "A",
+        "correct": "D",
         "explanation": "Deploying infrastructure via CI/CD pipelines ensures that infrastructure changes are version-controlled, auditable, consistently reproducible, and low risk, allowing teams to iterate rapidly and test performance optimizations safely."
     },
     {
@@ -1333,13 +1392,12 @@
         "type": "multi",
         "question": "Which TWO operational practices under Compute Performance (PERF02) ensure compute capacity precisely tracks fluctuating workload demand without overprovisioning? (Select 2)",
         "options": [
-            "A) Configure and right-size compute resources based on measured utilization metrics (PERF02-BP04)",
-            "B) Scale compute resources dynamically using automated Auto Scaling policies (PERF02-BP05)",
-            "C) Assign static private IP configurations to instances to prevent ephemeral termination events",
-            "D) Maintain 100% constant CPU utilization across all compute fleets by disabling horizontal scaling"
+            "A) Maintain 100% constant CPU utilization across all compute fleets by disabling horizontal scaling",
+            "B) Configure and right-size compute resources based on measured utilization metrics (PERF02-BP04)",
+            "C) Scale compute resources dynamically using automated Auto Scaling policies (PERF02-BP05)",
+            "D) Assign static private IP configurations to instances to prevent ephemeral termination events"
         ],
         "correct": [
-            "A",
             "B"
         ],
         "explanation": "PERF02-BP04 focuses on right-sizing compute instance families and sizes to workload characteristics, while PERF02-BP05 focuses on dynamic horizontal auto scaling to add and remove capacity in direct proportion to real-time demand."
@@ -1352,12 +1410,12 @@
         "type": "single",
         "question": "If a relational database encounters severe performance bottlenecks during complex read queries, which Data Management best practice (PERF03-BP04) should the team execute first?",
         "options": [
-            "A) Implement database-level query optimization techniques such as indexing, partitioning, or read replicas",
+            "A) Export database tables to an offline physical AWS Snowball Edge device for batch query execution",
             "B) Immediately migrate the database back to an on-premises physical bare-metal database server appliance",
-            "C) Permanently purge historical transaction records from the database tables to shrink disk allocation",
-            "D) Export database tables to an offline physical AWS Snowball Edge device for batch query execution"
+            "C) Implement database-level query optimization techniques such as indexing, partitioning, or read replicas",
+            "D) Permanently purge historical transaction records from the database tables to shrink disk allocation"
         ],
-        "correct": "A",
+        "correct": "C",
         "explanation": "PERF03-BP04 recommends improving query performance within the data store by creating appropriate indexes, optimizing SQL query execution plans, partitioning large tables, utilizing materialized views, or offloading read queries to read replicas."
     },
     {
@@ -1369,9 +1427,9 @@
         "question": "What level of granularity does the AWS Cost and Usage Report (CUR) provide to assist financial teams with fine-grained cost allocation?",
         "options": [
             "A) Individual line items for each unique combination of AWS product, usage type, operation, and resource tag",
-            "B) A single high-level monthly aggregate invoice figure without breakdown by service or operational usage",
-            "C) The specific line numbers of application source code that initiated individual programmatic API calls",
-            "D) The physical serial numbers and chassis designations of underlying host hypervisors in AWS facilities"
+            "B) The physical serial numbers and chassis designations of underlying host hypervisors in AWS facilities",
+            "C) A single high-level monthly aggregate invoice figure without breakdown by service or operational usage",
+            "D) The specific line numbers of application source code that initiated individual programmatic API calls"
         ],
         "correct": "A",
         "explanation": "The AWS Cost and Usage Report (CUR) provides the most detailed billing dataset available in AWS, listing itemized line items broken down by hourly or daily usage, service product, usage type, operation, resource ID, and cost allocation tags."
@@ -1384,12 +1442,12 @@
         "type": "single",
         "question": "What is the primary economic advantage of implementing a 'just-in-time' resource supply strategy in AWS over traditional static capacity planning?",
         "options": [
-            "A) Eliminating wasteful and expensive overprovisioning by provisioning capacity exactly when demand requires it",
-            "B) Allowing cloud data centers to operate without consuming underlying electrical power or cooling resources",
-            "C) Bypassing third-party commercial software licensing fees across all provisioned operating systems",
+            "A) Allowing cloud data centers to operate without consuming underlying electrical power or cooling resources",
+            "B) Bypassing third-party commercial software licensing fees across all provisioned operating systems",
+            "C) Eliminating wasteful and expensive overprovisioning by provisioning capacity exactly when demand requires it",
             "D) Permanently preventing physical server hardware failures across all regional Availability Zones"
         ],
-        "correct": "A",
+        "correct": "C",
         "explanation": "Just-in-time provisioning dynamically aligns resource capacity with real-time demand (using Auto Scaling, serverless architectures, and dynamic scheduling), eliminating the costly buffer capacity historically required in on-premises environments."
     },
     {
@@ -1401,9 +1459,9 @@
         "question": "Why does the 'Optimize Over Time' foundational category mandate periodically evaluating newly released AWS services and instance types?",
         "options": [
             "A) Because new AWS services and modern Graviton instance generations often offer higher performance at lower cost",
-            "B) Because previous AWS service offerings are automatically terminated and deprecated within 6 months of release",
-            "C) Because adopting new AWS services automatically grants an unmetered 50% discount on entire monthly billing",
-            "D) Because international financial regulations strictly require annual cloud infrastructure software re-architectures"
+            "B) Because international financial regulations strictly require annual cloud infrastructure software re-architectures",
+            "C) Because previous AWS service offerings are automatically terminated and deprecated within 6 months of release",
+            "D) Because adopting new AWS services automatically grants an unmetered 50% discount on entire monthly billing"
         ],
         "correct": "A",
         "explanation": "AWS continually innovates, releasing more cost-effective instance generations (e.g., AWS Graviton processors offering up to 40% better price-performance), new storage tiers, and managed serverless services that lower Total Cost of Ownership."
@@ -1417,9 +1475,9 @@
         "question": "When deploying application software updates across a multi-AZ architecture, what deployment rule limits the blast radius of potential deployment failures?",
         "options": [
             "A) Avoid deploying changes to multiple Availability Zones within an AWS Region simultaneously",
-            "B) Deploy updates simultaneously to all global AWS Regions to maintain identical software release parity",
-            "C) Schedule all major deployment pipeline executions exclusively during peak daytime customer traffic hours",
-            "D) Deregister and terminate all Application Load Balancers prior to executing minor application binary updates"
+            "B) Deregister and terminate all Application Load Balancers prior to executing minor application binary updates",
+            "C) Deploy updates simultaneously to all global AWS Regions to maintain identical software release parity",
+            "D) Schedule all major deployment pipeline executions exclusively during peak daytime customer traffic hours"
         ],
         "correct": "A",
         "explanation": "Zonal fault-isolated deployment principles dictate updating one Availability Zone at a time, validating health and performance metrics before proceeding to the next zone, ensuring that an issue in a release only affects a single AZ."
@@ -1433,13 +1491,12 @@
         "question": "Which TWO operational criteria are rigorously evaluated during an Operational Readiness Review (ORR) before deploying a workload to production? (Select 2)",
         "options": [
             "A) The completeness of end-to-end testing and the effectiveness of real-time monitoring and alerting",
-            "B) The ability of the workload to meet and audit performance Service Level Agreements (SLAs) during disruptions",
-            "C) The physical security clearance badges and biometric credentials of data center facility engineers",
-            "D) The specific frontend CSS styling frameworks and JavaScript minification algorithms used by developers"
+            "B) The specific frontend CSS styling frameworks and JavaScript minification algorithms used by developers",
+            "C) The ability of the workload to meet and audit performance Service Level Agreements (SLAs) during disruptions",
+            "D) The physical security clearance badges and biometric credentials of data center facility engineers"
         ],
         "correct": [
-            "A",
-            "B"
+            "A"
         ],
         "explanation": "Operational Readiness Reviews (ORRs) evaluate whether a workload is truly production-ready by examining test completeness, telemetry/monitoring visibility, operational runbooks, failure recovery procedures, and SLA compliance during degradation."
     },
@@ -1451,12 +1508,12 @@
         "type": "single",
         "question": "How does implementing Feature Flags (Feature Toggles) improve release safety and performance risk management during production deployments?",
         "options": [
-            "A) By allowing new code to be deployed in a disabled state and gradually rolled out or disabled instantly without rollbacks",
-            "B) By physically disconnecting backend VPC subnets from public internet gateways during deployment windows",
-            "C) By automatically rewriting relational database schemas upon detecting transient application HTTP 500 errors",
-            "D) By compressing Docker container image layers to decrease cold-start provisioning latency in AWS Lambda"
+            "A) By compressing Docker container image layers to decrease cold-start provisioning latency in AWS Lambda",
+            "B) By automatically rewriting relational database schemas upon detecting transient application HTTP 500 errors",
+            "C) By physically disconnecting backend VPC subnets from public internet gateways during deployment windows",
+            "D) By allowing new code to be deployed in a disabled state and gradually rolled out or disabled instantly without rollbacks"
         ],
-        "correct": "A",
+        "correct": "D",
         "explanation": "Feature flags decouple code deployment from feature release, enabling dark launches, gradual percentage-based traffic routing, and instant kill-switch deactivation if latency or error spikes occur without requiring emergency code rollbacks."
     },
     {
@@ -1468,13 +1525,12 @@
         "question": "To prevent transient network failures or latency spikes from cascading through a distributed microservices workload, which TWO architectural practices should be adopted? (Select 2)",
         "options": [
             "A) Implement loosely coupled asynchronous dependencies between services using queues or events (REL04-BP02)",
-            "B) Ensure API operations and message processing logic are designed to be idempotent (REL04-BP04)",
-            "C) Mandate that all inter-service communications execute via synchronous, blocking RPC connections",
-            "D) Configure application clients to retry failed API calls indefinitely without exponential backoff"
+            "B) Mandate that all inter-service communications execute via synchronous, blocking RPC connections",
+            "C) Configure application clients to retry failed API calls indefinitely without exponential backoff",
+            "D) Ensure API operations and message processing logic are designed to be idempotent (REL04-BP04)"
         ],
         "correct": [
-            "A",
-            "B"
+            "A"
         ],
         "explanation": "Designing resilient distributed systems requires loose coupling (via asynchronous queues/events) and idempotent APIs (so retrying transient failures does not cause duplicate side effects or data corruption)."
     },
@@ -1486,12 +1542,12 @@
         "type": "single",
         "question": "An e-commerce product page calls multiple microservices. If the 'Personalized Recommendations' service fails, the page still renders core product details and checkout buttons. Which design principle does this demonstrate?",
         "options": [
-            "A) Implementing graceful degradation by converting non-critical hard dependencies into resilient soft dependencies",
-            "B) Enforcing infinite client connection timeouts to guarantee eventual microservice response delivery",
-            "C) Maintaining in-memory state on the frontend web instances to eliminate backend database communication",
-            "D) Executing continuous constant-work algorithms to keep CPU utilization identical across all hours"
+            "A) Executing continuous constant-work algorithms to keep CPU utilization identical across all hours",
+            "B) Implementing graceful degradation by converting non-critical hard dependencies into resilient soft dependencies",
+            "C) Enforcing infinite client connection timeouts to guarantee eventual microservice response delivery",
+            "D) Maintaining in-memory state on the frontend web instances to eliminate backend database communication"
         ],
-        "correct": "A",
+        "correct": "B",
         "explanation": "Graceful degradation converts hard dependencies (which crash the whole page if unavailable) into soft dependencies (which fail gracefully or show fallbacks, allowing the core application to continue functioning)."
     },
     {
@@ -1502,12 +1558,12 @@
         "type": "single",
         "question": "How does migrating from legacy on-premises data centers to AWS cloud infrastructure directly advance corporate sustainability and TCO goals?",
         "options": [
-            "A) AWS data centers operate with significantly higher energy efficiency and renewable energy usage, reducing carbon footprint",
+            "A) AWS provides enterprise customers with dedicated solar panel installations for their corporate headquarters",
             "B) AWS physically collects and refurbishes all customer on-premises server racks free of charge upon contract signing",
-            "C) AWS provides enterprise customers with dedicated solar panel installations for their corporate headquarters",
-            "D) AWS cloud hardware hypervisors operate completely without electrical power consumption using quantum caching"
+            "C) AWS cloud hardware hypervisors operate completely without electrical power consumption using quantum caching",
+            "D) AWS data centers operate with significantly higher energy efficiency and renewable energy usage, reducing carbon footprint"
         ],
-        "correct": "A",
+        "correct": "D",
         "explanation": "AWS infrastructure is significantly more energy-efficient than typical on-premises data centers due to purpose-built hardware, advanced cooling, high server utilization, and a commitment to powering operations with 100% renewable energy."
     },
     {
@@ -1519,8 +1575,8 @@
         "question": "In terms of long-term operational expenditure, what primary financial advantage does cloud automation provide over manual systems administration?",
         "options": [
             "A) It minimizes routine manual administrative tasks, lowering labor expenses and drastically reducing human error",
-            "B) It eliminates the need for IT engineering, security, and architectural personnel across the entire organization",
-            "C) It automatically negotiates lower third-party commercial software licensing contracts with external vendors",
+            "B) It automatically negotiates lower third-party commercial software licensing contracts with external vendors",
+            "C) It eliminates the need for IT engineering, security, and architectural personnel across the entire organization",
             "D) It automatically replaces all compiled backend application code with autonomous machine learning routines"
         ],
         "correct": "A",
@@ -1534,12 +1590,12 @@
         "type": "single",
         "question": "When deploying Amazon RDS Read Replicas to offload intensive read query workloads from the Primary DB instance, which replication mechanism is utilized between the database nodes?",
         "options": [
-            "A) Asynchronous replication from the Primary instance to the Read Replicas with potential minor replication lag",
-            "B) Synchronous replication ensuring zero-millisecond replication lag between all instances across all AZs",
-            "C) Multi-master bi-directional active-active write replication across all provisioned database instances",
+            "A) Multi-master bi-directional active-active write replication across all provisioned database instances",
+            "B) Asynchronous replication from the Primary instance to the Read Replicas with potential minor replication lag",
+            "C) Synchronous replication ensuring zero-millisecond replication lag between all instances across all AZs",
             "D) Periodic nightly batch snapshot restoration creating read-only copies at 24-hour intervals"
         ],
-        "correct": "A",
+        "correct": "B",
         "explanation": "Amazon RDS Read Replicas utilize asynchronous replication native to the database engine (MySQL, PostgreSQL, MariaDB, Oracle). The primary writes immediately to disk and streams transaction logs asynchronously to replicas."
     },
     {
@@ -1551,9 +1607,9 @@
         "question": "According to the AWS Autoscaling capabilities matrix, which container orchestration service natively supports target-tracking, step scaling, and scheduled auto-scaling policies?",
         "options": [
             "A) Amazon Elastic Container Service (Amazon ECS) managing container tasks across EC2 and AWS Fargate",
-            "B) Amazon Lightsail standalone virtual private server instances hosting monolithic web stacks",
-            "C) AWS Elastic Beanstalk Worker Tiers running single-instance batch background worker threads",
-            "D) AWS Storage Gateway virtual appliances deployed within on-premises VMware vSphere hypervisors"
+            "B) AWS Storage Gateway virtual appliances deployed within on-premises VMware vSphere hypervisors",
+            "C) Amazon Lightsail standalone virtual private server instances hosting monolithic web stacks",
+            "D) AWS Elastic Beanstalk Worker Tiers running single-instance batch background worker threads"
         ],
         "correct": "A",
         "explanation": "Amazon ECS natively supports Service Auto Scaling (target tracking, step scaling, scheduled scaling) using Application Auto Scaling to dynamically adjust task counts across both EC2 container instances and AWS Fargate serverless compute."
@@ -1566,12 +1622,12 @@
         "type": "single",
         "question": "An organization is developing dynamic forecasting models to quantify business value and establish flexible budgeting for an upcoming cloud migration. Which CFM pillar does this represent?",
         "options": [
-            "A) Plan, which focuses on dynamic forecasting, flexible budgeting, and quantifying business value generation",
+            "A) Run, which focuses on operational governance guardrails and Service Control Policy enforcement",
             "B) See, which focuses exclusively on tagging taxonomy and organizational resource hierarchy visibility",
             "C) Save, which focuses strictly on executing compute right-sizing and purchasing Savings Plans commitments",
-            "D) Run, which focuses on operational governance guardrails and Service Control Policy enforcement"
+            "D) Plan, which focuses on dynamic forecasting, flexible budgeting, and quantifying business value generation"
         ],
-        "correct": "A",
+        "correct": "D",
         "explanation": "The 'Plan' pillar of Cloud Financial Management centers on improving financial planning through dynamic forecasting, flexible budgeting, cloud economics modeling, and quantifying business value metrics."
     },
     {
@@ -1582,12 +1638,12 @@
         "type": "single",
         "question": "A company operating high-throughput in-memory Redis clusters commits to a 1-year Reserved Node agreement in Amazon ElastiCache. What specific resource parameter defines this reservation?",
         "options": [
-            "A) Specific Reserved Cache Node Types (e.g., cache.r6g.large) provisioned within a specific AWS Region",
-            "B) Provisioned Read and Write Capacity Units (RCUs/WCUs) allocated across in-memory key spaces",
-            "C) Aggregate gigabytes of volatile memory storage allocated across multi-threaded cluster partitions",
-            "D) The maximum total count of API cache GET and SET operations processed per calendar billing month"
+            "A) Aggregate gigabytes of volatile memory storage allocated across multi-threaded cluster partitions",
+            "B) The maximum total count of API cache GET and SET operations processed per calendar billing month",
+            "C) Specific Reserved Cache Node Types (e.g., cache.r6g.large) provisioned within a specific AWS Region",
+            "D) Provisioned Read and Write Capacity Units (RCUs/WCUs) allocated across in-memory key spaces"
         ],
-        "correct": "A",
+        "correct": "C",
         "explanation": "Amazon ElastiCache Reserved Nodes provide a significant discount off On-Demand rates when committing to a 1-year or 3-year term for specific cache node types (e.g., cache.r6g.xlarge) in a chosen AWS Region."
     },
     {
@@ -1598,16 +1654,815 @@
         "type": "multi",
         "question": "Which TWO architectural mechanisms are recommended under the AWS Reliability and Performance guidelines (REL05) to prevent queue exhaustion and mitigate cascading system failures? (Select 2)",
         "options": [
-            "A) Implement rate limiting and request throttling to shed excess load gracefully (REL05-BP02)",
-            "B) Implement emergency levers and circuit breakers to selectively disable non-critical functionality (REL05-BP07)",
-            "C) Maintain state continuously in all microservice containers to eliminate external database queries",
-            "D) Increase client request timeouts infinitely to prevent client applications from dropping connections"
+            "A) Increase client request timeouts infinitely to prevent client applications from dropping connections",
+            "B) Implement rate limiting and request throttling to shed excess load gracefully (REL05-BP02)",
+            "C) Implement emergency levers and circuit breakers to selectively disable non-critical functionality (REL05-BP07)",
+            "D) Maintain state continuously in all microservice containers to eliminate external database queries"
         ],
         "correct": [
-            "A",
             "B"
         ],
         "explanation": "REL05 best practices for limiting queues and mitigating cascading failure include throttling excess requests (REL05-BP02), failing fast, setting sensible client timeouts, making services stateless, and implementing emergency levers/circuit breakers (REL05-BP07)."
+    },
+    {
+        "id": 51,
+        "section": "COST OPTIMIZATION",
+        "topic": "Compute Cost Optimization",
+        "subtopic": "Spot vs On-Demand vs Savings Plans vs RIs",
+        "type": "single",
+        "question": "A data processing startup runs stateless, fault-tolerant batch processing jobs that can be interrupted at any time without data corruption. Which EC2 purchasing option delivers up to 90% cost savings compared to On-Demand rates?",
+        "options": [
+            "A) Dedicated Hosts",
+            "B) EC2 Spot Instances",
+            "C) EC2 Instance Savings Plans (1-year term)",
+            "D) Standard Reserved Instances (3-year term)"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. EC2 Spot Instances allow you to request spare EC2 computing capacity at steep discounts (up to 90% off On-Demand prices). Spot instances can be reclaimed by AWS with a 2-minute warning, making them perfect for stateless, fault-tolerant batch processing. Options B and C require 1- or 3-year financial commitments."
+    },
+    {
+        "id": 52,
+        "section": "COST OPTIMIZATION",
+        "topic": "Compute Cost Optimization",
+        "subtopic": "Spot vs On-Demand vs Savings Plans vs RIs",
+        "type": "single",
+        "question": "An enterprise has a mission-critical web application with a steady baseline demand of 20 EC2 instances running continuously 24/7 across multiple instance families (C6i, M6i, R6i) in different regions. Which commitment option offers maximum flexibility across families and regions while maximizing discounts?",
+        "options": [
+            "A) Standard Reserved Instances",
+            "B) Spot Fleets with Capacity Optimized allocation strategy",
+            "C) EC2 Instance Savings Plans",
+            "D) Compute Savings Plans"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Compute Savings Plans provide the highest flexibility, applying automatically to EC2 instance usage regardless of instance family, size, OS, region, or tenancy (and even apply to AWS Fargate and AWS Lambda). Option B (EC2 Instance Savings Plans) is locked to a specific instance family in a specific region."
+    },
+    {
+        "id": 53,
+        "section": "COST OPTIMIZATION",
+        "topic": "Compute Cost Optimization",
+        "subtopic": "Spot vs On-Demand vs Savings Plans vs RIs",
+        "type": "single",
+        "question": "A financial company runs a steady DB server on a specific instance size (r6g.4xlarge) in us-east-1 and knows it will not change instance family, region, or OS for the next 3 years. Which commitment option provides the highest possible discount percentage for this specific instance?",
+        "options": [
+            "A) EC2 Instance Savings Plans (or Standard Reserved Instance) with 3-year term, All Upfront payment",
+            "B) Compute Savings Plans with 1-year term, No Upfront payment",
+            "C) Convertible Reserved Instances with 1-year term",
+            "D) Spot Block instances with 6-hour duration reservation"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. EC2 Instance Savings Plans (and 3-year Standard RIs) locked to a specific instance family and region offer the deepest discount (up to 72%) when committed for 3 years with All Upfront payment. Compute Savings Plans offer lower discounts in exchange for cross-family flexibility."
+    },
+    {
+        "id": 54,
+        "section": "COST OPTIMIZATION",
+        "topic": "Compute Cost Optimization",
+        "subtopic": "Spot vs On-Demand vs Savings Plans vs RIs",
+        "type": "single",
+        "question": "A company wants to run a containerized batch job on AWS Fargate that needs to complete within 30 minutes. If interrupted, the job can be re-run easily. Which cost-effective Fargate capability should be used?",
+        "options": [
+            "A) Compute Savings Plans 3-year term",
+            "B) On-Demand Fargate with Savings Plans",
+            "C) Fargate Reserved Tasks",
+            "D) Fargate Spot"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Fargate Spot allows running fault-tolerant ECS tasks on spare AWS capacity at up to 70% discount compared to standard Fargate prices, ideal for interruptible batch jobs."
+    },
+    {
+        "id": 55,
+        "section": "COST OPTIMIZATION",
+        "topic": "Compute Cost Optimization",
+        "subtopic": "Spot vs On-Demand vs Savings Plans vs RIs",
+        "type": "single",
+        "question": "To minimize interruption risk when launching an EC2 Spot Fleet for high-throughput data analytics, which Spot allocation strategy should be configured?",
+        "options": [
+            "A) highest-capacity-reserved",
+            "B) capacity-optimized (or price-capacity-optimized)",
+            "C) diversified",
+            "D) lowest-price"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. The capacity-optimized allocation strategy launches Spot instances from the Spot pools with the most available capacity, significantly reducing the probability of instance interruptions compared to the lowest-price strategy."
+    },
+    {
+        "id": 56,
+        "section": "COST OPTIMIZATION",
+        "topic": "Compute Cost Optimization",
+        "subtopic": "Spot vs On-Demand vs Savings Plans vs RIs",
+        "type": "single",
+        "question": "A company has unpredictable web traffic spikes that last for 1 to 2 hours every Monday morning. The rest of the week traffic is steady. How should compute capacity be structured to minimize total cost?",
+        "options": [
+            "A) Provision 100% On-Demand instances all week long",
+            "B) Use Savings Plans / Reserved Instances for steady baseline capacity and EC2 Auto Scaling with On-Demand / Spot instances for Monday spikes",
+            "C) Run all instances on Spot Instances continuously",
+            "D) Purchase 3-year All Upfront Reserved Instances sized for the peak Monday morning load"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. Combining Savings Plans for predictable baseline capacity with EC2 Auto Scaling using On-Demand or Spot instances for peak traffic bursts ensures baseline usage gets maximum discount while peak usage is provisioned dynamically without paying for idle capacity during the week."
+    },
+    {
+        "id": 57,
+        "section": "COST OPTIMIZATION",
+        "topic": "Compute Cost Optimization",
+        "subtopic": "Savings Plans Mechanics",
+        "type": "single",
+        "question": "What happens if a company commits to a Compute Savings Plan of $10/hour, but during a given hour their actual compute usage amounts to only $6/hour based on discounted rates?",
+        "options": [
+            "A) AWS automatically refunds $4 to the customer's credit card",
+            "B) The Savings Plan commitment automatically lowers to $6/hour for future months",
+            "C) The remaining $4 carries over into the next billing cycle as a credit",
+            "D) The company is billed the full committed $10 for that hour, and the remaining $4 commitment is lost"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Savings Plans commitments are hourly minimum spend obligations. If usage in an hour falls below the committed hourly amount, you are still billed the full committed amount ($10/hour), and unused commitment does not roll over to future hours."
+    },
+    {
+        "id": 58,
+        "section": "COST OPTIMIZATION",
+        "topic": "Compute Cost Optimization",
+        "subtopic": "Savings Plans Mechanics",
+        "type": "single",
+        "question": "A company wants to purchase a Reserved Instance strategy for EC2 that allows changing instance families (e.g. from C5 to M6i) or operating systems over time. Which Reserved Instance type supports this flexibility?",
+        "options": [
+            "A) Scheduled Reserved Instances",
+            "B) Standard Reserved Instances",
+            "C) Fixed Regional Reserved Instances",
+            "D) Convertible Reserved Instances"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Convertible Reserved Instances allow exchanging one or more Convertible RIs for another Convertible RI with a different instance family, OS, tenancy, or region, provided the target RI is of equal or greater financial value."
+    },
+    {
+        "id": 59,
+        "section": "COST OPTIMIZATION",
+        "topic": "Compute Cost Optimization",
+        "subtopic": "Savings Plans Mechanics",
+        "type": "single",
+        "question": "Which AWS compute services are eligible to receive automatic cost savings from a single AWS Compute Savings Plan commitment?",
+        "options": [
+            "A) Amazon EC2, Amazon EMR, and Amazon Redshift",
+            "B) AWS Fargate and AWS Elastic Beanstalk only",
+            "C) Amazon EC2, AWS Fargate, and AWS Lambda",
+            "D) Amazon EC2 and Amazon RDS only"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. AWS Compute Savings Plans apply automatically to compute usage across Amazon EC2, AWS Fargate, and AWS Lambda across all regions and configurations."
+    },
+    {
+        "id": 60,
+        "section": "COST OPTIMIZATION",
+        "topic": "Compute Cost Optimization",
+        "subtopic": "Savings Plans Mechanics",
+        "type": "single",
+        "question": "How do Database Reserved Instances work for Amazon RDS databases?",
+        "options": [
+            "A) They apply discounts across both Amazon RDS and Amazon Redshift clusters interchangeably",
+            "B) They automatically convert uncommitted RDS IOPS into free S3 storage credits",
+            "C) They provide a discounted hourly rate for specific database engine, instance class, and region for 1- or 3-year terms",
+            "D) They allow instant zero-downtime database engine migration between MySQL and DynamoDB"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. Amazon RDS Reserved Instances provide discounted hourly rates for specific DB instance classes and database engines over 1-year or 3-year terms."
+    },
+    {
+        "id": 61,
+        "section": "COST OPTIMIZATION",
+        "topic": "Compute Cost Optimization",
+        "subtopic": "Savings Plans Mechanics",
+        "type": "single",
+        "question": "Which payment option for 3-year Savings Plans yields the highest total percentage discount on compute usage?",
+        "options": [
+            "A) No Upfront",
+            "B) Partial Upfront",
+            "C) Monthly Installments with zero deposit",
+            "D) All Upfront"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. The All Upfront payment option requires paying for the entire term commitment upfront, providing the highest effective discount rate compared to Partial Upfront or No Upfront options."
+    },
+    {
+        "id": 62,
+        "section": "COST OPTIMIZATION",
+        "topic": "Storage Cost Optimization",
+        "subtopic": "S3 Storage Classes Selection",
+        "type": "single",
+        "question": "A media firm stores petabytes of raw video files in Amazon S3. Access patterns are unknown and unpredictable; some files are accessed frequently while others are never touched. The company wants to automatically optimize storage costs without operational overhead or retrieval fees. Which storage class should be used?",
+        "options": [
+            "A) Amazon S3 One Zone-Infrequent Access (S3 One Zone-IA)",
+            "B) Amazon S3 Standard-Infrequent Access (S3 Standard-IA)",
+            "C) Amazon S3 Intelligent-Tiering",
+            "D) Amazon S3 Glacier Flexible Retrieval"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. Amazon S3 Intelligent-Tiering automatically moves objects between frequent access and low-cost infrequent access tiers based on access patterns without operational management, performance impact, or retrieval fees."
+    },
+    {
+        "id": 63,
+        "section": "COST OPTIMIZATION",
+        "topic": "Storage Cost Optimization",
+        "subtopic": "S3 Storage Classes Selection",
+        "type": "single",
+        "question": "An archival storage policy requires storing compliance documents for 10 years. Records are rarely accessed (once a year), and a retrieval time of 3 to 5 hours is acceptable. Which storage class offers the lowest storage cost?",
+        "options": [
+            "A) Amazon S3 Express One Zone",
+            "B) Amazon S3 Intelligent-Tiering",
+            "C) Amazon S3 Glacier Flexible Retrieval (or S3 Glacier Deep Archive)",
+            "D) Amazon S3 Standard-IA"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. S3 Glacier Flexible Retrieval (and S3 Glacier Deep Archive) provides the lowest cost storage for long-term data archiving where retrieval times of minutes to hours are acceptable."
+    },
+    {
+        "id": 64,
+        "section": "COST OPTIMIZATION",
+        "topic": "Storage Cost Optimization",
+        "subtopic": "S3 Storage Classes Selection",
+        "type": "single",
+        "question": "A company generates thumbnail images that can be easily recreated if lost. The files are accessed infrequently and do not require multi-AZ resilience. Which S3 storage class provides a 20% lower cost than S3 Standard-IA?",
+        "options": [
+            "A) Amazon S3 Glacier Instant Retrieval",
+            "B) Amazon S3 One Zone-Infrequent Access (S3 One Zone-IA)",
+            "C) Amazon S3 Express One Zone",
+            "D) Amazon S3 Standard"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. S3 One Zone-IA stores data in a single Availability Zone at a 20% lower cost than S3 Standard-IA, making it ideal for non-critical, reproducible data."
+    },
+    {
+        "id": 65,
+        "section": "COST OPTIMIZATION",
+        "topic": "Storage Cost Optimization",
+        "subtopic": "S3 Storage Classes Selection",
+        "type": "single",
+        "question": "Medical images stored on Amazon S3 are accessed infrequently (once every few months), but when requested by a doctor, must be retrieved milliseconds fast. Which storage class minimizes cost while providing millisecond retrieval?",
+        "options": [
+            "A) Amazon S3 Glacier Deep Archive",
+            "B) Amazon S3 Standard",
+            "C) Amazon S3 Glacier Instant Retrieval",
+            "D) Amazon S3 Glacier Flexible Retrieval"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. Amazon S3 Glacier Instant Retrieval delivers the lowest-cost storage for long-lived data that is rarely accessed but requires millisecond retrieval when needed."
+    },
+    {
+        "id": 66,
+        "section": "COST OPTIMIZATION",
+        "topic": "Storage Cost Optimization",
+        "subtopic": "S3 Storage Classes Selection",
+        "type": "single",
+        "question": "What is a key cost caveat when storing small files (< 128 KB) in Amazon S3 Standard-IA or S3 Glacier storage classes?",
+        "options": [
+            "A) Objects smaller than 128 KB are charged for a minimum 128 KB of storage capacity, making small files costlier per byte in IA/Glacier",
+            "B) Small files are automatically deleted after 30 days of inactivity",
+            "C) Small files incur double PUT request charges upon bucket insertion",
+            "D) Objects smaller than 128 KB cannot be encrypted using KMS keys"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. S3 Standard-IA and Glacier storage classes enforce a minimum billable object size of 128 KB. If you store a 10 KB object, you are billed for 128 KB, which can make storing tiny files in IA classes more expensive than S3 Standard."
+    },
+    {
+        "id": 67,
+        "section": "COST OPTIMIZATION",
+        "topic": "Storage Cost Optimization",
+        "subtopic": "S3 Lifecycle Transition Optimization",
+        "type": "single",
+        "question": "A log bucket receives daily web server access logs. Logs are accessed heavily during the first 30 days, rarely for the next 60 days, and must be archived for 7 years for compliance. Which S3 Lifecycle configuration minimizes cost?",
+        "options": [
+            "A) Transition objects to S3 One Zone-IA after 1 day and delete after 30 days",
+            "B) Transition objects to S3 Glacier Deep Archive on Day 1 immediately",
+            "C) Keep all objects in S3 Standard continuously and run weekly automated deletion scripts",
+            "D) Transition objects to S3 Standard-IA after 30 days, transition to S3 Glacier Deep Archive after 90 days, and expire objects after 2555 days (7 years)"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Transitioning from S3 Standard -> S3 Standard-IA at 30 days -> S3 Glacier Deep Archive at 90 days matches the lifecycle of active usage, infrequent inspection, and long-term retention at minimal cost."
+    },
+    {
+        "id": 68,
+        "section": "COST OPTIMIZATION",
+        "topic": "Storage Cost Optimization",
+        "subtopic": "S3 Lifecycle Transition Optimization",
+        "type": "single",
+        "question": "A company enables S3 Versioning on a high-churn bucket. Storage costs have spiked dramatically because overwrites create hidden noncurrent object versions. How can S3 Lifecycle rules resolve this issue?",
+        "options": [
+            "A) Disable S3 Versioning and delete all bucket policies",
+            "B) Create a lifecycle rule to expire/permanently delete noncurrent object versions 14 days after becoming noncurrent",
+            "C) Enable S3 Object Lock on current objects",
+            "D) Transition current versions to S3 Glacier Deep Archive daily"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. S3 Lifecycle rules can target noncurrent object versions specifically, removing accumulated historical versions after a designated retention threshold (e.g. 14 days) to eliminate unexpected versioning costs."
+    },
+    {
+        "id": 69,
+        "section": "COST OPTIMIZATION",
+        "topic": "Storage Cost Optimization",
+        "subtopic": "S3 Lifecycle Transition Optimization",
+        "type": "single",
+        "question": "An analytics bucket receives incomplete multipart uploads when client connections drop mid-transfer. Unfinished parts consume petabytes of hidden storage. How can S3 Lifecycle rules stop this waste?",
+        "options": [
+            "A) Transition incomplete uploads to S3 Glacier Flexible Retrieval",
+            "B) Increase the SQS Visibility Timeout on the S3 upload queue",
+            "C) Add an S3 Lifecycle rule to abort incomplete multipart uploads after a specified number of days (e.g. 7 days)",
+            "D) Enable S3 Replication to clean up aborted uploads"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. S3 Lifecycle rules support the 'AbortIncompleteMultipartUpload' action, automatically deleting accumulated incomplete multipart upload fragments after X days to free up unneeded storage charges."
+    },
+    {
+        "id": 70,
+        "section": "COST OPTIMIZATION",
+        "topic": "Storage Cost Optimization",
+        "subtopic": "S3 Lifecycle Transition Optimization",
+        "type": "single",
+        "question": "What is the minimum recommended retention period before transitioning objects from S3 Standard to S3 Standard-IA in an S3 Lifecycle rule to avoid early deletion/transition penalties?",
+        "options": [
+            "A) 90 days",
+            "B) 30 days",
+            "C) 1 day",
+            "D) 180 days"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. Amazon S3 Standard-IA has a minimum storage duration charge of 30 days. Transitioning objects earlier than 30 days can incur minimum duration prorated charges."
+    },
+    {
+        "id": 71,
+        "section": "COST OPTIMIZATION",
+        "topic": "Database Cost Optimization",
+        "subtopic": "Dev/Test Environment Cost Reduction",
+        "type": "single",
+        "question": "A software company maintains 20 non-production Amazon RDS for MySQL instances for dev/test teams. Development occurs only Monday through Friday from 8 AM to 6 PM. How can the company reduce database costs during nights and weekends?",
+        "options": [
+            "A) Purchase 3-year All Upfront Reserved Instances for all dev environments",
+            "B) Export the database tables to S3 Glacier every evening",
+            "C) Use AWS EventBridge and AWS Lambda (or Systems Manager Automation) to start and stop the RDS instances automatically on a schedule",
+            "D) Convert the RDS instances into Multi-AZ deployments to reduce hourly rate"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. Stopping RDS instances outside business hours (nights and weekends) saves approximately 65% of monthly compute running costs. EventBridge and Lambda can automate scheduled start/stop routines."
+    },
+    {
+        "id": 72,
+        "section": "COST OPTIMIZATION",
+        "topic": "Database Cost Optimization",
+        "subtopic": "Dev/Test Environment Cost Reduction",
+        "type": "single",
+        "question": "To optimize costs for a non-production developer RDS instance, which deployment configuration is most appropriate?",
+        "options": [
+            "A) Multi-AZ Cluster deployment on a Memory Optimized instance class",
+            "B) Multi-Region Aurora Global Database",
+            "C) Provisioned IOPS SSD (io2) with 64,000 IOPS",
+            "D) Single-AZ deployment on a burstable instance class (e.g., db.t4g.medium)"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. For dev/test environments where high availability is not required, Single-AZ deployments on cost-effective ARM-based burstable instance classes (db.t4g) cut compute costs in half compared to Multi-AZ."
+    },
+    {
+        "id": 73,
+        "section": "COST OPTIMIZATION",
+        "topic": "Network Cost Optimization",
+        "subtopic": "NAT Gateway vs NAT Instance Cost",
+        "type": "single",
+        "question": "A small VPC with low data transfer volume has a managed NAT Gateway running 24/7. The company notices the base hourly charge ($0.045/hr per NAT Gateway) accounts for 80% of their AWS bill. What alternative architecture can reduce baseline hourly network costs?",
+        "options": [
+            "A) Add 2 additional NAT Gateways in each private subnet",
+            "B) Route private traffic over an internet gateway using public IPs",
+            "C) Replace the NAT Gateway with a self-managed NAT Instance on a small t4g.nano EC2 instance",
+            "D) Deploy AWS Transit Gateway with BGP Peering"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. For very low-throughput workloads, running a self-managed NAT Instance on a tiny EC2 instance (e.g., t4g.nano) costs significantly less per hour than the fixed base charge of a managed AWS NAT Gateway."
+    },
+    {
+        "id": 74,
+        "section": "COST OPTIMIZATION",
+        "topic": "Network Cost Optimization",
+        "subtopic": "VPC Endpoint Cost Savings",
+        "type": "single",
+        "question": "EC2 instances in a private subnet frequently download gigabytes of data from Amazon S3. Traffic currently routes through a NAT Gateway, incurring high NAT data processing charges ($0.045/GB). How can S3 traffic charges be eliminated completely?",
+        "options": [
+            "A) Deploy an AWS Direct Connect dedicated line",
+            "B) Route S3 traffic over an AWS Site-to-Site VPN",
+            "C) Upgrade the NAT Gateway to a 100 Gbps instance",
+            "D) Create a Gateway VPC Endpoint for S3 and route traffic directly through the VPC route table (free of charge)"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Gateway VPC Endpoints for S3 and DynamoDB are provided free of charge, eliminating both NAT Gateway hourly and data processing charges for traffic destined for S3."
+    },
+    {
+        "id": 75,
+        "section": "COST OPTIMIZATION",
+        "topic": "Network Cost Optimization",
+        "subtopic": "Data Transfer Cost Rules",
+        "type": "single",
+        "question": "Which data transfer path within AWS is completely FREE of charge?",
+        "options": [
+            "A) Inbound data transfer to AWS from the internet across all services",
+            "B) Data transfer across different AWS regions",
+            "C) Outbound data transfer from AWS to the internet",
+            "D) Data transfer across Availability Zones within the same region"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. Inbound data transfer into AWS from the internet is free across all AWS services. Outbound data transfer to the internet, cross-AZ data transfer, and cross-region data transfer incur data transfer charges."
+    },
+    {
+        "id": 76,
+        "section": "COST OPTIMIZATION",
+        "topic": "Network Cost Optimization",
+        "subtopic": "Data Transfer Cost Rules",
+        "type": "single",
+        "question": "Two EC2 instances in different Availability Zones within the same region communicate using public IP addresses. How does this impact network data transfer costs?",
+        "options": [
+            "A) It is covered under the AWS Free Tier indefinitely",
+            "B) It is free because both instances are in the same VPC",
+            "C) It incurs double data transfer charges (cross-AZ cost + public IP egress cost)",
+            "D) It incurs half the cost of standard private IP communication"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. Communicating between instances in different AZs using public/Elastic IP addresses charges for both regional data transfer and internet/public IP routing, making it more expensive than private IP communication."
+    },
+    {
+        "id": 77,
+        "section": "COST OPTIMIZATION",
+        "topic": "Network Cost Optimization",
+        "subtopic": "CloudFront Egress Cost Optimization",
+        "type": "single",
+        "question": "A video streaming app serves global users directly from Amazon S3 over public internet, resulting in high S3 Data Transfer Out fees. How can deploying Amazon CloudFront reduce egress costs?",
+        "options": [
+            "A) CloudFront routes video streams through AWS Direct Connect",
+            "B) CloudFront compresses video files automatically by 90%",
+            "C) Data transfer from S3 to CloudFront is free, and CloudFront outbound data transfer rates are cheaper than direct S3 internet egress rates",
+            "D) CloudFront eliminates S3 GET request charges completely"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. Data transfer out from S3 to CloudFront is free. In addition, CloudFront's outbound data transfer pricing is generally lower than standard S3 outbound internet pricing, reducing total network egress costs while improving performance via edge caching."
+    },
+    {
+        "id": 78,
+        "section": "COST OPTIMIZATION",
+        "topic": "Cost Management Tools",
+        "subtopic": "Compute Optimizer & Trusted Advisor",
+        "type": "single",
+        "question": "Which AWS service uses machine learning to analyze historical EC2, EBS, and Lambda utilization metrics and provides specific right-sizing recommendations to eliminate over-provisioned infrastructure?",
+        "options": [
+            "A) AWS Compute Optimizer",
+            "B) AWS Budgets",
+            "C) AWS Billing Conductor",
+            "D) AWS Cost Explorer"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. AWS Compute Optimizer uses machine learning to analyze historical configuration and CloudWatch performance metrics, providing actionable right-sizing recommendations for EC2 instances, EBS volumes, and Lambda functions."
+    },
+    {
+        "id": 79,
+        "section": "COST OPTIMIZATION",
+        "topic": "Cost Management Tools",
+        "subtopic": "Compute Optimizer & Trusted Advisor",
+        "type": "single",
+        "question": "A DevOps team wants to identify unattached EBS volumes, idle RDS instances, and unassociated Elastic IP addresses across their AWS accounts. Which service provides these cost optimization checks out of the box?",
+        "options": [
+            "A) AWS Service Catalog",
+            "B) AWS Trusted Advisor",
+            "C) AWS Systems Manager Inventory",
+            "D) AWS Compute Optimizer"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. AWS Trusted Advisor inspects your AWS environment and provides recommendations under 5 categories, including Cost Optimization checks for unattached EBS volumes, idle RDS instances, unused EIPs, and low utilization EC2 instances."
+    },
+    {
+        "id": 80,
+        "section": "COST OPTIMIZATION",
+        "topic": "Cost Management Tools",
+        "subtopic": "AWS Cost Explorer & Budgets",
+        "type": "single",
+        "question": "A finance manager wants to receive an email alert whenever monthly EC2 spending is forecasted to exceed $5,000 before the end of the billing period. Which service should be configured?",
+        "options": [
+            "A) CloudWatch Metric Filters",
+            "B) AWS Cost Explorer Custom Reports",
+            "C) AWS Cost and Usage Report (CUR)",
+            "D) AWS Budgets with Forecasted Cost Alerts"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. AWS Budgets allows setting custom spend limits and sending automated alerts (email/SNS) when your actual OR forecasted costs exceed defined thresholds."
+    },
+    {
+        "id": 81,
+        "section": "COST OPTIMIZATION",
+        "topic": "Cost Management Tools",
+        "subtopic": "Cost Allocation Tags",
+        "type": "single",
+        "question": "An enterprise requires breaking down monthly AWS costs by department (e.g., Engineering, Marketing, Finance). What step is required to reflect custom tags in Cost Explorer reports?",
+        "options": [
+            "A) Apply resource tags to AWS resources and activate them as User-Defined Cost Allocation Tags in the AWS Billing Console",
+            "B) Enable AWS Organizations Consolidated Billing without tagging",
+            "C) Configure AWS Service Catalog portfolios per department",
+            "D) Create separate AWS regions for each department"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. Resource tags must be activated as User-Defined Cost Allocation Tags in the AWS Billing Console before AWS includes them in Cost Explorer and Cost & Usage Reports for cost categorization."
+    },
+    {
+        "id": 82,
+        "section": "COST OPTIMIZATION",
+        "topic": "Cost Management Tools",
+        "subtopic": "AWS Cost and Usage Report (CUR)",
+        "type": "single",
+        "question": "A data analytics team needs the most comprehensive, granular AWS billing dataset available, containing hourly line-item details delivered directly into an Amazon S3 bucket for analysis using Amazon Athena. Which billing report should be generated?",
+        "options": [
+            "A) AWS Cost Explorer CSV Export",
+            "B) AWS Billing Monthly Summary PDF",
+            "C) AWS Budgets Spend History Report",
+            "D) AWS Cost and Usage Report (CUR)"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. The AWS Cost and Usage Report (CUR) provides the most detailed AWS cost and usage dataset available, including metadata, pricing, and reservation line items, automatically delivered to Amazon S3 for Athena query analysis."
+    },
+    {
+        "id": 83,
+        "section": "COST OPTIMIZATION",
+        "topic": "Cost Management Tools",
+        "subtopic": "Consolidated Billing Benefits",
+        "type": "single",
+        "question": "How does Consolidated Billing under AWS Organizations help reduce enterprise storage and compute costs?",
+        "options": [
+            "A) It provides 50% discount on all AWS Marketplace purchases",
+            "B) It waives all cross-region data transfer fees between member accounts",
+            "C) It automatically converts all On-Demand instances to Spot instances",
+            "D) It combines usage across all member accounts to qualify for higher volume pricing tier discounts on S3 and data transfer"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Consolidated Billing aggregates usage across all member accounts within an AWS Organization, allowing the enterprise to reach higher volume discount tiers faster (e.g. for S3 storage tiers and outbound data transfer rates)."
+    },
+    {
+        "id": 84,
+        "section": "COST OPTIMIZATION",
+        "topic": "Architecture Cost Optimization",
+        "subtopic": "EFS vs EBS Cost Trade-offs",
+        "type": "single",
+        "question": "A single EC2 instance requires a persistent 500 GB block storage volume. Compare the cost of using Amazon EBS General Purpose SSD (gp3) versus Amazon EFS Standard for this single-instance workload.",
+        "options": [
+            "A) EFS Standard is lower cost per GB than EBS gp3",
+            "B) EBS gp3 and EFS Standard cost the exact same per GB",
+            "C) EFS Standard is free for volumes under 1 TB",
+            "D) EBS gp3 is significantly lower cost per GB (~$0.08/GB) compared to EFS Standard (~$0.30/GB)"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Amazon EBS gp3 costs around $0.08/GB-month, whereas Amazon EFS Standard costs around $0.30/GB-month. For a single EC2 instance that does not require multi-node file sharing, EBS is substantially more cost-effective."
+    },
+    {
+        "id": 85,
+        "section": "COST OPTIMIZATION",
+        "topic": "Architecture Cost Optimization",
+        "subtopic": "Serverless vs Provisioned Cost Models",
+        "type": "single",
+        "question": "An API receives a few requests per hour during off-peak times and bursts to 100 requests per minute during peak times. Which compute service model avoids paying for idle server running time?",
+        "options": [
+            "A) Elastic Beanstalk Load Balanced environment",
+            "B) Serverless compute using AWS Lambda and Amazon API Gateway",
+            "C) ECS cluster running on dedicated EC2 instances",
+            "D) EC2 Auto Scaling group with minimum capacity of 2 instances"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. AWS Lambda and API Gateway follow a true serverless pay-per-request model, charging $0 when no requests are being processed, eliminating idle running costs entirely for low/variable traffic APIs."
+    },
+    {
+        "id": 86,
+        "section": "COST OPTIMIZATION",
+        "topic": "Architecture Cost Optimization",
+        "subtopic": "Graviton ARM Processor Cost Advantage",
+        "type": "single",
+        "question": "How do AWS Graviton (ARM-based) EC2 instance families (e.g. C7g, M7g, R7g) compare to x86-based instance families in terms of price-performance?",
+        "options": [
+            "A) Graviton instances provide up to 40% better price-performance compared to equivalent x86-based instances",
+            "B) Graviton instances cost 50% more due to custom silicon licensing fees",
+            "C) Graviton instances are only available under Spot pricing",
+            "D) Graviton instances require dedicated host reservations"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. AWS Graviton processors (Graviton2/3/4) deliver up to 40% better price-performance over comparable current-generation x86-based instances for a wide range of workloads."
+    },
+    {
+        "id": 87,
+        "section": "COST OPTIMIZATION",
+        "topic": "Architecture Cost Optimization",
+        "subtopic": "DynamoDB On-Demand vs Provisioned Billing",
+        "type": "single",
+        "question": "A team is deciding between DynamoDB On-Demand and Provisioned capacity for a predictable production workload running 24/7. Which option is more cost-effective for steady traffic?",
+        "options": [
+            "A) On-Demand capacity mode",
+            "B) Provisioned capacity mode with Auto Scaling (and optional Reserved Capacity commitments)",
+            "C) On-Demand capacity mode with S3 Intelligent-Tiering",
+            "D) Provisioned capacity mode without auto scaling"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. For steady, predictable workloads running continuously, DynamoDB Provisioned Capacity mode (especially with Auto Scaling and Reserved Capacity) is significantly cheaper per request than On-Demand capacity mode."
+    },
+    {
+        "id": 88,
+        "section": "COST OPTIMIZATION",
+        "topic": "Architecture Cost Optimization",
+        "subtopic": "Elastic Load Balancer Cost Optimization",
+        "type": "single",
+        "question": "A microservices application deploys 10 separate small services. Creating 10 distinct Application Load Balancers (ALBs) is causing high fixed monthly load balancer fees. How can the architecture be consolidated to reduce load balancer costs?",
+        "options": [
+            "A) Place a Network Load Balancer in front of each Application Load Balancer",
+            "B) Consolidate services behind a single Application Load Balancer using path-based or host-based listener rules",
+            "C) Route traffic directly to public EC2 instances without load balancers",
+            "D) Replace all ALBs with 10 Classic Load Balancers"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. An Application Load Balancer supports path-based and host-based routing. Consolidating 10 microservices behind a single ALB reduces fixed load balancer hourly charges while maintaining separate target groups for each microservice."
+    },
+    {
+        "id": 89,
+        "section": "COST OPTIMIZATION",
+        "topic": "Architecture Cost Optimization",
+        "subtopic": "Data Transfer inside Amazon CloudWatch",
+        "type": "single",
+        "question": "CloudWatch Logs ingest fees have grown significantly due to verbose debug logging from application fleets. What action immediately lowers CloudWatch Logs storage and ingestion costs?",
+        "options": [
+            "A) Convert CloudWatch logs to XML format",
+            "B) Export logs continuously to Amazon EC2 instance store",
+            "C) Change application logging levels to INFO/ERROR and set log group retention periods (e.g. 30 days instead of 'Never Expire')",
+            "D) Enable CloudWatch Container Insights on all instances"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. Reducing log volume by adjusting verbosity levels (from DEBUG to INFO/ERROR) reduces ingestion charges, and configuring log group retention periods (e.g., 14 or 30 days) prevents indefinite storage costs for old logs."
+    },
+    {
+        "id": 90,
+        "section": "COST OPTIMIZATION",
+        "topic": "Architecture Cost Optimization",
+        "subtopic": "EC2 Auto Scaling Mixed Instances Groups",
+        "type": "single",
+        "question": "How can an EC2 Auto Scaling Group be configured to optimize costs while ensuring capacity availability during traffic spikes?",
+        "options": [
+            "A) Disable scale-in actions permanently",
+            "B) Configure a Mixed Instances Policy combining a baseline percentage of On-Demand/Savings Plan instances with Spot instances across multiple instance types",
+            "C) Restrict the Auto Scaling group to a single instance type in one AZ",
+            "D) Set minimum, maximum, and desired capacity to equal values"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. Auto Scaling Mixed Instances Policies allow fulfilling baseline capacity with On-Demand/Savings Plan instances while satisfying scaling spikes with low-cost Spot instances across multiple instance families, balancing availability and cost."
+    },
+    {
+        "id": 91,
+        "section": "COST OPTIMIZATION",
+        "topic": "Architecture Cost Optimization",
+        "subtopic": "RDS Storage Auto Scaling",
+        "type": "single",
+        "question": "What is the cost advantage of enabling Amazon RDS Storage Auto Scaling instead of pre-provisioning large storage capacities on day one?",
+        "options": [
+            "A) You only pay for the database storage allocated at any given time, scaling up automatically as data grows without downtime",
+            "B) Storage Auto Scaling converts provisioned IOPS to free general purpose IOPS",
+            "C) Storage Auto Scaling reduces per-GB storage pricing by 50%",
+            "D) Storage Auto Scaling automatically deletes old database snapshots"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. RDS Storage Auto Scaling automatically expands storage capacity as database usage grows. This eliminates the need to over-provision and pay for unused disk space upfront."
+    },
+    {
+        "id": 92,
+        "section": "COST OPTIMIZATION",
+        "topic": "Resource Cleanup Optimization",
+        "subtopic": "Unattached EBS Volumes & EIPs",
+        "type": "single",
+        "question": "An AWS account administrator notices recurring monthly charges for Elastic IP addresses that are not currently associated with any running EC2 instance. How does AWS bill unassociated Elastic IP addresses?",
+        "options": [
+            "A) AWS automatically releases unassociated Elastic IPs after 1 hour",
+            "B) Unassociated Elastic IP addresses are always 100% free of charge",
+            "C) AWS charges for unassociated Elastic IPs only if they receive inbound network traffic",
+            "D) AWS charges a small hourly fee for Elastic IP addresses that are allocated but not associated with a running instance"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. AWS charges a hourly fee for allocated Elastic IP addresses that are NOT associated with a running EC2 instance (or associated with a stopped instance) to prevent IP address hoarding."
+    },
+    {
+        "id": 93,
+        "section": "COST OPTIMIZATION",
+        "topic": "Resource Cleanup Optimization",
+        "subtopic": "Unattached EBS Volumes & EIPs",
+        "type": "single",
+        "question": "When an EC2 instance is terminated, what happens by default to its attached EBS root volume versus additional data volumes, and how does this affect costs?",
+        "options": [
+            "A) Additional volumes are converted into free S3 Glacier archives",
+            "B) All attached volumes are automatically deleted upon instance termination",
+            "C) Root volumes are deleted by default (DeleteOnTermination=true), while additional data volumes persist by default (DeleteOnTermination=false), causing orphan storage costs if forgotten",
+            "D) Root volumes persist indefinitely while data volumes are deleted immediately"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. By default, the DeleteOnTermination attribute is true for root volumes (deleted when instance terminates) but false for secondary attached data volumes. Terminating an instance without checking this setting leaves orphan EBS volumes accruing continuous storage charges."
+    },
+    {
+        "id": 94,
+        "section": "COST OPTIMIZATION",
+        "topic": "Storage Cost Optimization",
+        "subtopic": "S3 Storage Class Analysis",
+        "type": "single",
+        "question": "Which Amazon S3 tool analyzes object access patterns across a bucket to recommend optimal lifecycle transition timing to S3 Standard-IA?",
+        "options": [
+            "A) AWS Trusted Advisor",
+            "B) Amazon S3 Storage Lens",
+            "C) Amazon Macie",
+            "D) Amazon S3 Storage Class Analysis"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. S3 Storage Class Analysis analyzes storage access patterns to help you decide when to transition infrequently accessed data to S3 Standard-IA or other storage classes."
+    },
+    {
+        "id": 95,
+        "section": "COST OPTIMIZATION",
+        "topic": "Storage Cost Optimization",
+        "subtopic": "S3 Storage Lens for Cost Visibility",
+        "type": "single",
+        "question": "An enterprise wants organization-wide visibility into S3 storage metrics, identifying incomplete multipart uploads, un-lifecycle-configured buckets, and old object versions across 100 AWS accounts. Which feature delivers this dashboard?",
+        "options": [
+            "A) AWS Cost Explorer",
+            "B) AWS Billing Conductor",
+            "C) AWS Control Tower",
+            "D) Amazon S3 Storage Lens"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Amazon S3 Storage Lens provides organization-wide visibility into object storage usage and activity, highlighting cost-optimization opportunities such as incomplete multipart uploads and noncurrent object versions."
+    },
+    {
+        "id": 96,
+        "section": "COST OPTIMIZATION",
+        "topic": "Compute Cost Optimization",
+        "subtopic": "EC2 Stop/Start for Non-Prod",
+        "type": "single",
+        "question": "When an EC2 instance backed by EBS is in a STOPPED state, which component continues to incur charges?",
+        "options": [
+            "A) Both EC2 compute and EBS storage fees continue equally",
+            "B) The attached Amazon EBS storage volume and any allocated Elastic IP addresses",
+            "C) The EC2 per-second compute running fee",
+            "D) The VPC regional network interface fee"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. Stopping an EC2 instance halts EC2 compute charges. However, you continue to pay for the attached EBS storage volume space and any unassociated Elastic IP addresses."
+    },
+    {
+        "id": 97,
+        "section": "COST OPTIMIZATION",
+        "topic": "Database Cost Optimization",
+        "subtopic": "Aurora I/O-Optimized Storage",
+        "type": "single",
+        "question": "A company runs a read/write intensive Amazon Aurora cluster where database I/O operations account for 60% of total database costs. Which Aurora storage configuration eliminates per-I/O operation charges?",
+        "options": [
+            "A) Amazon DynamoDB On-Demand",
+            "B) Amazon RDS Provisioned IOPS (io2)",
+            "C) Amazon Aurora I/O-Optimized storage cluster configuration",
+            "D) Amazon Aurora Standard storage cluster configuration"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. Amazon Aurora I/O-Optimized provides predictable pricing for I/O-intensive applications with zero charges for read/write I/O operations, offering up to 40% cost savings for heavy I/O workloads."
+    },
+    {
+        "id": 98,
+        "section": "COST OPTIMIZATION",
+        "topic": "Compute Cost Optimization",
+        "subtopic": "Lambda Memory Sizing Optimization",
+        "type": "single",
+        "question": "An open-source tool allows developers to run automated performance tests across various AWS Lambda memory settings (128 MB to 10,240 MB) to find the sweet spot between execution time and total cost. What is this concept called?",
+        "options": [
+            "A) AWS Lambda Power Tuning",
+            "B) AWS Step Functions Tuning",
+            "C) AWS Batch Sizing",
+            "D) AWS Compute Optimizer"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. AWS Lambda Power Tuning is a widely used state-machine tool that executes Lambda functions at different memory configurations in parallel to help developers discover the optimal balance between speed and cost."
+    },
+    {
+        "id": 99,
+        "section": "COST OPTIMIZATION",
+        "topic": "Compute Cost Optimization",
+        "subtopic": "ECS Spot Task Allocation",
+        "type": "single",
+        "question": "When deploying Amazon ECS tasks using EC2 Spot instances, what capacity provider strategy ensures high availability while minimizing cost?",
+        "options": [
+            "A) Use On-Demand capacity providers exclusively",
+            "B) Use Fargate On-Demand with zero scaling",
+            "C) Provision 100% Spot instances with base=0 in a single AZ",
+            "D) Set a base capacity of On-Demand instances (e.g. base=2) and distribute remaining scaling tasks across Spot capacity providers (weight=1)"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. ECS Capacity Provider strategies allow defining a baseline count of On-Demand tasks for baseline stability, while scaling out addition capacity using low-cost Spot instances."
+    },
+    {
+        "id": 100,
+        "section": "COST OPTIMIZATION",
+        "topic": "Architecture Cost Optimization",
+        "subtopic": "AWS Free Tier Rules",
+        "type": "single",
+        "question": "What happens when an AWS account exceeds the 12-Month Free Tier usage limits (such as 750 hours of t2.micro/t3.micro EC2 compute per month)?",
+        "options": [
+            "A) The AWS account is automatically suspended until the next month",
+            "B) Usage beyond the free tier limits is charged at standard On-Demand pay-as-you-go rates",
+            "C) AWS automatically terminates all running EC2 instances",
+            "D) Usage beyond free tier limits requires manual approval from AWS Support"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. Usage exceeding free tier allowances is automatically billed at standard On-Demand pay-as-you-go rates to the account payment method."
     }
 ];
 
@@ -1746,7 +2601,7 @@
                 '<button class="submit-btn" onclick="checkAnswer(' + q.id + ')">Submit Answer</button>' +
                 '<div id="feedback-' + q.id + '" class="explanation"></div>' +
                 '<div class="card-watermark">' +
-                    '🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">AWS SAA-C03 Prep Tracker • github.com/borudeyash1</a>' +
+                    '🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-30-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">AWS SAA-C03 Prep Tracker • github.com/borudeyash1</a>' +
                 '</div>' +
             '</div>';
         });
@@ -2254,6 +3109,81 @@
 
     // Initialize application on load
     renderQuiz();
-</script>
+
+    // ======================== PRACTICE MODE QUESTION NAVIGATOR ========================
+    var practiceNavOpen = false;
+    function togglePracticeNav() { practiceNavOpen ? closePracticeNav() : openPracticeNav(); }
+    function openPracticeNav() {
+        practiceNavOpen = true;
+        var panel = document.getElementById('practice-nav-panel');
+        if (panel) panel.classList.add('open');
+        refreshPracticeNav();
+    }
+    function closePracticeNav() {
+        practiceNavOpen = false;
+        var panel = document.getElementById('practice-nav-panel');
+        if (panel) panel.classList.remove('open');
+    }
+    function refreshPracticeNav() {
+        if (!practiceNavOpen) return;
+        var grid = document.getElementById('practice-nav-grid');
+        var statsEl = document.getElementById('practice-nav-stats');
+        if (!grid) return;
+        grid.innerHTML = '';
+        var data = typeof activeQuizData !== 'undefined' && activeQuizData ? activeQuizData : (typeof quizData !== 'undefined' ? quizData : []);
+        if (!data || data.length === 0) return;
+        var correctCount = 0, incorrectCount = 0;
+        data.forEach(function(q) {
+            var card = document.getElementById('card-' + q.id);
+            var status = card ? (card.getAttribute('data-status') || 'unanswered') : 'unanswered';
+            if (status === 'correct') correctCount++;
+            else if (status === 'incorrect') incorrectCount++;
+            var btn = document.createElement('button');
+            btn.className = 'nav-q-btn status-' + status;
+            btn.title = 'Q#' + q.id + ' — ' + (q.q || q.question || '').substring(0, 60) + '...';
+            btn.textContent = q.id;
+            btn.onclick = function() {
+                var target = document.getElementById('card-' + q.id);
+                if (target) {
+                    closePracticeNav();
+                    setTimeout(function() {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        target.style.outline = '2px solid #ff9900';
+                        target.style.outlineOffset = '4px';
+                        setTimeout(function() { target.style.outline = ''; target.style.outlineOffset = ''; }, 2000);
+                    }, 300);
+                }
+            };
+            grid.appendChild(btn);
+        });
+        var total = data.length;
+        var answered = correctCount + incorrectCount;
+        if (statsEl) statsEl.innerHTML = '<strong>' + answered + '/' + total + '</strong> answered &nbsp;|&nbsp; [OK] ' + correctCount + ' correct &nbsp;|&nbsp; ❌ ' + incorrectCount + ' incorrect';
+    }
+    document.addEventListener('click', function(e) {
+        var panel = document.getElementById('practice-nav-panel');
+        var btn = document.getElementById('practice-nav-btn');
+        if (practiceNavOpen && panel && btn && !panel.contains(e.target) && !btn.contains(e.target)) closePracticeNav();
+    });
+
+    // ======================== ORDER BUTTONS ========================
+    var currentOrder = 'first';
+    function setOrder(orderType, btn) {
+        currentOrder = orderType;
+        document.querySelectorAll('.order-btn').forEach(function(b) { b.classList.remove('active'); });
+        if (btn) btn.classList.add('active');
+        var data = typeof activeQuizData !== 'undefined' && activeQuizData ? activeQuizData : (typeof quizData !== 'undefined' ? quizData : null);
+        if (!data || data.length === 0) return;
+        var ordered = data.slice();
+        if (orderType === 'first') ordered.sort(function(a,b){ return (parseInt(a.id)||0)-(parseInt(b.id)||0); });
+        else if (orderType === 'last') ordered.sort(function(a,b){ return (parseInt(b.id)||0)-(parseInt(a.id)||0); });
+        else ordered.sort(function(){ return 0.5-Math.random(); });
+        if (typeof activeQuizData !== 'undefined') activeQuizData = ordered;
+        if (typeof renderQuizGroupedBySection === 'function') renderQuizGroupedBySection(ordered);
+        else if (typeof renderQuiz === 'function') renderQuiz(ordered);
+        if (typeof refreshPracticeNav === 'function') setTimeout(refreshPracticeNav, 200);
+    }
+
+    </script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AWS Solutions Architect Associate (SAA-C03) - Performance Quiz Master</title>
+    <title>AWS Solutions Architect Associate (SAA-C03) - Design for Migration & Hybrid Connectivity Master Quiz</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -710,6 +710,74 @@
         .btn-export-json:hover {
             background: #2563eb;
         }
+    
+    /* ======================== QUESTION NAVIGATOR PANEL ======================== */
+    #practice-nav-btn {
+        position: fixed;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 9000;
+        background: linear-gradient(135deg, #ff9900, #e07b00);
+        color: #fff;
+        border: none;
+        border-radius: 10px 0 0 10px;
+        padding: 12px 10px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        cursor: pointer;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        letter-spacing: 1.5px;
+        box-shadow: -3px 0 18px rgba(255,153,0,0.45);
+        transition: background 0.2s, box-shadow 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    #practice-nav-btn:hover { background: linear-gradient(135deg, #ffaa22, #ff9900); box-shadow: -4px 0 24px rgba(255,153,0,0.6); }
+    #practice-nav-panel {
+        position: fixed;
+        right: -340px;
+        top: 0;
+        height: 100vh;
+        width: 320px;
+        background: var(--card-bg, #111827);
+        border-left: 2px solid #ff9900;
+        box-shadow: -6px 0 40px rgba(0,0,0,0.5);
+        z-index: 8999;
+        display: flex;
+        flex-direction: column;
+        transition: right 0.32s cubic-bezier(0.4,0,0.2,1);
+        overflow: hidden;
+    }
+    #practice-nav-panel.open { right: 0; }
+    #practice-nav-panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 18px;
+        background: linear-gradient(135deg, rgba(255,153,0,0.15), rgba(255,153,0,0.05));
+        border-bottom: 1px solid var(--border-color, #e2e8f0);
+    }
+    #practice-nav-panel-header h3 { margin: 0; font-size: 1rem; font-weight: 700; color: #ff9900; }
+    #practice-nav-close { background: none; border: none; color: var(--text-secondary, #6b7280); font-size: 1.4rem; cursor: pointer; line-height: 1; padding: 2px 6px; border-radius: 4px; transition: color 0.2s; }
+    #practice-nav-close:hover { color: var(--text-primary, #111); }
+    #practice-nav-legend { display: flex; gap: 12px; padding: 10px 18px 8px; border-bottom: 1px solid var(--border-color, #e2e8f0); flex-wrap: wrap; }
+    .nav-legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.75rem; color: var(--text-secondary, #6b7280); }
+    .nav-legend-dot { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+    .nav-legend-dot.unanswered { background: var(--card-sub-bg, #f1f5f9); border: 1px solid var(--border-color, #cbd5e1); }
+    .nav-legend-dot.correct { background: rgba(16,185,129,0.25); border: 1px solid #10b981; }
+    .nav-legend-dot.incorrect { background: rgba(239,68,68,0.25); border: 1px solid #ef4444; }
+    #practice-nav-stats { padding: 8px 18px; font-size: 0.8rem; color: var(--text-secondary, #6b7280); border-bottom: 1px solid var(--border-color, #e2e8f0); }
+    #practice-nav-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; padding: 14px; overflow-y: auto; flex: 1; }
+    .nav-q-btn { aspect-ratio: 1; border-radius: 5px; border: 1px solid var(--border-color, #cbd5e1); background: var(--card-sub-bg, #f1f5f9); color: var(--text-secondary, #6b7280); font-size: 0.68rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+    .nav-q-btn:hover { background: rgba(255,153,0,0.15); border-color: #ff9900; color: #ff9900; transform: scale(1.08); }
+    .nav-q-btn.status-correct { background: rgba(16,185,129,0.18); border-color: #10b981; color: #10b981; }
+    .nav-q-btn.status-incorrect { background: rgba(239,68,68,0.18); border-color: #ef4444; color: #ef4444; }
+    /* Order buttons */
+    .order-btn-group { display: inline-flex; gap: 5px; margin-left: 10px; padding-left: 10px; border-left: 1px solid var(--border-color, #cbd5e1); }
+
     </style>
 </head>
 <body>
@@ -772,839 +840,803 @@
     const quizData = [
     {
         "id": 1,
-        "section": "PERFORMANCE",
-        "topic": "AWS Well-Architected Framework",
-        "subtopic": "Pillars of the Framework",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Migration Strategy",
+        "subtopic": "7 Rs of Migration",
         "type": "single",
-        "question": "The AWS Well-Architected Framework is based on six pillars designed to measure architectures against best practices. Which of the following is NOT one of the six pillars?",
+        "question": "A company wants to migrate an on-premises web application to AWS quickly without making any architecture or code modifications. Which cloud migration strategy (7 Rs) describes this lift-and-shift approach?",
         "options": [
-            "A) Performance Efficiency (focusing on structured resource selection, monitoring, and scaling)",
-            "B) Sustainability (focusing on minimizing environmental impacts of running cloud workloads)",
-            "C) Operational Excellence (focusing on running and monitoring systems to deliver business value)",
-            "D) Agility and Elasticity (focusing on rapid speculative prototyping and unregulated growth)"
+            "A) Refactor / Re-architect",
+            "B) Repurchase (Drop and Shop)",
+            "C) Rehost (Lift and Shift)",
+            "D) Replatform (Lift, Tinker, and Shift)"
         ],
-        "correct": "D",
-        "explanation": "The six pillars of the AWS Well-Architected Framework are Operational Excellence, Security, Reliability, Performance Efficiency, Cost Optimization, and Sustainability. Agility and Elasticity is not a distinct pillar."
+        "correct": "C",
+        "explanation": "Correct Answer: C. Rehost (Lift and Shift) involves moving applications from on-premises to the cloud without making any changes to application code or core architecture (typically using tools like AWS Application Migration Service - MGN). Option B (Replatform) involves making minor optimizations like moving to managed DBs. Option C (Refactor) involves re-architecting for cloud-native features. Option D (Repurchase) involves switching to a SaaS product."
     },
     {
         "id": 2,
-        "section": "PERFORMANCE",
-        "topic": "Performance Design Principles",
-        "subtopic": "Mechanical Sympathy",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Migration Strategy",
+        "subtopic": "7 Rs of Migration",
         "type": "single",
-        "question": "An organization relies heavily on Amazon S3 to store rapidly mutating transactional SQL records, causing severe performance degradation. Which Performance Design Principle is explicitly being violated in this scenario?",
+        "question": "A enterprise plans to migrate an on-premises Oracle database to Amazon RDS for MySQL to eliminate expensive proprietary database licensing fees. Which migration strategy does this database engine change represent?",
         "options": [
-            "A) Consider mechanical sympathy (aligning workload access patterns with purpose-built storage technologies)",
-            "B) Democratize advanced technologies (delegating complex operational tasks to managed cloud vendor services)",
-            "C) Use serverless architectures (removing the operational requirement to manage physical compute instances)",
-            "D) Experiment more often (leveraging automation to conduct comparative benchmarking across instance families)"
+            "A) Rehost",
+            "B) Retain",
+            "C) Retire",
+            "D) Replatform (or Refactor depending on schema change extent)"
         ],
-        "correct": "A",
-        "explanation": "Mechanical sympathy means using a technology for what it was designed for. Using S3 (an object store) as a relational database violates this principle."
+        "correct": "D",
+        "explanation": "Correct Answer: D. Switching database engines (e.g. from self-managed Oracle to managed Amazon RDS MySQL) to take advantage of cloud-managed services without rewriting the core application code is classified as Replatforming (or Refactoring when significant schema re-architecture is performed via SCT)."
     },
     {
         "id": 3,
-        "section": "PERFORMANCE",
-        "topic": "Performance Design Principles",
-        "subtopic": "Democratize Advanced Technologies",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Migration Strategy",
+        "subtopic": "7 Rs of Migration",
         "type": "single",
-        "question": "Which scenario best exemplifies the performance design principle 'Democratize advanced technologies'?",
+        "question": "An organization decides to replace a legacy on-premises HR software package with a third-party Software-as-a-Service (SaaS) application like Salesforce or Workday. Which 7 Rs migration strategy is being executed?",
         "options": [
-            "A) Building, compiling, and hosting custom machine learning neural network software on unmanaged bare-metal servers",
-            "B) Consuming managed AI services like Amazon Rekognition or Lex rather than hosting and training custom infrastructure",
-            "C) Hardcoding static relational database connection pools inside application configuration files across all compute nodes",
-            "D) Provisioning dedicated physical hardware security modules in private subnets without enabling KMS integrations"
+            "A) Retain",
+            "B) Rehost",
+            "C) Relocate",
+            "D) Repurchase (Drop and Shop)"
         ],
-        "correct": "B",
-        "explanation": "Democratizing advanced technologies means consuming complex technologies (like ML, media transcoding, or managed databases) as services rather than having your team manage the underlying infrastructure."
+        "correct": "D",
+        "explanation": "Correct Answer: D. Repurchase (Drop and Shop) involves discarding existing legacy software and purchasing a cloud-native SaaS product or licensing a new product from the AWS Marketplace."
     },
     {
         "id": 4,
-        "section": "PERFORMANCE",
-        "topic": "Performance Design Principles",
-        "subtopic": "Five Design Principles",
-        "type": "multi",
-        "question": "Which TWO of the following are explicit Performance Design Principles defined in the AWS Well-Architected Framework? (Select 2)",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Migration Strategy",
+        "subtopic": "7 Rs of Migration",
+        "type": "single",
+        "question": "A company moves a VMware vSphere environment from an on-premises data center to VMware Cloud on AWS without modifying hypervisor formats or rewriting virtual machines. Which migration strategy is this?",
         "options": [
-            "A) Go global in minutes (deploying workloads in multiple regions for lower latency and better user experience)",
-            "B) Use serverless architectures (reducing operational overhead and leveraging per-request dynamic scaling)",
-            "C) Mandate synchronous monolithic architectures (coupling application tiers to reduce network communication)",
-            "D) Restrict resource provisioning to a single Availability Zone (minimizing cross-zone network latency hops)"
+            "A) Refactor",
+            "B) Relocate",
+            "C) Repurchase",
+            "D) Retire"
         ],
-        "correct": [
-            "A",
-            "B"
-        ],
-        "explanation": "The five Performance Efficiency design principles are: Democratize advanced technologies, Go global in minutes, Use serverless architectures, Experiment more often, and Consider mechanical sympathy."
+        "correct": "B",
+        "explanation": "Correct Answer: B. Relocate involves moving hypervisor-level workloads (such as VMware vSphere VMs) directly to VMware Cloud on AWS without rewriting applications or changing virtual machine formats."
     },
     {
         "id": 5,
-        "section": "PERFORMANCE",
-        "topic": "Servered vs Serverless",
-        "subtopic": "Architectural Spectrum",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Migration Strategy",
+        "subtopic": "7 Rs of Migration",
         "type": "single",
-        "question": "When categorizing AWS compute options along the spectrum from 'Servered' to 'Serverless', which of the following is correctly positioned in the middle as a container service that manages servers but abstracts raw virtual machines?",
+        "question": "An enterprise audit reveals that 15% of on-premises servers in a legacy data center host obsolete services that are no longer used by any business unit. What is the recommended 7 Rs decision for these servers?",
         "options": [
-            "A) Amazon EC2 with dedicated hosts (providing full hardware-level virtualization control to the customer)",
-            "B) Amazon ECS or Amazon EKS on EC2 (providing container orchestration while managing worker node clusters)",
-            "C) AWS Lambda (providing fully event-driven execution without provisioning or managing server instances)",
-            "D) AWS Step Functions (providing visual serverless workflow orchestration across distributed microservices)"
+            "A) Retire",
+            "B) Rehost",
+            "C) Retain",
+            "D) Replatform"
         ],
-        "correct": "B",
-        "explanation": "The compute spectrum moves from Servered (EC2, Beanstalk) to Containerized/Hybrid (ECS/EKS on EC2) to pure Serverless (Fargate, Lambda)."
+        "correct": "A",
+        "explanation": "Correct Answer: A. Retire involves identifying and turning off applications or servers that are no longer useful or needed, eliminating migration costs and reducing attack surface."
     },
     {
         "id": 6,
-        "section": "PERFORMANCE",
-        "topic": "Autoscaling vs Manual Scaling",
-        "subtopic": "Service Support Matrix",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Migration Strategy",
+        "subtopic": "7 Rs of Migration",
         "type": "single",
-        "question": "According to the AWS autoscaling support matrix, which compute service requires manual scaling rather than supporting native dynamic autoscaling policies?",
+        "question": "A mainframe application cannot be moved to AWS due to strict legacy hardware dependencies and regulatory constraints. The application will remain on-premises while newer microservices are built in AWS. What strategy applies to the mainframe?",
         "options": [
-            "A) Amazon Lightsail (designed for simple fixed-price virtual private servers with manual instance resizing)",
-            "B) Amazon EC2 Auto Scaling (dynamically launching and terminating instances based on target tracking policies)",
-            "C) AWS App Runner (automatically scaling container instances up and down in response to incoming web traffic)",
-            "D) Amazon DynamoDB (automatically scaling provisioned read and write capacity units based on utilization)"
+            "A) Retain",
+            "B) Repurchase",
+            "C) Rehost",
+            "D) Relocate"
         ],
         "correct": "A",
-        "explanation": "Amazon Lightsail is designed as a simplified, fixed-bundle virtual private server platform and does not feature native dynamic autoscaling like EC2 ASG or App Runner."
+        "explanation": "Correct Answer: A. Retain involves keeping applications in their current on-premises environment (often because migration is not feasible, un-justified by ROI, or postponed for future phases)."
     },
     {
         "id": 7,
-        "section": "PERFORMANCE",
-        "topic": "Performance Categories",
-        "subtopic": "Four Major Categories",
-        "type": "multi",
-        "question": "Which TWO of the following are explicitly listed as major categories that all performance actions will affect within AWS? (Select 2)",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Database Migration",
+        "subtopic": "AWS DMS vs AWS SCT",
+        "type": "single",
+        "question": "A company is migrating a Microsoft SQL Server database to Amazon Aurora PostgreSQL. Because the database engines are different (heterogeneous migration), database schemas, stored procedures, and views must be converted. Which tool automates schema conversion?",
         "options": [
-            "A) Compute and Hardware (evaluating CPU architecture, accelerators, memory ratios, and instance types)",
-            "B) Process and Culture (establishing benchmarking, load testing, metrics visibility, and automation KPIs)",
-            "C) Financial Budget Allocation (negotiating corporate commercial software volume licensing contracts)",
-            "D) Human Resources Recruitment (establishing developer hiring quotas and internal staffing models)"
+            "A) AWS Database Migration Service (AWS DMS)",
+            "B) AWS Application Migration Service (AWS MGN)",
+            "C) AWS DataSync",
+            "D) AWS Schema Conversion Tool (AWS SCT)"
         ],
-        "correct": [
-            "A",
-            "B"
-        ],
-        "explanation": "The major categories for performance in AWS are Overall Architecture Selection, Compute and Hardware, Data Management, Networking and Content Delivery, and Process and Culture."
+        "correct": "D",
+        "explanation": "Correct Answer: D. AWS Schema Conversion Tool (AWS SCT) automatically converts source database schemas, views, stored procedures, and functions into equivalent target database engine definitions during heterogeneous database migrations. AWS DMS then performs data replication."
     },
     {
         "id": 8,
-        "section": "PERFORMANCE",
-        "topic": "Architecture Selection",
-        "subtopic": "Best Practices (PERF01)",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Database Migration",
+        "subtopic": "AWS DMS vs AWS SCT",
         "type": "single",
-        "question": "According to the Architecture Selection best practices (PERF01), which action is critical when deciding on an architectural approach to ensure business viability?",
+        "question": "A company needs to perform a zero-downtime database migration from an on-premises Oracle database to Amazon RDS for Oracle. The on-premises database must remain active during migration. Which service performs ongoing Change Data Capture (CDC)?",
         "options": [
-            "A) Factor cost into architectural decisions to select solutions that meet throughput goals with minimal investment",
-            "B) Ensure every workload component is strictly deployed using serverless technologies regardless of runtime constraints",
-            "C) Migrate all enterprise data exclusively to third-party multi-tenant SaaS providers outside of the cloud environment",
-            "D) Disregard operational tradeoffs and cost constraints to prioritize absolute maximum compute clock speed"
+            "A) AWS Backup",
+            "B) AWS Snowball Edge Storage Optimized",
+            "C) AWS Database Migration Service (AWS DMS)",
+            "D) AWS Schema Conversion Tool (AWS SCT)"
         ],
-        "correct": "A",
-        "explanation": "PERF01-BP03 explicitly states to 'Factor cost into architectural decisions' to find an approach that matches needs with the minimal amount of investment."
+        "correct": "C",
+        "explanation": "Correct Answer: C. AWS Database Migration Service (AWS DMS) performs full data loads AND continuous ongoing replication (Change Data Capture - CDC) to keep source and target databases in sync until cutover, achieving near-zero downtime."
     },
     {
         "id": 9,
-        "section": "PERFORMANCE",
-        "topic": "Compute Performance",
-        "subtopic": "Best Practices (PERF02)",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Database Migration",
+        "subtopic": "AWS DMS vs AWS SCT",
         "type": "single",
-        "question": "A workload requires specialized mathematical processing that standard CPUs cannot handle efficiently. According to the Compute Performance best practices (PERF02), what should the architect do?",
+        "question": "What is the recommended tool workflow when performing a heterogeneous database migration (e.g., on-premises IBM DB2 to Amazon Aurora MySQL)?",
         "options": [
-            "A) Use optimized hardware-based compute accelerators (such as GPUs, AWS Inferentia, or AWS Trainium)",
-            "B) Scale compute resources manually instead of implementing dynamic autoscaling policies across instances",
-            "C) Provision baseline general-purpose EC2 instances and write custom assembly algorithms to bypass kernel calls",
-            "D) Downgrade the size and memory footprint of the compute instances to reduce total monthly infrastructure cost"
+            "A) Use AWS SCT first to convert the database schema and code, then use AWS DMS to migrate the data and run ongoing replication",
+            "B) Use AWS DataSync to stream database binary logs directly to S3 Glacier",
+            "C) Use AWS MGN to copy the database operating system volume directly to RDS",
+            "D) Use AWS DMS first to convert the database schema, then use AWS SCT to copy table data"
         ],
         "correct": "A",
-        "explanation": "PERF02-BP06 specifically recommends to 'Use optimized hardware-based compute accelerators' to optimize performance efficiency for specialized workloads."
+        "explanation": "Correct Answer: A. The standard AWS recommended workflow for heterogeneous database migrations is: 1) Run AWS SCT to convert schemas, views, and stored procedures; 2) Apply converted schemas to target database; 3) Use AWS DMS to load data and maintain continuous replication."
     },
     {
         "id": 10,
-        "section": "PERFORMANCE",
-        "topic": "Data Management Performance",
-        "subtopic": "Best Practices (PERF03)",
-        "type": "multi",
-        "question": "Which TWO of the following are considered Data Management Performance best practices (PERF03) according to the AWS Well-Architected Framework? (Select 2)",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Database Migration",
+        "subtopic": "AWS DMS vs AWS SCT",
+        "type": "single",
+        "question": "During an AWS DMS migration, where is the DMS Replication Instance hosted?",
         "options": [
-            "A) Use a purpose-built data store that best supports your data access and storage requirements (PERF03-BP01)",
-            "B) Implement data access patterns that utilize caching to reduce latency and database read contention (PERF03-BP05)",
-            "C) Always utilize block storage instead of object storage to ensure sequential read performance for all workloads",
-            "D) Restrict all database writes strictly to a single Availability Zone to prevent cross-zone replication latency"
+            "A) Inside an S3 bucket configured for Transfer Acceleration",
+            "B) On the source on-premises database server directly",
+            "C) Inside an AWS Direct Connect customer edge router",
+            "D) On an EC2 instance provisioned in an AWS VPC managed by AWS DMS"
         ],
-        "correct": [
-            "A",
-            "B"
-        ],
-        "explanation": "PERF03-BP01 (Use a purpose-built data store) and PERF03-BP05 (Implement data access patterns that utilize caching) are documented best practices for Data Management Performance."
+        "correct": "D",
+        "explanation": "Correct Answer: D. An AWS DMS Replication Instance is a managed EC2 compute node provisioned inside your AWS VPC that connects to both source and target databases to execute migration tasks."
     },
     {
         "id": 11,
-        "section": "PERFORMANCE",
-        "topic": "Networking Performance",
-        "subtopic": "Reducing Latency and Jitter",
-        "type": "multi",
-        "question": "An architect is tasked with reducing network distance and jitter for a globally distributed workload. Which TWO AWS networking features are specifically highlighted in the framework to address this?",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Database Migration",
+        "subtopic": "AWS DMS vs AWS SCT",
+        "type": "single",
+        "question": "A company wants to extract data from an on-premises data warehouse (Teradata) and load it into Amazon Redshift. Large data volumes make network streaming slow. Which combination should be used?",
         "options": [
-            "A) Amazon Route 53 latency routing (routing client requests to the AWS region that provides the lowest latency)",
-            "B) AWS Global Accelerator (routing traffic over the congestion-free AWS global backbone via anycast IP endpoints)",
-            "C) Amazon EC2 network-optimized instances (providing up to 100 Gbps enhanced networking bandwidth per instance)",
-            "D) Amazon S3 Transfer Acceleration (enabling high-speed file uploads to S3 buckets over CloudFront edge locations)"
+            "A) AWS SCT Extractors with AWS Snowball Edge devices",
+            "B) AWS DataSync continuous replication over public internet",
+            "C) Amazon S3 Gateway Endpoints",
+            "D) AWS MGN block-level server mirroring"
         ],
-        "correct": [
-            "A",
-            "B"
-        ],
-        "explanation": "The framework differentiates between features that optimize network traffic (EC2 optimized instances, S3 transfer acceleration) and features that reduce network distance or jitter (Route 53 latency routing, VPC endpoints, Direct Connect, and Global Accelerator)."
+        "correct": "A",
+        "explanation": "Correct Answer: A. AWS SCT includes Data Extractors that can extract data locally from proprietary data warehouses and write it to AWS Snowball Edge devices for physical shipment to AWS Redshift."
     },
     {
         "id": 12,
-        "section": "PERFORMANCE",
-        "topic": "Networking Performance",
-        "subtopic": "Traffic Optimization",
-        "type": "multi",
-        "question": "Which TWO of the following AWS product features are specifically categorized as optimizing network traffic (throughput/performance) rather than reducing network distance/jitter? (Select 2)",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Server Migration",
+        "subtopic": "AWS Application Migration Service (MGN)",
+        "type": "single",
+        "question": "Which primary AWS service is recommended for lift-and-shift automated block-level replication of physical, virtual, or cloud-based servers into Amazon EC2?",
         "options": [
-            "A) Enhanced Networking (utilizing SR-IOV to provide high packet-per-second performance and low CPU utilization)",
-            "B) Amazon S3 Transfer Acceleration (accelerating data uploads across long geographic distances via edge locations)",
-            "C) Amazon VPC Endpoints (providing direct private connectivity to AWS services without traversing internet gateways)",
-            "D) AWS Direct Connect (establishing dedicated private fiber circuits between on-premises data centers and AWS)"
+            "A) AWS Server Migration Service (AWS SMS - deprecated)",
+            "B) AWS Application Migration Service (AWS MGN)",
+            "C) AWS DataSync",
+            "D) AWS Elastic Beanstalk"
         ],
-        "correct": [
-            "A",
-            "B"
-        ],
-        "explanation": "Enhanced Networking, EC2 networking optimized instances, S3 transfer acceleration, and CloudFront are categorized under optimizing network traffic. VPC endpoints and Direct Connect are categorized under reducing network distance/jitter."
+        "correct": "B",
+        "explanation": "Correct Answer: B. AWS Application Migration Service (AWS MGN) is the primary AWS recommended service for lift-and-shift server migration, providing continuous block-level replication of source disks into staging areas in AWS."
     },
     {
         "id": 13,
-        "section": "PERFORMANCE",
-        "topic": "Process and Culture",
-        "subtopic": "Load Generation",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Server Migration",
+        "subtopic": "AWS Application Migration Service (MGN)",
         "type": "single",
-        "question": "When generating load to test application performance, what characteristic should the test scripts possess to yield valid results?",
+        "question": "How does AWS Application Migration Service (AWS MGN) replicate source physical or virtual servers into AWS without causing downtime on source applications?",
         "options": [
-            "A) They should be idempotent and not coupled, accurately replicating the realistic usage behavior in production",
-            "B) They should execute queries exclusively against the database tier while bypassing the application tier completely",
-            "C) They should be heavily interdependent and coupled to ensure strict sequential transaction execution orders",
-            "D) They must execute strictly on physical on-premises hardware to avoid consuming cloud computing resources"
+            "A) By installing an AWS Replication Agent on source servers that performs continuous, non-disruptive block-level replication to a low-cost staging area in AWS",
+            "B) By shutting down source servers every night to export full VMDK disk images to S3",
+            "C) By converting source OS configurations into Docker containers",
+            "D) By executing SSH scripts that mirror user home directories over VPN"
         ],
         "correct": "A",
-        "explanation": "The framework states that test scripts for load generation should replicate synthetic or prerecorded user journeys, and 'These scripts should be idempotent and not coupled' to yield valid results."
+        "explanation": "Correct Answer: A. AWS MGN uses a lightweight agent installed on source OS hosts to continuously stream block-level changes to lightweight EC2 staging instances in AWS without requiring source server reboots."
     },
     {
         "id": 14,
-        "section": "PERFORMANCE",
-        "topic": "Process and Culture",
-        "subtopic": "Performance Visibility",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Server Migration",
+        "subtopic": "AWS Application Migration Service (MGN)",
         "type": "single",
-        "question": "According to the Process and Culture guidelines, why is it critical to focus on the 99.9th and 99.99th percentile for latency outliers rather than just average latency?",
+        "question": "What is the role of the Staging Area in AWS Application Migration Service (AWS MGN)?",
         "options": [
-            "A) Because extreme outlier latency experienced by even a small percentage of requests creates poor user experience at scale",
-            "B) Because average latency metrics cannot be calculated or displayed within Amazon CloudWatch dashboard widgets",
-            "C) Because calculating 99.9th percentile metrics requires significantly fewer CloudWatch metric mathematical operations",
-            "D) Because latency outliers indicate active distributed denial-of-service (DDoS) flood attacks at the network layer"
+            "A) It is a low-cost subnet containing small EC2 staging instances and low-cost EBS volume storage that receives continuously replicated block data before cutover",
+            "B) It is an AWS CloudFormation repository for IAM roles",
+            "C) It is a temporary S3 bucket where source server memory dumps are converted to Python scripts",
+            "D) It is an on-premises backup SAN appliance"
         ],
         "correct": "A",
-        "explanation": "AWS emphasizes focusing on latency outliers because 'if one in 100 of your requests causes extreme latency, it will eventually become a problem as your traffic grows', making the average latency an insufficient metric for customer experience."
+        "explanation": "Correct Answer: A. AWS MGN uses a low-cost staging area (subnet with small instance types and low-cost EBS volumes) to receive replicated data continuously, minimizing costs until you trigger target EC2 instance launches during testing or cutover."
     },
     {
         "id": 15,
-        "section": "PERFORMANCE",
-        "topic": "Process and Culture",
-        "subtopic": "Best Practices (PERF05)",
-        "type": "multi",
-        "question": "Which TWO of the following are defined as Process and Culture best practices (PERF05) for performance efficiency? (Select 2)",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Server Migration",
+        "subtopic": "AWS Application Migration Service (MGN)",
+        "type": "single",
+        "question": "During an AWS MGN server migration, what allows testing the migrated target EC2 instances without impacting ongoing background source server replication?",
         "options": [
-            "A) Establish key performance indicators (KPIs) to measure workload health, latency, and business efficiency (PERF05-BP01)",
-            "B) Use automation to proactively remediate performance-related issues and resource bottlenecks (PERF05-BP05)",
-            "C) Rely strictly on manual human execution and verification for all performance benchmark evaluations",
-            "D) Implement static instance hardware configurations and avoid automated dynamic scaling policies"
+            "A) Terminating the staging subnets",
+            "B) Launching Test Instances in AWS MGN, which creates target EC2 instances from point-in-time snapshots while replication continues in parallel",
+            "C) Detaching source network cards",
+            "D) Pausing source database servers manually for 4 hours"
         ],
-        "correct": [
-            "A",
-            "B"
-        ],
-        "explanation": "PERF05-BP01 (Establish KPIs) and PERF05-BP05 (Use automation to proactively remediate performance-related issues) are explicit best practices for Process and Culture."
+        "correct": "B",
+        "explanation": "Correct Answer: B. AWS MGN allows launching Test Instances at any time. Target EC2 instances are spun up from current staging snapshots for validation while background block replication to the staging area remains uninterrupted."
     },
     {
         "id": 16,
-        "section": "PERFORMANCE",
-        "topic": "Process and Culture",
-        "subtopic": "Anti-Patterns",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Server Migration",
+        "subtopic": "AWS Application Migration Service (MGN)",
         "type": "single",
-        "question": "Which of the following represents a major performance anti-pattern according to the Process and Culture best practices?",
+        "question": "What service replaced the legacy AWS Server Migration Service (AWS SMS) for server migrations?",
         "options": [
-            "A) Performing load tests and performance benchmarks only right before production launch or when critical issues occur",
-            "B) Integrating automated load testing suites directly into continuous integration and delivery (CI/CD) deployment pipelines",
-            "C) Using Amazon CloudWatch Synthetics canaries to continuously monitor REST API endpoints from multiple global regions",
-            "D) Implementing automated target tracking scaling policies based on average CPU utilization across EC2 instance fleets"
+            "A) AWS Elastic Disaster Recovery (AWS DRS)",
+            "B) AWS DataSync",
+            "C) AWS Application Migration Service (AWS MGN)",
+            "D) AWS Database Migration Service (AWS DMS)"
         ],
-        "correct": "A",
-        "explanation": "Testing performance only right before launch (or reactively after outages) is a major anti-pattern. Performance testing should be continuous, automated, and driven throughout the development lifecycle."
+        "correct": "C",
+        "explanation": "Correct Answer: C. AWS Application Migration Service (AWS MGN) is the primary successor that replaced legacy AWS Server Migration Service (AWS SMS)."
     },
     {
         "id": 17,
-        "section": "PERFORMANCE",
-        "topic": "Performance Design Principles",
-        "subtopic": "Experiment More Often",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Hybrid Storage",
+        "subtopic": "AWS DataSync vs Storage Gateway",
         "type": "single",
-        "question": "How does cloud computing enable teams to uphold the 'Experiment more often' performance design principle effectively?",
+        "question": "An enterprise requires on-premises application servers to access Amazon S3 storage using standard file protocols (NFS and SMB) with local low-latency caching of frequently accessed files. Which AWS Storage Gateway mode should be deployed?",
         "options": [
-            "A) By allowing teams to quickly provision comparative infrastructure using automation, test performance, and delete resources",
-            "B) By requiring upfront multi-year capital expenditure investments for all exploratory proof-of-concept testing",
-            "C) By permanently locking hardware configurations once an initial CloudFormation stack deployment completes",
-            "D) By eliminating the need to monitor system metrics, transaction logs, or throughput benchmarks during experimentation"
+            "A) Volume Gateway (Stored Volume mode)",
+            "B) S3 File Gateway (Amazon S3 File Gateway)",
+            "C) AWS DataSync",
+            "D) Tape Gateway"
         ],
-        "correct": "A",
-        "explanation": "With cloud architectures and Infrastructure as Code, teams can provision diverse instance families and configurations in minutes, benchmark them against workloads, and de-provision them with zero ongoing commitment."
+        "correct": "B",
+        "explanation": "Correct Answer: B. Amazon S3 File Gateway presents file shares over NFS or SMB, caching recently accessed files locally on-premises while storing objects seamlessly in Amazon S3 buckets. Option B (Volume Gateway) provides block storage (iSCSI). Option C (Tape Gateway) replaces physical tape libraries. Option D (DataSync) is a batch data transfer service, not an interactive local file share."
     },
     {
         "id": 18,
-        "section": "PERFORMANCE",
-        "topic": "Compute Performance",
-        "subtopic": "Instance Sizing",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Hybrid Storage",
+        "subtopic": "AWS DataSync vs Storage Gateway",
         "type": "single",
-        "question": "An analytics workload processes batch datasets in memory. The CPU utilization remains below 20% while memory utilization consistently reaches 95%. Which Amazon EC2 instance family aligns best with mechanical sympathy for this workload?",
+        "question": "An enterprise wants to replace physical tape backup libraries with cloud storage while keeping existing backup software (Veritas, Commvault) intact. Which AWS Storage Gateway mode emulates physical tapes?",
         "options": [
-            "A) Memory-optimized instances (such as R-family or X-family instances providing high memory-to-vCPU ratios)",
-            "B) Compute-optimized instances (such as C-family instances providing high compute power and lower RAM capacity)",
-            "C) Storage-optimized instances (such as I-family instances providing high random IOPS on local NVMe SSD storage)",
-            "D) Accelerated computing instances (such as P-family or G-family instances providing hardware GPU accelerators)"
+            "A) Tape Gateway",
+            "B) Cached Volume Gateway",
+            "C) S3 File Gateway",
+            "D) AWS DataSync"
         ],
         "correct": "A",
-        "explanation": "Memory-optimized instances (R/X families) are purpose-built for workloads that process large datasets in memory (like high-performance databases, in-memory caches, and real-time big data analytics)."
+        "explanation": "Correct Answer: A. AWS Tape Gateway presents an iSCSI-based virtual tape library (VTL) to existing backup software, seamlessly replacing physical tape infrastructure with durable S3 and Glacier storage."
     },
     {
         "id": 19,
-        "section": "PERFORMANCE",
-        "topic": "Data Management Performance",
-        "subtopic": "Storage Tiers",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Hybrid Storage",
+        "subtopic": "AWS DataSync vs Storage Gateway",
         "type": "single",
-        "question": "A media rendering platform needs high-performance shared file storage accessible concurrently by hundreds of Linux EC2 instances with sub-millisecond latencies and high throughput. Which storage service should be chosen?",
+        "question": "An on-premises database requires local iSCSI block storage for low-latency operations while automatically taking asynchronous point-in-time snapshots of volumes directly to Amazon EBS snapshots. Which Storage Gateway mode fulfills this?",
         "options": [
-            "A) Amazon FSx for Lustre or Amazon EFS with Provisioned Throughput to provide high-performance concurrent POSIX access",
-            "B) Amazon S3 Glacier Deep Archive mounted locally on compute instances using unbuffered user-space file drivers",
-            "C) Amazon EBS Provisioned IOPS io2 volumes formatted as single-instance local ext4 file systems across availability zones",
-            "D) AWS Storage Gateway Tape Gateway providing virtual tape library archives over public internet connections"
+            "A) S3 File Gateway",
+            "B) FSx File Gateway",
+            "C) Volume Gateway (Cached or Stored Volume mode)",
+            "D) AWS Transfer Family"
         ],
-        "correct": "A",
-        "explanation": "Amazon FSx for Lustre and Amazon EFS provide high-throughput, concurrent shared POSIX storage optimized for compute-intensive analytics, media processing, and container workloads."
+        "correct": "C",
+        "explanation": "Correct Answer: C. Volume Gateway provides iSCSI block storage volumes to on-premises applications, taking automated point-in-time snapshots stored in AWS as EBS snapshots."
     },
     {
         "id": 20,
-        "section": "PERFORMANCE",
-        "topic": "Offloading and Load Distribution",
-        "subtopic": "Database Read Replicas",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Hybrid Storage",
+        "subtopic": "AWS DataSync vs Storage Gateway",
         "type": "single",
-        "question": "A relational database experiences severe latency due to heavy read traffic from business intelligence reporting tools. How can read traffic be offloaded efficiently?",
+        "question": "What is a main architectural distinction between AWS DataSync and AWS Storage Gateway?",
         "options": [
-            "A) Provision Amazon RDS Read Replicas to offload read-only analytical queries and reserve the primary DB instance for writes",
-            "B) Increase the size of the database storage volume to automatically double the maximum CPU clock frequency",
-            "C) Convert all relational database tables into static CSV files and store them in an Amazon S3 Glacier archive vault",
-            "D) Configure multi-AZ standby instances to process live read queries while the primary instance handles write operations"
+            "A) DataSync is for automated batch file/object data migration and replication; Storage Gateway provides continuous interactive hybrid file/block/tape storage access to on-premises applications",
+            "B) DataSync provides iSCSI block storage; Storage Gateway is only for S3 object migration",
+            "C) DataSync requires physical hardware shipping; Storage Gateway runs over internet",
+            "D) Storage Gateway does not support local caching; DataSync caches files locally"
         ],
         "correct": "A",
-        "explanation": "RDS Read Replicas offload read-intensive queries from the primary database instance, horizontally scaling read throughput and improving application write performance."
+        "explanation": "Correct Answer: A. AWS DataSync is an automated batch network transfer tool designed to move large datasets efficiently. AWS Storage Gateway is an interactive hybrid storage appliance (virtual software or hardware) providing ongoing local NFS/SMB/iSCSI access to cloud storage."
     },
     {
         "id": 21,
-        "section": "PERFORMANCE",
-        "topic": "Offloading and Load Distribution",
-        "subtopic": "In-Memory Caching",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Hybrid Storage",
+        "subtopic": "AWS DataSync vs Storage Gateway",
         "type": "single",
-        "question": "Which AWS caching service provides sub-millisecond response times for frequently requested database queries and session state data?",
+        "question": "A Windows environment on-premises needs low-latency SMB file share access to Amazon FSx for Windows File Server. Which specialized gateway appliance should be chosen?",
         "options": [
-            "A) Amazon ElastiCache (Redis or Memcached) providing high-throughput in-memory caching to offload database load",
-            "B) Amazon CloudFront Regional Edge Caches storing static video files at global points of presence",
-            "C) Amazon S3 Standard-Infrequent Access storing backup archive snapshots with rapid retrieval options",
-            "D) AWS Storage Gateway Volume Gateway caching local block storage volumes inside on-premises data centers"
+            "A) Tape Gateway",
+            "B) AWS DataSync Agent",
+            "C) S3 File Gateway",
+            "D) FSx File Gateway"
         ],
-        "correct": "A",
-        "explanation": "Amazon ElastiCache is a fully managed in-memory data store service that provides sub-millisecond latencies for caching database query results and managing session state."
+        "correct": "D",
+        "explanation": "Correct Answer: D. Amazon FSx File Gateway provides fast, local, low-latency on-premises access to cloud-based Amazon FSx for Windows File Server shares."
     },
     {
         "id": 22,
-        "section": "PERFORMANCE",
-        "topic": "Offloading and Load Distribution",
-        "subtopic": "DynamoDB Accelerator (DAX)",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Hybrid Networking",
+        "subtopic": "Direct Connect vs Site-to-Site VPN",
         "type": "single",
-        "question": "A gaming application requires microsecond read latency for hot player profile records stored in Amazon DynamoDB. Which solution provides seamless, fully managed in-memory caching?",
+        "question": "A financial company requires an encrypted private connection between an on-premises data center and AWS over an existing AWS Direct Connect connection. Which configuration secures Direct Connect traffic with IPsec encryption?",
         "options": [
-            "A) Amazon DynamoDB Accelerator (DAX) providing a dedicated, fully managed in-memory cache with microsecond response times",
-            "B) Amazon ElastiCache for Memcached requiring custom application code changes to invalidate expired table cache keys",
-            "C) Amazon CloudFront configured with custom origin request policies to cache raw DynamoDB HTTP API responses",
-            "D) AWS AppConfig configured to deploy static database table records dynamically to running EC2 compute instances"
+            "A) VPC Peering over Direct Connect",
+            "B) AWS Gateway Endpoints with TLS 1.3",
+            "C) Standard Direct Connect connection without additional configuration (Direct Connect is automatically IPsec encrypted)",
+            "D) AWS Site-to-Site VPN configured over a Public Virtual Interface (Public VIF) or Transit VIF on Direct Connect"
         ],
-        "correct": "A",
-        "explanation": "DynamoDB Accelerator (DAX) is a fully managed, highly available, in-memory cache for DynamoDB that delivers up to a 10x performance improvement—from milliseconds to microseconds—without requiring application logic modifications."
+        "correct": "D",
+        "explanation": "Correct Answer: D. AWS Direct Connect traffic is private but NOT encrypted in transit by default. Combining AWS Site-to-Site VPN over a Direct Connect public or transit VIF delivers both high dedicated bandwidth AND IPsec end-to-end encryption. (MACsec is also an alternative for 10/100 Gbps dedicated lines)."
     },
     {
         "id": 23,
-        "section": "PERFORMANCE",
-        "topic": "Networking Performance",
-        "subtopic": "Content Delivery",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Hybrid Networking",
+        "subtopic": "Direct Connect vs Site-to-Site VPN",
         "type": "single",
-        "question": "How does Amazon CloudFront improve web application performance for globally distributed users?",
+        "question": "An architect is comparing AWS Direct Connect vs AWS Site-to-Site VPN for a new hybrid cloud project. Which benefit is UNIQUE to AWS Direct Connect?",
         "options": [
-            "A) By caching static and dynamic content at global edge locations close to viewers, reducing origin round-trip latency",
-            "B) By compressing database table schemas automatically and storing them in local client web browser cookies",
-            "C) By re-encrypting network packets using unvalidated self-signed certificates at the edge to accelerate handshakes",
-            "D) By routing all user traffic through a single centralized corporate proxy server located in the primary AWS region"
+            "A) Free of charge for all inbound and outbound bandwidth",
+            "B) Provisions instantly in under 5 minutes using software configuration",
+            "C) Consistent network performance and lower data egress charges compared to internet-based VPNs",
+            "D) Traverses the public internet using IPsec tunnels"
         ],
-        "correct": "A",
-        "explanation": "Amazon CloudFront speeds up distribution of static and dynamic web content by delivering it through a worldwide network of edge locations, terminating TLS closer to users and serving cached responses with minimal latency."
+        "correct": "C",
+        "explanation": "Correct Answer: C. AWS Direct Connect bypasses the public internet, delivering consistent network throughput, reduced latency variability, and lower outbound data transfer rates compared to internet egress."
     },
     {
         "id": 24,
-        "section": "PERFORMANCE",
-        "topic": "Networking Performance",
-        "subtopic": "Global Accelerator vs CloudFront",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Hybrid Networking",
+        "subtopic": "Direct Connect vs Site-to-Site VPN",
         "type": "single",
-        "question": "When should an architect choose AWS Global Accelerator over Amazon CloudFront for performance optimization?",
+        "question": "A company needs a quick, low-cost hybrid network connection to connect an on-premises branch office to an AWS VPC within 1 hour while a 3-month Direct Connect order is being provisioned. Which service should be deployed immediately?",
         "options": [
-            "A) When routing non-HTTP/HTTPS protocols (like UDP/TCP gaming or VoIP) or when static anycast IP addresses are required",
-            "B) When caching static HTML, CSS, JavaScript, and video media files at global edge locations for web browsers",
-            "C) When building serverless single-page applications hosted entirely on static Amazon S3 website endpoints",
-            "D) When decrypting SSL/TLS certificates exclusively on backend Amazon EC2 instances in private subnets"
+            "A) AWS Direct Connect Dedicated Connection",
+            "B) AWS Site-to-Site VPN",
+            "C) AWS Storage Gateway Volume Gateway",
+            "D) AWS Snowball Edge"
         ],
-        "correct": "A",
-        "explanation": "Global Accelerator provides static anycast IP addresses and optimizes network paths over the AWS global network for both HTTP and non-HTTP (TCP/UDP) protocols without content caching, whereas CloudFront is designed for HTTP/HTTPS content delivery and caching."
+        "correct": "B",
+        "explanation": "Correct Answer: B. AWS Site-to-Site VPN can be provisioned in minutes over standard internet connections, making it ideal for immediate hybrid connectivity or as a backup to Direct Connect."
     },
     {
         "id": 25,
-        "section": "PERFORMANCE",
-        "topic": "Offloading and Load Distribution",
-        "subtopic": "CloudFront Functions",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Hybrid Networking",
+        "subtopic": "Direct Connect vs Site-to-Site VPN",
         "type": "single",
-        "question": "According to the AWS edge computing architecture, which lightweight compute service executes ultra-low-latency JavaScript code at CloudFront edge locations at the 'Viewer Request' phase before cache lookups?",
+        "question": "What is the maximum IPsec tunnel throughput limit for a single AWS Site-to-Site VPN connection?",
         "options": [
-            "A) CloudFront Functions (executing lightweight sub-millisecond URL rewrites and header manipulations at edge locations)",
-            "B) Lambda@Edge (executing compute-intensive Node.js or Python code with full network access at regional edge caches)",
-            "C) AWS Step Functions (orchestrating distributed multi-step serverless state machines inside customer VPC subnets)",
-            "D) AWS Systems Manager Run Command (executing administrative shell scripts across fleets of managed EC2 instances)"
+            "A) Up to 10 MB/s per tunnel",
+            "B) Unlimited bandwidth without scaling limits",
+            "C) Up to 1.25 Gbps per tunnel (ECMP can be used to aggregate multiple tunnels)",
+            "D) Up to 100 Gbps per tunnel"
         ],
-        "correct": "A",
-        "explanation": "CloudFront Functions is designed for lightweight, sub-millisecond edge processing (such as HTTP header manipulation, URL redirects, and cache key normalization) running at all CloudFront edge locations during Viewer Request/Response phases."
+        "correct": "C",
+        "explanation": "Correct Answer: C. A single AWS Site-to-Site VPN tunnel supports up to 1.25 Gbps throughput. Equal-Cost Multi-Path (ECMP) routing can be used across multiple VPN tunnels to aggregate higher throughput."
     },
     {
         "id": 26,
-        "section": "PERFORMANCE",
-        "topic": "Offloading and Load Distribution",
-        "subtopic": "CloudFront Edge Caching",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Hybrid Networking",
+        "subtopic": "Direct Connect vs Site-to-Site VPN",
         "type": "single",
-        "question": "When a client initiates an HTTP request to Amazon CloudFront that requires executing lightweight edge compute logic to manipulate URL headers before evaluating the local edge cache, which compute feature handles this viewer-facing step?",
+        "question": "To secure 10 Gbps and 100 Gbps dedicated AWS Direct Connect links at Layer 2 between on-premises routers and AWS Direct Connect locations, which hardware encryption standard is supported?",
         "options": [
-            "A) CloudFront Functions attached to the Viewer Request trigger at the edge",
-            "B) Lambda@Edge Functions attached to the Origin Request trigger in the VPC",
-            "C) API Gateway Method Request execution running behind Regional caches",
-            "D) NGINX Reverse Proxy sidecars deployed within local container clusters"
+            "A) TLS 1.2 RSA",
+            "B) OpenVPN SSL",
+            "C) MACsec (Media Access Control Security)",
+            "D) WPA3 Enterprise"
         ],
-        "correct": "A",
-        "explanation": "CloudFront Functions operate at 450+ CloudFront edge points of presence (PoPs) specifically on Viewer Request and Viewer Response triggers before CloudFront checks or populates its local edge cache, providing sub-millisecond execution for URL rewrites and header transformations."
+        "correct": "C",
+        "explanation": "Correct Answer: C. MACsec (IEEE 802.AE) provides Layer 2 hardware-based point-to-point encryption for 10 Gbps and 100 Gbps dedicated Direct Connect links between customer routers and AWS edge routers."
     },
     {
         "id": 27,
-        "section": "PERFORMANCE",
-        "topic": "Offloading and Load Distribution",
-        "subtopic": "Lambda@Edge",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Hybrid Topology",
+        "subtopic": "Transit Gateway vs Peering vs DX Gateway",
         "type": "single",
-        "question": "In an advanced multi-tier CloudFront caching architecture, at which exact stage of the request lifecycle does a Lambda@Edge function execute an 'Origin Request' trigger?",
+        "question": "An enterprise has 50 AWS VPCs across multiple regions and an on-premises data center connected via Direct Connect. Managing individual VPC peering connections is becoming unmanageable. Which central hub simplifies network topology?",
         "options": [
-            "A) After a cache miss in the local Edge Cache but prior to forwarding traffic to Regional Edge Caches and Origins",
-            "B) Immediately upon receiving the viewer connection prior to evaluating local Edge Cache presence or edge routing",
-            "C) Directly after the origin server generates a response payload before reaching Regional Edge caching layers",
-            "D) Within the private customer VPC subnet following complete TLS termination at the Regional Application Load Balancer"
+            "A) AWS Application Load Balancers",
+            "B) AWS VPC Peering mesh",
+            "C) AWS Transit Gateway",
+            "D) AWS Gateway Endpoints"
         ],
-        "correct": "A",
-        "explanation": "Lambda@Edge Origin Request functions execute only upon a local edge cache miss, running before CloudFront forwards the request to the Regional Edge Cache or directly to the custom/S3 origin. This allows payload modification or dynamic origin routing without incurring execution costs on cache hits."
+        "correct": "C",
+        "explanation": "Correct Answer: C. AWS Transit Gateway acts as a central cloud router, connecting thousands of VPCs and on-premises networks through a single hub, eliminating complex full-mesh VPC peering relationships."
     },
     {
         "id": 28,
-        "section": "PERFORMANCE",
-        "topic": "Offloading and Load Distribution",
-        "subtopic": "API Gateway Caching",
-        "type": "multi",
-        "question": "Which TWO backend targets can Amazon API Gateway directly integrate with to serve cached and uncached API responses according to the serverless performance offloading architecture? (Select 2)",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Hybrid Topology",
+        "subtopic": "Transit Gateway vs Peering vs DX Gateway",
+        "type": "single",
+        "question": "A company wants to connect an on-premises location via AWS Direct Connect to multiple VPCs located across 3 different AWS regions. Which component allows a single Direct Connect connection to access VPCs across multiple regions?",
         "options": [
-            "A) AWS Lambda serverless functions executing core business logic",
-            "B) Publicly accessible HTTP/HTTPS endpoints hosted on Amazon EC2 instances",
-            "C) On-premises tape storage targets accessed via AWS Storage Gateway VTL",
-            "D) Amazon DynamoDB Accelerator (DAX) hardware clusters via private subnets"
+            "A) AWS Local Zones",
+            "B) VPC Peering Connection",
+            "C) Direct Connect Gateway",
+            "D) Internet Gateway"
         ],
-        "correct": [
-            "A",
-            "B"
-        ],
-        "explanation": "Amazon API Gateway natively supports integration with AWS Lambda functions, any publicly accessible HTTP/HTTPS endpoints (including applications hosted on EC2 instances or on-premises servers), and other AWS services, offloading compute and connection management through its built-in API caching tier."
+        "correct": "C",
+        "explanation": "Correct Answer: C. A Direct Connect Gateway enables connecting an on-premises Direct Connect connection to private subnets in multiple VPCs located across ANY supported AWS region worldwide."
     },
     {
         "id": 29,
-        "section": "PERFORMANCE",
-        "topic": "Servered vs Serverless",
-        "subtopic": "Scaling Mechanics",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Hybrid Topology",
+        "subtopic": "Transit Gateway vs Peering vs DX Gateway",
         "type": "single",
-        "question": "Why does the AWS Well-Architected Framework explicitly advocate choosing serverless architectures to maximize performance efficiency during variable and unpredictable traffic surges?",
+        "question": "What is a key difference between VPC Peering and AWS Transit Gateway regarding transitive routing?",
         "options": [
-            "A) Serverless offerings scale automatically on a per-request basis without requiring pre-provisioned headroom",
-            "B) Serverless architectures eliminate all underlying data transfer egress fees between different AWS Regions",
-            "C) Serverless databases utilize cross-region synchronous master nodes that completely eliminate write contention",
-            "D) Serverless runtimes bypass hypervisor virtualization layers entirely to grant bare-metal performance"
+            "A) VPC Peering incurs data transfer costs; Transit Gateway is free",
+            "B) Transit Gateway is restricted to a single AZ",
+            "C) VPC Peering does NOT support transitive routing (VPC A -> VPC B -> VPC C is invalid); AWS Transit Gateway supports central transitive routing across connected VPCs",
+            "D) VPC Peering supports transitive routing; Transit Gateway does not"
         ],
-        "correct": "A",
-        "explanation": "Serverless architectures (e.g., AWS Lambda, API Gateway, DynamoDB) scale automatically and granularly in direct response to incoming request volume, eliminating the latency, operational overhead, and potential under-provisioning bottlenecks associated with traditional fleet-based capacity scaling."
+        "correct": "C",
+        "explanation": "Correct Answer: C. VPC Peering does NOT support transitive routing (traffic cannot hop through VPC B to reach VPC C). AWS Transit Gateway acts as a true Layer 3 router, supporting central transitive routing across attached VPCs and VPNs."
     },
     {
         "id": 30,
-        "section": "PERFORMANCE",
-        "topic": "Servered vs Serverless",
-        "subtopic": "Aurora Configuration",
-        "type": "multi",
-        "question": "In an Amazon Aurora high-performance relational database topology spanning multiple Availability Zones, which TWO distinct instance node roles are provisioned across the shared storage layer? (Select 2)",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Hybrid Topology",
+        "subtopic": "Transit Gateway vs Peering vs DX Gateway",
+        "type": "single",
+        "question": "To connect an AWS Direct Connect connection to an AWS Transit Gateway, which Virtual Interface (VIF) type must be created on the Direct Connect connection?",
         "options": [
-            "A) Primary Writer instance handling all database read/write transactions",
-            "B) Aurora Read Replica instances serving offloaded query traffic across AZs",
-            "C) Dedicated Redshift Leader Nodes orchestrating query parallelization plans",
-            "D) Distributed ElastiCache Master Nodes managing write-through cache eviction"
+            "A) Gateway Virtual Interface (Gateway VIF)",
+            "B) Public Virtual Interface (Public VIF)",
+            "C) Private Virtual Interface (Private VIF)",
+            "D) Transit Virtual Interface (Transit VIF)"
         ],
-        "correct": [
-            "A",
-            "B"
-        ],
-        "explanation": "An Amazon Aurora cluster architecture consists of a single Primary (Writer) DB instance that handles all write operations, alongside up to 15 Aurora Read Replicas (Readers) deployed across multiple Availability Zones to offload read-heavy query workloads, all backed by a shared, self-healing distributed NVMe storage subsystem."
+        "correct": "D",
+        "explanation": "Correct Answer: D. A Transit Virtual Interface (Transit VIF) is required to attach a Direct Connect connection (via a Direct Connect Gateway) to an AWS Transit Gateway."
     },
     {
         "id": 31,
-        "section": "PERFORMANCE",
-        "topic": "Process and Culture",
-        "subtopic": "Deployment Pipelines",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Hybrid Topology",
+        "subtopic": "Transit Gateway vs Peering vs DX Gateway",
         "type": "single",
-        "question": "According to the AWS Well-Architected Framework for Performance Efficiency, what is the primary operational advantage of implementing automated CI/CD deployment pipelines for cloud infrastructure?",
+        "question": "A enterprise requires isolating Dev, Test, and Prod VPC network attachments connected to a single AWS Transit Gateway so they cannot route traffic to each other. How is this network isolation enforced?",
         "options": [
-            "A) Enabling repeatable, consistent, and low-cost infrastructure iterations through automated pipelines",
-            "B) Automatically generating least-privilege IAM policies using heuristic machine learning analyzers",
-            "C) Forcing all inter-service VPC communications to employ MACsec Layer-2 hardware encryption",
-            "D) Eliminating architectural review stages and completely replacing software unit test validation"
+            "A) Create separate Transit Gateway Route Tables and associate each environment attachment with its designated route table",
+            "B) Deploy separate AWS Transit Gateways per region",
+            "C) Delete all security groups on EC2 instances",
+            "D) Use S3 Access Points"
         ],
         "correct": "A",
-        "explanation": "Implementing CI/CD deployment pipelines for Infrastructure as Code (IaC) ensures that infrastructure changes and performance optimizations can be tested, benchmarked, and deployed repeatedly and reliably with minimal risk and operational friction."
+        "explanation": "Correct Answer: A. AWS Transit Gateway supports multiple TGW Route Tables. By assigning attachments (VPCs/VPNs) to different TGW route tables and controlling route propagation, you can isolate traffic (e.g., preventing Dev from reaching Prod)."
     },
     {
         "id": 32,
-        "section": "PERFORMANCE",
-        "topic": "Process and Culture",
-        "subtopic": "Performance Testing",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Data Migration Hardware",
+        "subtopic": "AWS Snow Family Selection",
         "type": "single",
-        "question": "When automating performance load tests within continuous integration workflows, which strategy is recommended to prevent extensive benchmark suites from delaying standard developer pull request builds?",
+        "question": "An oceanographic research vessel needs a ruggedized, portable edge computing and data transfer device to collect 10 TB of sensor data at sea and run onboard compute workloads. Which AWS Snow Family device is smallest and lightweight?",
         "options": [
-            "A) Decoupling performance test execution asynchronously from fast builds and executing tests using Spot Instances",
-            "B) Halting the deployment pipeline synchronously until comprehensive 24-hour soak tests complete execution",
-            "C) Bypassing performance testing completely whenever application unit and integration tests achieve 100% coverage",
-            "D) Scheduling all heavy synthetic load generation suites directly against production environments during peak hours"
+            "A) AWS Snowmobile",
+            "B) AWS Snowball Edge Storage Optimized",
+            "C) AWS Snowcone",
+            "D) AWS Snowball Edge Compute Optimized"
         ],
-        "correct": "A",
-        "explanation": "AWS recommends decoupling long-running load and performance tests from the critical CI/CD build path by triggering them asynchronously (e.g., nightly or staged benchmark pipelines) and taking advantage of Amazon EC2 Spot Instances to generate massive load cost-effectively."
+        "correct": "C",
+        "explanation": "Correct Answer: C. AWS Snowcone is the smallest, most portable device in the AWS Snow Family (weighing ~4.5 lbs / 2.1 kg), providing up to 8 TB of usable storage and edge computing capabilities for harsh, space-constrained environments."
     },
     {
         "id": 33,
-        "section": "PERFORMANCE",
-        "topic": "Architecture Selection",
-        "subtopic": "Benchmarking",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Data Migration Hardware",
+        "subtopic": "AWS Snow Family Selection",
         "type": "single",
-        "question": "Under the Architecture Selection pillar best practice PERF01-BP06, what is the recommended data-driven approach to select between competing AWS resource types (such as instance families or storage tiers)?",
+        "question": "A company needs to migrate 80 TB of data from an on-premises data center to Amazon S3. Network bandwidth is limited to 10 Mbps. Which device should be ordered?",
         "options": [
-            "A) Utilizing empirical benchmarking with workload-representative traffic to guide architectural decisions",
-            "B) Defaulting exclusively to the lowest-cost tier regardless of throughput limits and I/O latency profiles",
-            "C) Relying strictly on manual resource provisioning via the AWS Management Console to observe behavior",
-            "D) Restricting resource selection strictly to default AWS service quotas without conducting load evaluations"
+            "A) AWS Snowcone",
+            "B) AWS Snowball Edge Storage Optimized device",
+            "C) AWS Snowmobile",
+            "D) AWS DataSync over VPN"
         ],
-        "correct": "A",
-        "explanation": "PERF01-BP06 states that teams should 'Use benchmarking to drive architectural decisions' by deploying candidate architectures, simulating realistic production access patterns, and analyzing objective performance and cost metrics."
+        "correct": "B",
+        "explanation": "Correct Answer: B. AWS Snowball Edge Storage Optimized provides ~80 TB of usable block/S3-compatible storage, ideal for offline data migration when network bandwidth is inadequate. Option C (Snowmobile) is an 45-foot shipping container for exabyte-scale (100 PB+) migrations."
     },
     {
         "id": 34,
-        "section": "PERFORMANCE",
-        "topic": "Compute Performance",
-        "subtopic": "Data Collection",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Data Migration Hardware",
+        "subtopic": "AWS Snow Family Selection",
         "type": "single",
-        "question": "In accordance with Compute Performance best practice PERF02-BP03, what ongoing operational task must cloud architects perform to accurately right-size EC2 instances and container fleets over time?",
+        "question": "Which AWS Snow Family appliance is designed for massive, exabyte-scale data migrations (up to 100 PB per unit) delivered via a 45-foot long ruggedized shipping container pulled by a semi-trailer truck?",
         "options": [
-            "A) Continuously collect and analyze compute utilization metrics including CPU, memory, and I/O profiles",
-            "B) Disconnect all production compute instances from the internet to eliminate transient socket saturation",
-            "C) Configure Auto Scaling groups to maintain fixed capacity sizes without allowing scale-in operations",
-            "D) Apply static IAM permissions boundaries across all application container execution roles"
+            "A) AWS Snowball Edge Large",
+            "B) AWS Storage Gateway Truck",
+            "C) AWS Snowmobile",
+            "D) AWS Outposts Appliance"
         ],
-        "correct": "A",
-        "explanation": "PERF02-BP03 requires organizations to collect compute-related metrics (such as CPU utilization, memory pressure via CloudWatch agent, disk I/O, and network throughput) to evaluate actual workload behavior and right-size capacity over time."
+        "correct": "C",
+        "explanation": "Correct Answer: C. AWS Snowmobile is an exabyte-scale data migration service used to move up to 100 PB of data per container."
     },
     {
         "id": 35,
-        "section": "PERFORMANCE",
-        "topic": "Process and Culture",
-        "subtopic": "Visualization",
-        "type": "multi",
-        "question": "Which TWO visualization practices are recommended by the AWS Well-Architected Framework to accelerate root cause identification during performance bottleneck investigations? (Select 2)",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Data Migration Hardware",
+        "subtopic": "AWS Snow Family Selection",
+        "type": "single",
+        "question": "Can EC2-compatible Virtual Machines and AWS Lambda functions be executed locally on an AWS Snowball Edge device while disconnected from the internet?",
         "options": [
-            "A) Overlaying real-time latency and throughput metrics directly across system architecture topology diagrams",
-            "B) Overlaying application execution profiling and timing metrics over call graphs and source code paths",
-            "C) Streaming raw, unparsed CloudWatch log events directly into unindexed terminal output consoles",
-            "D) Aggregating daily system averages while ignoring high-percentile (p99/p99.9) latency distribution curves"
+            "A) No, Lambda functions require Amazon DynamoDB cloud connectivity to execute",
+            "B) No, Snowball devices only support passive file copying and cannot run compute workloads",
+            "C) Yes, Snowball Edge devices support running local EC2 AMIs and Lambda functions at remote edge locations without continuous AWS cloud connectivity",
+            "D) Yes, but only if an active 1 Gbps Direct Connect line is connected to the device"
         ],
-        "correct": [
-            "A",
-            "B"
-        ],
-        "explanation": "Visualizing performance data by overlaying metrics on architectural diagrams and call graphs or source code enables engineers to instantly pinpoint bottlenecks, slow database calls, and saturated network paths across distributed microservices."
+        "correct": "C",
+        "explanation": "Correct Answer: C. AWS Snowball Edge devices include local compute capabilities, allowing you to run EC2-compatible AMIs and AWS Lambda functions at disconnected or remote edge locations."
     },
     {
         "id": 36,
-        "section": "PERFORMANCE",
-        "topic": "Data Management Performance",
-        "subtopic": "Data Store Selection",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Hybrid Access",
+        "subtopic": "Client VPN vs PrivateLink",
         "type": "single",
-        "question": "When evaluating database and storage engines for performance optimization, which factor is NOT a customer-managed architectural design criterion under the AWS Well-Architected Framework?",
+        "question": "Remote employees working from home need secure OpenVPN-based encrypted access to private resources inside AWS VPCs and on-premises networks. Which managed AWS service provides user authentication and client VPN endpoints?",
         "options": [
-            "A) The exact physical server rack location and chassis positioning within the AWS Availability Zone",
-            "B) The underlying data access patterns categorized as either high-throughput sequential or random I/O",
-            "C) The required frequency of access ranging between hot real-time online queries and cold archive tiers",
-            "D) The frequency and mutability of data updates contrasting dynamic transactions with WORM constraints"
+            "A) AWS Client VPN",
+            "B) AWS Site-to-Site VPN",
+            "C) AWS Transit Gateway Connect",
+            "D) AWS Direct Connect"
         ],
         "correct": "A",
-        "explanation": "Architectural selection criteria for data stores focus on access patterns (random vs. sequential), access frequency, update frequency, consistency models, and throughput requirements. Physical rack positions and hardware chassis placements are fully abstracted and managed by AWS."
+        "explanation": "Correct Answer: A. AWS Client VPN is a managed client-based VPN service based on OpenVPN that enables remote employees to securely connect to AWS VPCs and on-premises networks from any location."
     },
     {
         "id": 37,
-        "section": "PERFORMANCE",
-        "topic": "Networking Performance",
-        "subtopic": "Networking Protocols",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Hybrid Access",
+        "subtopic": "Client VPN vs PrivateLink",
         "type": "single",
-        "question": "Under Networking Performance best practice PERF04-BP05, which architectural action should teams implement to maximize network throughput and minimize connection establishment overhead?",
+        "question": "What is a main difference between AWS Site-to-Site VPN and AWS Client VPN?",
         "options": [
-            "A) Evaluate and select optimal modern network protocols tailored to the workload communication profile",
-            "B) Force all internal microservice inter-VPC traffic to traverse an external public Internet Gateway",
-            "C) Cap maximum network interface bandwidth across all EC2 instances to 100 Mbps using traffic shapers",
-            "D) Disable IPv6 protocol stacks completely across all Virtual Private Clouds and Transit Gateways"
+            "A) Client VPN does not support Active Directory authentication",
+            "B) Site-to-Site VPN uses SSL; Client VPN uses physical fiber",
+            "C) Site-to-Site VPN is for home users only",
+            "D) Site-to-Site VPN connects entire networks (e.g. data center IPsec gateway to VPC); Client VPN connects individual user devices (laptops) to VPCs via OpenVPN client software"
         ],
-        "correct": "A",
-        "explanation": "PERF04-BP05 recommends selecting modern and optimized networking protocols (such as HTTP/2, HTTP/3/QUIC, gRPC over HTTP/2, UDP for real-time streaming, or SR-IOV/ENA with jumbo frames) to reduce latency and maximize transmission efficiency."
+        "correct": "D",
+        "explanation": "Correct Answer: D. Site-to-Site VPN establishes an IPsec tunnel between network gateways (router-to-VPC). Client VPN connects individual remote user devices (laptops) using OpenVPN software."
     },
     {
         "id": 38,
-        "section": "PERFORMANCE",
-        "topic": "Autoscaling vs Manual Scaling",
-        "subtopic": "Elastic Load Balancing Integration",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Hybrid Access",
+        "subtopic": "Client VPN vs PrivateLink",
         "type": "single",
-        "question": "In a highly available autoscaled multi-tier web application architecture, how does the Application Load Balancer distribute incoming traffic across the fleet?",
+        "question": "How can AWS Client VPN authenticate remote users connecting to enterprise VPCs?",
         "options": [
-            "A) Evenly across healthy registered target instances deployed in subnets across multiple Availability Zones",
-            "B) Exclusively to instances running in the public subnet of the primary Availability Zone during steady state",
-            "C) By bypassing EC2 Security Group inspection to route raw packets directly to instance loopback interfaces",
-            "D) By forcing all incoming HTTP/HTTPS connections through an intermediary private NAT Gateway instance"
+            "A) IAM Access Keys only",
+            "B) Active Directory (via AWS Managed Microsoft AD or AD Connector), SAML 2.0 Identity Providers (Okta, Azure AD), or Mutual Certificate Authentication",
+            "C) S3 Bucket Policies only",
+            "D) Route 53 TXT Records"
         ],
-        "correct": "A",
-        "explanation": "An Application Load Balancer (ALB) operates at Layer 7 and automatically balances incoming web traffic across healthy EC2 targets distributed evenly across multiple Availability Zones to ensure fault tolerance and responsive performance."
+        "correct": "B",
+        "explanation": "Correct Answer: B. AWS Client VPN supports Active Directory integration, SAML 2.0 federated authentication (Single Sign-On), and mutual certificate-based authentication."
     },
     {
         "id": 39,
-        "section": "PERFORMANCE",
-        "topic": "Process and Culture",
-        "subtopic": "Performance Review Process",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Hybrid Access",
+        "subtopic": "Client VPN vs PrivateLink",
         "type": "single",
-        "question": "What does the AWS Well-Architected Framework identify as the primary underlying cause when cloud architectures degrade in performance efficiency over time?",
+        "question": "An enterprise wants to allow remote employees using AWS Client VPN to access on-premises data center servers through an existing Direct Connect link attached to the VPC. Which feature enables this?",
         "options": [
-            "A) The lack of a formalized, recurring performance review process to assess evolving cloud capabilities",
-            "B) The inevitable physical wear and tear of underlying hypervisor hardware in cloud data centers",
-            "C) The architectural adoption of serverless compute services in place of persistent EC2 fleets",
-            "D) Excessive utilization of Amazon CloudFront edge caching points of presence across global regions"
+            "A) VPC Peering with Internet Gateway",
+            "B) Client VPN Route Tables with target network routes set to the on-premises CIDR block",
+            "C) S3 Gateway Endpoints",
+            "D) AWS DataSync Agent"
         ],
-        "correct": "A",
-        "explanation": "The AWS Well-Architected Framework highlights that degrading performance is usually the result of a non-existent or irregular performance review process. Regular reviews allow teams to incorporate newly released AWS services, instance types, and optimization patterns."
+        "correct": "B",
+        "explanation": "Correct Answer: B. Adding routes for the on-premises network CIDR into the AWS Client VPN route table allows connected VPN clients to pass traffic through the VPC to on-premises destinations over Direct Connect or VPN."
     },
     {
         "id": 40,
-        "section": "PERFORMANCE",
-        "topic": "Process and Culture",
-        "subtopic": "Infrastructure as Code",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Pre-Migration Planning",
+        "subtopic": "Discovery & Evaluation Tools",
         "type": "single",
-        "question": "How does defining infrastructure using Infrastructure as Code (IaC) tools like AWS CloudFormation or Terraform directly enhance long-term system performance efficiency?",
+        "question": "An enterprise plans to migrate 1,000 on-premises servers to AWS. They need an automated tool to discover server inventory, performance metrics (CPU, RAM, disk I/O), and network process dependencies. Which service collects this data?",
         "options": [
-            "A) By versioning infrastructure in source control alongside application code to enable rapid, safe iterations",
-            "B) By automatically encrypting attached EBS volumes without requiring AWS KMS key configurations",
-            "C) By completely replacing the need for relational database schema indexing and query optimization",
-            "D) By overclocking underlying physical CPU clock speeds when instances encounter compute saturation"
+            "A) AWS Application Discovery Service",
+            "B) AWS Launch Wizard",
+            "C) AWS Migration Evaluator (formerly TSO Logic)",
+            "D) AWS Service Catalog"
         ],
         "correct": "A",
-        "explanation": "Defining Infrastructure as Code (IaC) allows infrastructure to be maintained in source control, tested in CI/CD pipelines, and evolved using standard software development practices, enabling fast, repeatable experimentation and performance tuning."
+        "explanation": "Correct Answer: A. AWS Application Discovery Service collects server inventory, performance metrics, and network process dependencies from on-premises servers to assist in migration planning."
     },
     {
         "id": 41,
-        "section": "PERFORMANCE",
-        "topic": "Offloading and Load Distribution",
-        "subtopic": "NGINX Proxy",
-        "type": "multi",
-        "question": "In an enterprise multi-brand load distribution architecture routing public web traffic to specialized brand backends, which TWO intermediary components handle request routing before target ALBs? (Select 2)",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Pre-Migration Planning",
+        "subtopic": "Discovery & Evaluation Tools",
+        "type": "single",
+        "question": "A CFO wants a directional business case report detailing total cost of ownership (TCO) modeling, compare on-premises server licensing costs vs AWS optimized instance right-sizing before committing to a migration project. Which service builds this business case?",
         "options": [
-            "A) Fleet of reverse-proxy routing servers such as NGINX deployed in Auto Scaling groups",
-            "B) Initial front-facing Elastic Load Balancing tier terminating public client connections",
-            "C) Dedicated AWS Direct Connect Gateways terminating on-premises MPLS connections",
-            "D) Clustered Amazon ElastiCache Redis nodes providing write-through request proxying"
+            "A) AWS Migration Evaluator",
+            "B) AWS Control Tower",
+            "C) AWS Application Discovery Service",
+            "D) AWS Systems Manager"
         ],
-        "correct": [
-            "A",
-            "B"
-        ],
-        "explanation": "The multi-tier enterprise architecture routes incoming public traffic through an initial Elastic Load Balancer layer to a scalable tier of NGINX reverse proxy servers, which perform advanced path/brand rewriting and route traffic to brand-specific Application Load Balancers."
+        "correct": "A",
+        "explanation": "Correct Answer: A. AWS Migration Evaluator provides data-driven business cases and TCO financial insights to evaluate AWS cloud cost estimates based on actual on-premises usage data."
     },
     {
         "id": 42,
-        "section": "PERFORMANCE",
-        "topic": "Offloading and Load Distribution",
-        "subtopic": "CloudFront Caching Tiers",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Pre-Migration Planning",
+        "subtopic": "Discovery & Evaluation Tools",
         "type": "single",
-        "question": "To maximize performance and cache hit ratios for globally distributed users, which architectural component sits between local CloudFront Edge PoPs and the custom backend Origin?",
+        "question": "What agent deployment options are supported by AWS Application Discovery Service?",
         "options": [
-            "A) CloudFront Regional Edge Caches that consolidate cache misses across regional catchment areas",
-            "B) CloudFront Functions executing lightweight header rewrites on incoming Viewer Requests",
-            "C) DynamoDB Accelerator (DAX) clusters caching in-memory document data in private VPC subnets",
-            "D) Amazon Route 53 Geolocation DNS Resolvers performing authoritative name query lookups"
+            "A) Agentless Discovery (via AWS Agentless Collector VM for VMware vSphere) and Agent-Based Discovery (installing AWS Application Discovery Agent on Linux/Windows hosts)",
+            "B) Hardware appliances shipped via carrier",
+            "C) SNMP polling via AWS WAF",
+            "D) Agentless discovery only via S3 logs"
         ],
         "correct": "A",
-        "explanation": "CloudFront uses Regional Edge Caches located between local Edge Locations (PoPs) and the origin server. When a local PoP misses a cache entry, it queries the Regional Edge Cache before reaching the origin, dramatically improving cache hit ratios and reducing origin load."
+        "explanation": "Correct Answer: A. AWS Application Discovery Service offers both Agentless Discovery (via VMware vCenter appliance) for high-level inventory, and Agent-Based Discovery for detailed host-level process dependencies and performance metrics."
     },
     {
         "id": 43,
-        "section": "PERFORMANCE",
-        "topic": "Process and Culture",
-        "subtopic": "Business Metrics",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Edge & Hybrid Compute",
+        "subtopic": "AWS Outposts vs Local Zones",
         "type": "single",
-        "question": "When formulating Key Performance Indicators (KPIs) for a high-traffic production system, which metric represents a business-aligned indicator of performance financial efficiency?",
+        "question": "A manufacturing plant requires ultra-low single-digit millisecond latency execution for on-premises industrial automation machinery that cannot be moved to AWS regions. They want AWS infrastructure delivered as physical server racks directly into their data center. Which service fulfills this?",
         "options": [
-            "A) The aggregate cumulative infrastructure cost incurred per processed business transaction",
-            "B) The garbage collection frequency and pause duration metrics of the underlying Java Virtual Machine",
-            "C) The total count of active concurrent worker threads allocated within the web container pool",
-            "D) The raw Time-to-First-Byte (TTFB) duration recorded by regional edge monitoring probes"
+            "A) AWS Outposts",
+            "B) AWS Snowball Edge",
+            "C) AWS Local Zones",
+            "D) AWS Wavelength"
         ],
         "correct": "A",
-        "explanation": "While thread count, TTFB, and GC pauses are technical metrics, 'aggregate cumulative cost per request or transaction' ties performance directly to business and financial efficiency, allowing teams to verify that scaling is economically sustainable."
+        "explanation": "Correct Answer: A. AWS Outposts delivers physical AWS managed infrastructure (racks or servers) directly into your on-premises data center or co-location facility, extending native AWS services and APIs on-site for single-digit millisecond latency."
     },
     {
         "id": 44,
-        "section": "PERFORMANCE",
-        "topic": "Networking Performance",
-        "subtopic": "Physical Constraints",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Edge & Hybrid Compute",
+        "subtopic": "AWS Outposts vs Local Zones",
         "type": "single",
-        "question": "What mechanism does the AWS Well-Architected Framework recommend to mitigate the impact of physical network constraints (such as speed-of-light propagation latency over long geographic distances)?",
+        "question": "A media rendering company in Los Angeles needs low-latency compute resources located near LA end-users without operating their own physical data center. Which AWS regional expansion infrastructure should they use?",
         "options": [
-            "A) Deploying CloudFront edge locations, AWS Global Accelerator, or localized regional infrastructure",
-            "B) Upgrading physical RAM and solid-state drives across end-user desktop and mobile devices",
-            "C) Disabling all IPv6 routing across intermediate network transit providers and regional gateways",
-            "D) Rewriting all application backend code from managed languages like Java to native C++ binaries"
+            "A) AWS Outposts",
+            "B) AWS Local Zones",
+            "C) AWS Wavelength",
+            "D) AWS Snowcone"
         ],
-        "correct": "A",
-        "explanation": "Physical networking constraints (speed of light across fiber optic cables) cannot be eliminated, but their latency impact can be mitigated by placing resources closer to users via CloudFront Edge Locations, AWS Global Accelerator, Local Zones, or Outposts."
+        "correct": "B",
+        "explanation": "Correct Answer: B. AWS Local Zones place compute, storage, and database services close to large population and industrial centers, allowing users to run latency-sensitive workloads near end-users without managing physical data center facilities."
     },
     {
         "id": 45,
-        "section": "PERFORMANCE",
-        "topic": "Autoscaling Support Matrix",
-        "subtopic": "Amazon EMR",
-        "type": "multi",
-        "question": "According to the AWS Autoscaling configuration matrix, which TWO management interfaces natively support configuring dynamic auto-scaling policies for Amazon EMR clusters? (Select 2)",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Edge & Hybrid Compute",
+        "subtopic": "AWS Outposts vs Local Zones",
+        "type": "single",
+        "question": "A mobile telecom provider wants to host ultra-low latency 5G edge applications inside telecommunications providers' 5G networks to serve mobile devices. Which service is built for 5G edge compute?",
         "options": [
-            "A) AWS Management Console interface enabling visual policy configuration",
-            "B) AWS Command Line Interface (CLI) supporting automated script execution",
-            "C) Hardware DIP switches located on physical AWS Outpost rack enclosures",
-            "D) Direct operating system root kernel configuration parameters via SSH"
+            "A) AWS Local Zones",
+            "B) AWS Wavelength",
+            "C) AWS Snowball Edge",
+            "D) AWS Outposts"
         ],
-        "correct": [
-            "A",
-            "B"
-        ],
-        "explanation": "Amazon EMR supports dynamic instance autoscaling configuration across all standard programmatic and visual AWS interfaces, including the AWS Management Console, AWS CLI, AWS SDKs, and AWS CloudFormation templates."
+        "correct": "B",
+        "explanation": "Correct Answer: B. AWS Wavelength embeds AWS compute and storage services within 5G network edge data centers of telecommunications providers, delivering ultra-low latency for mobile applications."
     },
     {
         "id": 46,
-        "section": "PERFORMANCE",
-        "topic": "Offloading and Load Distribution",
-        "subtopic": "DocumentDB vs RDS",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Edge & Hybrid Compute",
+        "subtopic": "AWS Outposts vs Local Zones",
         "type": "single",
-        "question": "How does the Amazon DocumentDB clustering architecture parallel the high-performance read-scaling model of Amazon Aurora?",
+        "question": "How are local network connections handled between on-premises equipment and workloads running on an AWS Outposts rack inside the same data center?",
         "options": [
-            "A) Using a primary instance for writes and read replicas to offload queries across a shared storage volume",
-            "B) Requiring synchronous multi-master write replication across all database instances in every AZ",
-            "C) Restricting all replica instances to processing write transactions while the primary serves reads",
-            "D) Mandating an external Redis cache to persist all document collections in volatile RAM memory"
+            "A) Traffic routes exclusively through an S3 Gateway Endpoint",
+            "B) All traffic must loop out to the public internet and back",
+            "C) Via a Local Gateway (LGW) that routes traffic directly between the Outposts rack and the local on-premises network at layer 2/3",
+            "D) Via an AWS Client VPN tunnel"
         ],
-        "correct": "A",
-        "explanation": "Amazon DocumentDB separates compute and storage in the exact same manner as Amazon Aurora: a single primary compute instance processes all write operations, while up to 15 read replica instances offload read query traffic, all attached to a shared, fault-tolerant distributed storage cluster."
+        "correct": "C",
+        "explanation": "Correct Answer: C. An AWS Outposts rack includes a Local Gateway (LGW) that enables low-latency communication directly between Outposts subnets and local on-premises network resources."
     },
     {
         "id": 47,
-        "section": "PERFORMANCE",
-        "topic": "Applying Performance Design Principles",
-        "subtopic": "Database Technology Switch",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Edge & Hybrid Compute",
+        "subtopic": "AWS Outposts vs Local Zones",
         "type": "single",
-        "question": "An organization stores transactional relational data as flat objects in Amazon S3, causing severe query latency and locking issues. The architect proposes migrating to Amazon RDS. Which design principle guides this?",
+        "question": "What happens to workloads running on an AWS Outposts rack if the network connection back to the parent AWS region is temporarily lost?",
         "options": [
-            "A) Consider mechanical sympathy by aligning workload access patterns with purpose-built data technologies",
-            "B) Use serverless architectures to eliminate all server maintenance and operating system patching tasks",
-            "C) Go global in minutes by automatically deploying multi-region active-active database clusters",
-            "D) Democratize advanced technologies by delegating all SQL query optimization to AWS Managed Services"
+            "A) Traffic is re-routed over satellite links automatically",
+            "B) All local data is automatically erased",
+            "C) Local workloads running on the Outposts rack continue to function and communicate with local on-premises network resources via the Local Gateway (LGW), but control plane operations (e.g. launching new instances) are unavailable until connection is restored",
+            "D) The Outposts rack immediately powers off all instances"
         ],
-        "correct": "A",
-        "explanation": "'Consider mechanical sympathy' means using the right tool for the job by understanding how cloud technologies work under the hood. Using S3 as an ad-hoc relational database is anti-pattern; switching to Amazon RDS aligns relational transactional workloads with an engine designed specifically for ACID queries."
+        "correct": "C",
+        "explanation": "Correct Answer: C. During temporary disconnects from the parent AWS region, active local workloads on AWS Outposts continue running locally and communicating over the Local Gateway (LGW), though AWS cloud control plane management operations are unavailable until re-connected."
     },
     {
         "id": 48,
-        "section": "PERFORMANCE",
-        "topic": "Process and Culture",
-        "subtopic": "Load Generation Tools",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Migration Orchestration",
+        "subtopic": "AWS Migration Hub",
         "type": "single",
-        "question": "To rigorously test application performance under extreme load without incurring massive permanent compute expenses, which compute strategy does AWS recommend for generating synthetic traffic?",
+        "question": "A enterprise migration program uses AWS MGN, AWS DMS, and partner tools across hundreds of servers. Project managers need a single central dashboard to track the status of all application migrations across all tools. Which service acts as this central migration tracking hub?",
         "options": [
-            "A) Utilizing Amazon EC2 Spot Instances and Marketplace load-testing tools to generate high-volume load cheaply",
-            "B) Purchasing dedicated bare-metal on-premises servers under multi-year fixed capital contracts",
-            "C) Employing manual browser interaction testing teams to simulate concurrent traffic loads",
-            "D) Executing load-generation test scripts directly within the AWS Management Console backend"
+            "A) AWS Control Tower",
+            "B) AWS Systems Manager OpsCenter",
+            "C) AWS Migration Hub",
+            "D) AWS Launch Wizard"
         ],
-        "correct": "A",
-        "explanation": "AWS recommends taking advantage of Amazon EC2 Spot Instances (offering up to 90% cost savings over On-Demand) and AWS Marketplace distributed testing tools (e.g., Locust, JMeter) to spin up massive, cost-effective fleets for brief synthetic load test runs."
+        "correct": "C",
+        "explanation": "Correct Answer: C. AWS Migration Hub provides a single central location to track the progress of application migrations across multiple AWS and partner tools (such as AWS MGN, DMS, and discovery tools)."
     },
     {
         "id": 49,
-        "section": "PERFORMANCE",
-        "topic": "Performance Design Principles",
-        "subtopic": "Go Global in Minutes",
-        "type": "multi",
-        "question": "Which TWO architectural benefits are directly realized by adhering to the 'Go global in minutes' design principle of the Performance Efficiency pillar? (Select 2)",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Migration Orchestration",
+        "subtopic": "AWS Launch Wizard",
+        "type": "single",
+        "question": "A company wants to deploy enterprise third-party applications like SAP HANA or Microsoft SQL Server Always On availability groups on AWS using guided sizing, automated CloudFormation provisioning, and AWS best-practice architectures. Which tool simplifies this deployment?",
         "options": [
-            "A) Reducing latency for international users by deploying workloads across multiple geographic AWS Regions",
-            "B) Delivering an enhanced customer user experience worldwide while maintaining minimal infrastructure overhead",
-            "C) Enforcing that all corporate application data must reside exclusively within a single physical data center",
-            "D) Mandating manual deployment verification procedures across all localized regional edge environments"
+            "A) AWS Migration Evaluator",
+            "B) AWS CodeDeploy",
+            "C) AWS Service Catalog",
+            "D) AWS Launch Wizard"
         ],
-        "correct": [
-            "A",
-            "B"
-        ],
-        "explanation": "The 'Go global in minutes' principle emphasizes leveraging AWS's global footprint (Regions, Availability Zones, Edge Locations) to deploy workloads close to end users worldwide, reducing latency and boosting performance without large upfront capital expenditures."
+        "correct": "D",
+        "explanation": "Correct Answer: D. AWS Launch Wizard offers a guided interactive wizard to size, configure, and deploy complex enterprise applications (such as SAP HANA and SQL Server Always On) on AWS following AWS best practices."
     },
     {
         "id": 50,
-        "section": "PERFORMANCE",
-        "topic": "Design Challenge",
-        "subtopic": "Architecture Adjustments",
+        "section": "MIGRATION & HYBRID",
+        "topic": "Migration Orchestration",
+        "subtopic": "AWS Mainframe Modernization",
         "type": "single",
-        "question": "An API backend experiences high latency and database CPU spikes because thousands of clients repeatedly request the exact same static reference data. Which architectural change resolves this most effectively?",
+        "question": "A enterprise legacy mainframe application written in COBOL needs to be refactored or automated for cloud execution on AWS. Which service provides a managed platform for analyzing, refactoring, and hosting legacy mainframe workloads on AWS?",
         "options": [
-            "A) Implement an API Gateway Cache or Amazon ElastiCache layer to offload repetitive queries from the database",
-            "B) Expand the provisioned storage capacity of the backend database Amazon EBS General Purpose volume",
-            "C) Force all client applications to transmit API requests using unencrypted plain HTTP transport protocols",
-            "D) Migrate the backend relational database instance to a geographically distant secondary AWS Region"
+            "A) AWS Application Migration Service",
+            "B) AWS Mainframe Modernization",
+            "C) AWS Snowmobile",
+            "D) AWS Schema Conversion Tool"
         ],
-        "correct": "A",
-        "explanation": "Caching static or infrequently changing query responses at the API Gateway caching tier or via an in-memory caching layer (Amazon ElastiCache Redis/Memcached) intercepts duplicate read requests, offloading the database and delivering sub-millisecond response times to clients."
+        "correct": "B",
+        "explanation": "Correct Answer: B. AWS Mainframe Modernization is a managed service that helps migrate, refactor, and modernize legacy mainframe workloads (such as COBOL applications) onto AWS runtime environments."
     }
 ];
 
@@ -1743,7 +1775,7 @@
                 '<button class="submit-btn" onclick="checkAnswer(' + q.id + ')">Submit Answer</button>' +
                 '<div id="feedback-' + q.id + '" class="explanation"></div>' +
                 '<div class="card-watermark">' +
-                    '🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-20-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">AWS SAA-C03 Prep Tracker • github.com/borudeyash1</a>' +
+                    '🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-30-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">AWS SAA-C03 Prep Tracker • github.com/borudeyash1</a>' +
                 '</div>' +
             '</div>';
         });
@@ -2251,6 +2283,81 @@
 
     // Initialize application on load
     renderQuiz();
-</script>
+
+    // ======================== PRACTICE MODE QUESTION NAVIGATOR ========================
+    var practiceNavOpen = false;
+    function togglePracticeNav() { practiceNavOpen ? closePracticeNav() : openPracticeNav(); }
+    function openPracticeNav() {
+        practiceNavOpen = true;
+        var panel = document.getElementById('practice-nav-panel');
+        if (panel) panel.classList.add('open');
+        refreshPracticeNav();
+    }
+    function closePracticeNav() {
+        practiceNavOpen = false;
+        var panel = document.getElementById('practice-nav-panel');
+        if (panel) panel.classList.remove('open');
+    }
+    function refreshPracticeNav() {
+        if (!practiceNavOpen) return;
+        var grid = document.getElementById('practice-nav-grid');
+        var statsEl = document.getElementById('practice-nav-stats');
+        if (!grid) return;
+        grid.innerHTML = '';
+        var data = typeof activeQuizData !== 'undefined' && activeQuizData ? activeQuizData : (typeof quizData !== 'undefined' ? quizData : []);
+        if (!data || data.length === 0) return;
+        var correctCount = 0, incorrectCount = 0;
+        data.forEach(function(q) {
+            var card = document.getElementById('card-' + q.id);
+            var status = card ? (card.getAttribute('data-status') || 'unanswered') : 'unanswered';
+            if (status === 'correct') correctCount++;
+            else if (status === 'incorrect') incorrectCount++;
+            var btn = document.createElement('button');
+            btn.className = 'nav-q-btn status-' + status;
+            btn.title = 'Q#' + q.id + ' — ' + (q.q || q.question || '').substring(0, 60) + '...';
+            btn.textContent = q.id;
+            btn.onclick = function() {
+                var target = document.getElementById('card-' + q.id);
+                if (target) {
+                    closePracticeNav();
+                    setTimeout(function() {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        target.style.outline = '2px solid #ff9900';
+                        target.style.outlineOffset = '4px';
+                        setTimeout(function() { target.style.outline = ''; target.style.outlineOffset = ''; }, 2000);
+                    }, 300);
+                }
+            };
+            grid.appendChild(btn);
+        });
+        var total = data.length;
+        var answered = correctCount + incorrectCount;
+        if (statsEl) statsEl.innerHTML = '<strong>' + answered + '/' + total + '</strong> answered &nbsp;|&nbsp; [OK] ' + correctCount + ' correct &nbsp;|&nbsp; ❌ ' + incorrectCount + ' incorrect';
+    }
+    document.addEventListener('click', function(e) {
+        var panel = document.getElementById('practice-nav-panel');
+        var btn = document.getElementById('practice-nav-btn');
+        if (practiceNavOpen && panel && btn && !panel.contains(e.target) && !btn.contains(e.target)) closePracticeNav();
+    });
+
+    // ======================== ORDER BUTTONS ========================
+    var currentOrder = 'first';
+    function setOrder(orderType, btn) {
+        currentOrder = orderType;
+        document.querySelectorAll('.order-btn').forEach(function(b) { b.classList.remove('active'); });
+        if (btn) btn.classList.add('active');
+        var data = typeof activeQuizData !== 'undefined' && activeQuizData ? activeQuizData : (typeof quizData !== 'undefined' ? quizData : null);
+        if (!data || data.length === 0) return;
+        var ordered = data.slice();
+        if (orderType === 'first') ordered.sort(function(a,b){ return (parseInt(a.id)||0)-(parseInt(b.id)||0); });
+        else if (orderType === 'last') ordered.sort(function(a,b){ return (parseInt(b.id)||0)-(parseInt(a.id)||0); });
+        else ordered.sort(function(){ return 0.5-Math.random(); });
+        if (typeof activeQuizData !== 'undefined') activeQuizData = ordered;
+        if (typeof renderQuizGroupedBySection === 'function') renderQuizGroupedBySection(ordered);
+        else if (typeof renderQuiz === 'function') renderQuiz(ordered);
+        if (typeof refreshPracticeNav === 'function') setTimeout(refreshPracticeNav, 200);
+    }
+
+    </script>
 </body>
 </html>

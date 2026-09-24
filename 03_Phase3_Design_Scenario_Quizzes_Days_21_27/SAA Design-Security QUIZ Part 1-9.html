@@ -1,0 +1,3163 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Solutions Architect Associate (SAA-C03) - Design for Security Master Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Light Theme */
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-sub-bg: #f1f5f9;
+            --card-hover-bg: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --border-color: #cbd5e1;
+            --accent-orange: #ff9900;
+            --accent-orange-hover: #e68a00;
+            --accent-orange-light: rgba(255, 153, 0, 0.12);
+            --accent-orange-glow: rgba(255, 153, 0, 0.25);
+            
+            --correct-bg: #d1fae5;
+            --correct-text: #065f46;
+            --correct-border: #34d399;
+            
+            --incorrect-bg: #ffe4e6;
+            --incorrect-text: #9f1239;
+            --incorrect-border: #fb7185;
+            
+            --sticky-bg: rgba(255, 255, 255, 0.92);
+            --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="dark"] {
+            /* Dark Theme */
+            --bg-color: #000000;
+            --card-bg: #09090b;
+            --card-sub-bg: #121215;
+            --card-hover-bg: #1c1c21;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --border-color: #27272a;
+            --accent-orange: #ff9900;
+            --accent-orange-hover: #ffaa22;
+            --accent-orange-light: rgba(255, 153, 0, 0.18);
+            --accent-orange-glow: rgba(255, 153, 0, 0.4);
+            
+            --correct-bg: rgba(16, 185, 129, 0.15);
+            --correct-text: #34d399;
+            --correct-border: rgba(52, 211, 153, 0.4);
+            
+            --incorrect-bg: rgba(244, 63, 94, 0.15);
+            --incorrect-text: #fb7185;
+            --incorrect-border: rgba(251, 113, 133, 0.4);
+            
+            --sticky-bg: rgba(0, 0, 0, 0.92);
+            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.8);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 60px;
+        }
+
+        /* Sticky Dashboard Header */
+        header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background: var(--sticky-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 12px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand img.logo-img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(255, 153, 0, 0.3));
+        }
+
+        .brand-text h1 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .brand-text p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mode-btn {
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 7px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .mode-btn.active {
+            background: var(--accent-orange);
+            color: #000;
+            border-color: var(--accent-orange);
+        }
+
+        .theme-toggle {
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 7px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+
+        .stat-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+        }
+
+        .stat-badge .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .dot.correct { background: #10b981; }
+        .dot.incorrect { background: #f43f5e; }
+        .dot.total { background: #60a5fa; }
+        .dot.accuracy { background: var(--accent-orange); }
+
+        .search-filter-box {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .search-input {
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            width: 180px;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 0 2px var(--accent-orange-light);
+        }
+
+        .filter-btn {
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .filter-btn.active {
+            background: var(--accent-orange-light);
+            color: var(--accent-orange);
+            border-color: var(--accent-orange);
+        }
+
+        .progress-line-container {
+            width: 100%;
+            height: 4px;
+            background: var(--card-sub-bg);
+            border-radius: 2px;
+            overflow: hidden;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .progress-line-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-orange), #10b981);
+            transition: width 0.3s ease;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            width: 92%;
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .module-banner {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .module-banner h2 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .module-banner p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Question Cards */
+        .question-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-shadow: var(--shadow-card);
+            position: relative;
+        }
+
+        .question-card.answered-correct {
+            border-left: 5px solid #10b981;
+        }
+
+        .question-card.answered-incorrect {
+            border-left: 5px solid #f43f5e;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .topic-pill {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: var(--accent-orange-light);
+            color: var(--accent-orange);
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 153, 0, 0.3);
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+
+        .question-title {
+            font-size: 1.02rem;
+            font-weight: 700;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .status-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            display: none;
+            flex-shrink: 0;
+        }
+
+        .status-badge.correct {
+            background: var(--correct-bg);
+            color: var(--correct-text);
+            border: 1px solid var(--correct-border);
+        }
+
+        .status-badge.incorrect {
+            background: var(--incorrect-bg);
+            color: var(--incorrect-text);
+            border: 1px solid var(--incorrect-border);
+        }
+
+        .options-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-item {
+            position: relative;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 16px;
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.92rem;
+            line-height: 1.45;
+            color: var(--text-primary);
+            user-select: none;
+        }
+
+        .option-label:hover {
+            background: var(--card-hover-bg);
+            border-color: var(--accent-orange);
+        }
+
+        .option-label input {
+            margin-top: 3px;
+            cursor: pointer;
+            accent-color: var(--accent-orange);
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        .option-label.selected-opt {
+            border-color: var(--accent-orange);
+            background: var(--accent-orange-light);
+        }
+
+        .option-label.correct-ans {
+            background: var(--correct-bg) !important;
+            border-color: var(--correct-border) !important;
+            color: var(--correct-text) !important;
+            font-weight: 600;
+        }
+
+        .option-label.incorrect-ans {
+            background: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-border) !important;
+            color: var(--incorrect-text) !important;
+        }
+
+        .submit-btn {
+            align-self: flex-start;
+            background: var(--accent-orange);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px var(--accent-orange-glow);
+        }
+
+        .submit-btn:hover {
+            background: var(--accent-orange-hover);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .explanation {
+            display: none;
+            background: var(--card-sub-bg);
+            border-left: 4px solid var(--accent-orange);
+            border-radius: 0 8px 8px 0;
+            padding: 14px 18px;
+            font-size: 0.88rem;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .explanation strong {
+            color: var(--accent-orange);
+        }
+
+        .card-watermark {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            opacity: 0.7;
+            padding-top: 8px;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        .card-watermark a {
+            color: var(--accent-orange);
+            text-decoration: none;
+        }
+
+        .card-watermark a:hover {
+            text-decoration: underline;
+        }
+
+        /* Exam Mode Specific Layout */
+        .exam-header-bar {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-card);
+        }
+
+        .exam-timer-display {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--accent-orange);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .exam-grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 20px;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .exam-grid-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .exam-palette-panel {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: var(--shadow-card);
+            position: sticky;
+            top: 120px;
+        }
+
+        .palette-header {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-primary);
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+            max-height: 380px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .palette-btn {
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 6px 0;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .palette-btn.active {
+            border-color: var(--accent-orange);
+            outline: 2px solid var(--accent-orange);
+        }
+
+        .palette-btn.answered {
+            background: #2563eb;
+            color: #ffffff;
+            border-color: #2563eb;
+        }
+
+        .palette-btn.flagged {
+            position: relative;
+        }
+
+        .palette-btn.flagged::after {
+            content: '🚩';
+            position: absolute;
+            top: -5px;
+            right: -3px;
+            font-size: 0.65rem;
+        }
+
+        .palette-legend {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 14px;
+            font-size: 0.72rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            padding-top: 10px;
+        }
+
+        .exam-nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+        }
+
+        .btn-nav {
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.88rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-nav:hover {
+            background: var(--card-hover-bg);
+            border-color: var(--accent-orange);
+        }
+
+        .btn-flag {
+            background: var(--card-sub-bg);
+            border: 1px solid #eab308;
+            color: #eab308;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.88rem;
+        }
+
+        .btn-flag.flagged-active {
+            background: #eab308;
+            color: #000;
+        }
+
+        .btn-finish-exam {
+            background: #10b981;
+            color: #ffffff;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
+
+        .btn-finish-exam:hover {
+            background: #059669;
+        }
+
+        /* Results Dashboard */
+        .results-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .results-score-box {
+            text-align: center;
+            padding: 24px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .results-score-box.pass {
+            background: rgba(16, 185, 129, 0.12);
+            border: 2px solid #10b981;
+            color: var(--text-primary);
+        }
+
+        .results-score-box.fail {
+            background: rgba(244, 63, 94, 0.12);
+            border: 2px solid #f43f5e;
+            color: var(--text-primary);
+        }
+
+        .score-big {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--accent-orange);
+        }
+
+        .score-status-badge {
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-export-json {
+            background: #3b82f6;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+        }
+
+        .btn-export-json:hover {
+            background: #2563eb;
+        }
+    
+    /* ======================== QUESTION NAVIGATOR PANEL ======================== */
+    #practice-nav-btn {
+        position: fixed;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 9000;
+        background: linear-gradient(135deg, #ff9900, #e07b00);
+        color: #fff;
+        border: none;
+        border-radius: 10px 0 0 10px;
+        padding: 12px 10px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        cursor: pointer;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        letter-spacing: 1.5px;
+        box-shadow: -3px 0 18px rgba(255,153,0,0.45);
+        transition: background 0.2s, box-shadow 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    #practice-nav-btn:hover { background: linear-gradient(135deg, #ffaa22, #ff9900); box-shadow: -4px 0 24px rgba(255,153,0,0.6); }
+    #practice-nav-panel {
+        position: fixed;
+        right: -340px;
+        top: 0;
+        height: 100vh;
+        width: 320px;
+        background: var(--card-bg, #111827);
+        border-left: 2px solid #ff9900;
+        box-shadow: -6px 0 40px rgba(0,0,0,0.5);
+        z-index: 8999;
+        display: flex;
+        flex-direction: column;
+        transition: right 0.32s cubic-bezier(0.4,0,0.2,1);
+        overflow: hidden;
+    }
+    #practice-nav-panel.open { right: 0; }
+    #practice-nav-panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 18px;
+        background: linear-gradient(135deg, rgba(255,153,0,0.15), rgba(255,153,0,0.05));
+        border-bottom: 1px solid var(--border-color, #e2e8f0);
+    }
+    #practice-nav-panel-header h3 { margin: 0; font-size: 1rem; font-weight: 700; color: #ff9900; }
+    #practice-nav-close { background: none; border: none; color: var(--text-secondary, #6b7280); font-size: 1.4rem; cursor: pointer; line-height: 1; padding: 2px 6px; border-radius: 4px; transition: color 0.2s; }
+    #practice-nav-close:hover { color: var(--text-primary, #111); }
+    #practice-nav-legend { display: flex; gap: 12px; padding: 10px 18px 8px; border-bottom: 1px solid var(--border-color, #e2e8f0); flex-wrap: wrap; }
+    .nav-legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.75rem; color: var(--text-secondary, #6b7280); }
+    .nav-legend-dot { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+    .nav-legend-dot.unanswered { background: var(--card-sub-bg, #f1f5f9); border: 1px solid var(--border-color, #cbd5e1); }
+    .nav-legend-dot.correct { background: rgba(16,185,129,0.25); border: 1px solid #10b981; }
+    .nav-legend-dot.incorrect { background: rgba(239,68,68,0.25); border: 1px solid #ef4444; }
+    #practice-nav-stats { padding: 8px 18px; font-size: 0.8rem; color: var(--text-secondary, #6b7280); border-bottom: 1px solid var(--border-color, #e2e8f0); }
+    #practice-nav-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; padding: 14px; overflow-y: auto; flex: 1; }
+    .nav-q-btn { aspect-ratio: 1; border-radius: 5px; border: 1px solid var(--border-color, #cbd5e1); background: var(--card-sub-bg, #f1f5f9); color: var(--text-secondary, #6b7280); font-size: 0.68rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+    .nav-q-btn:hover { background: rgba(255,153,0,0.15); border-color: #ff9900; color: #ff9900; transform: scale(1.08); }
+    .nav-q-btn.status-correct { background: rgba(16,185,129,0.18); border-color: #10b981; color: #10b981; }
+    .nav-q-btn.status-incorrect { background: rgba(239,68,68,0.18); border-color: #ef4444; color: #ef4444; }
+    /* Order buttons */
+    .order-btn-group { display: inline-flex; gap: 5px; margin-left: 10px; padding-left: 10px; border-left: 1px solid var(--border-color, #cbd5e1); }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-top">
+        <div class="brand">
+            <img src="saa-badge.png" alt="AWS Certified Solutions Architect Associate" class="logo-img">
+            <div class="brand-text">
+                <h1>AWS Solutions Architect Associate (SAA-C03) - Performance Quiz Master</h1>
+                <p>Designing for Performance Efficiency • 50 High-Yield Questions</p>
+            </div>
+        </div>
+        <div class="header-controls">
+            <button class="mode-btn active" id="btn-mode-practice" onclick="switchQuizMode('practice')">
+                📖 Practice Mode
+            </button>
+            <button class="mode-btn" id="btn-mode-exam" onclick="switchQuizMode('exam')">
+                ⏱️ AWS Exam Mode
+            </button>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <span id="theme-icon">☀️</span>
+                <span id="theme-text">Light Mode</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="header-bottom" id="practice-header-bottom">
+        <div class="stats-bar">
+            <div class="stat-badge"><span class="dot total"></span> Total: <span id="stat-total">50</span></div>
+            <div class="stat-badge"><span class="dot total"></span> Answered: <span id="stat-answered">0</span></div>
+            <div class="stat-badge"><span class="dot correct"></span> Correct: <span id="stat-correct">0</span></div>
+            <div class="stat-badge"><span class="dot incorrect"></span> Incorrect: <span id="stat-incorrect">0</span></div>
+            <div class="stat-badge"><span class="dot accuracy"></span> Accuracy: <span id="stat-accuracy">0%</span></div>
+        </div>
+        <div class="search-filter-box">
+            <input type="text" id="search-input" class="search-input" placeholder="Search #Q or keywords..." oninput="filterQuestions()">
+            <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
+            <button class="filter-btn" onclick="setFilter('unanswered', this)">Unanswered</button>
+            <button class="filter-btn" onclick="setFilter('correct', this)">Correct</button>
+            <button class="filter-btn" onclick="setFilter('incorrect', this)">Incorrect</button>
+        </div>
+    </div>
+
+    <div class="progress-line-container" id="practice-progress-bar">
+        <div class="progress-line-fill" id="progress-fill"></div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="module-banner" id="module-banner">
+        <h2>🚀 Performance Efficiency Domain Modules</h2>
+        <p>Master AWS performance optimization: Compute Right-Sizing, Auto Scaling, Elastic Load Balancing, CloudFront & Lambda@Edge Caching, Aurora Distributed Storage, ElastiCache, High-Performance Storage (EBS, EFS, FSx for Lustre), and Infrastructure as Code pipelines.</p>
+    </div>
+
+    <div id="quiz-container"></div>
+</div>
+
+<script>
+    const quizData = [
+    {
+        "id": 1,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A global e-commerce company is deploying a new application on AWS, catering to North America, Europe, and Asia with low-latency and regional compliance requirements. Which approach should they consider?",
+        "options": [
+            "A) Deploy the application in a single centralized VPC in EU Central (Frankfurt) and configure inter-region VPC peering to secondary sites",
+            "B) Deploy the application in a single primary VPC in US East (N. Virginia) and rely exclusively on Amazon CloudFront edge caching",
+            "C) Deploy the application in multiple regional VPCs close to target customers and use Amazon Route 53 latency and geolocation routing",
+            "D) Deploy the application in a single centralized VPC in Asia-Pacific (Singapore) and use AWS Global Accelerator to route traffic globally"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. Deploying in multiple VPCs in different regions ensures proximity to customers for low latency and adheres to data residency requirements. Route 53 optimizes geographic and latency-based routing."
+    },
+    {
+        "id": 2,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A startup is developing a web application using AWS to handle sensitive customer transactions. They are evaluating whether to use the Default VPC or create a custom VPC. What security consideration should they keep in mind?",
+        "options": [
+            "A) The Default VPC is convenient for quick testing, but custom VPCs with private subnets and strict NACLs provide proper isolation",
+            "B) Creating a new VPC requires deploying third-party virtual appliances because native AWS security groups cannot restrict subnet traffic",
+            "C) The Default VPC places all compute and database resources inside isolated private subnets with default NAT gateway routing",
+            "D) The Default VPC provides complete isolation by default without requiring custom route tables or security group modifications"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. Default VPC provides a quick start, but security groups and NACLs must be customized to adhere to the principle of least privilege."
+    },
+    {
+        "id": 3,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A retail company is deploying a multi-tier web application (web, app, database tiers) in a VPC. How should they ensure secure connectivity where internet users can access the web tier, but app and database tiers remain isolated?",
+        "options": [
+            "A) Place the web tier in public subnets and backend app/database tiers in private subnets, restricting traffic using security groups",
+            "B) Place the web tier in a private subnet and place application and database tiers in public subnets with public IPv4 addressing",
+            "C) Place all three application tiers inside a single public subnet and rely exclusively on operating system level firewall rules",
+            "D) Place all tiers in private subnets and attach an Internet Gateway directly to the private routing table for web tier ingress"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. Web tier in public subnet and backend tiers in private subnets with route tables and security groups ensures secure multi-tier architecture."
+    },
+    {
+        "id": 4,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A software development company is deploying an application for developers over the internet, ensuring the application is not publicly accessible to general users. How should they configure access within a VPC?",
+        "options": [
+            "A) Attach an Internet Gateway to the VPC and configure security groups to restrict inbound access strictly to developer corporate IPs",
+            "B) Attach an Internet Gateway and configure custom VPC route tables to allow unrestricted 0.0.0.0/0 inbound and outbound traffic",
+            "C) Avoid using an Internet Gateway and require developers to connect via unencrypted public internet GRE tunnels to local instances",
+            "D) Attach an Internet Gateway and place application servers in a public subnet without configuring security groups or network ACLs"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. Internet Gateway provides internet routing, while security groups enforce least privilege by restricting access strictly to authorized developer IP addresses."
+    },
+    {
+        "id": 5,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A research institution is deploying an IPv6 application within a VPC that needs to download datasets from external IPv6 addresses on the internet while remaining completely inaccessible from the internet. What approach should they consider?",
+        "options": [
+            "A) Disable all outbound IPv6 routing tables and require instances to use AWS PrivateLink endpoints for external internet downloads",
+            "B) Deploy an Egress-Only Internet Gateway in the VPC and update route tables to direct outbound IPv6 traffic from private subnets",
+            "C) Deploy a standard Internet Gateway in the VPC and assign public IPv4 Elastic IP addresses to all backend private instances",
+            "D) Deploy a standard NAT Gateway in a public subnet and configure custom VPC route tables to translate all outbound IPv6 traffic"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. An Egress-Only Internet Gateway permits outbound IPv6 communication for private instances while preventing inbound connections initiated from the internet."
+    },
+    {
+        "id": 6,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A startup deploying a web application on an EC2 instance wants to ensure the application retains its public IP address even after instance restarts while maintaining security best practices. What approach should they take?",
+        "options": [
+            "A) Allocate an Elastic IP address, associate it with the EC2 instance, and configure security groups to allow only ports 80/443",
+            "B) Rely exclusively on AWS Site-to-Site VPN tunnels to route public customer web traffic from on-premises edge routers",
+            "C) Use the auto-assigned public IP address and write an automated Lambda script to update public DNS records upon every reboot",
+            "D) Allocate an Elastic IP address and disable instance security groups to ensure incoming internet packets bypass firewall checks"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. Elastic IP addresses provide persistent public IPs across reboots, while security groups enforce least privilege access."
+    },
+    {
+        "id": 7,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A financial analytics company deploying a high-performance computing (HPC) application requires extremely low network latency and high throughput between multiple instances in a placement group securely. What approach should they use?",
+        "options": [
+            "A) Deploy standard virtual network interfaces and implement application-level compression algorithms over public TCP connections",
+            "B) Attach an Elastic Fabric Adapter (EFA) and open all inbound ports to 0.0.0.0/0 to prevent handshake latency bottlenecks",
+            "C) Attach Elastic Fabric Adapters (EFA) to the EC2 instances and configure security group rules to allow required inter-node traffic",
+            "D) Attach multiple standard Elastic Network Interfaces (ENAs) to each instance and configure round-robin DNS routing across them"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. EFA provides OS-bypass low latency for HPC workloads, secured with specific security group rules allowing communication within the cluster."
+    },
+    {
+        "id": 8,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A financial technology company identified malicious IP addresses attempting unauthorized access to critical application instances in a private subnet. How should they deny access from these IP addresses using NACLs?",
+        "options": [
+            "A) Configure the subnet Network ACL to include a DENY rule numbered with a higher numerical value than default ALLOW rules",
+            "B) Create explicit DENY rules in the instance security groups targeting the offending source IPv4 addresses",
+            "C) Add explicit DENY rules for the malicious IP addresses in the subnet Network ACL with lower rule numbers than any ALLOW rules",
+            "D) Delete the default ALLOW rule in the Network ACL and manually add ALLOW rules for all valid IP addresses across the internet"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. Network ACLs evaluate rules in ascending numerical order, so explicit DENY rules must have lower rule numbers than broad ALLOW rules to take effect."
+    },
+    {
+        "id": 9,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A financial technology company deploying a payment gateway application wants to secure client-to-application communication using an Application Load Balancer (ALB) to handle SSL/TLS termination and offload decryption from backend EC2 instances. What approach should they use?",
+        "options": [
+            "A) Deploy an Application Load Balancer in TCP passthrough mode and perform all cryptographic TLS handshakes on backend instances",
+            "B) Deploy an ALB with an HTTPS listener using an AWS Certificate Manager (ACM) certificate to terminate SSL/TLS traffic",
+            "C) Configure the Application Load Balancer with an unencrypted HTTP listener and rely on client-side RSA JavaScript libraries",
+            "D) Avoid using an Application Load Balancer and assign public Elastic IP addresses directly to each backend database server"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. ALB handles SSL/TLS termination using trusted ACM certificates, offloading CPU load from backend instances and ensuring encrypted client communication."
+    },
+    {
+        "id": 10,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A global e-commerce company deploying virtual appliances to inspect and filter traffic in a VPC wants to use AWS Gateway Load Balancer uniformly to manage and scale appliances securely and compliantly. What approach should they take?",
+        "options": [
+            "A) Avoid Gateway Load Balancers and deploy virtual firewall software directly on application compute hosts across subnets",
+            "B) Deploy a Gateway Load Balancer with target groups registering the virtual appliances and route VPC traffic via GWLB endpoints",
+            "C) Configure Gateway Load Balancer endpoints with open public write permissions to allow external unauthenticated inspection",
+            "D) Deploy a Gateway Load Balancer without registering health check target groups or configuring CloudWatch alarm metrics"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. Virtual appliances behind Gateway Load Balancers scale transparently while GWLB endpoints in consumer VPCs route traffic securely through GENEVE encapsulation."
+    },
+    {
+        "id": 11,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A multinational corporation transferring large amounts of sensitive financial data between an on-premises data center and AWS wants a dedicated private network connection that does not traverse the public internet. What approach should they take?",
+        "options": [
+            "A) Deploy an AWS Storage Gateway Volume Gateway over public internet connections without configuring TLS encryption",
+            "B) Provision an AWS Direct Connect dedicated connection with a private virtual interface and configure MACsec or IPsec encryption",
+            "C) Configure an Internet Gateway in the VPC and use AWS Transfer Family with anonymous public SFTP access enabled",
+            "D) Establish an AWS Site-to-Site VPN tunnel across the public internet using standard unencrypted BGP routing sessions"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. AWS Direct Connect provides dedicated private network connectivity bypassing the public internet, which can be secured with MACsec or IPsec over Direct Connect."
+    },
+    {
+        "id": 12,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A retail company operating multiple VPCs (dev, test, prod) across multiple AWS accounts needs to simplify network connectivity and centrally inspect east-west traffic between VPCs. What is the recommended architectural approach?",
+        "options": [
+            "A) Deploy an AWS Transit Gateway to interconnect VPCs centrally and route cross-VPC traffic through an inspection VPC",
+            "B) Place all development, test, and production workloads inside a single shared public subnet in the management account",
+            "C) Establish full-mesh inter-VPC peering connections between every individual VPC pair across all member accounts",
+            "D) Configure software VPN tunnels between EC2 instances in each VPC over the public internet with static route tables"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. AWS Transit Gateway acts as a central hub simplifying multi-VPC topologies and facilitating centralized traffic inspection between environments."
+    },
+    {
+        "id": 13,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A fintech company developing a microservices-based application on EC2 instances wants private, secure access to Amazon DynamoDB without traversing the public internet or using NAT gateways. What should they configure?",
+        "options": [
+            "A) Establish an AWS Site-to-Site VPN connection back to on-premises routers to proxy DynamoDB API requests over Direct Connect",
+            "B) Deploy an Internet Gateway and configure Network ACLs to allow outbound HTTPS port 443 traffic to public DynamoDB endpoints",
+            "C) Deploy an Interface VPC Endpoint (AWS PrivateLink) for DynamoDB and attach public Elastic IP addresses to compute instances",
+            "D) Create a Gateway VPC Endpoint for DynamoDB and associate it with the route tables of the private application subnets"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. A Gateway VPC Endpoint provides free, private, high-throughput access to Amazon DynamoDB and Amazon S3 directly from VPC route tables without NAT gateways."
+    },
+    {
+        "id": 14,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A global e-commerce platform utilizing Amazon CloudFront wants to ensure that static images and media stored in Amazon S3 can only be accessed through CloudFront and never directly via the public S3 bucket URL. What should they configure?",
+        "options": [
+            "A) Configure public read permissions on the S3 bucket and use CloudFront signed URLs for user authentication checks",
+            "B) Place the Amazon S3 bucket inside a private VPC subnet and attach a Gateway Load Balancer endpoint to the distribution",
+            "C) Enable Amazon S3 Static Website Hosting and configure cross-origin resource sharing (CORS) rules to allow all domains",
+            "D) Configure Origin Access Control (OAC) in CloudFront and update the S3 bucket policy to allow access only from the CloudFront distribution"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Origin Access Control (OAC) secures S3 origins by restricting S3 bucket access exclusively to authorized CloudFront distributions."
+    },
+    {
+        "id": 15,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A multinational corporation routing traffic for a global web application requires automated DDoS protection, edge TLS termination, and smart anycast IP routing to the closest healthy regional application endpoint. Which service should they choose?",
+        "options": [
+            "A) Amazon Route 53 with weighted DNS records pointing directly to backend EC2 instances across private subnets",
+            "B) AWS Global Accelerator providing two static anycast IP addresses that route traffic over the AWS global network",
+            "C) Elastic Load Balancing cross-zone load balancing deployed across separate standalone virtual private clouds",
+            "D) Amazon CloudFront configured exclusively with unencrypted HTTP origin request policies and standard caching"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. AWS Global Accelerator provides static anycast IP addresses and routes client traffic over the congested-free AWS global backbone to healthy application endpoints."
+    },
+    {
+        "id": 16,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A leading e-commerce company deploying a multi-tier application on EC2 instances in private subnets needs secure administrative terminal access without exposing instances to the public internet. What is the traditional bastion architecture?",
+        "options": [
+            "A) Avoid deploying bastion hosts and open SSH port 22 directly on all private application and database compute instances",
+            "B) Deploy the bastion host in a public subnet, restrict inbound SSH to authorized corporate IP ranges, and jump to private instances",
+            "C) Deploy the bastion host in a private subnet and allow direct inbound SSH access from 0.0.0.0/0 on the internet",
+            "D) Deploy multiple bastion hosts across public subnets with unrestricted SSH port 22 access enabled for all external clients"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. Bastion hosts reside in public subnets with tightly restricted source IP security groups, acting as jump servers to private instances."
+    },
+    {
+        "id": 17,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A healthcare company handling sensitive patient data on EC2 instances is considering AWS Systems Manager instead of traditional SSH/RDP. What is a key advantage of using Systems Manager?",
+        "options": [
+            "A) Systems Manager requires EC2 instances to have public IP addresses and open inbound firewall ports 22 and 3389",
+            "B) Systems Manager Session Manager provides secure shell access without opening inbound ports or managing SSH key pairs",
+            "C) Systems Manager replaces EC2 instances entirely with serverless container tasks running on AWS Fargate clusters",
+            "D) Systems Manager grants direct physical hardware console access to the underlying hypervisor in AWS facilities"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. Systems Manager Session Manager provides secure, auditable console and shell access via TLS without requiring open inbound security group ports or bastion hosts."
+    },
+    {
+        "id": 18,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A global e-commerce company implementing AWS IAM Roles Anywhere for external workloads using X.509 certificates issued by their certificate authority (CA) wants a secure integration. What approach should they consider?",
+        "options": [
+            "A) Hardcode long-term AWS IAM user access keys directly inside external on-premises configuration files",
+            "B) Register the corporate CA as a trust anchor in IAM Roles Anywhere to establish trust and vend temporary STS credentials",
+            "C) Issue self-signed X.509 certificates without registering an authoritative certificate authority inside AWS IAM",
+            "D) Create individual IAM users for each external workload and disable multi-factor authentication requirements"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. Registering an X.509 CA as a trust anchor in IAM Roles Anywhere allows external workloads to exchange certificate signatures for temporary AWS credentials."
+    },
+    {
+        "id": 19,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A global e-commerce company deploying EC2 instances across multiple AZs within a VPC recently suffered a DDoS attack and wants to re-evaluate routing to enhance security. What practice should they adopt?",
+        "options": [
+            "A) Assign public IP addresses to all backend database instances and allow all inbound internet traffic directly",
+            "B) Place backend EC2 instances in private subnets and route outbound internet traffic through managed NAT Gateways",
+            "C) Remove all route table associations from application subnets to isolate instances from VPC DNS resolvers",
+            "D) Deploy all EC2 instances inside a single public subnet with public IP addresses to simplify load balancer routing"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. Placing instances in private subnets and routing egress traffic through NAT gateways prevents direct public exposure and protects against inbound attacks."
+    },
+    {
+        "id": 20,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A gaming company deploying an online multiplayer game on EC2 instances requires high IOPS and low-latency storage for temporary data processing. What is accurate about EC2 instance store volumes?",
+        "options": [
+            "A) Instance store volumes automatically synchronize and persist all block changes into Amazon S3 Standard buckets",
+            "B) Instance store volumes provide high-performance ephemeral block storage, but data is lost if instances stop or terminate",
+            "C) Instance store volumes retain all committed data across instance stop and start operations indefinitely",
+            "D) Instance store volumes provide persistent multi-attach storage that can be shared concurrently across multiple instances"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. Instance store volumes are physically attached ephemeral disks providing ultra-high IOPS, but data is lost when instances stop, terminate, or experience hardware failure."
+    },
+    {
+        "id": 21,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A global retail company with a fleet of EC2 instances wants to use AWS Systems Manager Patch Manager to automate patching. What is accurate about Patch Manager?",
+        "options": [
+            "A) Patch Manager requires opening inbound TCP port 22 and port 3389 to the public internet across all managed instances",
+            "B) Patch Manager forces an immediate, unconfigurable reboot of all managed instances simultaneously upon patch release",
+            "C) Patch Manager allows defining custom patch baselines with auto-approval rules and maintenance windows across fleets",
+            "D) Systems Manager Patch Manager is restricted exclusively to Amazon Linux and cannot patch Windows or Debian instances"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. Patch Manager automates OS patching against customizable patch baselines and maintenance windows without requiring interactive logins or open inbound ports."
+    },
+    {
+        "id": 22,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A healthcare company processing sensitive patient data on EC2 instances wants an isolated environment. What is accurate about AWS Nitro Enclaves?",
+        "options": [
+            "A) Nitro Enclaves provide isolated, hardened compute environments with no persistent storage or external network access",
+            "B) Nitro Enclaves require public IPv4 addresses to communicate with parent EC2 instances over external networks",
+            "C) Nitro Enclaves disable all cryptographic encryption algorithms to accelerate CPU floating-point calculations",
+            "D) Nitro Enclaves share interactive user logins and persistent storage partitions directly with the host operating system"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. AWS Nitro Enclaves create isolated compute environments with no persistent storage, interactive access, or external networking, communicating only via local vsock channels."
+    },
+    {
+        "id": 23,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A startup company wants to streamline building, testing, and deploying AMIs for EC2 instances using EC2 Image Builder. What is accurate about EC2 Image Builder?",
+        "options": [
+            "A) EC2 Image Builder automates the creation, testing, hardening, and distribution of secure golden virtual machine images",
+            "B) EC2 Image Builder requires engineers to log in manually via SSH to validate installed software security packages",
+            "C) EC2 Image Builder is restricted exclusively to container images and cannot build Amazon Machine Images (AMIs)",
+            "D) EC2 Image Builder is primarily designed to compress and deduplicate static files stored inside Amazon S3 Glacier"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. EC2 Image Builder is a managed service that automates the building, testing, and deployment of hardened, compliant AMIs and container images."
+    },
+    {
+        "id": 24,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A startup developing a web app wants to deploy quickly using AWS Elastic Beanstalk while ensuring environment security and up-to-date runtime patching. What is a key security feature they leverage?",
+        "options": [
+            "A) Managed platform updates in Elastic Beanstalk automatically apply the latest operating system and runtime patches",
+            "B) Elastic Beanstalk automatically provisions dedicated physical hardware security modules inside customer subnets",
+            "C) Elastic Beanstalk disables all IAM instance profile permissions by default to prevent data extraction",
+            "D) Elastic Beanstalk enables direct, unauthenticated root SSH access across all backend application instances"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. Elastic Beanstalk managed platform updates automatically apply OS, web server, and runtime security patches with configurable maintenance windows."
+    },
+    {
+        "id": 25,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A fintech startup deploying a microservices application using Elastic Beanstalk wants to integrate AWS X-Ray for distributed tracing seamlessly and securely. What step should they take?",
+        "options": [
+            "A) Deploy standalone unmanaged EC2 instances in public subnets to proxy trace data over unencrypted HTTP",
+            "B) Modify application source code to completely remove all existing logging and telemetry frameworks",
+            "C) Store raw X-Ray traces in a publicly accessible Amazon S3 bucket without server-side encryption enabled",
+            "D) Enable the X-Ray daemon in the Elastic Beanstalk configuration and ensure the instance profile has X-Ray permissions"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Enabling X-Ray in Elastic Beanstalk environment configurations installs the X-Ray daemon, requiring the AWSXRayDaemonWriteAccess policy on the instance profile."
+    },
+    {
+        "id": 26,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A media streaming company deploying a video processing app using Amazon ECS processing large video files stored in S3 wants the app to scale based on queue length securely. What is the best approach?",
+        "options": [
+            "A) Deploy container tasks on unmanaged standalone EC2 instances and write cron scripts to scale worker threads",
+            "B) Deploy individual ECS standalone tasks manually via the AWS Management Console whenever queue volume increases",
+            "C) Deploy as a static ECS service with a fixed task count and hardcode permanent IAM access keys inside the image",
+            "D) Deploy as an ECS service with target tracking scaling on SQS queue depth, using IAM Roles for Tasks for S3 access"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Amazon ECS services integrated with target tracking scaling on SQS queue depth provide automated scaling, while IAM Roles for Tasks grant least-privilege S3 access."
+    },
+    {
+        "id": 27,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A media streaming company deploying an ECS video processing application wants to integrate an Application Load Balancer (ALB) to distribute traffic efficiently and ensure traffic between ALB and ECS tasks is encrypted. What approach should they take?",
+        "options": [
+            "A) Deploy the ECS service without a load balancer and rely on public IP addressing and client-side round-robin DNS",
+            "B) Deploy a legacy Classic Load Balancer in front of ECS tasks and disable SSL/TLS certificate verification checks",
+            "C) Deploy the ECS service behind an Application Load Balancer configured with an HTTPS listener and SSL/TLS certificates",
+            "D) Deploy a Network Load Balancer in TCP passthrough mode without configuring target group health check endpoints"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. An Application Load Balancer with an HTTPS listener using ACM certificates terminates client TLS securely and distributes requests to ECS container targets."
+    },
+    {
+        "id": 28,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A media streaming company migrating to AWS wants to focus on app development without managing underlying infrastructure, considering Amazon ECS with Fargate launch type. What does Fargate provide?",
+        "options": [
+            "A) A serverless compute engine for containers that eliminates the need to provision, patch, and manage EC2 instances",
+            "B) A container orchestrator that requires administrators to manually manage EC2 AMI patching and cluster scaling",
+            "C) A virtual machine management tool that grants direct root access to the underlying hypervisor operating system",
+            "D) An on-premises hardware appliance that deploys dedicated container runtime servers in corporate server rooms"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. AWS Fargate provides serverless container execution for ECS and EKS, eliminating the operational overhead of provisioning, configuring, and scaling EC2 instances."
+    },
+    {
+        "id": 29,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A global retail company deploying applications on Amazon Elastic Kubernetes Service (EKS) wants to integrate an OpenID Connect (OIDC) identity provider with IAM to assign IAM roles to Kubernetes service accounts. What is essential for success?",
+        "options": [
+            "A) Attach administrative IAM policies directly to the underlying EKS worker node instance profile roles",
+            "B) Manually generate long-term AWS IAM access keys and embed them as Kubernetes secrets in each pod namespace",
+            "C) Enable the IAM OIDC provider for the EKS cluster and annotate Kubernetes ServiceAccounts with the IAM Role ARN (IRSA)",
+            "D) Use AWS IAM Identity Center to map Active Directory groups directly to Kubernetes cluster role bindings"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. IAM Roles for Service Accounts (IRSA) uses the cluster's OIDC provider to vend temporary, scoped AWS credentials to specific Kubernetes pods."
+    },
+    {
+        "id": 30,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A healthcare organization deploying a critical application on Amazon EKS needs to create an Amazon EKS cluster IAM role for the control plane to make API calls on their behalf. What are essential permissions for this role?",
+        "options": [
+            "A) Permissions to manage Amazon RDS database schemas and write clinical patient records to Amazon DynamoDB tables",
+            "B) Permissions allowing the EKS control plane to manage AWS resources such as Elastic Load Balancers and ENIs for nodes",
+            "C) Permissions to manage user authentication and internal role-based access control inside the Kubernetes cluster",
+            "D) Permissions granting full root administrator access across all AWS accounts within the parent AWS Organization"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. The Amazon EKS Cluster IAM role allows the managed Kubernetes control plane to provision and configure AWS infrastructure resources (like load balancers and ENIs)."
+    },
+    {
+        "id": 31,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A healthcare company running containerized apps on Amazon EKS using Fargate wants pods to securely access other AWS services using the Pod Execution Role. What best describes the use of this role?",
+        "options": [
+            "A) Grants permissions to physical EC2 worker nodes to register and join the Kubernetes cluster control plane",
+            "B) A mandatory account-wide administrator role required to create EKS clusters via the AWS Management Console",
+            "C) Allows the Fargate infrastructure to pull private container images from ECR and forward container logs to CloudWatch",
+            "D) A role assumed by human developers to execute interactive kubectl commands against cluster worker nodes"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. The EKS Fargate Pod Execution Role allows the Fargate compute infrastructure to pull images from Amazon ECR and forward pod logs to Amazon CloudWatch Logs."
+    },
+    {
+        "id": 32,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A healthcare company deploying microservices on Amazon EKS considering EKS Managed Node Groups wants to ensure security alignment. What is a benefit of using EKS Managed Node Groups?",
+        "options": [
+            "A) Requires manual node patching and disables integration with EC2 Auto Scaling groups and launch templates",
+            "B) Completely eliminates the use of EC2 instances by running all pods exclusively on serverless AWS Fargate profiles",
+            "C) Automates the provisioning, updating, and OS security patching of Kubernetes worker nodes without cluster downtime",
+            "D) Uses unhardened open-source operating system images that bypass AWS shared responsibility security guidelines"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. EKS Managed Node Groups automate worker node lifecycle management, including graceful draining and updating of Amazon Linux and Bottlerocket AMIs."
+    },
+    {
+        "id": 33,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A multinational corporation evaluating Amazon EKS over self-managed Kubernetes on EC2 wants to understand the division of operational security responsibilities. What is AWS responsible for in Amazon EKS?",
+        "options": [
+            "A) Managing customer role-based access control (RBAC) user bindings inside individual Kubernetes namespaces",
+            "B) Provisioning, scaling, and managing the availability and security of the Kubernetes control plane nodes",
+            "C) Patching operating system dependencies and configuring firewall security groups on worker node instances",
+            "D) Managing container application code security and writing pod network security policy definitions"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. Under the AWS shared responsibility model for Amazon EKS, AWS manages the availability, scalability, and security of the Kubernetes control plane instances and etcd storage."
+    },
+    {
+        "id": 34,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A global financial institution deploying a mission-critical banking application on Amazon EKS requires strict pod-to-pod network segmentation and least-privilege traffic flow controls within the cluster. Which solution should they deploy?",
+        "options": [
+            "A) Deploy standalone AWS WAF Web ACLs in front of each internal Kubernetes ClusterIP service endpoint",
+            "B) Deploy all sensitive microservice pods inside dedicated public subnets and use Elastic IP security groups",
+            "C) Configure standard VPC Network Access Control Lists (NACLs) targeting individual container IP addresses",
+            "D) Install the Amazon VPC CNI plugin and implement Kubernetes NetworkPolicies to restrict ingress/egress pod traffic"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Kubernetes NetworkPolicies (supported via Amazon VPC CNI or Calico) allow fine-grained layer-3/4 packet filtering between pods inside the EKS cluster."
+    },
+    {
+        "id": 35,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "An e-commerce platform deploying microservices on Amazon EKS needs a centralized mechanism to manage incoming external HTTP/HTTPS traffic and route requests to backend Kubernetes services based on request path. What should they deploy?",
+        "options": [
+            "A) Classic Load Balancers configured with manual TCP port forwarding rules pointing to worker nodes",
+            "B) The AWS Load Balancer Controller to automatically provision Application Load Balancers from Kubernetes Ingress resources",
+            "C) Standalone Amazon Route 53 latency-based routing policies mapped directly to pod container IP addresses",
+            "D) AWS Gateway Load Balancers deployed in private subnets with GENEVE packet encapsulation tunneling"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. The AWS Load Balancer Controller provisions and configures Application Load Balancers (ALBs) dynamically based on Kubernetes Ingress definitions for path-based routing."
+    },
+    {
+        "id": 36,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A global financial institution deploying applications on Amazon EKS wants to securely manage TLS certificates and automate certificate renewal for internal service endpoints. Which approach aligns with best practices?",
+        "options": [
+            "A) Require end users to download and install corporate root certificates on personal devices before every web session",
+            "B) Generate self-signed certificates manually on worker nodes and disable TLS certificate validation checks in clients",
+            "C) Integrate AWS Certificate Manager (ACM) with the AWS Load Balancer Controller or use cert-manager with AWS Private CA",
+            "D) Hardcode private RSA encryption keys inside public GitHub source repositories and pull them during container build"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. Integrating ACM with the AWS Load Balancer Controller or using cert-manager with AWS Private CA provides automated issuance, deployment, and rotation of TLS certificates."
+    },
+    {
+        "id": 37,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A global finance company deploying a data-intensive application on Amazon EKS requires persistent block storage volumes with automatic volume encryption using customer-managed KMS keys. What configuration should they implement?",
+        "options": [
+            "A) Attach unencrypted instance store volumes to worker nodes and use software-level LUKS encryption scripts in user data",
+            "B) Deploy the Amazon EBS CSI driver and configure a Kubernetes StorageClass with `encrypted: true` and `kmsKeyId` specified",
+            "C) Manually provision EBS volumes in the AWS Management Console and execute shell scripts inside pods to mount disks",
+            "D) Deploy Amazon S3 Glacier vaults and mount them as local block devices using third-party FUSE filesystem drivers"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. The Amazon EBS Container Storage Interface (CSI) driver dynamically provisions EBS volumes defined in a StorageClass with KMS encryption enabled."
+    },
+    {
+        "id": 38,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A bioinformatics company running HPC workloads on Amazon EKS requiring a high-throughput, scalable file system for large-scale data processing integrated with FSx for Lustre should take what steps?",
+        "options": [
+            "A) Mount the FSx for Lustre file system directly onto individual EC2 worker nodes using custom operating system startup scripts",
+            "B) Install the AWS FSx for Lustre CSI driver in the EKS cluster and define dynamic PersistentVolumeClaims with the StorageClass",
+            "C) Attach an IAM policy granting full administrative access to Amazon FSx directly to the Kubernetes default service account",
+            "D) Configure public internet access on the Amazon FSx for Lustre file system and access files over unencrypted NFS protocols"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. The AWS FSx for Lustre CSI driver allows Kubernetes pods to dynamically mount high-throughput Lustre file systems via standard PersistentVolume claims."
+    },
+    {
+        "id": 39,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A healthcare software provider using Amazon ECR needs to maintain a detailed audit trail of all container image activities for compliance and quick troubleshooting. What should they implement?",
+        "options": [
+            "A) Configure Amazon SNS notifications to email developers whenever a Docker image push or pull request completes",
+            "B) Deploy custom monitoring agents on container worker nodes to capture local Docker daemon command execution histories",
+            "C) Enable AWS CloudTrail logging to record all ECR API calls (such as PutImage, GetDownloadUrlForLayer, and BatchGetImage)",
+            "D) Archive container stdout/stderr console logs in an Amazon S3 Standard bucket with S3 Object Lock compliance retention"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. AWS CloudTrail automatically records API activity for Amazon ECR, providing comprehensive audit trails of container repository operations for compliance and security forensics."
+    },
+    {
+        "id": 40,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "An e-commerce company that recently migrated backend services to AWS App Runner wants to integrate their App Runner service with an existing VPC ensuring traffic between VPC and App Runner remains private without traversing the public internet. What step should they take?",
+        "options": [
+            "A) Establish an AWS Direct Connect dedicated circuit with redundant private virtual interfaces to route traffic over fiber",
+            "B) Configure an App Runner VPC connector associated with private subnets and security groups to route egress traffic privately",
+            "C) Create a standard inter-VPC peering connection between the customer VPC and the underlying App Runner managed service VPC",
+            "D) Deploy an AWS Site-to-Site IPsec VPN connection between the target VPC subnets and the App Runner service endpoint"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. AWS App Runner VPC connectors enable App Runner compute instances to securely access databases and backend services in private VPC subnets without internet traversal."
+    },
+    {
+        "id": 41,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A pharmaceutical company leveraging AWS Batch to process large datasets for drug discovery with varying processing times wants to optimize costs while ensuring jobs process efficiently. Which strategy should they adopt for compute options?",
+        "options": [
+            "A) Configure compute environments to utilize Spot Instances exclusively for all batch jobs regardless of execution duration",
+            "B) Provision dedicated Amazon EC2 physical hosts for all computational workflows to ensure single-tenant resource isolation",
+            "C) Restrict all batch computing environments strictly to On-Demand compute instances to prevent any potential interruption",
+            "D) Create multiple compute environments: On-Demand for long-running critical jobs, and Spot for fault-tolerant, short-running jobs"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Using a tiered compute strategy with On-Demand instances for time-critical jobs and Spot Instances for resilient workloads minimizes cost while preventing deadline breaches."
+    },
+    {
+        "id": 42,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A pharmaceutical company using AWS Batch for complex simulations wants insights into the job execution lifecycle and troubleshooting issues. What approach helps achieve monitoring and logging objectives?",
+        "options": [
+            "A) Configure AWS Batch jobs to stream stdout/stderr logs directly to Amazon CloudWatch Logs and create metric alarms on errors",
+            "B) Schedule an AWS Lambda function to poll the AWS Batch DescribeJobs API endpoint every sixty seconds for job state changes",
+            "C) Increase the maximum job retry attempt counter in AWS Batch to ten retries without capturing application log streams",
+            "D) Write application logs to local EC2 instance storage and manually retrieve log files after batch compute environments terminate"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. AWS Batch integrates natively with Amazon CloudWatch Logs to capture container execution logs, enabling real-time alerting and troubleshooting via CloudWatch Alarms."
+    },
+    {
+        "id": 43,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A fintech startup building a serverless application using AWS Lambda handling sensitive financial transactions wants to adhere to security best practices. Which action aligns with customer responsibility in the shared responsibility model?",
+        "options": [
+            "A) Managing physical hardware server maintenance and environmental cooling across AWS Availability Zone data centers",
+            "B) Enforcing physical security access controls and biometric badge authentication for AWS data center facilities",
+            "C) Applying operating system security patches and firmware updates to the underlying virtualization hypervisor hosts",
+            "D) Implementing fine-grained IAM execution roles with least-privilege permissions and securing function code dependencies"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Under the AWS Shared Responsibility Model for serverless, AWS manages the runtime infrastructure, while the customer is responsible for IAM policies, code security, and data protection."
+    },
+    {
+        "id": 44,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A fintech company deploying MariaDB on Amazon RDS wants to use AWS IAM for database authentication to streamline user management and enhance security. What step should they take?",
+        "options": [
+            "A) Configure the Amazon RDS database instance security group to allow inbound unauthenticated MySQL connections on port 3306",
+            "B) Create a standard IAM role with administrative RDS permissions and attach it directly to the client database driver software",
+            "C) Enable IAM database authentication on the RDS instance and grant the `rds-db:connect` permission to database IAM principals",
+            "D) Generate permanent IAM access keys and configure them as static database user passwords in client connection strings"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. Enabling IAM DB Authentication generates temporary authentication tokens signed with SigV4, requiring the `rds-db:connect` IAM permission policy."
+    },
+    {
+        "id": 45,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A leading e-commerce company using Amazon RDS wants to implement automatic password rotation for RDS database instances without downtime. Which service should they use?",
+        "options": [
+            "A) AWS Secrets Manager with built-in automatic rotation using AWS Lambda to update credentials in both the database and secrets store",
+            "B) AWS Key Management Service (KMS) to generate symmetric data keys for client-side encryption of database connection strings",
+            "C) AWS Config to record database configuration history and alert administrators via email when passwords exceed thirty days",
+            "D) AWS Identity and Access Management (IAM) to manage account passwords and enforce complexity requirements across user groups"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. AWS Secrets Manager natively integrates with Amazon RDS to provide automated, zero-downtime credential rotation using managed Lambda rotation functions."
+    },
+    {
+        "id": 46,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A rapidly growing e-commerce company migrating to Amazon RDS expects high traffic during seasonal sales and needs a solution handling increased load while ensuring data security. Which DB instance type should they consider?",
+        "options": [
+            "A) Micro DB instance classes (such as db.t4g.micro) designed exclusively for low-cost sandbox testing and educational tutorials",
+            "B) Burstable performance DB instance classes configured with standard baseline credits and manual CPU throttling thresholds",
+            "C) General-purpose DB instance classes (such as db.m6g) with baseline CPU allocation intended for moderate development workloads",
+            "D) Memory-optimized DB instance classes (such as db.r6g) to support high-throughput database workloads caching large working sets in RAM"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Memory-optimized instance classes (R-family) provide large RAM allocations essential for high-throughput transactional database workloads."
+    },
+    {
+        "id": 47,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A rapidly growing e-commerce company using Amazon RDS wants to ensure optimal performance and availability by monitoring specific CloudWatch metrics. Which metric should they prioritize monitoring?",
+        "options": [
+            "A) VolumeQueueLength to evaluate the number of outstanding input/output storage requests waiting to access attached disk storage",
+            "B) FreeableMemory to monitor available RAM capacity and detect when database workloads are nearing memory exhaustion thresholds",
+            "C) NetworkPacketsOut to measure the total volume of network packets exiting the database network interface card per second",
+            "D) DatabaseConnections to count total active client sessions without monitoring underlying server memory or CPU utilization"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. FreeableMemory is a critical metric for database health; low freeable memory indicates memory pressure that can cause swapping, slow queries, and database restarts."
+    },
+    {
+        "id": 48,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A fintech startup using Amazon RDS experiencing performance issues during heavy reporting queries wants detailed wait-state analysis to identify slow queries. Which feature should they enable?",
+        "options": [
+            "A) AWS CloudTrail data events to log control-plane and data-plane API invocations across the database cluster volume",
+            "B) Amazon CloudWatch Logs metric filters to extract SQL statement strings from raw operating system database log files",
+            "C) Amazon RDS Enhanced Monitoring to display real-time CPU utilization metrics for individual operating system processes",
+            "D) Amazon RDS Performance Insights to visualize database load, monitor active wait states, and identify bottleneck SQL queries"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Performance Insights provides an interactive dashboard that breaks down database load by wait states, hosts, users, and specific SQL queries."
+    },
+    {
+        "id": 49,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A fintech company using Amazon RDS wants to receive real-time notifications when database events (such as failovers, parameter group changes, or backup completions) occur. Which feature should they configure?",
+        "options": [
+            "A) Deploy Amazon CloudWatch Logs Insights queries to parse database audit logs and send SMS messages via external gateways",
+            "B) Configure scheduled AWS Lambda functions to poll the Amazon RDS DescribeDBInstances API endpoint every two minutes",
+            "C) Create Amazon RDS Event Subscriptions integrated with Amazon SNS topics to publish automated notifications on critical events",
+            "D) Enable AWS Systems Manager OpsCenter to generate operational incident tickets for routine database maintenance tasks"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. Amazon RDS Event Subscriptions notify subscribers via Amazon SNS when specific event categories (such as failover, maintenance, or configuration changes) occur."
+    },
+    {
+        "id": 50,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A fintech startup storing sensitive financial data on Amazon RDS wants to ensure data is encrypted at rest to meet regulatory standards with minimal operational complexity. What is the best approach?",
+        "options": [
+            "A) Deploy third-party file system encryption software inside the underlying EC2 operating system hosting the RDS instance",
+            "B) Enable Amazon RDS encryption at rest using AWS KMS during instance creation to encrypt storage volumes, snapshots, and backups",
+            "C) Implement application-level client-side encryption using custom cryptographic libraries before writing data to database tables",
+            "D) Configure transparent database encryption (TDE) certificates manually on client workstations connecting over public endpoints"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. Amazon RDS provides built-in encryption at rest using AWS KMS, encrypting the underlying storage, automated backups, read replicas, and snapshots seamlessly."
+    },
+    {
+        "id": 51,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A fintech startup considering migrating to Amazon Aurora wants to know how Aurora provides high availability and fault-tolerant storage across Availability Zones. How is Aurora storage architected?",
+        "options": [
+            "A) Stores a single primary database copy in one zone and takes asynchronous daily snapshots to an Amazon S3 Glacier vault",
+            "B) Replicates six copies of data across three Availability Zones (2 copies per AZ) with automated self-healing storage volumes",
+            "C) Maintains two active read/write master database nodes located in different Availability Zones using shared block storage",
+            "D) Mirrors data across three Availability Zones using third-party software clustering and manual failover DNS routing"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. Amazon Aurora features a distributed, self-healing storage system that automatically replicates six copies of data across three Availability Zones."
+    },
+    {
+        "id": 52,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A healthcare company deploying a patient management system on Amazon Aurora needs to ensure that read traffic from analytical queries does not impact write performance on the primary DB instance. What should they configure?",
+        "options": [
+            "A) Provision Amazon Aurora Read Replicas and direct analytical reporting queries to the Aurora Reader endpoint",
+            "B) Increase the primary DB instance compute size to the largest available instance class and disable database indexing",
+            "C) Place an Application Load Balancer directly in front of the database to balance SQL write queries across replica nodes",
+            "D) Deploy a separate Amazon RDS for MySQL standalone instance and write manual cron scripts to export and import table data"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. Aurora Read Replicas share the same underlying cluster storage with minimal replication lag; routing read queries to the Reader endpoint isolates reporting load."
+    },
+    {
+        "id": 53,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A healthtech company deploying a system using Amazon Aurora wants the database to communicate securely and privately with other AWS services within their VPC without internet exposure. What should they set up?",
+        "options": [
+            "A) Establish an inter-region VPC peering connection to route database traffic through an external third-party inspection proxy",
+            "B) Deploy a public Elastic Load Balancer to proxy communication between private database instances and external cloud APIs",
+            "C) Attach an Internet Gateway to private subnets and assign public IPv4 addresses to the underlying Amazon Aurora cluster nodes",
+            "D) Provision VPC Interface Endpoints (AWS PrivateLink) to connect to AWS services privately without requiring public internet access"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. VPC Interface Endpoints powered by AWS PrivateLink enable private, secure connectivity between VPC resources and supported AWS services without an Internet Gateway."
+    },
+    {
+        "id": 54,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A healthcare company using Amazon Aurora wants to ensure confidentiality and integrity of patient data stored and transmitted. What steps should they take?",
+        "options": [
+            "A) Enable Amazon RDS Performance Insights and export database audit log files to unencrypted Amazon S3 Standard buckets",
+            "B) Activate Database Activity Streams without encryption to allow external monitoring systems to inspect transaction payloads",
+            "C) Enable CloudWatch Enhanced Monitoring and disable SSL/TLS certificate requirements in database connection strings",
+            "D) Enable Amazon Aurora encryption at rest with AWS KMS and enforce encrypted in-transit client connections using SSL/TLS"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Comprehensive Aurora security requires enabling AWS KMS encryption at rest and enforcing SSL/TLS encryption for all client-to-database network connections."
+    },
+    {
+        "id": 55,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A fintech company experiencing intermittent database connectivity issues due to sudden traffic spikes on Amazon RDS is considering solutions to improve application resilience and database scalability. How can they address this?",
+        "options": [
+            "A) Deploy multiple standalone RDS instances and require developers to manually balance database connections in code",
+            "B) Deploy an external Memcached cluster to intercept all SQL write transactions before forwarding them to the database",
+            "C) Increase the provisioned storage IOPS allocation on attached EBS volumes without modifying compute connection limits",
+            "D) Deploy Amazon RDS Proxy to pool and share database connections, improving scalability and reducing failover times"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Amazon RDS Proxy pools and shares database connections efficiently, preventing connection storms during traffic surges and reducing database failover time."
+    },
+    {
+        "id": 56,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A fintech company using Amazon RDS wants to enhance connection security and integrate a solution that securely stores and manages database credentials using Amazon RDS Proxy. How should they achieve this?",
+        "options": [
+            "A) Store database credentials in AWS Secrets Manager and grant Amazon RDS Proxy permissions to retrieve and manage them",
+            "B) Store plaintext database passwords inside an unencrypted Amazon S3 bucket accessible by application servers",
+            "C) Hardcode administrative database credentials inside the RDS Proxy parameter group configuration settings",
+            "D) Store credentials in plaintext inside application source code repositories and disable credential rotation policies"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. Amazon RDS Proxy integrates natively with AWS Secrets Manager to securely retrieve database credentials, eliminating hardcoded passwords in client applications."
+    },
+    {
+        "id": 57,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A company using Amazon RDS Proxy experiencing performance and compatibility issues wants detailed information about SQL statements for debugging purposes. Which feature should they enable?",
+        "options": [
+            "A) Enable cross-AZ communication on proxy endpoints and disable SSL/TLS certificate validation across all client sessions",
+            "B) Modify the private subnet Network ACL rules to deny outbound TCP traffic returning from the database instance",
+            "C) Enable enhanced logging for Amazon RDS Proxy to capture detailed SQL statement processing logs in CloudWatch Logs",
+            "D) Increase the maximum connection pool threshold in the target group configuration to allow unlimited client connections"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. Enhanced logging in Amazon RDS Proxy provides detailed transaction information and SQL statement execution logs in CloudWatch for troubleshooting."
+    },
+    {
+        "id": 58,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A financial analytics firm using Amazon Redshift wants to leverage AWS IAM for authenticating users to the Redshift cluster. Which statement is true regarding IAM authentication in Redshift?",
+        "options": [
+            "A) Users must log into the AWS Management Console and execute queries exclusively using the Redshift query editor",
+            "B) IAM authentication eliminates the concept of database users, tables, and internal database role permissions entirely",
+            "C) IAM authentication is only supported when connecting over public internet endpoints without VPC routing",
+            "D) Users can obtain temporary database credentials via IAM authentication (using `GetClusterCredentials`) to connect securely"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Amazon Redshift supports IAM authentication via the `GetClusterCredentials` API, generating temporary, scoped database credentials dynamically."
+    },
+    {
+        "id": 59,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A financial services company using Amazon Redshift wants to ensure cluster traffic does not traverse the public internet using Amazon VPC Interface Endpoints. What is accurate?",
+        "options": [
+            "A) VPC Interface Endpoints are used exclusively to compress query result payloads and cannot provide private network connectivity",
+            "B) Amazon Redshift exclusively supports Gateway VPC Endpoints and does not integrate with AWS PrivateLink interface endpoints",
+            "C) VPC Interface Endpoints (AWS PrivateLink) allow clients to connect to Amazon Redshift privately without assigning public IP addresses",
+            "D) Amazon Redshift clusters are automatically accessible via VPC Interface Endpoints without requiring any endpoint configuration"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. Interface VPC Endpoints powered by AWS PrivateLink enable private, secure connectivity to Amazon Redshift from within a VPC or on-premises networks."
+    },
+    {
+        "id": 60,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A financial institution using Amazon Redshift wants to monitor and retain logs of all activities and performance metrics using Amazon CloudWatch Logs. What step should they take?",
+        "options": [
+            "A) Use Redshift Spectrum to query external unencrypted log tables hosted on third-party on-premises file storage servers",
+            "B) Configure scheduled AWS Lambda functions to export query history logs manually to Amazon S3 buckets every twenty-four hours",
+            "C) Deploy custom logging daemons on leader nodes to scrape local text log files and forward them over unencrypted HTTP",
+            "D) Enable Amazon Redshift audit logging and configure export to Amazon CloudWatch Logs for connection, user, and user activity logs"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Amazon Redshift audit logging can export connection logs, user logs, and user activity logs directly to Amazon CloudWatch Logs for real-time analysis and compliance retention."
+    },
+    {
+        "id": 61,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A startup building a serverless application considering Amazon DynamoDB for minimal operational overhead wants to know how DynamoDB caters to this requirement. How does it work?",
+        "options": [
+            "A) Requires administrators to manage hypervisor patching, disk volume defragmentation, and database engine upgrades",
+            "B) Automatically manages hardware provisioning, replication, patching, and scales on-demand to handle varying traffic workloads",
+            "C) Requires developers to provision dedicated database server clusters and manually scale read/write capacity units",
+            "D) Enforces single-AZ deployments and requires manual snapshot exports to achieve cross-availability zone durability"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. Amazon DynamoDB is a fully managed serverless NoSQL database that automatically handles hardware provisioning, setup, configuration, replication, software patching, and scaling."
+    },
+    {
+        "id": 62,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A retail company using Amazon DynamoDB wants to ensure EC2 instances in a VPC can securely access DynamoDB without traversing the public internet. What solution should they implement?",
+        "options": [
+            "A) Deploy managed NAT Gateways in each public subnet and assign public Elastic IP addresses to backend compute instances",
+            "B) Create a Gateway VPC Endpoint for DynamoDB and associate it with the route tables of the private application subnets",
+            "C) Establish an inter-region VPC peering connection to route DynamoDB requests through an external transit hub VPC",
+            "D) Configure an AWS Site-to-Site VPN connection and route DynamoDB API requests through on-premises corporate firewalls"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. A Gateway VPC Endpoint allows instances in private subnets to access Amazon DynamoDB directly over the AWS private network without traversing the internet or incurring NAT charges."
+    },
+    {
+        "id": 63,
+        "section": "SECURITY",
+        "topic": "Security Architecture",
+        "subtopic": "Identity & Access Control",
+        "type": "single",
+        "question": "A gaming company using Amazon DynamoDB to store player profiles wants to monitor performance and health of tables to ensure optimal user experience. What is a recommended approach?",
+        "options": [
+            "A) Export entire DynamoDB table datasets nightly into Amazon S3 Standard buckets and run manual SQL integrity checks",
+            "B) Use Amazon CloudWatch Metrics to monitor consumed read/write capacity units, throttled requests, and system latency",
+            "C) Configure AWS X-Ray daemon agents on all client mobile gaming devices to trace local device memory usage in real time",
+            "D) Schedule an AWS Lambda function to execute continuous full table scan queries every thirty seconds to evaluate latency"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. Amazon CloudWatch provides native metrics for DynamoDB (such as ConsumedReadCapacityUnits, ThrottledRequests, and Latency) to monitor table health and performance."
+    },
+    {
+        "id": 64,
+        "section": "SECURITY",
+        "topic": "Network Security",
+        "subtopic": "WAF vs Shield vs Security Groups vs NACLs",
+        "type": "single",
+        "question": "A web application hosted behind an Application Load Balancer is experiencing Layer 7 SQL injection and cross-site scripting (XSS) attacks. Which AWS service should be deployed to inspect HTTP/HTTPS payloads and block these attacks?",
+        "options": [
+            "A) AWS Shield Advanced",
+            "B) VPC Network ACLs (NACLs)",
+            "C) AWS WAF (Web Application Firewall)",
+            "D) EC2 Security Groups"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. AWS WAF operates at Layer 7 (Application layer) to monitor HTTP and HTTPS requests forwarded to ALBs, API Gateways, or CloudFront distributions, allowing you to block SQL injection, XSS, rate-based bots, and bad user agents. Option B (Shield) targets DDoS attacks (Layer 3/4). Options C and D inspect packet headers (IP/port) at network layers 3/4, not HTTP payload contents."
+    },
+    {
+        "id": 65,
+        "section": "SECURITY",
+        "topic": "Network Security",
+        "subtopic": "WAF vs Shield vs Security Groups vs NACLs",
+        "type": "single",
+        "question": "A global enterprise application running on EC2 instances behind CloudFront requires 24/7 protection against large-scale Layer 3 and Layer 4 volumetric Distributed Denial of Service (DDoS) attacks, along with access to a dedicated AWS DDoS Response Team (DRT). Which service must be enabled?",
+        "options": [
+            "A) AWS Network Firewall",
+            "B) AWS Shield Advanced",
+            "C) AWS WAF Rate-Based Rules",
+            "D) AWS Shield Standard"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. AWS Shield Advanced provides enhanced protection against sophisticated Layer 3/4/7 DDoS attacks, financial protection against DDoS cost spikes, and 24/7 access to the AWS DDoS Response Team (DRT). Option B (Shield Standard) provides basic volumetric protection automatically but lacks 24/7 DRT support and financial protection."
+    },
+    {
+        "id": 66,
+        "section": "SECURITY",
+        "topic": "Network Security",
+        "subtopic": "WAF vs Shield vs Security Groups vs NACLs",
+        "type": "single",
+        "question": "An architect needs to block traffic coming from a specific list of 50 malicious public IP addresses at the subnet perimeter before packets reach any EC2 instances or load balancers. Which network security mechanism supports explicit DENY rules by IP address?",
+        "options": [
+            "A) VPC Flow Logs",
+            "B) AWS Gateway Endpoints",
+            "C) Security Groups",
+            "D) Network ACLs (NACLs)"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Network ACLs (NACLs) operate at the subnet boundary, are stateless, and explicitly support ALLOW and DENY rules by IP address/CIDR. Security Groups (Option B) are stateful at the ENI level and support ALLOW rules only (no explicit DENY rules)."
+    },
+    {
+        "id": 67,
+        "section": "SECURITY",
+        "topic": "Network Security",
+        "subtopic": "WAF vs Shield vs Security Groups vs NACLs",
+        "type": "single",
+        "question": "What is a key difference between Security Groups and Network ACLs (NACLs) regarding rule statefulness?",
+        "options": [
+            "A) Security Groups are stateful (inbound allowed traffic automatically allows outbound response traffic); NACLs are stateless (return traffic must be explicitly allowed in outbound rules)",
+            "B) Security Groups operate at the subnet level; NACLs operate at the ENI level",
+            "C) Security Groups support explicit DENY rules; NACLs only support ALLOW rules",
+            "D) Security Groups are stateless; NACLs are stateful"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. Security Groups are stateful (if inbound traffic is allowed, response traffic is automatically allowed regardless of outbound rules). NACLs are stateless (inbound and outbound rules are evaluated independently)."
+    },
+    {
+        "id": 68,
+        "section": "SECURITY",
+        "topic": "Network Security",
+        "subtopic": "WAF vs Shield vs Security Groups vs NACLs",
+        "type": "single",
+        "question": "An enterprise requires stateful packet inspection, intrusion prevention (IPS/IDS), and URL domain filtering across thousands of non-HTTP network protocols entering a Transit Gateway. Which service provides this granular network inspection?",
+        "options": [
+            "A) VPC Security Groups",
+            "B) Amazon Route 53 Resolver DNS Firewall",
+            "C) AWS Network Firewall",
+            "D) AWS WAF"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. AWS Network Firewall is a managed stateful network inspection service providing deep packet inspection, intrusion prevention (Suricata IPS rules), and domain name filtering across all VPC traffic."
+    },
+    {
+        "id": 69,
+        "section": "SECURITY",
+        "topic": "Network Security",
+        "subtopic": "WAF vs Shield vs Security Groups vs NACLs",
+        "type": "single",
+        "question": "To secure access between an Application Load Balancer in a public subnet and EC2 instances in a private subnet, how should the backend EC2 Security Group be configured?",
+        "options": [
+            "A) Allow inbound HTTP/HTTPS traffic ONLY from the Security Group ID assigned to the Application Load Balancer",
+            "B) Allow inbound HTTP/HTTPS traffic from 0.0.0.0/0",
+            "C) Allow inbound HTTP/HTTPS traffic from the public subnet CIDR block",
+            "D) Attach a Network ACL with an explicit DENY rule for port 80"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. Referencing the ALB's Security Group ID in the EC2 instance's Security Group inbound rule ensures that only traffic originating from the ALB ENI is allowed, fulfilling least privilege."
+    },
+    {
+        "id": 70,
+        "section": "SECURITY",
+        "topic": "Data Protection",
+        "subtopic": "KMS CMK vs AWS Managed Keys",
+        "type": "single",
+        "question": "A enterprise compliance team requires managing encryption keys where key rotation occurs annually, key access logs are audited in CloudTrail, and keys can be deleted immediately if compromised. Which AWS KMS key type is required?",
+        "options": [
+            "A) CloudHSM Public Key",
+            "B) Customer Managed KMS Key (CMK)",
+            "C) AWS Owned KMS Key",
+            "D) AWS Managed KMS Key"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. Customer Managed Keys (CMKs) give you full control over key policies, grant management, key rotation schedules, and manual deletion capabilities. AWS Managed Keys (Option B) are managed by AWS on your behalf and cannot be deleted or manually rotated."
+    },
+    {
+        "id": 71,
+        "section": "SECURITY",
+        "topic": "Data Protection",
+        "subtopic": "KMS CMK vs AWS Managed Keys",
+        "type": "single",
+        "question": "A company requires encrypting data stored in Amazon S3 using encryption keys that are managed under FIPS 140-2 Level 3 validated single-tenant dedicated hardware security modules (HSM). Which service must be used?",
+        "options": [
+            "A) Amazon Macie",
+            "B) AWS CloudHSM",
+            "C) AWS Secrets Manager",
+            "D) AWS KMS default multi-tenant key store"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. AWS CloudHSM provides dedicated, single-tenant Hardware Security Modules (HSMs) under FIPS 140-2 Level 3 compliance for direct cryptographic control."
+    },
+    {
+        "id": 72,
+        "section": "SECURITY",
+        "topic": "Data Protection",
+        "subtopic": "KMS CMK vs AWS Managed Keys",
+        "type": "single",
+        "question": "An application writes encrypted files to S3. To minimize AWS KMS API costs for uploading millions of small objects, which KMS feature generates data keys locally at the application layer?",
+        "options": [
+            "A) KMS Asymmetric Key Pairs",
+            "B) KMS Multi-Region Keys",
+            "C) KMS Data Key Caching (via AWS Encryption SDK)",
+            "D) S3 Bucket Key for SSE-KMS"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. KMS Data Key Caching reuses data keys across multiple encryption calls in the AWS Encryption SDK, significantly reducing API calls and costs to AWS KMS."
+    },
+    {
+        "id": 73,
+        "section": "SECURITY",
+        "topic": "Data Protection",
+        "subtopic": "KMS CMK vs AWS Managed Keys",
+        "type": "single",
+        "question": "To reduce AWS KMS request costs when using Server-Side Encryption with AWS KMS (SSE-KMS) for Amazon S3, what feature creates a bucket-level key to reduce KMS request calls by up to 99%?",
+        "options": [
+            "A) Amazon S3 Bucket Keys",
+            "B) KMS Import Key Material",
+            "C) AWS PrivateLink for KMS",
+            "D) S3 Object Lock"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. Amazon S3 Bucket Keys generate a short-lived bucket-level key in S3 to encrypt objects, reducing KMS request traffic and associated API costs by up to 99%."
+    },
+    {
+        "id": 74,
+        "section": "SECURITY",
+        "topic": "Data Protection",
+        "subtopic": "KMS CMK vs AWS Managed Keys",
+        "type": "single",
+        "question": "A multi-region active-active application requires encrypting data in us-east-1 and decrypting it in eu-west-1 using the same cryptographic key ID without re-encrypting object payloads. Which KMS feature enables this?",
+        "options": [
+            "A) AWS KMS Automatic Key Rotation",
+            "B) AWS Secrets Manager Replication",
+            "C) AWS CloudHSM Cross-Region Peering",
+            "D) AWS KMS Multi-Region Keys"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. AWS KMS Multi-Region Keys are primary and replica keys in different regions that share the same key ID and key material, allowing data encrypted in one region to be decrypted in another without cross-region KMS call hops."
+    },
+    {
+        "id": 75,
+        "section": "SECURITY",
+        "topic": "Secrets Management",
+        "subtopic": "Secrets Manager vs Parameter Store",
+        "type": "single",
+        "question": "An application requires storing database credentials that must be automatically rotated every 30 days without application downtime, natively integrating with Amazon RDS. Which service should be chosen?",
+        "options": [
+            "A) AWS Systems Manager Parameter Store (Standard Tier)",
+            "B) Amazon DynamoDB with KMS encryption",
+            "C) S3 Standard with Bucket Policies",
+            "D) AWS Secrets Manager"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. AWS Secrets Manager natively supports built-in automatic credential rotation (using AWS Lambda functions) for Amazon RDS, Aurora, DocumentDB, and Redshift without downtime. Parameter Store does not support automated built-in rotation out of the box."
+    },
+    {
+        "id": 76,
+        "section": "SECURITY",
+        "topic": "Secrets Management",
+        "subtopic": "Secrets Manager vs Parameter Store",
+        "type": "single",
+        "question": "A developer needs a simple, zero-cost configuration store for non-sensitive application environment variables (such as log levels and API timeouts) with parameter versioning. Which service is best suited?",
+        "options": [
+            "A) Amazon ElastiCache for Redis",
+            "B) AWS Secrets Manager",
+            "C) AWS KMS Key Policy Store",
+            "D) AWS Systems Manager Parameter Store (Standard Tier)"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. SSM Parameter Store Standard Tier is free of charge for storing parameters (up to 10,000 per account) and provides parameter hierarchy, versioning, and IAM access control."
+    },
+    {
+        "id": 77,
+        "section": "SECURITY",
+        "topic": "Secrets Management",
+        "subtopic": "Secrets Manager vs Parameter Store",
+        "type": "single",
+        "question": "An enterprise application needs to replicate database password secrets to a secondary AWS region for disaster recovery. Which service natively supports cross-region secret replication?",
+        "options": [
+            "A) AWS Systems Manager Parameter Store Standard",
+            "B) AWS Config Rules",
+            "C) AWS Control Tower",
+            "D) AWS Secrets Manager"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. AWS Secrets Manager allows replicating secrets automatically to secondary AWS regions, keeping primary and replica secret values in sync for multi-region applications."
+    },
+    {
+        "id": 78,
+        "section": "SECURITY",
+        "topic": "Secrets Management",
+        "subtopic": "Secrets Manager vs Parameter Store",
+        "type": "single",
+        "question": "What is a main difference between SSM Parameter Store Advanced Tier and Standard Tier?",
+        "options": [
+            "A) Standard Tier requires CloudHSM backing",
+            "B) Advanced Tier is restricted to EC2 root instances",
+            "C) Advanced Tier supports larger parameter sizes (up to 8 KB), parameter policies (expiration/notifications), and higher query limits for a monthly fee",
+            "D) Advanced Tier provides free automatic database password rotation"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. SSM Parameter Store Advanced Tier increases parameter size limit from 4 KB to 8 KB, supports parameter policies (like expiration enforcement and CloudWatch event notifications), and allows higher throughput for a small monthly charge per parameter."
+    },
+    {
+        "id": 79,
+        "section": "SECURITY",
+        "topic": "Governance & Security",
+        "subtopic": "SCPs vs IAM Policies",
+        "type": "single",
+        "question": "A security administrator needs to prevent member accounts in an AWS Organization from launching any EC2 instances outside of us-east-1 and eu-west-1. Even account root users in member accounts must not be able to bypass this restriction. What mechanism enforces this?",
+        "options": [
+            "A) Service Control Policies (SCPs) attached to Organization Root or OUs",
+            "B) AWS Config Remediation Rules",
+            "C) VPC Security Groups with outbound DENY rules",
+            "D) IAM Identity-based Policies attached to AdministratorAccess role"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. Service Control Policies (SCPs) define maximum available permissions for member accounts in an AWS Organization. SCPs override member account IAM policies and restrict actions even for member account root users."
+    },
+    {
+        "id": 80,
+        "section": "SECURITY",
+        "topic": "Governance & Security",
+        "subtopic": "SCPs vs IAM Policies",
+        "type": "single",
+        "question": "Which statement correctly describes what an AWS Organizations Service Control Policy (SCP) CANNOT do?",
+        "options": [
+            "A) SCPs cannot be applied to Organizational Units (OUs)",
+            "B) SCPs cannot deny actions in member accounts",
+            "C) SCPs cannot grant permissions by themselves; they only specify guardrails defining maximum allowed actions",
+            "D) SCPs cannot restrict the AWS account root user"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. SCPs act as guardrails that specify the MAXIMUM allowed permissions. An SCP alone does NOT grant any permission—an IAM policy within the account must still grant the permission explicitly."
+    },
+    {
+        "id": 81,
+        "section": "SECURITY",
+        "topic": "Governance & Security",
+        "subtopic": "SCPs vs IAM Policies",
+        "type": "single",
+        "question": "An enterprise wants to enforce that no S3 buckets within any account can be created without default encryption enabled. Which combination provides prevention and detective remediation?",
+        "options": [
+            "A) IAM Role Permissions Boundary combined with CloudWatch Alarms",
+            "B) VPC Flow Logs combined with GuardDuty",
+            "C) Security Groups combined with Inspector",
+            "D) Service Control Policy (SCP) to prevent unencrypted bucket creation combined with AWS Config Rules to audit compliance"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. SCPs provide preventive guardrails (blocking non-compliant API calls), while AWS Config Rules provide detective evaluation and automated remediation of resource configurations."
+    },
+    {
+        "id": 82,
+        "section": "SECURITY",
+        "topic": "Governance & Security",
+        "subtopic": "IAM Boundaries & Roles",
+        "type": "single",
+        "question": "A developer is allowed to create new IAM roles for AWS Lambda functions. How can a security team ensure the developer cannot elevate their own privileges by creating an IAM role with AdministratorAccess?",
+        "options": [
+            "A) Enable GuardDuty Malware Protection on IAM roles",
+            "B) Configure an S3 Bucket Policy on the developer account",
+            "C) Attach an IAM Permissions Boundary requirement to the developer's IAM policy for all iam:CreateRole calls",
+            "D) Deploy an AWS WAF rate-limiting rule on IAM endpoints"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. IAM Permissions Boundaries set the maximum permissions that an IAM entity (user or role) can have. Requiring developers to attach a specific Permissions Boundary when creating new roles prevents privilege escalation."
+    },
+    {
+        "id": 83,
+        "section": "SECURITY",
+        "topic": "Governance & Security",
+        "subtopic": "IAM Cross-Account Access",
+        "type": "single",
+        "question": "A third-party SaaS vendor needs access to analyze resources in your AWS account. What IAM security mechanism prevents the 'Confused Deputy' problem during cross-account access?",
+        "options": [
+            "A) Enable S3 Versioning on audit logs",
+            "B) Attach a Service Control Policy to the vendor account",
+            "C) Use long-lived IAM User access keys with MFA",
+            "D) Require an External ID condition in the IAM Role Trust Policy"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Requiring an External ID in the cross-account IAM Role Trust Policy ensures that third-party vendors can only assume roles intended specifically for your account, preventing confused deputy exploits."
+    },
+    {
+        "id": 84,
+        "section": "SECURITY",
+        "topic": "Network Security",
+        "subtopic": "VPC Endpoints & PrivateLink",
+        "type": "single",
+        "question": "An EC2 instance in a private subnet must securely access Amazon S3 without exposing traffic to the public internet or incurring NAT Gateway costs. Which VPC Endpoint type must be deployed?",
+        "options": [
+            "A) OpenVPN Access Server",
+            "B) Gateway VPC Endpoint for S3",
+            "C) Interface VPC Endpoint for S3",
+            "D) AWS Site-to-Site VPN Endpoint"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. Gateway VPC Endpoints are designed specifically for Amazon S3 and DynamoDB. They modify VPC route tables to route traffic directly over AWS internal network without internet gateways or NAT costs."
+    },
+    {
+        "id": 85,
+        "section": "SECURITY",
+        "topic": "Network Security",
+        "subtopic": "VPC Endpoints & PrivateLink",
+        "type": "single",
+        "question": "An application in VPC A needs to access a REST API hosted in VPC B (different account) privately. VPC peering is prohibited due to overlapping IP CIDR blocks. Which technology enables this private service access?",
+        "options": [
+            "A) AWS PrivateLink (Interface VPC Endpoint backed by NLB)",
+            "B) VPC Peering with NAT Translation",
+            "C) AWS Direct Connect Gateway",
+            "D) AWS Transit Gateway with BGP Routing"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. AWS PrivateLink allows exposing a service behind a Network Load Balancer (NLB) in one VPC to Interface VPC Endpoints in other VPCs across accounts, working seamlessly even with overlapping IP CIDR ranges."
+    },
+    {
+        "id": 86,
+        "section": "SECURITY",
+        "topic": "Network Security",
+        "subtopic": "VPC Endpoints & PrivateLink",
+        "type": "single",
+        "question": "How do Interface VPC Endpoints differ technically from Gateway VPC Endpoints?",
+        "options": [
+            "A) Interface Endpoints use Elastic Network Interfaces (ENIs) with private IP addresses in subnets; Gateway Endpoints use route table target entries",
+            "B) Gateway Endpoints use ENIs; Interface Endpoints use route tables",
+            "C) Interface Endpoints are free; Gateway Endpoints charge per GB",
+            "D) Gateway Endpoints support all AWS services; Interface Endpoints only support S3"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. Interface Endpoints create ENIs with private IPs inside your subnets (powered by PrivateLink). Gateway Endpoints (available for S3 and DynamoDB only) add target entries to VPC route tables."
+    },
+    {
+        "id": 87,
+        "section": "SECURITY",
+        "topic": "Network Security",
+        "subtopic": "VPC Endpoints & PrivateLink",
+        "type": "single",
+        "question": "A company wants to restrict access through a Gateway VPC Endpoint for S3 so that instances can ONLY access S3 buckets owned by their corporate AWS account. How can this be enforced?",
+        "options": [
+            "A) Configure an IAM User Policy on EC2 root accounts",
+            "B) Block egress traffic on Security Groups",
+            "C) Attach a VPC Endpoint Policy to the Gateway Endpoint specifying allowed bucket ARNs in the Resource clause",
+            "D) Enable S3 Block Public Access on the endpoint"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. VPC Endpoint Policies are IAM resource policies attached directly to VPC Endpoints to control which AWS resources (e.g. specific S3 bucket ARNs) can be accessed through the endpoint."
+    },
+    {
+        "id": 88,
+        "section": "SECURITY",
+        "topic": "Network Security",
+        "subtopic": "VPC Endpoints & PrivateLink",
+        "type": "single",
+        "question": "An on-premises application connected via Direct Connect needs to resolve and access an AWS service privately via an Interface VPC Endpoint. How is DNS resolution configured?",
+        "options": [
+            "A) Deploy an AWS Gateway Endpoint on Direct Connect",
+            "B) Edit on-premises /etc/hosts files to point to public S3 IP addresses",
+            "C) Create a public CNAME alias pointing to the ENI",
+            "D) Enable private DNS on the Interface Endpoint and resolve queries using Route 53 Resolver Inbound Endpoints from on-premises"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Enabling Private DNS on Interface Endpoints creates private Route 53 records. On-premises servers query Route 53 Resolver Inbound Endpoints over Direct Connect to resolve endpoint ENI private IPs."
+    },
+    {
+        "id": 89,
+        "section": "SECURITY",
+        "topic": "Threat Detection & Auditing",
+        "subtopic": "GuardDuty vs Macie vs Inspector vs Security Hub",
+        "type": "single",
+        "question": "A security team requires continuous threat detection that uses machine learning to analyze VPC Flow Logs, AWS CloudTrail management/data events, and DNS logs to detect compromised EC2 instances or unauthorized IAM activity. Which service should be enabled?",
+        "options": [
+            "A) Amazon Macie",
+            "B) Amazon Inspector",
+            "C) AWS Config",
+            "D) Amazon GuardDuty"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Amazon GuardDuty is an intelligent threat detection service that analyzes foundational data sources (CloudTrail, VPC Flow Logs, DNS logs, EKS audit logs, S3 data events) to identify unauthorized behavior and malicious activity."
+    },
+    {
+        "id": 90,
+        "section": "SECURITY",
+        "topic": "Threat Detection & Auditing",
+        "subtopic": "GuardDuty vs Macie vs Inspector vs Security Hub",
+        "type": "single",
+        "question": "An automated security scanner is needed to discover Personally Identifiable Information (PII) such as credit card numbers or passport data stored in Amazon S3 buckets. Which service fulfills this requirement?",
+        "options": [
+            "A) Amazon Macie",
+            "B) AWS Trusted Advisor",
+            "C) Amazon GuardDuty",
+            "D) Amazon Inspector"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. Amazon Macie uses machine learning and pattern matching to discover, classify, and protect sensitive data (such as PII, credit card numbers, and API keys) stored in Amazon S3."
+    },
+    {
+        "id": 91,
+        "section": "SECURITY",
+        "topic": "Threat Detection & Auditing",
+        "subtopic": "GuardDuty vs Macie vs Inspector vs Security Hub",
+        "type": "single",
+        "question": "A DevOps team wants to automatically scan EC2 instances and ECR container images for software vulnerabilities and CVE exposure. Which service provides automated vulnerability management?",
+        "options": [
+            "A) Amazon GuardDuty",
+            "B) AWS CloudTrail",
+            "C) Amazon Macie",
+            "D) Amazon Inspector"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Amazon Inspector automatically scans EC2 instances, ECR container images, and Lambda functions for software vulnerabilities, unpatched CVEs, and unintended network exposure."
+    },
+    {
+        "id": 92,
+        "section": "SECURITY",
+        "topic": "Threat Detection & Auditing",
+        "subtopic": "GuardDuty vs Macie vs Inspector vs Security Hub",
+        "type": "single",
+        "question": "An enterprise wants a single dashboard that aggregates security alerts and compliance statuses from GuardDuty, Inspector, Macie, IAM Access Analyzer, and AWS Config across all accounts. Which service acts as this central security posture hub?",
+        "options": [
+            "A) AWS Systems Manager OpsCenter",
+            "B) AWS Control Tower",
+            "C) Amazon CloudWatch Dashboards",
+            "D) AWS Security Hub"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. AWS Security Hub centralizes security findings from GuardDuty, Inspector, Macie, IAM Access Analyzer, and AWS Config, providing automated security compliance checks against standards like CIS and PCI DSS."
+    },
+    {
+        "id": 93,
+        "section": "SECURITY",
+        "topic": "Threat Detection & Auditing",
+        "subtopic": "AWS Config for Resource Compliance",
+        "type": "single",
+        "question": "A compliance policy requires tracking resource configuration changes over time and recording historical state audits for all VPC Security Groups. Which service records resource configuration history?",
+        "options": [
+            "A) VPC Flow Logs",
+            "B) Amazon EventBridge",
+            "C) AWS CloudTrail",
+            "D) AWS Config"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. AWS Config continuously monitors and records AWS resource configurations, evaluating them against desired rules and storing historical configuration timelines for auditing."
+    },
+    {
+        "id": 94,
+        "section": "SECURITY",
+        "topic": "Threat Detection & Auditing",
+        "subtopic": "CloudTrail Management vs Data Events",
+        "type": "single",
+        "question": "What is the difference between AWS CloudTrail Management Events and Data Events?",
+        "options": [
+            "A) Management events record control plane operations (e.g. CreateBucket, RunInstances); Data events record high-volume resource operations (e.g. S3 GetObject, Lambda Invoke)",
+            "B) Both event types are identical in pricing and logging scope",
+            "C) Management events log network IP packets; Data events log RAM usage",
+            "D) Data events are recorded by default for free; Management events require paid subscriptions"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. Management events (logged by default) record administrative operations on AWS resources (control plane). Data events (optional, additional cost) log high-volume data operations performed ON or WITHIN resources (e.g., S3 GetObject/PutObject, Lambda Invoke)."
+    },
+    {
+        "id": 95,
+        "section": "SECURITY",
+        "topic": "Authentication & Authorization",
+        "subtopic": "Cognito User Pools vs Identity Pools",
+        "type": "single",
+        "question": "A mobile application requires user sign-up, sign-in, MFA, and social identity provider authentication (Google, Facebook). After sign-in, users need temporary AWS credentials to access S3 buckets directly. Which Amazon Cognito components fulfill this?",
+        "options": [
+            "A) Cognito Identity Pools for user sign-in UI and IAM Access Keys",
+            "B) Cognito User Pools for both authentication and AWS IAM temporary credential issuance",
+            "C) AWS IAM Identity Center combined with VPC Lattice",
+            "D) Amazon Cognito User Pools for user authentication combined with Cognito Identity Pools (Federated Identities) for authorization and temporary AWS credentials"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Cognito User Pools handle user directory authentication (sign-up, sign-in, MFA, social federation). Cognito Identity Pools exchange the authentication tokens for temporary AWS IAM credentials to access AWS services directly."
+    },
+    {
+        "id": 96,
+        "section": "SECURITY",
+        "topic": "Authentication & Authorization",
+        "subtopic": "Cognito User Pools vs Identity Pools",
+        "type": "single",
+        "question": "What is the primary function of Amazon Cognito Identity Pools (Federated Identities)?",
+        "options": [
+            "A) To enforce WAF rules on mobile application APIs",
+            "B) To host web user login directories and send password reset emails",
+            "C) To obtain temporary, scoped AWS IAM credentials for authenticated or unauthenticated users to access AWS resources",
+            "D) To manage Active Directory domain controllers in the cloud"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. Cognito Identity Pools exchange identity provider tokens (from Cognito User Pools, Google, Apple, SAML, etc.) for temporary AWS IAM credentials."
+    },
+    {
+        "id": 97,
+        "section": "SECURITY",
+        "topic": "S3 Security & WORM Compliance",
+        "subtopic": "S3 Object Lock Modes",
+        "type": "single",
+        "question": "Under Amazon S3 Object Lock, how does Governance Mode differ from Compliance Mode?",
+        "options": [
+            "A) Governance Mode allows users with specific IAM permissions (s3:BypassGovernanceRetention) to overwrite/delete protected object versions; Compliance Mode prevents ALL users including root from modifying protected versions",
+            "B) Compliance Mode allows root users to delete objects; Governance Mode does not",
+            "C) Governance Mode applies to entire buckets; Compliance Mode applies to KMS keys only",
+            "D) Both modes provide identical override permissions"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. In Governance Mode, protected object versions cannot be overwritten or deleted unless a user explicitly has the `s3:BypassGovernanceRetention` permission. In Compliance Mode, NO user (including the AWS root account) can overwrite or delete protected objects during the retention period."
+    },
+    {
+        "id": 98,
+        "section": "SECURITY",
+        "topic": "S3 Security & Access Control",
+        "subtopic": "S3 Block Public Access",
+        "type": "single",
+        "question": "A security policy requires ensuring that no bucket in an AWS account can ever be made publicly accessible through ACLs or bucket policies, overriding any existing or future bucket configuration. Which feature enforces this at the account level?",
+        "options": [
+            "A) Amazon S3 Block Public Access (Account-level setting)",
+            "B) Amazon Macie Discovery Jobs",
+            "C) VPC Endpoint Policies",
+            "D) AWS WAF Rate-Based Rules"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. Amazon S3 Block Public Access provides account-level (and bucket-level) centralized controls to block public access granted through ACLs or bucket policies, overriding all bucket-level permissions."
+    },
+    {
+        "id": 99,
+        "section": "SECURITY",
+        "topic": "Authentication & Governance",
+        "subtopic": "AWS IAM Identity Center (SSO)",
+        "type": "single",
+        "question": "An enterprise wants to connect its on-premises Microsoft Active Directory to AWS so that employees can log in to multiple AWS accounts and SAML 2.0 cloud applications using their existing corporate credentials. Which service should be configured?",
+        "options": [
+            "A) AWS Directory Service Simple AD",
+            "B) AWS IAM Identity Center (successor to AWS Single Sign-On)",
+            "C) AWS IAM User Access Keys",
+            "D) Amazon Cognito User Pools"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. AWS IAM Identity Center simplifies managing multi-account access to AWS and SAML applications by integrating directly with existing identity providers such as Active Directory or Okta."
+    },
+    {
+        "id": 100,
+        "section": "SECURITY",
+        "topic": "Authentication & Access Control",
+        "subtopic": "IAM Policy Evaluation Logic",
+        "type": "single",
+        "question": "According to AWS IAM policy evaluation logic, what happens if a request is allowed by an Identity Policy, allowed by a Resource Policy, but explicitly DENIED by an attached Service Control Policy (SCP)?",
+        "options": [
+            "A) The request is ALLOWED because the root account overrides SCPs",
+            "B) The request is DENIED, because an explicit DENY in any policy always overrides any ALLOW statements",
+            "C) The request is ALLOWED because Identity and Resource policies take precedence over SCPs",
+            "D) The request triggers an automated AWS Support review"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. In AWS IAM policy evaluation logic, an EXPLICIT DENY in any policy (IAM policy, SCP, Resource policy, VPC Endpoint policy, Permissions Boundary) ALWAYS overrides any ALLOW statements."
+    }
+];
+
+    // Theme Management
+    let currentTheme = localStorage.getItem('quiz-theme') || 'light';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    updateThemeUI(currentTheme);
+
+    function toggleTheme() {
+        currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        localStorage.setItem('quiz-theme', currentTheme);
+        updateThemeUI(currentTheme);
+    }
+
+    function updateThemeUI(theme) {
+        const icon = document.getElementById('theme-icon');
+        const text = document.getElementById('theme-text');
+        if (icon && text) {
+            if (theme === 'dark') {
+                icon.textContent = '🌙';
+                text.textContent = 'Dark Mode';
+            } else {
+                icon.textContent = '☀️';
+                text.textContent = 'Light Mode';
+            }
+        }
+    }
+
+    let currentFilter = 'all';
+
+    function setFilter(filterType, btn) {
+        currentFilter = filterType;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        filterQuestions();
+    }
+
+    function filterQuestions() {
+        const query = document.getElementById('search-input').value.toLowerCase().trim();
+        const cards = document.querySelectorAll('.question-card');
+
+        cards.forEach(card => {
+            const qTitle = card.querySelector('.question-title') ? card.querySelector('.question-title').textContent : '';
+            const status = card.getAttribute('data-status') || 'unanswered';
+
+            let matchesFilter = false;
+            if (currentFilter === 'all') matchesFilter = true;
+            else if (currentFilter === 'unanswered' && status === 'unanswered') matchesFilter = true;
+            else if (currentFilter === 'correct' && status === 'correct') matchesFilter = true;
+            else if (currentFilter === 'incorrect' && status === 'incorrect') matchesFilter = true;
+
+            let matchesSearch = true;
+            if (query) {
+                if (query.startsWith('#')) {
+                    const num = query.substring(1).trim();
+                    matchesSearch = qTitle.startsWith(num + '.') || qTitle.includes(' ' + num + '.');
+                } else {
+                    matchesSearch = qTitle.toLowerCase().includes(query) || card.textContent.toLowerCase().includes(query);
+                }
+            }
+
+            if (matchesFilter && matchesSearch) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    function updateStats() {
+        const total = quizData.length;
+        const answeredCards = document.querySelectorAll('.question-card[data-status="correct"], .question-card[data-status="incorrect"]');
+        const correctCards = document.querySelectorAll('.question-card[data-status="correct"]');
+        const incorrectCards = document.querySelectorAll('.question-card[data-status="incorrect"]');
+
+        const answered = answeredCards.length;
+        const correct = correctCards.length;
+        const incorrect = incorrectCards.length;
+        const accuracy = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+
+        const statTotal = document.getElementById('stat-total');
+        const statAnswered = document.getElementById('stat-answered');
+        const statCorrect = document.getElementById('stat-correct');
+        const statIncorrect = document.getElementById('stat-incorrect');
+        const statAccuracy = document.getElementById('stat-accuracy');
+        const progressFill = document.getElementById('progress-fill');
+
+        if (statTotal) statTotal.textContent = total;
+        if (statAnswered) statAnswered.textContent = answered;
+        if (statCorrect) statCorrect.textContent = correct;
+        if (statIncorrect) statIncorrect.textContent = incorrect;
+        if (statAccuracy) statAccuracy.textContent = accuracy + '%';
+
+        if (progressFill) {
+            const pct = Math.round((answered / total) * 100);
+            progressFill.style.width = pct + '%';
+        }
+    }
+
+    function renderQuiz() {
+        const container = document.getElementById('quiz-container');
+        let html = '';
+
+        quizData.forEach((q, index) => {
+            const isMulti = q.type === 'multi' || (Array.isArray(q.correct) ? q.correct.length > 1 : (typeof q.correct === 'string' && q.correct.includes(',')));
+            const reqCount = Array.isArray(q.correct) ? q.correct.length : (typeof q.correct === 'string' && q.correct.includes(',') ? q.correct.split(',').length : (isMulti ? 2 : 1));
+            const inputType = isMulti ? 'checkbox' : 'radio';
+
+            let optionsHtml = '';
+            q.options.forEach((opt) => {
+                const optLetter = opt.charAt(0);
+                optionsHtml += '<li class="option-item">' +
+                    '<label class="option-label" onclick="selectOption(this)">' +
+                        '<input type="' + inputType + '" name="question-' + q.id + '" value="' + optLetter + '">' +
+                        '<span>' + opt + '</span>' +
+                    '</label>' +
+                '</li>';
+            });
+
+            html += '<div class="question-card" id="card-' + q.id + '" data-id="' + q.id + '" data-type="' + (isMulti ? 'multi' : 'single') + '" data-req="' + reqCount + '" data-status="unanswered">' +
+                '<div>' +
+                    '<span class="topic-pill">' + q.topic + (q.subtopic ? ' • ' + q.subtopic : '') + '</span>' +
+                    '<div class="question-header">' +
+                        '<div class="question-title">' +
+                            (index + 1) + '. ' + q.question +
+                            (isMulti ? '<span style="color: var(--accent-orange); font-weight: 700; margin-left: 8px;">(Select ' + reqCount + ' options)</span>' : '') +
+                        '</div>' +
+                        '<span class="status-badge correct">✓ Correct</span>' +
+                        '<span class="status-badge incorrect">✕ Incorrect</span>' +
+                    '</div>' +
+                '</div>' +
+                '<ul class="options-list">' +
+                    optionsHtml +
+                '</ul>' +
+                '<button class="submit-btn" onclick="checkAnswer(' + q.id + ')">Submit Answer</button>' +
+                '<div id="feedback-' + q.id + '" class="explanation"></div>' +
+                '<div class="card-watermark">' +
+                    '🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-30-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">AWS SAA-C03 Prep Tracker • github.com/borudeyash1</a>' +
+                '</div>' +
+            '</div>';
+        });
+
+        container.innerHTML = html;
+        updateStats();
+    }
+
+    function selectOption(labelElement) {
+        const card = labelElement.closest('.question-card');
+        if (!card) return;
+        const isMulti = card.getAttribute('data-type') === 'multi';
+        const reqCount = parseInt(card.getAttribute('data-req') || '1');
+
+        if (!isMulti) {
+            card.querySelectorAll('.option-label').forEach(l => l.classList.remove('selected-opt'));
+            labelElement.classList.add('selected-opt');
+        } else {
+            const chk = labelElement.querySelector('input[type="checkbox"]');
+            const checkedCount = card.querySelectorAll('input[type="checkbox"]:checked').length;
+            if (checkedCount > reqCount) {
+                if (chk) chk.checked = false;
+                labelElement.classList.remove('selected-opt');
+                alert('You can only select up to ' + reqCount + ' options for this question.');
+                return;
+            }
+            if (chk && chk.checked) {
+                labelElement.classList.add('selected-opt');
+            } else {
+                labelElement.classList.remove('selected-opt');
+            }
+        }
+    }
+
+    function checkAnswer(questionId) {
+        const q = quizData.find(item => item.id === questionId);
+        const card = document.getElementById('card-' + questionId);
+        if (!card || !q) return;
+
+        let correctVal = q.correct;
+        let correctArr = Array.isArray(correctVal) ? correctVal : (typeof correctVal === 'string' && correctVal.includes(',') ? correctVal.split(',').map(s => s.trim()) : [String(correctVal).trim()]);
+
+        const selectedInputs = card.querySelectorAll('input[name="question-' + questionId + '"]:checked');
+        if (selectedInputs.length === 0) {
+            alert("Please select an answer before submitting.");
+            return;
+        }
+
+        const selectedVals = Array.from(selectedInputs).map(i => i.value);
+        const isCorrect = (selectedVals.length === correctArr.length) && selectedVals.every(v => correctArr.includes(v));
+
+        const labels = card.querySelectorAll('.option-label');
+        labels.forEach(label => {
+            const input = label.querySelector('input');
+            if (correctArr.includes(input.value)) {
+                label.classList.add('correct-ans');
+            } else if (selectedVals.includes(input.value)) {
+                label.classList.add('incorrect-ans');
+            }
+            input.disabled = true;
+        });
+
+        const btn = card.querySelector('.submit-btn');
+        btn.disabled = true;
+
+        const badgeCorrect = card.querySelector('.status-badge.correct');
+        const badgeIncorrect = card.querySelector('.status-badge.incorrect');
+
+        if (isCorrect) {
+            card.setAttribute('data-status', 'correct');
+            card.classList.add('answered-correct');
+            card.classList.remove('answered-incorrect');
+            if (badgeCorrect) badgeCorrect.style.display = 'inline-block';
+            if (badgeIncorrect) badgeIncorrect.style.display = 'none';
+        } else {
+            card.setAttribute('data-status', 'incorrect');
+            card.classList.add('answered-incorrect');
+            card.classList.remove('answered-correct');
+            if (badgeIncorrect) badgeIncorrect.style.display = 'inline-block';
+            if (badgeCorrect) badgeCorrect.style.display = 'none';
+        }
+
+        const feedback = document.getElementById('feedback-' + questionId);
+        if (feedback) {
+            feedback.innerHTML = '<strong>' + (isCorrect ? '✓ Correct Answer!' : '✕ Incorrect.') + '</strong> ' + q.explanation;
+            feedback.style.display = 'block';
+        }
+
+        updateStats();
+    }
+
+    // Exam Mode Engine
+    let currentMode = 'practice';
+    let examData = [];
+    let currentExamIndex = 0;
+    let userAnswers = {};
+    let flaggedQuestions = new Set();
+    let examTimerInterval = null;
+    let examTimeRemaining = 0;
+    let lastExamResult = null;
+
+    function switchQuizMode(mode) {
+        if (mode === currentMode) return;
+
+        if (currentMode === 'exam' && mode === 'practice') {
+            if (!confirm('Exiting Exam Mode will end your timed session. Are you sure you want to return to Practice Mode?')) {
+                return;
+            }
+            stopExamTimer();
+        }
+
+        currentMode = mode;
+
+        document.getElementById('btn-mode-practice').classList.toggle('active', mode === 'practice');
+        document.getElementById('btn-mode-exam').classList.toggle('active', mode === 'exam');
+
+        const practiceBottom = document.getElementById('practice-header-bottom');
+        const practiceProgress = document.getElementById('practice-progress-bar');
+        const moduleBanner = document.getElementById('module-banner');
+
+        if (mode === 'practice') {
+            if (practiceBottom) practiceBottom.style.display = 'flex';
+            if (practiceProgress) practiceProgress.style.display = 'block';
+            if (moduleBanner) moduleBanner.style.display = 'flex';
+            renderQuiz();
+        } else {
+            if (practiceBottom) practiceBottom.style.display = 'none';
+            if (practiceProgress) practiceProgress.style.display = 'none';
+            if (moduleBanner) moduleBanner.style.display = 'none';
+            initExamMode();
+        }
+    }
+
+    function initExamMode() {
+        examData = JSON.parse(JSON.stringify(quizData));
+        currentExamIndex = 0;
+        userAnswers = {};
+        flaggedQuestions.clear();
+        lastExamResult = null;
+
+        examTimeRemaining = examData.length * 120; // 2 mins per question
+
+        renderExamLayout();
+        startExamTimer();
+    }
+
+    function startExamTimer() {
+        stopExamTimer();
+        updateTimerDisplay();
+        examTimerInterval = setInterval(() => {
+            examTimeRemaining--;
+            updateTimerDisplay();
+            if (examTimeRemaining <= 0) {
+                stopExamTimer();
+                alert('⏳ Time is up! Submitting your exam now.');
+                finishExamAndShowResults();
+            }
+        }, 1000);
+    }
+
+    function stopExamTimer() {
+        if (examTimerInterval) {
+            clearInterval(examTimerInterval);
+            examTimerInterval = null;
+        }
+    }
+
+    function updateTimerDisplay() {
+        const timerEl = document.getElementById('exam-timer');
+        if (!timerEl) return;
+        const hours = Math.floor(examTimeRemaining / 3600);
+        const mins = Math.floor((examTimeRemaining % 3600) / 60);
+        const secs = examTimeRemaining % 60;
+
+        const formatted = hours > 0 
+            ? hours + ':' + String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0')
+            : String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+
+        timerEl.textContent = '⏱️ ' + formatted;
+        if (examTimeRemaining < 300) {
+            timerEl.style.color = '#ef4444';
+        }
+    }
+
+    function renderExamLayout() {
+        const container = document.getElementById('quiz-container');
+        container.innerHTML = '<div class="exam-header-bar">' +
+            '<div>' +
+                '<strong style="color: var(--text-primary); font-size: 1.05rem;">AWS Solutions Architect Associate Exam Simulation</strong>' +
+                '<div style="font-size: 0.8rem; color: var(--text-secondary);">' + examData.length + ' Questions • Timed Real-Exam Mode</div>' +
+            '</div>' +
+            '<div class="exam-timer-display" id="exam-timer">⏱️ 00:00</div>' +
+            '<button class="btn-finish-exam" onclick="confirmFinishExam()">Submit Exam</button>' +
+        '</div>' +
+        '<div class="exam-grid-layout">' +
+            '<div id="exam-card-area"></div>' +
+            '<div id="exam-palette-area"></div>' +
+        '</div>';
+
+        renderExamCard();
+        renderQuestionPalette();
+    }
+
+    function renderExamCard() {
+        const cardArea = document.getElementById('exam-card-area');
+        if (!cardArea || !examData[currentExamIndex]) return;
+
+        const q = examData[currentExamIndex];
+        const isMulti = q.type === 'multi' || (Array.isArray(q.correct) ? q.correct.length > 1 : (typeof q.correct === 'string' && q.correct.includes(',')));
+        const reqCount = Array.isArray(q.correct) ? q.correct.length : (typeof q.correct === 'string' && q.correct.includes(',') ? q.correct.split(',').length : (isMulti ? 2 : 1));
+        const inputType = isMulti ? 'checkbox' : 'radio';
+
+        const currentAns = userAnswers[q.id] || [];
+        const isFlagged = flaggedQuestions.has(q.id);
+
+        let optionsHTML = '';
+        q.options.forEach(opt => {
+            const optLetter = opt.charAt(0);
+            const isChecked = currentAns.includes(optLetter);
+            optionsHTML += '<li class="option-item">' +
+                '<label class="option-label ' + (isChecked ? 'selected-opt' : '') + '" onclick="handleExamOptionClick(this, \'' + optLetter + '\', ' + isMulti + ', ' + reqCount + ')">' +
+                    '<input type="' + inputType + '" name="exam-q-' + q.id + '" value="' + optLetter + '" ' + (isChecked ? 'checked' : '') + '>' +
+                    '<span>' + opt + '</span>' +
+                '</label>' +
+            '</li>';
+        });
+
+        cardArea.innerHTML = '<div class="question-card" style="margin-top: 0;">' +
+            '<div>' +
+                '<span class="topic-pill">' + q.topic + (q.subtopic ? ' • ' + q.subtopic : '') + '</span>' +
+                '<div class="question-header">' +
+                    '<div class="question-title">' +
+                        'Question ' + (currentExamIndex + 1) + ' of ' + examData.length +
+                        '<div style="font-weight: 500; font-size: 0.95rem; margin-top: 8px;">' + q.question + '</div>' +
+                        (isMulti ? '<div style="color: var(--accent-orange); font-size: 0.85rem; font-weight: 700; margin-top: 4px;">(Select ' + reqCount + ' options)</div>' : '') +
+                    '</div>' +
+                '</div>' +
+            '</div>' +
+            '<ul class="options-list">' +
+                optionsHTML +
+            '</ul>' +
+            '<div class="exam-nav-bar">' +
+                '<button class="btn-nav" onclick="navExamQuestion(-1)" ' + (currentExamIndex === 0 ? 'disabled style="opacity: 0.4; cursor: not-allowed;"' : '') + '>' +
+                    '← Previous' +
+                '</button>' +
+                '<button class="btn-flag ' + (isFlagged ? 'flagged-active' : '') + '" onclick="toggleFlagQuestion(' + q.id + ')">' +
+                    (isFlagged ? '🚩 Flagged' : '🏳️ Flag for Review') +
+                '</button>' +
+                '<button class="btn-nav" onclick="navExamQuestion(1)" ' + (currentExamIndex === examData.length - 1 ? 'disabled style="opacity: 0.4; cursor: not-allowed;"' : '') + '>' +
+                    'Next →' +
+                '</button>' +
+            '</div>' +
+        '</div>';
+    }
+
+    function handleExamOptionClick(labelEl, optLetter, isMulti, reqCount) {
+        const q = examData[currentExamIndex];
+        if (!userAnswers[q.id]) userAnswers[q.id] = [];
+
+        if (!isMulti) {
+            userAnswers[q.id] = [optLetter];
+            document.querySelectorAll('.exam-grid-layout .option-label').forEach(l => l.classList.remove('selected-opt'));
+            labelEl.classList.add('selected-opt');
+            const radio = labelEl.querySelector('input[type="radio"]');
+            if (radio) radio.checked = true;
+        } else {
+            const chk = labelEl.querySelector('input[type="checkbox"]');
+            if (userAnswers[q.id].includes(optLetter)) {
+                userAnswers[q.id] = userAnswers[q.id].filter(l => l !== optLetter);
+                labelEl.classList.remove('selected-opt');
+                if (chk) chk.checked = false;
+            } else {
+                if (userAnswers[q.id].length >= reqCount) {
+                    alert('You can only select up to ' + reqCount + ' options.');
+                    if (chk) chk.checked = false;
+                    return;
+                }
+                userAnswers[q.id].push(optLetter);
+                labelEl.classList.add('selected-opt');
+                if (chk) chk.checked = true;
+            }
+        }
+        renderQuestionPalette();
+    }
+
+    function toggleFlagQuestion(qId) {
+        if (flaggedQuestions.has(qId)) {
+            flaggedQuestions.delete(qId);
+        } else {
+            flaggedQuestions.add(qId);
+        }
+        renderExamCard();
+        renderQuestionPalette();
+    }
+
+    function navExamQuestion(delta) {
+        const nextIdx = currentExamIndex + delta;
+        if (nextIdx >= 0 && nextIdx < examData.length) {
+            currentExamIndex = nextIdx;
+            renderExamCard();
+            renderQuestionPalette();
+        }
+    }
+
+    function jumpToExamQuestion(idx) {
+        if (idx >= 0 && idx < examData.length) {
+            currentExamIndex = idx;
+            renderExamCard();
+            renderQuestionPalette();
+        }
+    }
+
+    function renderQuestionPalette() {
+        const paletteContainer = document.getElementById('exam-palette-area');
+        if (!paletteContainer) return;
+
+        let answeredCount = 0;
+        let buttonsHTML = '';
+
+        examData.forEach((q, idx) => {
+            const isAnswered = userAnswers[q.id] && userAnswers[q.id].length > 0;
+            if (isAnswered) answeredCount++;
+            const isFlagged = flaggedQuestions.has(q.id);
+            const isActive = idx === currentExamIndex;
+
+            let classes = ['palette-btn'];
+            if (isActive) classes.push('active');
+            if (isAnswered) classes.push('answered');
+            if (isFlagged) classes.push('flagged');
+
+            buttonsHTML += '<button class="' + classes.join(' ') + '" onclick="jumpToExamQuestion(' + idx + ')">' +
+                (idx + 1) +
+            '</button>';
+        });
+
+        paletteContainer.innerHTML = '<div class="exam-palette-panel">' +
+            '<div class="palette-header">' +
+                '<span>Question Palette</span>' +
+                '<span style="font-size: 0.8rem; opacity: 0.8;">' + answeredCount + '/' + examData.length + ' Done</span>' +
+            '</div>' +
+            '<div class="palette-grid">' +
+                buttonsHTML +
+            '</div>' +
+            '<div class="palette-legend">' +
+                '<span><strong style="color: #60a5fa;">●</strong> Answered</span>' +
+                '<span><strong style="color: #fbbf24;">🚩</strong> Flagged</span>' +
+                '<span><strong>◯</strong> Unanswered</span>' +
+            '</div>' +
+        '</div>';
+    }
+
+    function confirmFinishExam() {
+        const unanswered = examData.length - Object.keys(userAnswers).filter(k => userAnswers[k] && userAnswers[k].length > 0).length;
+        let msg = 'Are you sure you want to finish and submit your exam?';
+        if (unanswered > 0) {
+            msg = '⚠️ You have ' + unanswered + ' unanswered question(s). Are you sure you want to finish and submit your exam now?';
+        }
+        if (confirm(msg)) {
+            finishExamAndShowResults();
+        }
+    }
+
+    function finishExamAndShowResults() {
+        stopExamTimer();
+
+        let correctCount = 0;
+        let incorrectQuestions = [];
+
+        examData.forEach((q, idx) => {
+            const userAns = userAnswers[q.id] || [];
+            let correctArray = Array.isArray(q.correct) ? q.correct : (typeof q.correct === 'string' && q.correct.includes(',') ? q.correct.split(',').map(s => s.trim()) : [String(q.correct)]);
+
+            const isCorrect = (userAns.length === correctArray.length) && userAns.every(val => correctArray.includes(val));
+
+            // Extract option text for rich results
+            const userAnsText = userAns.length > 0 
+                ? userAns.map(letter => {
+                    const opt = q.options.find(o => o.startsWith(letter));
+                    return opt || letter;
+                  }).join('<br>')
+                : 'None (Unanswered)';
+
+            const correctAnsText = correctArray.map(letter => {
+                const opt = q.options.find(o => o.startsWith(letter));
+                return opt || letter;
+            }).join('<br>');
+
+            if (isCorrect) {
+                correctCount++;
+            } else {
+                incorrectQuestions.push({
+                    number: idx + 1,
+                    id: q.id,
+                    question: q.question,
+                    options: q.options,
+                    userAnswer: userAns.length > 0 ? userAns.join(', ') : 'None (Unanswered)',
+                    userAnswerText: userAnsText,
+                    correctAnswer: correctArray.join(', '),
+                    correctAnswerText: correctAnsText,
+                    explanation: q.explanation || ''
+                });
+            }
+        });
+
+        const totalQs = examData.length;
+        const scorePct = Math.round((correctCount / totalQs) * 100);
+        const awsScaledScore = Math.round(100 + (scorePct / 100) * 900);
+        const isPass = awsScaledScore >= 720;
+
+        const timeSpentSecs = (examData.length * 120) - examTimeRemaining;
+        const spentMins = Math.floor(timeSpentSecs / 60);
+        const spentSecs = timeSpentSecs % 60;
+        const formattedTimeSpent = spentMins + 'm ' + spentSecs + 's';
+
+        const resultRecord = {
+            timestamp: new Date().toISOString(),
+            examTitle: 'AWS Solutions Architect Associate (SAA-C03) - Performance Quiz Master',
+            totalQuestions: totalQs,
+            correctCount: correctCount,
+            scorePercentage: scorePct,
+            awsScaledScore: awsScaledScore,
+            status: isPass ? 'PASS' : 'FAIL',
+            timeSpent: formattedTimeSpent,
+            incorrectQuestions: incorrectQuestions
+        };
+
+        lastExamResult = resultRecord;
+
+        try {
+            const existing = JSON.parse(localStorage.getItem('aws_saa_exam_history') || '[]');
+            existing.unshift(resultRecord);
+            localStorage.setItem('aws_saa_exam_history', JSON.stringify(existing));
+        } catch (e) {}
+
+        renderResultsDashboard(resultRecord);
+    }
+
+    function renderResultsDashboard(result) {
+        const container = document.getElementById('quiz-container');
+
+        let auditHTML = '';
+        if (result.incorrectQuestions.length === 0) {
+            auditHTML = '<div style="text-align: center; color: #10b981; font-weight: 700; padding: 20px;">🎉 Flawless Score! You answered every question correctly.</div>';
+        } else {
+            result.incorrectQuestions.forEach(item => {
+                auditHTML += '<div class="question-card" style="margin-bottom: 16px; border-left: 4px solid #ef4444;">' +
+                    '<div style="font-weight: 700; margin-bottom: 8px; color: var(--text-primary, #0f172a); font-size: 1rem;">' +
+                        '#' + item.number + '. ' + item.question +
+                    '</div>' +
+                    '<div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem; margin-bottom: 12px; background: var(--card-sub-bg); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">' +
+                        '<div style="color: #ef4444;">' +
+                            '❌ <strong>Your Answer:</strong><br>' + item.userAnswerText +
+                        '</div>' +
+                        '<div style="color: #10b981; border-top: 1px dashed var(--border-color); padding-top: 8px;">' +
+                            '✓ <strong>Correct Answer:</strong><br>' + item.correctAnswerText +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="explanation" style="display: block; margin-top: 8px;">' +
+                        '<strong>Explanation:</strong> ' + item.explanation +
+                    '</div>' +
+                '</div>';
+            });
+        }
+
+        container.innerHTML = '<div class="results-container">' +
+            '<div class="results-score-box ' + result.status.toLowerCase() + '">' +
+                '<div class="score-status-badge">' + (result.status === 'PASS' ? '🎉 CONGRATULATIONS - PASSED' : '⚠️ FAIL - NEEDS IMPROVEMENT') + '</div>' +
+                '<div class="score-big">' + result.awsScaledScore + ' / 1000</div>' +
+                '<div style="font-weight: 600; font-size: 1.1rem;">' +
+                    'Score: ' + result.correctCount + ' / ' + result.totalQuestions + ' (' + result.scorePercentage + '%) | Time Spent: ' + result.timeSpent +
+                '</div>' +
+                '<div style="font-size: 0.85rem; opacity: 0.8; margin-top: 4px;">(Passing Threshold: 720 / 1000)</div>' +
+            '</div>' +
+
+            '<div class="results-actions">' +
+                '<button class="btn-export-json" onclick="downloadExamResultsJSON()">' +
+                    '📥 Save Results JSON (exam_results.json)' +
+                '</button>' +
+                '<button class="btn-nav" onclick="initExamMode()">' +
+                    '🔄 Retake AWS Exam' +
+                '</button>' +
+                '<button class="btn-nav" onclick="switchQuizMode(\'practice\')">' +
+                    '📖 Return to Practice Mode' +
+                '</button>' +
+            '</div>' +
+
+            '<div style="margin-top: 32px;">' +
+                '<h3 style="color: var(--text-primary, #0f172a); margin-bottom: 16px;">🔍 Incorrect & Unanswered Questions Analysis (' + result.incorrectQuestions.length + ')</h3>' +
+                auditHTML +
+            '</div>' +
+        '</div>';
+    }
+
+    function downloadExamResultsJSON() {
+        if (!lastExamResult) return;
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(lastExamResult, null, 2));
+        const downloadAnchor = document.createElement('a');
+        downloadAnchor.setAttribute("href", dataStr);
+        downloadAnchor.setAttribute("download", "exam_results.json");
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        downloadAnchor.remove();
+        alert('Saved exam results to exam_results.json!');
+    }
+
+    // Initialize application on load
+    renderQuiz();
+
+    // ======================== PRACTICE MODE QUESTION NAVIGATOR ========================
+    var practiceNavOpen = false;
+    function togglePracticeNav() { practiceNavOpen ? closePracticeNav() : openPracticeNav(); }
+    function openPracticeNav() {
+        practiceNavOpen = true;
+        var panel = document.getElementById('practice-nav-panel');
+        if (panel) panel.classList.add('open');
+        refreshPracticeNav();
+    }
+    function closePracticeNav() {
+        practiceNavOpen = false;
+        var panel = document.getElementById('practice-nav-panel');
+        if (panel) panel.classList.remove('open');
+    }
+    function refreshPracticeNav() {
+        if (!practiceNavOpen) return;
+        var grid = document.getElementById('practice-nav-grid');
+        var statsEl = document.getElementById('practice-nav-stats');
+        if (!grid) return;
+        grid.innerHTML = '';
+        var data = typeof activeQuizData !== 'undefined' && activeQuizData ? activeQuizData : (typeof quizData !== 'undefined' ? quizData : []);
+        if (!data || data.length === 0) return;
+        var correctCount = 0, incorrectCount = 0;
+        data.forEach(function(q) {
+            var card = document.getElementById('card-' + q.id);
+            var status = card ? (card.getAttribute('data-status') || 'unanswered') : 'unanswered';
+            if (status === 'correct') correctCount++;
+            else if (status === 'incorrect') incorrectCount++;
+            var btn = document.createElement('button');
+            btn.className = 'nav-q-btn status-' + status;
+            btn.title = 'Q#' + q.id + ' — ' + (q.q || q.question || '').substring(0, 60) + '...';
+            btn.textContent = q.id;
+            btn.onclick = function() {
+                var target = document.getElementById('card-' + q.id);
+                if (target) {
+                    closePracticeNav();
+                    setTimeout(function() {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        target.style.outline = '2px solid #ff9900';
+                        target.style.outlineOffset = '4px';
+                        setTimeout(function() { target.style.outline = ''; target.style.outlineOffset = ''; }, 2000);
+                    }, 300);
+                }
+            };
+            grid.appendChild(btn);
+        });
+        var total = data.length;
+        var answered = correctCount + incorrectCount;
+        if (statsEl) statsEl.innerHTML = '<strong>' + answered + '/' + total + '</strong> answered &nbsp;|&nbsp; [OK] ' + correctCount + ' correct &nbsp;|&nbsp; ❌ ' + incorrectCount + ' incorrect';
+    }
+    document.addEventListener('click', function(e) {
+        var panel = document.getElementById('practice-nav-panel');
+        var btn = document.getElementById('practice-nav-btn');
+        if (practiceNavOpen && panel && btn && !panel.contains(e.target) && !btn.contains(e.target)) closePracticeNav();
+    });
+
+    // ======================== ORDER BUTTONS ========================
+    var currentOrder = 'first';
+    function setOrder(orderType, btn) {
+        currentOrder = orderType;
+        document.querySelectorAll('.order-btn').forEach(function(b) { b.classList.remove('active'); });
+        if (btn) btn.classList.add('active');
+        var data = typeof activeQuizData !== 'undefined' && activeQuizData ? activeQuizData : (typeof quizData !== 'undefined' ? quizData : null);
+        if (!data || data.length === 0) return;
+        var ordered = data.slice();
+        if (orderType === 'first') ordered.sort(function(a,b){ return (parseInt(a.id)||0)-(parseInt(b.id)||0); });
+        else if (orderType === 'last') ordered.sort(function(a,b){ return (parseInt(b.id)||0)-(parseInt(a.id)||0); });
+        else ordered.sort(function(){ return 0.5-Math.random(); });
+        if (typeof activeQuizData !== 'undefined') activeQuizData = ordered;
+        if (typeof renderQuizGroupedBySection === 'function') renderQuizGroupedBySection(ordered);
+        else if (typeof renderQuiz === 'function') renderQuiz(ordered);
+        if (typeof refreshPracticeNav === 'function') setTimeout(refreshPracticeNav, 200);
+    }
+
+    </script>
+</body>
+</html>

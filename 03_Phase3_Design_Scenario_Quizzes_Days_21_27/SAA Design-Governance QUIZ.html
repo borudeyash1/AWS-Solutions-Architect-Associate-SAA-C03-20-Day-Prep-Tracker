@@ -1,0 +1,2363 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Solutions Architect Associate (SAA-C03) - Multi-Account Governance & Security Master Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Light Theme */
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-sub-bg: #f1f5f9;
+            --card-hover-bg: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --border-color: #cbd5e1;
+            --accent-orange: #ff9900;
+            --accent-orange-hover: #e68a00;
+            --accent-orange-light: rgba(255, 153, 0, 0.12);
+            --accent-orange-glow: rgba(255, 153, 0, 0.25);
+            
+            --correct-bg: #d1fae5;
+            --correct-text: #065f46;
+            --correct-border: #34d399;
+            
+            --incorrect-bg: #ffe4e6;
+            --incorrect-text: #9f1239;
+            --incorrect-border: #fb7185;
+            
+            --sticky-bg: rgba(255, 255, 255, 0.92);
+            --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="dark"] {
+            /* Dark Theme */
+            --bg-color: #000000;
+            --card-bg: #09090b;
+            --card-sub-bg: #121215;
+            --card-hover-bg: #1c1c21;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --border-color: #27272a;
+            --accent-orange: #ff9900;
+            --accent-orange-hover: #ffaa22;
+            --accent-orange-light: rgba(255, 153, 0, 0.18);
+            --accent-orange-glow: rgba(255, 153, 0, 0.4);
+            
+            --correct-bg: rgba(16, 185, 129, 0.15);
+            --correct-text: #34d399;
+            --correct-border: rgba(52, 211, 153, 0.4);
+            
+            --incorrect-bg: rgba(244, 63, 94, 0.15);
+            --incorrect-text: #fb7185;
+            --incorrect-border: rgba(251, 113, 133, 0.4);
+            
+            --sticky-bg: rgba(0, 0, 0, 0.92);
+            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.8);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 60px;
+        }
+
+        /* Sticky Dashboard Header */
+        header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background: var(--sticky-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 12px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand img.logo-img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(255, 153, 0, 0.3));
+        }
+
+        .brand-text h1 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .brand-text p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mode-btn {
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 7px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .mode-btn.active {
+            background: var(--accent-orange);
+            color: #000;
+            border-color: var(--accent-orange);
+        }
+
+        .theme-toggle {
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 7px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+
+        .stat-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+        }
+
+        .stat-badge .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .dot.correct { background: #10b981; }
+        .dot.incorrect { background: #f43f5e; }
+        .dot.total { background: #60a5fa; }
+        .dot.accuracy { background: var(--accent-orange); }
+
+        .search-filter-box {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .search-input {
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            width: 180px;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 0 2px var(--accent-orange-light);
+        }
+
+        .filter-btn {
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .filter-btn.active {
+            background: var(--accent-orange-light);
+            color: var(--accent-orange);
+            border-color: var(--accent-orange);
+        }
+
+        .progress-line-container {
+            width: 100%;
+            height: 4px;
+            background: var(--card-sub-bg);
+            border-radius: 2px;
+            overflow: hidden;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .progress-line-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-orange), #10b981);
+            transition: width 0.3s ease;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            width: 92%;
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .module-banner {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .module-banner h2 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .module-banner p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Question Cards */
+        .question-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-shadow: var(--shadow-card);
+            position: relative;
+        }
+
+        .question-card.answered-correct {
+            border-left: 5px solid #10b981;
+        }
+
+        .question-card.answered-incorrect {
+            border-left: 5px solid #f43f5e;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .topic-pill {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: var(--accent-orange-light);
+            color: var(--accent-orange);
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 153, 0, 0.3);
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+
+        .question-title {
+            font-size: 1.02rem;
+            font-weight: 700;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .status-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            display: none;
+            flex-shrink: 0;
+        }
+
+        .status-badge.correct {
+            background: var(--correct-bg);
+            color: var(--correct-text);
+            border: 1px solid var(--correct-border);
+        }
+
+        .status-badge.incorrect {
+            background: var(--incorrect-bg);
+            color: var(--incorrect-text);
+            border: 1px solid var(--incorrect-border);
+        }
+
+        .options-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-item {
+            position: relative;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 16px;
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.92rem;
+            line-height: 1.45;
+            color: var(--text-primary);
+            user-select: none;
+        }
+
+        .option-label:hover {
+            background: var(--card-hover-bg);
+            border-color: var(--accent-orange);
+        }
+
+        .option-label input {
+            margin-top: 3px;
+            cursor: pointer;
+            accent-color: var(--accent-orange);
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        .option-label.selected-opt {
+            border-color: var(--accent-orange);
+            background: var(--accent-orange-light);
+        }
+
+        .option-label.correct-ans {
+            background: var(--correct-bg) !important;
+            border-color: var(--correct-border) !important;
+            color: var(--correct-text) !important;
+            font-weight: 600;
+        }
+
+        .option-label.incorrect-ans {
+            background: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-border) !important;
+            color: var(--incorrect-text) !important;
+        }
+
+        .submit-btn {
+            align-self: flex-start;
+            background: var(--accent-orange);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px var(--accent-orange-glow);
+        }
+
+        .submit-btn:hover {
+            background: var(--accent-orange-hover);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .explanation {
+            display: none;
+            background: var(--card-sub-bg);
+            border-left: 4px solid var(--accent-orange);
+            border-radius: 0 8px 8px 0;
+            padding: 14px 18px;
+            font-size: 0.88rem;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .explanation strong {
+            color: var(--accent-orange);
+        }
+
+        .card-watermark {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            opacity: 0.7;
+            padding-top: 8px;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        .card-watermark a {
+            color: var(--accent-orange);
+            text-decoration: none;
+        }
+
+        .card-watermark a:hover {
+            text-decoration: underline;
+        }
+
+        /* Exam Mode Specific Layout */
+        .exam-header-bar {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-card);
+        }
+
+        .exam-timer-display {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--accent-orange);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .exam-grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 20px;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .exam-grid-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .exam-palette-panel {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: var(--shadow-card);
+            position: sticky;
+            top: 120px;
+        }
+
+        .palette-header {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-primary);
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+            max-height: 380px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .palette-btn {
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 6px 0;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .palette-btn.active {
+            border-color: var(--accent-orange);
+            outline: 2px solid var(--accent-orange);
+        }
+
+        .palette-btn.answered {
+            background: #2563eb;
+            color: #ffffff;
+            border-color: #2563eb;
+        }
+
+        .palette-btn.flagged {
+            position: relative;
+        }
+
+        .palette-btn.flagged::after {
+            content: '🚩';
+            position: absolute;
+            top: -5px;
+            right: -3px;
+            font-size: 0.65rem;
+        }
+
+        .palette-legend {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 14px;
+            font-size: 0.72rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            padding-top: 10px;
+        }
+
+        .exam-nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+        }
+
+        .btn-nav {
+            background: var(--card-sub-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.88rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-nav:hover {
+            background: var(--card-hover-bg);
+            border-color: var(--accent-orange);
+        }
+
+        .btn-flag {
+            background: var(--card-sub-bg);
+            border: 1px solid #eab308;
+            color: #eab308;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.88rem;
+        }
+
+        .btn-flag.flagged-active {
+            background: #eab308;
+            color: #000;
+        }
+
+        .btn-finish-exam {
+            background: #10b981;
+            color: #ffffff;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
+
+        .btn-finish-exam:hover {
+            background: #059669;
+        }
+
+        /* Results Dashboard */
+        .results-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .results-score-box {
+            text-align: center;
+            padding: 24px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .results-score-box.pass {
+            background: rgba(16, 185, 129, 0.12);
+            border: 2px solid #10b981;
+            color: var(--text-primary);
+        }
+
+        .results-score-box.fail {
+            background: rgba(244, 63, 94, 0.12);
+            border: 2px solid #f43f5e;
+            color: var(--text-primary);
+        }
+
+        .score-big {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--accent-orange);
+        }
+
+        .score-status-badge {
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-export-json {
+            background: #3b82f6;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+        }
+
+        .btn-export-json:hover {
+            background: #2563eb;
+        }
+    
+    /* ======================== QUESTION NAVIGATOR PANEL ======================== */
+    #practice-nav-btn {
+        position: fixed;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 9000;
+        background: linear-gradient(135deg, #ff9900, #e07b00);
+        color: #fff;
+        border: none;
+        border-radius: 10px 0 0 10px;
+        padding: 12px 10px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        cursor: pointer;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        letter-spacing: 1.5px;
+        box-shadow: -3px 0 18px rgba(255,153,0,0.45);
+        transition: background 0.2s, box-shadow 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    #practice-nav-btn:hover { background: linear-gradient(135deg, #ffaa22, #ff9900); box-shadow: -4px 0 24px rgba(255,153,0,0.6); }
+    #practice-nav-panel {
+        position: fixed;
+        right: -340px;
+        top: 0;
+        height: 100vh;
+        width: 320px;
+        background: var(--card-bg, #111827);
+        border-left: 2px solid #ff9900;
+        box-shadow: -6px 0 40px rgba(0,0,0,0.5);
+        z-index: 8999;
+        display: flex;
+        flex-direction: column;
+        transition: right 0.32s cubic-bezier(0.4,0,0.2,1);
+        overflow: hidden;
+    }
+    #practice-nav-panel.open { right: 0; }
+    #practice-nav-panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 18px;
+        background: linear-gradient(135deg, rgba(255,153,0,0.15), rgba(255,153,0,0.05));
+        border-bottom: 1px solid var(--border-color, #e2e8f0);
+    }
+    #practice-nav-panel-header h3 { margin: 0; font-size: 1rem; font-weight: 700; color: #ff9900; }
+    #practice-nav-close { background: none; border: none; color: var(--text-secondary, #6b7280); font-size: 1.4rem; cursor: pointer; line-height: 1; padding: 2px 6px; border-radius: 4px; transition: color 0.2s; }
+    #practice-nav-close:hover { color: var(--text-primary, #111); }
+    #practice-nav-legend { display: flex; gap: 12px; padding: 10px 18px 8px; border-bottom: 1px solid var(--border-color, #e2e8f0); flex-wrap: wrap; }
+    .nav-legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.75rem; color: var(--text-secondary, #6b7280); }
+    .nav-legend-dot { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+    .nav-legend-dot.unanswered { background: var(--card-sub-bg, #f1f5f9); border: 1px solid var(--border-color, #cbd5e1); }
+    .nav-legend-dot.correct { background: rgba(16,185,129,0.25); border: 1px solid #10b981; }
+    .nav-legend-dot.incorrect { background: rgba(239,68,68,0.25); border: 1px solid #ef4444; }
+    #practice-nav-stats { padding: 8px 18px; font-size: 0.8rem; color: var(--text-secondary, #6b7280); border-bottom: 1px solid var(--border-color, #e2e8f0); }
+    #practice-nav-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; padding: 14px; overflow-y: auto; flex: 1; }
+    .nav-q-btn { aspect-ratio: 1; border-radius: 5px; border: 1px solid var(--border-color, #cbd5e1); background: var(--card-sub-bg, #f1f5f9); color: var(--text-secondary, #6b7280); font-size: 0.68rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+    .nav-q-btn:hover { background: rgba(255,153,0,0.15); border-color: #ff9900; color: #ff9900; transform: scale(1.08); }
+    .nav-q-btn.status-correct { background: rgba(16,185,129,0.18); border-color: #10b981; color: #10b981; }
+    .nav-q-btn.status-incorrect { background: rgba(239,68,68,0.18); border-color: #ef4444; color: #ef4444; }
+    /* Order buttons */
+    .order-btn-group { display: inline-flex; gap: 5px; margin-left: 10px; padding-left: 10px; border-left: 1px solid var(--border-color, #cbd5e1); }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-top">
+        <div class="brand">
+            <img src="saa-badge.png" alt="AWS Certified Solutions Architect Associate" class="logo-img">
+            <div class="brand-text">
+                <h1>AWS Solutions Architect Associate (SAA-C03) - Performance Quiz Master</h1>
+                <p>Designing for Performance Efficiency • 50 High-Yield Questions</p>
+            </div>
+        </div>
+        <div class="header-controls">
+            <button class="mode-btn active" id="btn-mode-practice" onclick="switchQuizMode('practice')">
+                📖 Practice Mode
+            </button>
+            <button class="mode-btn" id="btn-mode-exam" onclick="switchQuizMode('exam')">
+                ⏱️ AWS Exam Mode
+            </button>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <span id="theme-icon">☀️</span>
+                <span id="theme-text">Light Mode</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="header-bottom" id="practice-header-bottom">
+        <div class="stats-bar">
+            <div class="stat-badge"><span class="dot total"></span> Total: <span id="stat-total">50</span></div>
+            <div class="stat-badge"><span class="dot total"></span> Answered: <span id="stat-answered">0</span></div>
+            <div class="stat-badge"><span class="dot correct"></span> Correct: <span id="stat-correct">0</span></div>
+            <div class="stat-badge"><span class="dot incorrect"></span> Incorrect: <span id="stat-incorrect">0</span></div>
+            <div class="stat-badge"><span class="dot accuracy"></span> Accuracy: <span id="stat-accuracy">0%</span></div>
+        </div>
+        <div class="search-filter-box">
+            <input type="text" id="search-input" class="search-input" placeholder="Search #Q or keywords..." oninput="filterQuestions()">
+            <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
+            <button class="filter-btn" onclick="setFilter('unanswered', this)">Unanswered</button>
+            <button class="filter-btn" onclick="setFilter('correct', this)">Correct</button>
+            <button class="filter-btn" onclick="setFilter('incorrect', this)">Incorrect</button>
+        </div>
+    </div>
+
+    <div class="progress-line-container" id="practice-progress-bar">
+        <div class="progress-line-fill" id="progress-fill"></div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="module-banner" id="module-banner">
+        <h2>🚀 Performance Efficiency Domain Modules</h2>
+        <p>Master AWS performance optimization: Compute Right-Sizing, Auto Scaling, Elastic Load Balancing, CloudFront & Lambda@Edge Caching, Aurora Distributed Storage, ElastiCache, High-Performance Storage (EBS, EFS, FSx for Lustre), and Infrastructure as Code pipelines.</p>
+    </div>
+
+    <div id="quiz-container"></div>
+</div>
+
+<script>
+    const quizData = [
+    {
+        "id": 1,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "AWS Organizations",
+        "subtopic": "Organizational Hierarchy & Governance",
+        "type": "single",
+        "question": "An enterprise manages 100 AWS accounts. Security policies require applying strict baseline security guardrails across all Production accounts, while allowing experimental freedom in Sandbox accounts. What AWS Organizations feature enables grouping accounts for policy application?",
+        "options": [
+            "A) IAM Role Groups",
+            "B) AWS Systems Manager Resource Groups",
+            "C) Amazon Route 53 Traffic Policy Groups",
+            "D) Organizational Units (OUs)"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Organizational Units (OUs) provide a administrative structure inside AWS Organizations to group member accounts and attach Service Control Policies (SCPs) or backup policies hierarchically."
+    },
+    {
+        "id": 2,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "AWS Organizations",
+        "subtopic": "Organizational Hierarchy & Governance",
+        "type": "single",
+        "question": "What is a security best practice regarding operational workloads inside an AWS Organization Management (Payer) Account?",
+        "options": [
+            "A) Keep the Management Account restricted purely to administrative, governance, and billing tasks; do NOT host application workloads in it",
+            "B) Run all production databases in the Management Account to maximize IOPS",
+            "C) Delete the Management Account after member accounts are provisioned",
+            "D) Deploy public web servers in the Management Account for administrative visibility"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. AWS security best practices strictly dictate keeping the Management Account clean of operational application workloads, restricting access exclusively to administrative management, organization governance, and consolidated billing."
+    },
+    {
+        "id": 3,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "AWS Organizations",
+        "subtopic": "Organizational Hierarchy & Governance",
+        "type": "single",
+        "question": "An enterprise wants to delegate administrative management of security monitoring services (such as GuardDuty and Security Hub) to a dedicated Security team account without granting full root access to the Organization Management Account. Which feature enables this?",
+        "options": [
+            "A) Delegated Administrator designation",
+            "B) Service Control Policy (SCP) Allow All",
+            "C) Consolidated Billing override",
+            "D) IAM Access Key rotation"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. Delegated Administrator allows designating specific member accounts (e.g. a dedicated Security Account) to manage organization-wide services like GuardDuty, Security Hub, Inspector, and AWS Config without logging into the primary Management Account."
+    },
+    {
+        "id": 4,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "AWS Organizations",
+        "subtopic": "Organizational Hierarchy & Governance",
+        "type": "single",
+        "question": "When a Service Control Policy (SCP) is attached to the Root of an AWS Organization, which accounts are affected by the policy restrictions?",
+        "options": [
+            "A) External partner AWS accounts connected via VPC Peering",
+            "B) Only the Management Account",
+            "C) All member accounts in the organization (including accounts inside OUs), EXCEPT the Organization Management Account",
+            "D) All accounts including the Management Account"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. SCPs attached to the Root apply to all member accounts in the organization hierarchy below root. Crucially, SCPs NEVER apply to the Organization Management Account."
+    },
+    {
+        "id": 5,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "AWS Organizations",
+        "subtopic": "Organizational Hierarchy & Governance",
+        "type": "single",
+        "question": "How does policy inheritance work when an SCP is attached to an Organizational Unit (OU) that contains child OUs?",
+        "options": [
+            "A) SCPs must be individually re-attached to every child account manually",
+            "B) SCPs apply only to the immediate parent OU and do not inherit downwards",
+            "C) Child OUs override parent SCPs automatically unless explicitly blocked",
+            "D) SCPs inherit down the organization tree; child OUs and member accounts automatically inherit all SCP restrictions applied to parent OUs"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. SCPs follow hierarchical inheritance. Any SCP attached to a parent node (Root or parent OU) flows down and applies automatically to all child OUs and member accounts underneath it."
+    },
+    {
+        "id": 6,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Service Control Policies",
+        "subtopic": "SCP Design Strategies",
+        "type": "single",
+        "question": "An enterprise wants to enforce a strict Allow List strategy using SCPs, where member accounts can ONLY run specific approved AWS services (EC2, S3, RDS). How should the SCP strategy be configured?",
+        "options": [
+            "A) Attach IAM Permissions Boundaries to member account root users",
+            "B) Remove the default FullAWSAccess SCP and replace it with custom SCPs that explicitly list only allowed service actions",
+            "C) Keep the default FullAWSAccess SCP and add explicit DENY rules for unapproved services",
+            "D) Disable AWS Organizations All Features mode"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. An Allow List SCP strategy involves removing the default FullAWSAccess policy (which permits everything) and explicitly attaching SCPs that specify allowed actions only."
+    },
+    {
+        "id": 7,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Service Control Policies",
+        "subtopic": "SCP Design Strategies",
+        "type": "single",
+        "question": "An enterprise prefers a Deny List SCP strategy, where member accounts have full access to AWS by default except for specific high-risk actions. Which policy configuration represents a Deny List strategy?",
+        "options": [
+            "A) Remove FullAWSAccess SCP from all accounts",
+            "B) Retain the default FullAWSAccess SCP and attach explicit DENY SCPs (e.g. denying s3:DeleteBucket or leave organization)",
+            "C) Use IAM Identity Center permission sets with Deny statements",
+            "D) Delete all IAM users in member accounts"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. A Deny List SCP strategy retains the default FullAWSAccess policy (allowing access) and layers explicit DENY SCP rules over it to block specific forbidden operations."
+    },
+    {
+        "id": 8,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Service Control Policies",
+        "subtopic": "SCP Design Strategies",
+        "type": "single",
+        "question": "A security policy requires preventing member account administrators from leaving the AWS Organization or disabling AWS CloudTrail logging. Which mechanism enforces this permanently?",
+        "options": [
+            "A) S3 Bucket Policy on CloudTrail bucket",
+            "B) IAM policy on member account administrators",
+            "C) VPC Security Group rule",
+            "D) An SCP with explicit DENY for organizations:LeaveOrganization and cloudtrail:StopLogging / cloudtrail:DeleteTrail"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. SCPs with explicit DENY statements prevent member account administrators (and root users) from removing accounts from the organization or tampering with organization-level audit trails."
+    },
+    {
+        "id": 9,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Service Control Policies",
+        "subtopic": "SCP Design Strategies",
+        "type": "single",
+        "question": "Can a Service Control Policy (SCP) affect service-linked roles created by AWS services to perform automated background actions?",
+        "options": [
+            "A) No, because service-linked roles run inside the AWS Management Account exclusively",
+            "B) No, SCPs do not affect service-linked roles; AWS services can continue using service-linked roles to perform automated actions",
+            "C) Yes, but only if the SCP contains a Wildcard (*)",
+            "D) Yes, SCPs automatically disable all service-linked roles in member accounts"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. SCPs do NOT affect service-linked roles. Service-linked roles enable AWS services to integrate securely without being blocked by account SCP guardrails."
+    },
+    {
+        "id": 10,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Service Control Policies",
+        "subtopic": "SCP Design Strategies",
+        "type": "single",
+        "question": "What feature mode must be enabled in AWS Organizations before Service Control Policies (SCPs) can be used?",
+        "options": [
+            "A) VPC Sharing mode",
+            "B) Consolidated Billing Only mode",
+            "C) All Features mode",
+            "D) Basic Governance mode"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. AWS Organizations must be set to 'All Features' mode to enable advanced management features, including SCPs, organizational backup policies, and service integrations."
+    },
+    {
+        "id": 11,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Service Control Policies",
+        "subtopic": "SCP Design Strategies",
+        "type": "single",
+        "question": "A company wants to restrict EC2 instance creation in member accounts to only specific approved instance types (e.g. t3.micro, t3.small, m6i.large). Which SCP condition key supports this?",
+        "options": [
+            "A) iam:PermissionsBoundary",
+            "B) ec2:InstanceType with StringNotEquals condition",
+            "C) ec2:VolumeType",
+            "D) aws:RequestedRegion"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. The `ec2:InstanceType` condition key used with a `StringNotEquals` or `StringNotLike` condition in a DENY SCP restricts instance launches to authorized instance types."
+    },
+    {
+        "id": 12,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Control Tower & Landing Zones",
+        "subtopic": "Control Tower & Guardrails",
+        "type": "single",
+        "question": "An enterprise wants to set up a secure, multi-account AWS environment following AWS best practices (a Landing Zone) with automated account provisioning, centralized logging, and pre-configured guardrails in under a day. Which service automates this setup?",
+        "options": [
+            "A) AWS Organizations manually",
+            "B) AWS Control Tower",
+            "C) AWS Service Catalog",
+            "D) AWS Config custom scripts"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. AWS Control Tower offers the easiest way to set up and govern a secure, multi-account AWS environment (Landing Zone) using automated best-practice blueprints and guardrails."
+    },
+    {
+        "id": 13,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Control Tower & Landing Zones",
+        "subtopic": "Control Tower & Guardrails",
+        "type": "single",
+        "question": "In AWS Control Tower, what is the difference between Preventive Guardrails and Detective Guardrails?",
+        "options": [
+            "A) Preventive guardrails use CloudWatch; Detective guardrails use Security Groups",
+            "B) Both guardrail types block API calls identically",
+            "C) Preventive guardrails (implemented via SCPs) block non-compliant actions from occurring; Detective guardrails (implemented via AWS Config Rules) detect and report non-compliant resources",
+            "D) Preventive guardrails only apply to S3; Detective guardrails apply to EC2"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. Preventive Guardrails use SCPs to disallow non-compliant API requests before they execute. Detective Guardrails use AWS Config Rules to audit, monitor, and flag existing non-compliant resources."
+    },
+    {
+        "id": 14,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Control Tower & Landing Zones",
+        "subtopic": "Control Tower Account Factory",
+        "type": "single",
+        "question": "A DevOps team needs to automate the provisioning of new AWS member accounts with pre-approved network baseline VPC configurations and security baseline controls. Which AWS Control Tower component automates new account creation?",
+        "options": [
+            "A) Account Factory (integrated with AWS Service Catalog)",
+            "B) Control Tower Dashboard",
+            "C) AWS Control Tower Guardrail Studio",
+            "D) AWS Organizations Console"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. Account Factory is a configurable component of AWS Control Tower that automates new account provisioning with pre-approved network and security baselines."
+    },
+    {
+        "id": 15,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Control Tower & Landing Zones",
+        "subtopic": "Control Tower Core Accounts",
+        "type": "single",
+        "question": "When AWS Control Tower sets up a Landing Zone, which core accounts are automatically created under the Security Organizational Unit (OU)?",
+        "options": [
+            "A) Network Account and Billing Account",
+            "B) Management Account and Developer Account",
+            "C) Log Archive Account and Audit Account",
+            "D) Production Account and Staging Account"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. AWS Control Tower creates a dedicated Security OU containing two core governance accounts: the Log Archive Account (centralized CloudTrail/Config logs) and the Audit Account (security assessment access)."
+    },
+    {
+        "id": 16,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Control Tower & Landing Zones",
+        "subtopic": "Control Tower Drift Detection",
+        "type": "single",
+        "question": "What feature in AWS Control Tower alerts administrators when a member account's security configuration deviates from the governance baselines established by Control Tower?",
+        "options": [
+            "A) Drift Detection",
+            "B) Schema Conversion",
+            "C) License Manager Audit",
+            "D) Trusted Advisor Sync"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. Drift Detection in AWS Control Tower identifies changes made to accounts or OUs that cause them to fall out of compliance with applied landing zone baselines and guardrails."
+    },
+    {
+        "id": 17,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Cross-Account Resource Sharing",
+        "subtopic": "AWS Resource Access Manager (RAM)",
+        "type": "single",
+        "question": "A central networking team creates subnets in a shared VPC. They need to allow development teams in 20 different member accounts to launch EC2 instances into these specific shared subnets without duplicating VPC infrastructure. Which service enables this?",
+        "options": [
+            "A) AWS Storage Gateway",
+            "B) AWS Resource Access Manager (AWS RAM)",
+            "C) VPC Peering mesh",
+            "D) AWS Transit Gateway"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. AWS Resource Access Manager (AWS RAM) allows sharing specified AWS resources—such as VPC Subnets, Transit Gateways, Route 53 Resolver Rules, and License Manager configurations—across AWS accounts within an organization."
+    },
+    {
+        "id": 18,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Cross-Account Resource Sharing",
+        "subtopic": "AWS Resource Access Manager (RAM)",
+        "type": "single",
+        "question": "When VPC subnets are shared across accounts via AWS RAM, what permissions do participant accounts have regarding resources owned by other participant accounts in the same shared subnet?",
+        "options": [
+            "A) Participants have full administrative access over all resources in the subnet",
+            "B) Participants cannot view, modify, or delete resources owned by other participants or the VPC owner; they only manage their own resources",
+            "C) Participants can terminate EC2 instances launched by the VPC owner",
+            "D) Participants share a single shared security group automatically"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. In VPC Sharing via RAM, resource isolation is preserved. Participant accounts can only see and manage their own resources (such as EC2 instances and ENIs) and cannot modify or view resources belonging to other accounts."
+    },
+    {
+        "id": 19,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Cross-Account Resource Sharing",
+        "subtopic": "AWS Resource Access Manager (RAM)",
+        "type": "single",
+        "question": "Which of the following resources CANNOT be shared across accounts using AWS RAM?",
+        "options": [
+            "A) VPC Subnets",
+            "B) AWS Transit Gateways",
+            "C) IAM Roles and Users",
+            "D) Route 53 Resolver Rules"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. IAM Roles and IAM Users are account-level identity resources that cannot be shared via RAM. (VPC Subnets, Transit Gateways, Route 53 Resolver Rules, Capacity Reservations, and License Configurations CAN be shared via RAM)."
+    },
+    {
+        "id": 20,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Cross-Account Resource Sharing",
+        "subtopic": "AWS Resource Access Manager (RAM)",
+        "type": "single",
+        "question": "How are invitation steps handled when sharing resources via AWS RAM to accounts WITHIN the same AWS Organization with resource sharing enabled?",
+        "options": [
+            "A) Invitations are accepted automatically; member accounts gain access to shared resources without explicit manual invitation acceptance",
+            "B) Invitations must be processed via AWS Support ticket",
+            "C) Shared resources require root password authorization",
+            "D) Every member account administrator must manually accept an email invitation within 7 days"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. When sharing resources within an AWS Organization (with sharing enabled in RAM settings), invitations are automatically accepted without requiring manual intervention from recipient account owners."
+    },
+    {
+        "id": 21,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Cross-Account Resource Sharing",
+        "subtopic": "AWS Resource Access Manager (RAM)",
+        "type": "single",
+        "question": "A enterprise buys software licenses that are constrained by CPU vCPU count. How can the company share license tracking rules across all AWS accounts to prevent license compliance violations?",
+        "options": [
+            "A) Deploy custom PowerShell scripts on every EC2 instance",
+            "B) Configure AWS Budgets alerts",
+            "C) Create license configurations in AWS License Manager and share them across accounts via AWS RAM",
+            "D) Attach a Service Control Policy to the root"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. AWS License Manager integrates with AWS RAM, allowing license rules to be shared across accounts to track and enforce software license limits globally."
+    },
+    {
+        "id": 22,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Identity & Access Governance",
+        "subtopic": "IAM Identity Center & Permission Sets",
+        "type": "single",
+        "question": "What component in AWS IAM Identity Center (formerly AWS SSO) defines the collection of IAM permissions that are assigned to users or groups for specific target AWS accounts?",
+        "options": [
+            "A) Permission Sets",
+            "B) Resource Access Shares",
+            "C) IAM Access Keys",
+            "D) Service Control Policies"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. Permission Sets in AWS IAM Identity Center define the IAM policies and permissions that are assigned to users or groups when accessing specific AWS accounts."
+    },
+    {
+        "id": 23,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Identity & Access Governance",
+        "subtopic": "IAM Identity Center & Permission Sets",
+        "type": "single",
+        "question": "How does AWS IAM Identity Center manage access behind the scenes when a user assumes a Permission Set to log into a target AWS account?",
+        "options": [
+            "A) It creates permanent IAM Users with static password credentials in each account",
+            "B) It routes all user traffic through an AWS Client VPN connection",
+            "C) It automatically provisions and updates short-lived IAM Roles in target accounts that users assume via SAML 2.0 federation",
+            "D) It generates hardcoded IAM Access Keys in S3"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. IAM Identity Center automatically provisions and manages short-lived IAM roles in target accounts. When users authenticate, they assume these temporary roles using SAML federation."
+    },
+    {
+        "id": 24,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Identity & Access Governance",
+        "subtopic": "IAM Identity Center & Permission Sets",
+        "type": "single",
+        "question": "A security team wants to require Multi-Factor Authentication (MFA) for all corporate users signing in via AWS IAM Identity Center. Where is this MFA requirement configured?",
+        "options": [
+            "A) Inside VPC Security Groups",
+            "B) Individually in every member account IAM console",
+            "C) In the S3 Bucket Policy of the log archive account",
+            "D) Centrally in the AWS IAM Identity Center console settings"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. MFA enforcement can be configured centrally in AWS IAM Identity Center console settings for all users across the entire organization."
+    },
+    {
+        "id": 25,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Identity & Access Governance",
+        "subtopic": "IAM Identity Center & Permission Sets",
+        "type": "single",
+        "question": "Which protocol is used by AWS IAM Identity Center to synchronize user identities and group memberships automatically from an external Identity Provider (such as Okta or Azure AD)?",
+        "options": [
+            "A) SFTP (Secure File Transfer Protocol)",
+            "B) SCIM (System for Cross-domain Identity Management)",
+            "C) SNMP (Simple Network Management Protocol)",
+            "D) BGP (Border Gateway Protocol)"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. SCIM (System for Cross-domain Identity Management) is the open standard protocol used by IAM Identity Center to automatically sync users and groups from external IdPs (Okta, Azure AD)."
+    },
+    {
+        "id": 26,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Identity & Access Governance",
+        "subtopic": "IAM Identity Center & Permission Sets",
+        "type": "single",
+        "question": "Why is using AWS IAM Identity Center preferred over creating individual IAM Users inside each member account?",
+        "options": [
+            "A) IAM Identity Center bypasses Service Control Policies",
+            "B) IAM Users provide higher network throughput than IAM Identity Center",
+            "C) IAM Users incur monthly fees whereas IAM Identity Center is paid per query",
+            "D) It eliminates long-lived IAM user credentials, centralizes access management, and provides Single Sign-On (SSO) access using short-lived credentials"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. IAM Identity Center eliminates credential sprawl and long-lived IAM user passwords/access keys, providing centralized Single Sign-On and short-lived temporary access credentials."
+    },
+    {
+        "id": 27,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Governance Enforcement",
+        "subtopic": "Config vs SCPs vs Boundaries",
+        "type": "single",
+        "question": "An enterprise wants to evaluate whether all existing Amazon EBS volumes across 50 accounts are encrypted. If an unencrypted volume is detected, an automated remediation script should encrypt it. Which service performs this evaluation and remediation?",
+        "options": [
+            "A) Amazon Route 53 DNS Firewall",
+            "B) Service Control Policies (SCPs)",
+            "C) IAM Permissions Boundaries",
+            "D) AWS Config with AWS Systems Manager Automation Remediation"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. AWS Config evaluates resource compliance continuously (detective) and integrates with Systems Manager Automation documents to perform automated remediation when non-compliant resources are discovered."
+    },
+    {
+        "id": 28,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Governance Enforcement",
+        "subtopic": "Config vs SCPs vs Boundaries",
+        "type": "single",
+        "question": "What is the key functional difference between a Service Control Policy (SCP) and an AWS Config Rule?",
+        "options": [
+            "A) SCPs are detective; Config Rules are preventive",
+            "B) SCPs run inside VPCs; Config Rules run on on-premises edge servers",
+            "C) Both tools block API calls identically",
+            "D) SCPs are PREVENTIVE (block API calls before resources are created); AWS Config Rules are DETECTIVE (evaluate compliance of existing resources after creation)"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. SCPs enforce preventive guardrails by blocking non-compliant API calls in real time. AWS Config Rules enforce detective controls by monitoring resource configuration changes and evaluating compliance after deployment."
+    },
+    {
+        "id": 29,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Governance Enforcement",
+        "subtopic": "Config vs SCPs vs Boundaries",
+        "type": "single",
+        "question": "A developer needs full access to manage S3 and EC2, but must NOT be allowed to create or modify IAM users or policies under any circumstances. Which IAM mechanism enforces this boundary on a developer user?",
+        "options": [
+            "A) Service Linked Role",
+            "B) AWS Trusted Advisor Rule",
+            "C) S3 Bucket Policy",
+            "D) IAM Permissions Boundary"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. An IAM Permissions Boundary sets the maximum permissions an IAM entity can have, ensuring developers cannot grant themselves permissions beyond the boundary limit."
+    },
+    {
+        "id": 30,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Governance Enforcement",
+        "subtopic": "Config vs SCPs vs Boundaries",
+        "type": "single",
+        "question": "How can AWS Config rules be deployed continuously across all present and future member accounts in an AWS Organization automatically?",
+        "options": [
+            "A) Deploy Organization AWS Config Rules from the Management Account",
+            "B) Manually log into each account every month and enable rules",
+            "C) Attach a WAF rule to the organization root",
+            "D) Use S3 Cross-Region Replication"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. Organization AWS Config Rules allow administrators to define and deploy AWS Config rules centrally across all accounts in an AWS Organization."
+    },
+    {
+        "id": 31,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Governance Enforcement",
+        "subtopic": "Config vs SCPs vs Boundaries",
+        "type": "single",
+        "question": "What AWS service manages enterprise software license compliance (e.g. tracking Microsoft Windows Server or SQL Server core licenses across EC2 instances)?",
+        "options": [
+            "A) AWS Config",
+            "B) AWS Billing Conductor",
+            "C) AWS License Manager",
+            "D) AWS Systems Manager Patch Manager"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. AWS License Manager manages software licenses from vendors (like Microsoft, Oracle, and SAP) across AWS and on-premises environments, enforcing licensing rules automatically."
+    },
+    {
+        "id": 32,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Cost Governance",
+        "subtopic": "Consolidated Billing & RI Sharing",
+        "type": "single",
+        "question": "An enterprise has 10 member accounts under Consolidated Billing. Account A purchased a 3-year Reserved Instance for an r6g.2xlarge EC2 instance, but Account A's instance was terminated. How does Consolidated Billing handle the unused Reserved Instance discount?",
+        "options": [
+            "A) The Reserved Instance discount is automatically applied to matching r6g.2xlarge instance usage in other member accounts within the same organization",
+            "B) The Reserved Instance is automatically refunded to the billing credit card",
+            "C) The Reserved Instance discount is lost permanently",
+            "D) Account A is charged a cancellation penalty fee"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. By default, Reserved Instance and Savings Plans billing benefits are shared across all member accounts within an AWS Organization's consolidated billing family."
+    },
+    {
+        "id": 33,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Cost Governance",
+        "subtopic": "Consolidated Billing & RI Sharing",
+        "type": "single",
+        "question": "A business unit owner in Account B wants to ensure their purchased Reserved Instance discounts are NOT shared with other member accounts in the AWS Organization. How can RI discount sharing be turned off?",
+        "options": [
+            "A) Turn off Reserved Instance discount sharing in the AWS Billing Console settings from the Management Account",
+            "B) Detach the member account from the VPC",
+            "C) Convert the account into an Organizational Unit",
+            "D) Enable S3 Block Public Access"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. Reserved Instance and Savings Plans discount sharing can be explicitly disabled for specific accounts or the entire organization in the AWS Billing console."
+    },
+    {
+        "id": 34,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Cost Governance",
+        "subtopic": "Consolidated Billing & RI Sharing",
+        "type": "single",
+        "question": "Which AWS service allows creating custom billing rates, customizing line items, and allocating pro-rated billing data for reseller partners or internal business units?",
+        "options": [
+            "A) AWS Budgets",
+            "B) AWS Control Tower",
+            "C) AWS Cost Explorer",
+            "D) AWS Billing Conductor"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. AWS Billing Conductor allows customized billing structures, custom rate cards, and cost allocation rules for enterprise showback/chargeback to internal business units or partners."
+    },
+    {
+        "id": 35,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Cost Governance",
+        "subtopic": "Consolidated Billing & RI Sharing",
+        "type": "single",
+        "question": "What is a primary financial benefit of using Consolidated Billing in AWS Organizations?",
+        "options": [
+            "A) Automatic 50% discount on all AWS Marketplace software",
+            "B) Zero data transfer fees across regions",
+            "C) Receiving a single consolidated invoice for all accounts and reaching higher volume tier discounts faster for S3 storage and Data Transfer Out",
+            "D) Free EC2 compute usage for all member accounts"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. Consolidated Billing combines usage from all member accounts onto a single monthly bill, enabling the organization to qualify for tier volume pricing discounts faster."
+    },
+    {
+        "id": 36,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Audit Logging",
+        "subtopic": "Organization CloudTrail & Log Isolation",
+        "type": "single",
+        "question": "A Chief Information Security Officer (CISO) requires logging all AWS API activity across 100 member accounts into a single, tamper-proof Amazon S3 bucket located in a dedicated, isolated Log Archive account. How should CloudTrail be configured?",
+        "options": [
+            "A) Enable CloudWatch Container Insights on member VPCs",
+            "B) Create an Organization Trail in the Management Account that automatically logs events for all member accounts into the target S3 bucket in the Log Archive account",
+            "C) Export VPC Flow Logs to an on-premises syslog server over HTTP",
+            "D) Log into all 100 accounts individually and configure local S3 buckets"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. An Organization Trail logs API calls for ALL member accounts in the organization automatically into a central S3 bucket in a secure Log Archive account, ensuring member account admins cannot disable logging."
+    },
+    {
+        "id": 37,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Audit Logging",
+        "subtopic": "Organization CloudTrail & Log Isolation",
+        "type": "single",
+        "question": "To protect CloudTrail audit logs stored in the central Log Archive S3 bucket against malicious modification or deletion by a compromised admin user, what security configuration is required?",
+        "options": [
+            "A) Enable S3 Object Lock in Compliance Mode, S3 Versioning, and CloudTrail Log File Integrity Validation",
+            "B) Enable Route 53 Resolver DNS Firewall",
+            "C) Store logs on EC2 instance store volumes",
+            "D) Enable S3 Transfer Acceleration"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. Enabling CloudTrail Log File Integrity Validation (digest files), S3 Versioning, and S3 Object Lock in Compliance Mode ensures log files cannot be modified, overwritten, or deleted by any user."
+    },
+    {
+        "id": 38,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Audit Logging",
+        "subtopic": "Organization CloudTrail & Log Isolation",
+        "type": "single",
+        "question": "What happens when a new member account is created or joins an AWS Organization that has an active Organization Trail?",
+        "options": [
+            "A) The Organization Trail is automatically paused",
+            "B) An email request must be approved by AWS Support",
+            "C) The new account is excluded from logging until manual CloudTrail setup is executed",
+            "D) The new account automatically starts logging API activity to the Organization Trail without requiring manual setup"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. When an Organization Trail is active, new member accounts joining the organization are automatically included and monitored by the Organization Trail immediately."
+    },
+    {
+        "id": 39,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Audit Logging",
+        "subtopic": "Organization CloudTrail & Log Isolation",
+        "type": "single",
+        "question": "Which service allows querying CloudTrail log files directly in Amazon S3 using standard SQL queries without managing database infrastructure?",
+        "options": [
+            "A) AWS DataSync",
+            "B) Amazon QuickSight",
+            "C) AWS Glue DataBrew",
+            "D) Amazon Athena (or CloudTrail Lake)"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Amazon Athena (and CloudTrail Lake) allows running SQL queries directly on JSON audit logs stored in Amazon S3 buckets for security investigation and compliance auditing."
+    },
+    {
+        "id": 40,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Cross-Account Architecture",
+        "subtopic": "Cross-Account Roles vs Resource Policies",
+        "type": "single",
+        "question": "An application in Account A needs to read objects from an S3 bucket in Account B. Which two methods can grant cross-account access?",
+        "options": [
+            "A) Use AWS Direct Connect Gateway",
+            "B) Enable VPC Peering between S3 buckets",
+            "C) Create static IAM User Access Keys in Account B and hardcode them in Account A",
+            "D) Attach an S3 Bucket Policy in Account B allowing Account A's IAM principal, OR allow Account A's principal to assume a cross-account IAM Role in Account B"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. Cross-account access to S3 can be granted either via a resource-based policy (S3 Bucket Policy in Account B) or via identity-based role delegation (assuming a cross-account IAM Role in Account B)."
+    },
+    {
+        "id": 41,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Cross-Account Architecture",
+        "subtopic": "Cross-Account Roles vs Resource Policies",
+        "type": "single",
+        "question": "What is an architectural advantage of using an S3 Bucket Policy (resource-based policy) over IAM Role Assumption for cross-account S3 access?",
+        "options": [
+            "A) IAM Role assumption is limited to 1 request per hour",
+            "B) S3 Bucket Policies are stored in local RAM",
+            "C) Resource-based policies allow the principal in Account A to perform actions in Account B without switching IAM role context or issuing STS AssumeRole API calls",
+            "D) S3 Bucket Policies bypass KMS encryption"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. Resource-based policies (such as S3 bucket policies or KMS key policies) grant direct access to external account principals without requiring them to call STS AssumeRole or switch security contexts."
+    },
+    {
+        "id": 42,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Cross-Account Architecture",
+        "subtopic": "VPC Sharing via RAM vs Peering",
+        "type": "single",
+        "question": "A enterprise network team wants to centrally manage subnets, route tables, and NAT Gateways in a single VPC owned by a Central Network Account, while allowing multiple business unit accounts to deploy EC2 instances into those subnets. Which topology should be chosen?",
+        "options": [
+            "A) AWS Site-to-Site VPN",
+            "B) VPC Peering mesh",
+            "C) AWS Transit Gateway with 50 attachments",
+            "D) VPC Sharing via AWS RAM"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. VPC Sharing via AWS RAM enables a central networking team to own and manage VPCs, subnets, route tables, and NAT Gateways centrally while sharing subnets with participant accounts to deploy resources."
+    },
+    {
+        "id": 43,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Cross-Account Architecture",
+        "subtopic": "VPC Sharing via RAM vs Peering",
+        "type": "single",
+        "question": "What is a main network efficiency benefit of VPC Sharing via AWS RAM compared to creating separate VPCs connected via Transit Gateway?",
+        "options": [
+            "A) Shared subnets allow resources in different accounts to communicate with high bandwidth and low latency within the same VPC without Transit Gateway data processing fees",
+            "B) Transit Gateway is restricted to single-AZ deployments",
+            "C) VPC Sharing eliminates Security Groups",
+            "D) VPC Sharing provides free internet egress"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. In VPC Sharing, instances in different participant accounts reside in the exact same VPC and subnets, allowing direct intra-VPC communication without incurring Transit Gateway data processing charges."
+    },
+    {
+        "id": 44,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Cross-Account Architecture",
+        "subtopic": "IAM Security Tooling",
+        "type": "single",
+        "question": "Which AWS IAM feature analyzes resource policies across your organization to identify S3 buckets, KMS keys, or IAM roles that are shared with external entities outside your AWS Organization?",
+        "options": [
+            "A) AWS Config Rules",
+            "B) AWS Trusted Advisor",
+            "C) IAM Access Analyzer",
+            "D) Amazon Macie"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. IAM Access Analyzer uses mathematical logic to evaluate resource-based policies across your AWS environment and alerts you to resources that are accessible from outside your trusted account or organization boundary."
+    },
+    {
+        "id": 45,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Cross-Account Architecture",
+        "subtopic": "Service Catalog for Governance",
+        "type": "single",
+        "question": "An enterprise wants to allow non-administrative developers to launch pre-approved, security-hardened CloudFormation infrastructure templates (e.g. approved S3 buckets or EC2 stacks) without giving developers direct IAM permissions to provision those services manually. Which service provides this self-service governance portal?",
+        "options": [
+            "A) AWS Launch Wizard",
+            "B) AWS OpsWorks",
+            "C) AWS Service Catalog",
+            "D) AWS Control Tower"
+        ],
+        "correct": "C",
+        "explanation": "Correct Answer: C. AWS Service Catalog allows organizations to create and manage catalogs of IT services (CloudFormation templates) that are approved for use on AWS, allowing end users to launch pre-approved resources with constrained launch role permissions."
+    },
+    {
+        "id": 46,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Cross-Account Architecture",
+        "subtopic": "Service Catalog Portfolios",
+        "type": "single",
+        "question": "In AWS Service Catalog, how do administrators group products and manage access for specific IAM users, roles, or AWS accounts?",
+        "options": [
+            "A) By organizing products into Portfolios and granting access permissions to target IAM entities or sharing portfolios via AWS RAM",
+            "B) By running Systems Manager Automation",
+            "C) By deploying WAF Rate Rules",
+            "D) By attaching S3 Bucket Policies"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. In AWS Service Catalog, products are collected into Portfolios. Administrators grant access to portfolios for specific IAM users, roles, or accounts, or share portfolios across accounts in an organization."
+    },
+    {
+        "id": 47,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Cross-Account Architecture",
+        "subtopic": "Service Catalog Launch Constraints",
+        "type": "single",
+        "question": "What is a Launch Constraint in AWS Service Catalog?",
+        "options": [
+            "A) A memory limit on CloudFormation execution engine",
+            "B) An IAM role that Service Catalog assumes when a user launches a product, allowing users to provision resources without needing underlying IAM permissions themselves",
+            "C) A network bandwidth throttle on VPC subnets",
+            "D) A rule that limits resource deployment to 1 instance per hour"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. A Launch Constraint specifies an IAM role that AWS Service Catalog assumes to provision resources. This allows end users to launch approved products even if they do not have direct IAM permissions to create the underlying AWS resources."
+    },
+    {
+        "id": 48,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Cross-Account Architecture",
+        "subtopic": "AWS CloudFormation StackSets",
+        "type": "single",
+        "question": "A security administrator needs to deploy an IAM security audit role and AWS Config rules automatically across 200 member accounts in an AWS Organization. Which CloudFormation feature automates cross-account, multi-region stack deployments?",
+        "options": [
+            "A) AWS CloudFormation Modules",
+            "B) AWS Systems Manager State Manager",
+            "C) AWS Service Catalog Portfolios",
+            "D) AWS CloudFormation StackSets"
+        ],
+        "correct": "D",
+        "explanation": "Correct Answer: D. AWS CloudFormation StackSets allows creating, updating, or deleting CloudFormation stacks across multiple AWS accounts and regions in a single operation."
+    },
+    {
+        "id": 49,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Cross-Account Architecture",
+        "subtopic": "AWS Systems Manager Incident Manager",
+        "type": "single",
+        "question": "During a critical cross-account application outage, which AWS Systems Manager capability automates incident response plans, escalates alerts to on-call engineers via SMS/voice, and coordinates response channels?",
+        "options": [
+            "A) AWS Health Dashboard",
+            "B) AWS Systems Manager Incident Manager",
+            "C) AWS Systems Manager Parameter Store",
+            "D) AWS Systems Manager Patch Manager"
+        ],
+        "correct": "B",
+        "explanation": "Correct Answer: B. AWS Systems Manager Incident Manager automates incident response plans, engages on-call responders via SMS/voice/email, and provides centralized collaboration dashboards during critical operational incidents."
+    },
+    {
+        "id": 50,
+        "section": "GOVERNANCE & MULTI-ACCOUNT",
+        "topic": "Cross-Account Architecture",
+        "subtopic": "AWS Health Dashboard",
+        "type": "single",
+        "question": "An operational team needs personalized alerts when an AWS infrastructure event (such as an EC2 hardware degradation or scheduled maintenance) specifically affects resources in their AWS accounts. Which dashboard provides personalized event visibility?",
+        "options": [
+            "A) AWS Health Dashboard (AWS Personal Health Dashboard)",
+            "B) AWS CloudTrail Insights",
+            "C) AWS Service Health Dashboard (Public status page)",
+            "D) Amazon CloudWatch ServiceLens"
+        ],
+        "correct": "A",
+        "explanation": "Correct Answer: A. AWS Health Dashboard provides personalized alerts and guidance when AWS experiences events that may affect your specific AWS account resources and scheduled maintenance."
+    }
+];
+
+    // Theme Management
+    let currentTheme = localStorage.getItem('quiz-theme') || 'light';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    updateThemeUI(currentTheme);
+
+    function toggleTheme() {
+        currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        localStorage.setItem('quiz-theme', currentTheme);
+        updateThemeUI(currentTheme);
+    }
+
+    function updateThemeUI(theme) {
+        const icon = document.getElementById('theme-icon');
+        const text = document.getElementById('theme-text');
+        if (icon && text) {
+            if (theme === 'dark') {
+                icon.textContent = '🌙';
+                text.textContent = 'Dark Mode';
+            } else {
+                icon.textContent = '☀️';
+                text.textContent = 'Light Mode';
+            }
+        }
+    }
+
+    let currentFilter = 'all';
+
+    function setFilter(filterType, btn) {
+        currentFilter = filterType;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        filterQuestions();
+    }
+
+    function filterQuestions() {
+        const query = document.getElementById('search-input').value.toLowerCase().trim();
+        const cards = document.querySelectorAll('.question-card');
+
+        cards.forEach(card => {
+            const qTitle = card.querySelector('.question-title') ? card.querySelector('.question-title').textContent : '';
+            const status = card.getAttribute('data-status') || 'unanswered';
+
+            let matchesFilter = false;
+            if (currentFilter === 'all') matchesFilter = true;
+            else if (currentFilter === 'unanswered' && status === 'unanswered') matchesFilter = true;
+            else if (currentFilter === 'correct' && status === 'correct') matchesFilter = true;
+            else if (currentFilter === 'incorrect' && status === 'incorrect') matchesFilter = true;
+
+            let matchesSearch = true;
+            if (query) {
+                if (query.startsWith('#')) {
+                    const num = query.substring(1).trim();
+                    matchesSearch = qTitle.startsWith(num + '.') || qTitle.includes(' ' + num + '.');
+                } else {
+                    matchesSearch = qTitle.toLowerCase().includes(query) || card.textContent.toLowerCase().includes(query);
+                }
+            }
+
+            if (matchesFilter && matchesSearch) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    function updateStats() {
+        const total = quizData.length;
+        const answeredCards = document.querySelectorAll('.question-card[data-status="correct"], .question-card[data-status="incorrect"]');
+        const correctCards = document.querySelectorAll('.question-card[data-status="correct"]');
+        const incorrectCards = document.querySelectorAll('.question-card[data-status="incorrect"]');
+
+        const answered = answeredCards.length;
+        const correct = correctCards.length;
+        const incorrect = incorrectCards.length;
+        const accuracy = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+
+        const statTotal = document.getElementById('stat-total');
+        const statAnswered = document.getElementById('stat-answered');
+        const statCorrect = document.getElementById('stat-correct');
+        const statIncorrect = document.getElementById('stat-incorrect');
+        const statAccuracy = document.getElementById('stat-accuracy');
+        const progressFill = document.getElementById('progress-fill');
+
+        if (statTotal) statTotal.textContent = total;
+        if (statAnswered) statAnswered.textContent = answered;
+        if (statCorrect) statCorrect.textContent = correct;
+        if (statIncorrect) statIncorrect.textContent = incorrect;
+        if (statAccuracy) statAccuracy.textContent = accuracy + '%';
+
+        if (progressFill) {
+            const pct = Math.round((answered / total) * 100);
+            progressFill.style.width = pct + '%';
+        }
+    }
+
+    function renderQuiz() {
+        const container = document.getElementById('quiz-container');
+        let html = '';
+
+        quizData.forEach((q, index) => {
+            const isMulti = q.type === 'multi' || (Array.isArray(q.correct) ? q.correct.length > 1 : (typeof q.correct === 'string' && q.correct.includes(',')));
+            const reqCount = Array.isArray(q.correct) ? q.correct.length : (typeof q.correct === 'string' && q.correct.includes(',') ? q.correct.split(',').length : (isMulti ? 2 : 1));
+            const inputType = isMulti ? 'checkbox' : 'radio';
+
+            let optionsHtml = '';
+            q.options.forEach((opt) => {
+                const optLetter = opt.charAt(0);
+                optionsHtml += '<li class="option-item">' +
+                    '<label class="option-label" onclick="selectOption(this)">' +
+                        '<input type="' + inputType + '" name="question-' + q.id + '" value="' + optLetter + '">' +
+                        '<span>' + opt + '</span>' +
+                    '</label>' +
+                '</li>';
+            });
+
+            html += '<div class="question-card" id="card-' + q.id + '" data-id="' + q.id + '" data-type="' + (isMulti ? 'multi' : 'single') + '" data-req="' + reqCount + '" data-status="unanswered">' +
+                '<div>' +
+                    '<span class="topic-pill">' + q.topic + (q.subtopic ? ' • ' + q.subtopic : '') + '</span>' +
+                    '<div class="question-header">' +
+                        '<div class="question-title">' +
+                            (index + 1) + '. ' + q.question +
+                            (isMulti ? '<span style="color: var(--accent-orange); font-weight: 700; margin-left: 8px;">(Select ' + reqCount + ' options)</span>' : '') +
+                        '</div>' +
+                        '<span class="status-badge correct">✓ Correct</span>' +
+                        '<span class="status-badge incorrect">✕ Incorrect</span>' +
+                    '</div>' +
+                '</div>' +
+                '<ul class="options-list">' +
+                    optionsHtml +
+                '</ul>' +
+                '<button class="submit-btn" onclick="checkAnswer(' + q.id + ')">Submit Answer</button>' +
+                '<div id="feedback-' + q.id + '" class="explanation"></div>' +
+                '<div class="card-watermark">' +
+                    '🔗 <a href="https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-30-Day-Prep-Tracker" target="_blank" rel="noopener noreferrer">AWS SAA-C03 Prep Tracker • github.com/borudeyash1</a>' +
+                '</div>' +
+            '</div>';
+        });
+
+        container.innerHTML = html;
+        updateStats();
+    }
+
+    function selectOption(labelElement) {
+        const card = labelElement.closest('.question-card');
+        if (!card) return;
+        const isMulti = card.getAttribute('data-type') === 'multi';
+        const reqCount = parseInt(card.getAttribute('data-req') || '1');
+
+        if (!isMulti) {
+            card.querySelectorAll('.option-label').forEach(l => l.classList.remove('selected-opt'));
+            labelElement.classList.add('selected-opt');
+        } else {
+            const chk = labelElement.querySelector('input[type="checkbox"]');
+            const checkedCount = card.querySelectorAll('input[type="checkbox"]:checked').length;
+            if (checkedCount > reqCount) {
+                if (chk) chk.checked = false;
+                labelElement.classList.remove('selected-opt');
+                alert('You can only select up to ' + reqCount + ' options for this question.');
+                return;
+            }
+            if (chk && chk.checked) {
+                labelElement.classList.add('selected-opt');
+            } else {
+                labelElement.classList.remove('selected-opt');
+            }
+        }
+    }
+
+    function checkAnswer(questionId) {
+        const q = quizData.find(item => item.id === questionId);
+        const card = document.getElementById('card-' + questionId);
+        if (!card || !q) return;
+
+        let correctVal = q.correct;
+        let correctArr = Array.isArray(correctVal) ? correctVal : (typeof correctVal === 'string' && correctVal.includes(',') ? correctVal.split(',').map(s => s.trim()) : [String(correctVal).trim()]);
+
+        const selectedInputs = card.querySelectorAll('input[name="question-' + questionId + '"]:checked');
+        if (selectedInputs.length === 0) {
+            alert("Please select an answer before submitting.");
+            return;
+        }
+
+        const selectedVals = Array.from(selectedInputs).map(i => i.value);
+        const isCorrect = (selectedVals.length === correctArr.length) && selectedVals.every(v => correctArr.includes(v));
+
+        const labels = card.querySelectorAll('.option-label');
+        labels.forEach(label => {
+            const input = label.querySelector('input');
+            if (correctArr.includes(input.value)) {
+                label.classList.add('correct-ans');
+            } else if (selectedVals.includes(input.value)) {
+                label.classList.add('incorrect-ans');
+            }
+            input.disabled = true;
+        });
+
+        const btn = card.querySelector('.submit-btn');
+        btn.disabled = true;
+
+        const badgeCorrect = card.querySelector('.status-badge.correct');
+        const badgeIncorrect = card.querySelector('.status-badge.incorrect');
+
+        if (isCorrect) {
+            card.setAttribute('data-status', 'correct');
+            card.classList.add('answered-correct');
+            card.classList.remove('answered-incorrect');
+            if (badgeCorrect) badgeCorrect.style.display = 'inline-block';
+            if (badgeIncorrect) badgeIncorrect.style.display = 'none';
+        } else {
+            card.setAttribute('data-status', 'incorrect');
+            card.classList.add('answered-incorrect');
+            card.classList.remove('answered-correct');
+            if (badgeIncorrect) badgeIncorrect.style.display = 'inline-block';
+            if (badgeCorrect) badgeCorrect.style.display = 'none';
+        }
+
+        const feedback = document.getElementById('feedback-' + questionId);
+        if (feedback) {
+            feedback.innerHTML = '<strong>' + (isCorrect ? '✓ Correct Answer!' : '✕ Incorrect.') + '</strong> ' + q.explanation;
+            feedback.style.display = 'block';
+        }
+
+        updateStats();
+    }
+
+    // Exam Mode Engine
+    let currentMode = 'practice';
+    let examData = [];
+    let currentExamIndex = 0;
+    let userAnswers = {};
+    let flaggedQuestions = new Set();
+    let examTimerInterval = null;
+    let examTimeRemaining = 0;
+    let lastExamResult = null;
+
+    function switchQuizMode(mode) {
+        if (mode === currentMode) return;
+
+        if (currentMode === 'exam' && mode === 'practice') {
+            if (!confirm('Exiting Exam Mode will end your timed session. Are you sure you want to return to Practice Mode?')) {
+                return;
+            }
+            stopExamTimer();
+        }
+
+        currentMode = mode;
+
+        document.getElementById('btn-mode-practice').classList.toggle('active', mode === 'practice');
+        document.getElementById('btn-mode-exam').classList.toggle('active', mode === 'exam');
+
+        const practiceBottom = document.getElementById('practice-header-bottom');
+        const practiceProgress = document.getElementById('practice-progress-bar');
+        const moduleBanner = document.getElementById('module-banner');
+
+        if (mode === 'practice') {
+            if (practiceBottom) practiceBottom.style.display = 'flex';
+            if (practiceProgress) practiceProgress.style.display = 'block';
+            if (moduleBanner) moduleBanner.style.display = 'flex';
+            renderQuiz();
+        } else {
+            if (practiceBottom) practiceBottom.style.display = 'none';
+            if (practiceProgress) practiceProgress.style.display = 'none';
+            if (moduleBanner) moduleBanner.style.display = 'none';
+            initExamMode();
+        }
+    }
+
+    function initExamMode() {
+        examData = JSON.parse(JSON.stringify(quizData));
+        currentExamIndex = 0;
+        userAnswers = {};
+        flaggedQuestions.clear();
+        lastExamResult = null;
+
+        examTimeRemaining = examData.length * 120; // 2 mins per question
+
+        renderExamLayout();
+        startExamTimer();
+    }
+
+    function startExamTimer() {
+        stopExamTimer();
+        updateTimerDisplay();
+        examTimerInterval = setInterval(() => {
+            examTimeRemaining--;
+            updateTimerDisplay();
+            if (examTimeRemaining <= 0) {
+                stopExamTimer();
+                alert('⏳ Time is up! Submitting your exam now.');
+                finishExamAndShowResults();
+            }
+        }, 1000);
+    }
+
+    function stopExamTimer() {
+        if (examTimerInterval) {
+            clearInterval(examTimerInterval);
+            examTimerInterval = null;
+        }
+    }
+
+    function updateTimerDisplay() {
+        const timerEl = document.getElementById('exam-timer');
+        if (!timerEl) return;
+        const hours = Math.floor(examTimeRemaining / 3600);
+        const mins = Math.floor((examTimeRemaining % 3600) / 60);
+        const secs = examTimeRemaining % 60;
+
+        const formatted = hours > 0 
+            ? hours + ':' + String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0')
+            : String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+
+        timerEl.textContent = '⏱️ ' + formatted;
+        if (examTimeRemaining < 300) {
+            timerEl.style.color = '#ef4444';
+        }
+    }
+
+    function renderExamLayout() {
+        const container = document.getElementById('quiz-container');
+        container.innerHTML = '<div class="exam-header-bar">' +
+            '<div>' +
+                '<strong style="color: var(--text-primary); font-size: 1.05rem;">AWS Solutions Architect Associate Exam Simulation</strong>' +
+                '<div style="font-size: 0.8rem; color: var(--text-secondary);">' + examData.length + ' Questions • Timed Real-Exam Mode</div>' +
+            '</div>' +
+            '<div class="exam-timer-display" id="exam-timer">⏱️ 00:00</div>' +
+            '<button class="btn-finish-exam" onclick="confirmFinishExam()">Submit Exam</button>' +
+        '</div>' +
+        '<div class="exam-grid-layout">' +
+            '<div id="exam-card-area"></div>' +
+            '<div id="exam-palette-area"></div>' +
+        '</div>';
+
+        renderExamCard();
+        renderQuestionPalette();
+    }
+
+    function renderExamCard() {
+        const cardArea = document.getElementById('exam-card-area');
+        if (!cardArea || !examData[currentExamIndex]) return;
+
+        const q = examData[currentExamIndex];
+        const isMulti = q.type === 'multi' || (Array.isArray(q.correct) ? q.correct.length > 1 : (typeof q.correct === 'string' && q.correct.includes(',')));
+        const reqCount = Array.isArray(q.correct) ? q.correct.length : (typeof q.correct === 'string' && q.correct.includes(',') ? q.correct.split(',').length : (isMulti ? 2 : 1));
+        const inputType = isMulti ? 'checkbox' : 'radio';
+
+        const currentAns = userAnswers[q.id] || [];
+        const isFlagged = flaggedQuestions.has(q.id);
+
+        let optionsHTML = '';
+        q.options.forEach(opt => {
+            const optLetter = opt.charAt(0);
+            const isChecked = currentAns.includes(optLetter);
+            optionsHTML += '<li class="option-item">' +
+                '<label class="option-label ' + (isChecked ? 'selected-opt' : '') + '" onclick="handleExamOptionClick(this, \'' + optLetter + '\', ' + isMulti + ', ' + reqCount + ')">' +
+                    '<input type="' + inputType + '" name="exam-q-' + q.id + '" value="' + optLetter + '" ' + (isChecked ? 'checked' : '') + '>' +
+                    '<span>' + opt + '</span>' +
+                '</label>' +
+            '</li>';
+        });
+
+        cardArea.innerHTML = '<div class="question-card" style="margin-top: 0;">' +
+            '<div>' +
+                '<span class="topic-pill">' + q.topic + (q.subtopic ? ' • ' + q.subtopic : '') + '</span>' +
+                '<div class="question-header">' +
+                    '<div class="question-title">' +
+                        'Question ' + (currentExamIndex + 1) + ' of ' + examData.length +
+                        '<div style="font-weight: 500; font-size: 0.95rem; margin-top: 8px;">' + q.question + '</div>' +
+                        (isMulti ? '<div style="color: var(--accent-orange); font-size: 0.85rem; font-weight: 700; margin-top: 4px;">(Select ' + reqCount + ' options)</div>' : '') +
+                    '</div>' +
+                '</div>' +
+            '</div>' +
+            '<ul class="options-list">' +
+                optionsHTML +
+            '</ul>' +
+            '<div class="exam-nav-bar">' +
+                '<button class="btn-nav" onclick="navExamQuestion(-1)" ' + (currentExamIndex === 0 ? 'disabled style="opacity: 0.4; cursor: not-allowed;"' : '') + '>' +
+                    '← Previous' +
+                '</button>' +
+                '<button class="btn-flag ' + (isFlagged ? 'flagged-active' : '') + '" onclick="toggleFlagQuestion(' + q.id + ')">' +
+                    (isFlagged ? '🚩 Flagged' : '🏳️ Flag for Review') +
+                '</button>' +
+                '<button class="btn-nav" onclick="navExamQuestion(1)" ' + (currentExamIndex === examData.length - 1 ? 'disabled style="opacity: 0.4; cursor: not-allowed;"' : '') + '>' +
+                    'Next →' +
+                '</button>' +
+            '</div>' +
+        '</div>';
+    }
+
+    function handleExamOptionClick(labelEl, optLetter, isMulti, reqCount) {
+        const q = examData[currentExamIndex];
+        if (!userAnswers[q.id]) userAnswers[q.id] = [];
+
+        if (!isMulti) {
+            userAnswers[q.id] = [optLetter];
+            document.querySelectorAll('.exam-grid-layout .option-label').forEach(l => l.classList.remove('selected-opt'));
+            labelEl.classList.add('selected-opt');
+            const radio = labelEl.querySelector('input[type="radio"]');
+            if (radio) radio.checked = true;
+        } else {
+            const chk = labelEl.querySelector('input[type="checkbox"]');
+            if (userAnswers[q.id].includes(optLetter)) {
+                userAnswers[q.id] = userAnswers[q.id].filter(l => l !== optLetter);
+                labelEl.classList.remove('selected-opt');
+                if (chk) chk.checked = false;
+            } else {
+                if (userAnswers[q.id].length >= reqCount) {
+                    alert('You can only select up to ' + reqCount + ' options.');
+                    if (chk) chk.checked = false;
+                    return;
+                }
+                userAnswers[q.id].push(optLetter);
+                labelEl.classList.add('selected-opt');
+                if (chk) chk.checked = true;
+            }
+        }
+        renderQuestionPalette();
+    }
+
+    function toggleFlagQuestion(qId) {
+        if (flaggedQuestions.has(qId)) {
+            flaggedQuestions.delete(qId);
+        } else {
+            flaggedQuestions.add(qId);
+        }
+        renderExamCard();
+        renderQuestionPalette();
+    }
+
+    function navExamQuestion(delta) {
+        const nextIdx = currentExamIndex + delta;
+        if (nextIdx >= 0 && nextIdx < examData.length) {
+            currentExamIndex = nextIdx;
+            renderExamCard();
+            renderQuestionPalette();
+        }
+    }
+
+    function jumpToExamQuestion(idx) {
+        if (idx >= 0 && idx < examData.length) {
+            currentExamIndex = idx;
+            renderExamCard();
+            renderQuestionPalette();
+        }
+    }
+
+    function renderQuestionPalette() {
+        const paletteContainer = document.getElementById('exam-palette-area');
+        if (!paletteContainer) return;
+
+        let answeredCount = 0;
+        let buttonsHTML = '';
+
+        examData.forEach((q, idx) => {
+            const isAnswered = userAnswers[q.id] && userAnswers[q.id].length > 0;
+            if (isAnswered) answeredCount++;
+            const isFlagged = flaggedQuestions.has(q.id);
+            const isActive = idx === currentExamIndex;
+
+            let classes = ['palette-btn'];
+            if (isActive) classes.push('active');
+            if (isAnswered) classes.push('answered');
+            if (isFlagged) classes.push('flagged');
+
+            buttonsHTML += '<button class="' + classes.join(' ') + '" onclick="jumpToExamQuestion(' + idx + ')">' +
+                (idx + 1) +
+            '</button>';
+        });
+
+        paletteContainer.innerHTML = '<div class="exam-palette-panel">' +
+            '<div class="palette-header">' +
+                '<span>Question Palette</span>' +
+                '<span style="font-size: 0.8rem; opacity: 0.8;">' + answeredCount + '/' + examData.length + ' Done</span>' +
+            '</div>' +
+            '<div class="palette-grid">' +
+                buttonsHTML +
+            '</div>' +
+            '<div class="palette-legend">' +
+                '<span><strong style="color: #60a5fa;">●</strong> Answered</span>' +
+                '<span><strong style="color: #fbbf24;">🚩</strong> Flagged</span>' +
+                '<span><strong>◯</strong> Unanswered</span>' +
+            '</div>' +
+        '</div>';
+    }
+
+    function confirmFinishExam() {
+        const unanswered = examData.length - Object.keys(userAnswers).filter(k => userAnswers[k] && userAnswers[k].length > 0).length;
+        let msg = 'Are you sure you want to finish and submit your exam?';
+        if (unanswered > 0) {
+            msg = '⚠️ You have ' + unanswered + ' unanswered question(s). Are you sure you want to finish and submit your exam now?';
+        }
+        if (confirm(msg)) {
+            finishExamAndShowResults();
+        }
+    }
+
+    function finishExamAndShowResults() {
+        stopExamTimer();
+
+        let correctCount = 0;
+        let incorrectQuestions = [];
+
+        examData.forEach((q, idx) => {
+            const userAns = userAnswers[q.id] || [];
+            let correctArray = Array.isArray(q.correct) ? q.correct : (typeof q.correct === 'string' && q.correct.includes(',') ? q.correct.split(',').map(s => s.trim()) : [String(q.correct)]);
+
+            const isCorrect = (userAns.length === correctArray.length) && userAns.every(val => correctArray.includes(val));
+
+            // Extract option text for rich results
+            const userAnsText = userAns.length > 0 
+                ? userAns.map(letter => {
+                    const opt = q.options.find(o => o.startsWith(letter));
+                    return opt || letter;
+                  }).join('<br>')
+                : 'None (Unanswered)';
+
+            const correctAnsText = correctArray.map(letter => {
+                const opt = q.options.find(o => o.startsWith(letter));
+                return opt || letter;
+            }).join('<br>');
+
+            if (isCorrect) {
+                correctCount++;
+            } else {
+                incorrectQuestions.push({
+                    number: idx + 1,
+                    id: q.id,
+                    question: q.question,
+                    options: q.options,
+                    userAnswer: userAns.length > 0 ? userAns.join(', ') : 'None (Unanswered)',
+                    userAnswerText: userAnsText,
+                    correctAnswer: correctArray.join(', '),
+                    correctAnswerText: correctAnsText,
+                    explanation: q.explanation || ''
+                });
+            }
+        });
+
+        const totalQs = examData.length;
+        const scorePct = Math.round((correctCount / totalQs) * 100);
+        const awsScaledScore = Math.round(100 + (scorePct / 100) * 900);
+        const isPass = awsScaledScore >= 720;
+
+        const timeSpentSecs = (examData.length * 120) - examTimeRemaining;
+        const spentMins = Math.floor(timeSpentSecs / 60);
+        const spentSecs = timeSpentSecs % 60;
+        const formattedTimeSpent = spentMins + 'm ' + spentSecs + 's';
+
+        const resultRecord = {
+            timestamp: new Date().toISOString(),
+            examTitle: 'AWS Solutions Architect Associate (SAA-C03) - Performance Quiz Master',
+            totalQuestions: totalQs,
+            correctCount: correctCount,
+            scorePercentage: scorePct,
+            awsScaledScore: awsScaledScore,
+            status: isPass ? 'PASS' : 'FAIL',
+            timeSpent: formattedTimeSpent,
+            incorrectQuestions: incorrectQuestions
+        };
+
+        lastExamResult = resultRecord;
+
+        try {
+            const existing = JSON.parse(localStorage.getItem('aws_saa_exam_history') || '[]');
+            existing.unshift(resultRecord);
+            localStorage.setItem('aws_saa_exam_history', JSON.stringify(existing));
+        } catch (e) {}
+
+        renderResultsDashboard(resultRecord);
+    }
+
+    function renderResultsDashboard(result) {
+        const container = document.getElementById('quiz-container');
+
+        let auditHTML = '';
+        if (result.incorrectQuestions.length === 0) {
+            auditHTML = '<div style="text-align: center; color: #10b981; font-weight: 700; padding: 20px;">🎉 Flawless Score! You answered every question correctly.</div>';
+        } else {
+            result.incorrectQuestions.forEach(item => {
+                auditHTML += '<div class="question-card" style="margin-bottom: 16px; border-left: 4px solid #ef4444;">' +
+                    '<div style="font-weight: 700; margin-bottom: 8px; color: var(--text-primary, #0f172a); font-size: 1rem;">' +
+                        '#' + item.number + '. ' + item.question +
+                    '</div>' +
+                    '<div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem; margin-bottom: 12px; background: var(--card-sub-bg); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">' +
+                        '<div style="color: #ef4444;">' +
+                            '❌ <strong>Your Answer:</strong><br>' + item.userAnswerText +
+                        '</div>' +
+                        '<div style="color: #10b981; border-top: 1px dashed var(--border-color); padding-top: 8px;">' +
+                            '✓ <strong>Correct Answer:</strong><br>' + item.correctAnswerText +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="explanation" style="display: block; margin-top: 8px;">' +
+                        '<strong>Explanation:</strong> ' + item.explanation +
+                    '</div>' +
+                '</div>';
+            });
+        }
+
+        container.innerHTML = '<div class="results-container">' +
+            '<div class="results-score-box ' + result.status.toLowerCase() + '">' +
+                '<div class="score-status-badge">' + (result.status === 'PASS' ? '🎉 CONGRATULATIONS - PASSED' : '⚠️ FAIL - NEEDS IMPROVEMENT') + '</div>' +
+                '<div class="score-big">' + result.awsScaledScore + ' / 1000</div>' +
+                '<div style="font-weight: 600; font-size: 1.1rem;">' +
+                    'Score: ' + result.correctCount + ' / ' + result.totalQuestions + ' (' + result.scorePercentage + '%) | Time Spent: ' + result.timeSpent +
+                '</div>' +
+                '<div style="font-size: 0.85rem; opacity: 0.8; margin-top: 4px;">(Passing Threshold: 720 / 1000)</div>' +
+            '</div>' +
+
+            '<div class="results-actions">' +
+                '<button class="btn-export-json" onclick="downloadExamResultsJSON()">' +
+                    '📥 Save Results JSON (exam_results.json)' +
+                '</button>' +
+                '<button class="btn-nav" onclick="initExamMode()">' +
+                    '🔄 Retake AWS Exam' +
+                '</button>' +
+                '<button class="btn-nav" onclick="switchQuizMode(\'practice\')">' +
+                    '📖 Return to Practice Mode' +
+                '</button>' +
+            '</div>' +
+
+            '<div style="margin-top: 32px;">' +
+                '<h3 style="color: var(--text-primary, #0f172a); margin-bottom: 16px;">🔍 Incorrect & Unanswered Questions Analysis (' + result.incorrectQuestions.length + ')</h3>' +
+                auditHTML +
+            '</div>' +
+        '</div>';
+    }
+
+    function downloadExamResultsJSON() {
+        if (!lastExamResult) return;
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(lastExamResult, null, 2));
+        const downloadAnchor = document.createElement('a');
+        downloadAnchor.setAttribute("href", dataStr);
+        downloadAnchor.setAttribute("download", "exam_results.json");
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        downloadAnchor.remove();
+        alert('Saved exam results to exam_results.json!');
+    }
+
+    // Initialize application on load
+    renderQuiz();
+
+    // ======================== PRACTICE MODE QUESTION NAVIGATOR ========================
+    var practiceNavOpen = false;
+    function togglePracticeNav() { practiceNavOpen ? closePracticeNav() : openPracticeNav(); }
+    function openPracticeNav() {
+        practiceNavOpen = true;
+        var panel = document.getElementById('practice-nav-panel');
+        if (panel) panel.classList.add('open');
+        refreshPracticeNav();
+    }
+    function closePracticeNav() {
+        practiceNavOpen = false;
+        var panel = document.getElementById('practice-nav-panel');
+        if (panel) panel.classList.remove('open');
+    }
+    function refreshPracticeNav() {
+        if (!practiceNavOpen) return;
+        var grid = document.getElementById('practice-nav-grid');
+        var statsEl = document.getElementById('practice-nav-stats');
+        if (!grid) return;
+        grid.innerHTML = '';
+        var data = typeof activeQuizData !== 'undefined' && activeQuizData ? activeQuizData : (typeof quizData !== 'undefined' ? quizData : []);
+        if (!data || data.length === 0) return;
+        var correctCount = 0, incorrectCount = 0;
+        data.forEach(function(q) {
+            var card = document.getElementById('card-' + q.id);
+            var status = card ? (card.getAttribute('data-status') || 'unanswered') : 'unanswered';
+            if (status === 'correct') correctCount++;
+            else if (status === 'incorrect') incorrectCount++;
+            var btn = document.createElement('button');
+            btn.className = 'nav-q-btn status-' + status;
+            btn.title = 'Q#' + q.id + ' — ' + (q.q || q.question || '').substring(0, 60) + '...';
+            btn.textContent = q.id;
+            btn.onclick = function() {
+                var target = document.getElementById('card-' + q.id);
+                if (target) {
+                    closePracticeNav();
+                    setTimeout(function() {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        target.style.outline = '2px solid #ff9900';
+                        target.style.outlineOffset = '4px';
+                        setTimeout(function() { target.style.outline = ''; target.style.outlineOffset = ''; }, 2000);
+                    }, 300);
+                }
+            };
+            grid.appendChild(btn);
+        });
+        var total = data.length;
+        var answered = correctCount + incorrectCount;
+        if (statsEl) statsEl.innerHTML = '<strong>' + answered + '/' + total + '</strong> answered &nbsp;|&nbsp; [OK] ' + correctCount + ' correct &nbsp;|&nbsp; ❌ ' + incorrectCount + ' incorrect';
+    }
+    document.addEventListener('click', function(e) {
+        var panel = document.getElementById('practice-nav-panel');
+        var btn = document.getElementById('practice-nav-btn');
+        if (practiceNavOpen && panel && btn && !panel.contains(e.target) && !btn.contains(e.target)) closePracticeNav();
+    });
+
+    // ======================== ORDER BUTTONS ========================
+    var currentOrder = 'first';
+    function setOrder(orderType, btn) {
+        currentOrder = orderType;
+        document.querySelectorAll('.order-btn').forEach(function(b) { b.classList.remove('active'); });
+        if (btn) btn.classList.add('active');
+        var data = typeof activeQuizData !== 'undefined' && activeQuizData ? activeQuizData : (typeof quizData !== 'undefined' ? quizData : null);
+        if (!data || data.length === 0) return;
+        var ordered = data.slice();
+        if (orderType === 'first') ordered.sort(function(a,b){ return (parseInt(a.id)||0)-(parseInt(b.id)||0); });
+        else if (orderType === 'last') ordered.sort(function(a,b){ return (parseInt(b.id)||0)-(parseInt(a.id)||0); });
+        else ordered.sort(function(){ return 0.5-Math.random(); });
+        if (typeof activeQuizData !== 'undefined') activeQuizData = ordered;
+        if (typeof renderQuizGroupedBySection === 'function') renderQuizGroupedBySection(ordered);
+        else if (typeof renderQuiz === 'function') renderQuiz(ordered);
+        if (typeof refreshPracticeNav === 'function') setTimeout(refreshPracticeNav, 200);
+    }
+
+    </script>
+</body>
+</html>

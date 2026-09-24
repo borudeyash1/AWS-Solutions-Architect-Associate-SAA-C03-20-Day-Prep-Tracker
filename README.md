@@ -1,303 +1,144 @@
-# 🎯 AWS Solutions Architect Associate (SAA-C03) 20-Day Prep Tracker
+# 🚀 AWS Solutions Architect Associate (SAA-C03) — 30-Day Prep Tracker & Interactive Quizzes
 
-> **Source Material**: [AWS Solution Architect Handbook.pdf](file:///d:/Interview/SAA/AWS%20Solution%20Architect%20Handbook.pdf)  
-> **Goal**: Master all 16 AWS domains and 100+ core services across 20 structured prep days to clear the **SAA-C03** examination with confidence.
+[![AWS SAA-C03 Badge](saa-badge.png)](https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-30-Day-Prep-Tracker)
 
----
-
-## 📊 Preparation Overview
-
-| Phase | Days | Focus Areas | Primary Handbook Categories Covered |
-| :--- | :--- | :--- | :--- |
-| **Phase 1** | Days 1–5 | Core Infrastructure & Storage | Compute, Serverless, Storage, VPC & Core Networking |
-| **Phase 2** | Days 6–10 | Advanced Networking, Databases & App Integration | Edge Networking, Databases, Containers, Developer Tools & Messaging |
-| **Phase 3** | Days 11–15 | Security, Governance, Analytics & Cost Management | Security & Identity, Compliance, Management & Governance, Analytics & Cost |
-| **Phase 4** | Days 16–20 | Migration, AI/ML, Architecture Patterns & Mock Exams | Migration & Transfer, Front-End/ML, Well-Architected Framework & Practice Exams |
+> **Certified & Community-Driven:** Prepared, curated, and used by me to successfully clear the **AWS Certified Solutions Architect – Associate (SAA-C03)** exam. Sharing my complete preparation strategy, hands-on practice engines, and scenario-based quizzes to help you pass on your first attempt! 🎯
+>
+> 🔗 **GitHub Repository:** [github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-30-Day-Prep-Tracker](https://github.com/borudeyash1/AWS-Solutions-Architect-Associate-SAA-C03-30-Day-Prep-Tracker)
 
 ---
 
-## 🤝 Study Commitment & Dedicated Hours Promise
+## 💡 About This Repository
 
-> **The 60-Hour SAA-C03 Mastery Pledge** 📜  
-> *"I promise to dedicate **2.5 to 3 hours daily** over the next **20 days** (totaling **50–60 hours** of focused study) to thoroughly read the handbook, solve topic quizzes, analyze architectural trade-offs, and pass the **AWS Certified Solutions Architect Associate (SAA-C03)** exam with confidence."*
+When preparing for my AWS SAA-C03 exam, I realized the importance of active recall, structured domain breakdown, and real-world design scenario practice. Instead of relying solely on passive reading, I created a **30-Day Structured Prep Roadmap** paired with **custom, interactive web-based quiz applications**.
 
-### ⏳ Daily Hours Breakdown (2.5 – 3.0 Hours / Day):
-- 📖 **Theory & Handbook Deep-Dive (1.0 – 1.5 hrs/day)**: Study service architectures, configuration parameters, limits, and Well-Architected pillars from the handbook.
-- 🧪 **Topic Quizzes & Scenario Solving (1.0 hr/day)**: Practice scenario-based questions, multi-select evaluation, and jumbled option drills across interactive quiz modules.
-- 📝 **Audit & Retention Review (0.5 hr/day)**: Analyze incorrect options, review explanations, and solidify core architectural concepts.
+Having achieved my certification, I am sharing all these study resources, topic-wise practice modules, design scenario master quizzes, and flashcard engines with the AWS learning community.
 
 ---
 
-## 🗓️ Phase 1: Core Infrastructure & Storage (Days 1–5)
-
-### 📅 Day 1: Core Compute Services
-**Focus**: Primary EC2 instances, auto-scaling, batch workloads, and Elastic Beanstalk.  
-**Handbook Category**: `COMPUTE`
-
-- [ ] **Amazon EC2** — Instance types (General, Compute, Memory, Storage), Pricing Models (On-Demand, Reserved, Spot, Dedicated), Placement Groups, AMIs.
-- [ ] **Amazon EC2 Auto Scaling** — Auto Scaling Groups (ASG), Scaling Policies (Target Tracking, Step, Simple, Predictive), Health Checks.
-- [ ] **AWS Batch** — Batch processing, Job Definitions, Job Queues, Compute Environments (Managed vs Unmanaged).
-- [ ] **AWS Elastic Beanstalk** — PaaS deployment model, Deployment Strategies (All-at-once, Rolling, Rolling with batch, Immutable, Blue/Green).
-- [ ] 🎯 *Day 1 Review*: Review EC2 pricing models and scaling policy selection scenarios in the Handbook.
+### ✨ Key Features
+- 📅 **Structured 30-Day Prep Plan:** Phase-by-phase roadmap covering core theory, domain deep-dives, design scenarios, and final full mock practice.
+- 🎯 **Interactive HTML Quiz Engines:** Self-contained, zero-dependency HTML files with Practice Mode, Exam Mode, detailed answer explanations, and progress analytics.
+- 🏗️ **Domain-Specific Scenarios:** In-depth questions covering Security, Reliability, Performance Efficiency, Cost Optimization, Governance, and Migration.
+- ⚡ **Sequential, First/Last & Randomized Practice:** Real-time search filters, question navigators, and instant domain feedback.
 
 ---
 
-### 📅 Day 2: Edge/Hybrid Compute & Serverless Foundations
-**Focus**: Hybrid compute infrastructure, edge deployment, and core serverless compute.  
-**Handbook Categories**: `COMPUTE`, `SERVERLESS`
-
-- [ ] **AWS Outposts** — Extending AWS infrastructure and services on-premises for low-latency workloads.
-- [ ] **AWS Wavelength** — Ultra-low latency application deployment for 5G devices at the carrier edge.
-- [ ] **AWS Serverless Application Repository** — Managing and sharing serverless applications and components.
-- [ ] **AWS Lambda** — Serverless computing, Execution Context, Concurrency (Unreserved, Reserved, Provisioned), Event Sources, Function URLs.
-- [ ] **AWS Fargate** — Serverless compute engine for containerized workloads without managing EC2 instances.
-- [ ] 🎯 *Day 2 Review*: Contrast Lambda provisioned concurrency vs on-demand execution.
+> **Primary Handbook**: [`01_Phase1_Handbook_Study_Days_1_15/AWS Solution Architect Handbook.pdf`](01_Phase1_Handbook_Study_Days_1_15/AWS%20Solution%20Architect%20Handbook.pdf)  
+> **Topic-Wise Theoretical Quiz**: [`02_Phase2_Topic_Theoretical_Quizzes_Days_16_20/SAA Topic Wise Quiz.html`](02_Phase2_Topic_Theoretical_Quizzes_Days_16_20/SAA%20Topic%20Wise%20Quiz.html)  
+> **Master Design Scenario Quiz**: [`03_Phase3_Design_Scenario_Quizzes_Days_21_27/SAA Design Master Quiz.html`](03_Phase3_Design_Scenario_Quizzes_Days_21_27/SAA%20Design%20Master%20Quiz.html)  
+> **Mock Exam Revision**: [`04_Phase4_Final_Mock_Exam_Revision_Days_28_30/SAA Design Master Quiz.html`](04_Phase4_Final_Mock_Exam_Revision_Days_28_30/SAA%20Design%20Master%20Quiz.html)  
+> **Goal**: Master all SAA-C03 architectural domains and pass the exam with high confidence within **30 structured prep days**.
 
 ---
 
-### 📅 Day 3: Storage Deep Dive (Part 1 — S3 & EBS)
-**Focus**: Object storage partitioning, lifecycle management, and block storage performance.  
-**Handbook Category**: `STORAGE`
+## 📊 The 30-Day Chronological Roadmap
 
-- [ ] **Amazon S3** — Storage Classes (Standard, Intelligent-Tiering, Standard-IA, One Zone-IA, Glacier Instant/Flexible/Deep Archive), Lifecycle Rules, Versioning, Replication (CRR/SRR), Object Lock.
-- [ ] **Amazon S3 Security & Performance** — S3 Bucket Policies, KMS Encryption, S3 Select, Byte-Range Fetches, Multipart Upload, Access Points, Multi-Region Access Points.
-- [ ] **Amazon Elastic Block Store (Amazon EBS)** — Volume types (gp2/gp3, io1/io2, st1, sc1), EBS Snapshots, Data Lifecycle Manager (DLM), Encryption, Multi-Attach.
-- [ ] 🎯 *Day 3 Review*: Solve storage class cost-optimization scenarios.
-
----
-
-### 📅 Day 4: Storage Deep Dive (Part 2 — File Systems, Backup & Hybrid Storage)
-**Focus**: Distributed file systems, central backups, and hybrid storage gateways.  
-**Handbook Category**: `STORAGE`
-
-- [ ] **Amazon Elastic File System (Amazon EFS)** — Network file system (NFSv4), Performance Modes (General Purpose, Max I/O), Throughput Modes (Bursting, Provisioned, Elastic), Storage Classes.
-- [ ] **Amazon FSx (All Types)** — FSx for Windows File Server, FSx for Lustre (HPC), FSx for NetApp ONTAP, FSx for OpenZFS.
-- [ ] **AWS Backup** — Centralized backup management across AWS services (EBS, S3, RDS, DynamoDB, EFS).
-- [ ] **AWS Storage Gateway** — File Gateway (S3/FSx), Volume Gateway (Stored vs Cached), Tape Gateway.
-- [ ] 🎯 *Day 4 Review*: Compare EFS vs FSx for Windows vs FSx for Lustre use cases.
+```
+  +-----------------------------------------------------------------------------------+
+  |                                                                                   |
+  |   PHASE 1: Days 1 - 15  -->  Handbook Study & Core Fundamentals (15 Days)          |
+  |   PHASE 2: Days 16 - 20 -->  Topic-Wise Theoretical Quiz Practice (5 Days)        |
+  |   PHASE 3: Days 21 - 27 -->  Master Design Scenario Practice (7 Days)             |
+  |   PHASE 4: Days 28 - 30 -->  Final Revision & 65-Q Mock Exam Simulation (3 Days)  |
+  |                                                                                   |
+  +-----------------------------------------------------------------------------------+
+```
 
 ---
 
-### 📅 Day 5: Core Networking & Load Balancing
-**Focus**: Virtual Private Cloud setup, subnet routing, security, and load distribution.  
-**Handbook Category**: `NETWORKING & CONTENT DELIVERY`
+### 📘 Phase 1: Days 1–15 — Handbook Study & Core Fundamentals (15 Days)
 
-- [ ] **Amazon VPC (Part 1)** — CIDR blocks, Public & Private Subnets, Route Tables, Internet Gateways (IGW), NAT Gateways vs NAT Instances.
-- [ ] **Amazon VPC (Part 2)** — Security Groups (Stateful) vs Network ACLs (Stateless), VPC Flow Logs, VPC Peering.
-- [ ] **Elastic Load Balancing (ELB)** — Application Load Balancer (ALB), Network Load Balancer (NLB), Gateway Load Balancer (GWLB), Target Groups, Cross-Zone Load Balancing, SSL Termination.
-- [ ] **Amazon Route 53** — Routing Policies (Simple, Weighted, Latency, Failover, Geolocation, Geoproximity, Multi-Value Answer), Health Checks, Private Hosted Zones.
-- [ ] 🎯 *Day 5 Review*: Practice drawing a multi-AZ VPC architecture with ALB and Auto Scaling.
-
----
-
-## 🗓️ Phase 2: Advanced Networking, Databases & App Integration (Days 6–10)
-
-### 📅 Day 6: Advanced Networking & Content Delivery
-**Focus**: Global network acceleration, hybrid connectivity, and inter-VPC transit.  
-**Handbook Category**: `NETWORKING & CONTENT DELIVERY`
-
-- [ ] **Amazon CloudFront** — CDN origins, Edge Locations, CloudFront Functions vs Lambda@Edge, Signed URLs/Cookies, OAC/OAI, Cache Behaviors.
-- [ ] **AWS Direct Connect (DX)** — Dedicated network connections, DX Locations, Private VIF, Public VIF, Transit VIF, Direct Connect Gateway, High Availability design (Active/Active vs Active/Passive).
-- [ ] **AWS Global Accelerator** — Anycast IP addresses, Traffic Dial, Endpoint Groups, Static IP routing acceleration.
-- [ ] **AWS Transit Gateway (TGW)** — Central hub connecting VPCs, VPNs, and Direct Connect; Route Table domain isolation.
-- [ ] 🎯 *Day 6 Review*: Compare CloudFront vs Global Accelerator for dynamic content.
+* **Primary Resource**: [`01_Phase1_Handbook_Study_Days_1_15/AWS Solution Architect Handbook.pdf`](01_Phase1_Handbook_Study_Days_1_15/AWS%20Solution%20Architect%20Handbook.pdf)
+* **Goal**: Build deep architectural understanding across all core AWS services and concepts.
+* **Daily Schedule**:
+  * **Days 1–3**: Compute & Core Infrastructure (EC2, Auto Scaling, ELB, EBS, EFS)
+  * **Days 4–6**: Networking & Edge Services (VPC, Route 53, CloudFront, Direct Connect)
+  * **Days 7–9**: Database & Caching Services (RDS, Aurora, DynamoDB, ElastiCache)
+  * **Days 10–12**: Security, Identity & Compliance (IAM, KMS, Secrets Manager, WAF, Shield, GuardDuty)
+  * **Days 13–15**: Integration, Analytics, Governance & Migration (SQS, SNS, EventBridge, Organizations, SCPs, DMS, MGN)
 
 ---
 
-### 📅 Day 7: Relational Databases & Caching
-**Focus**: SQL database engine patterns, read replicas, multi-AZ high availability, and in-memory caches.  
-**Handbook Category**: `DATABASE`
+### 📚 Phase 2: Days 16–20 — Theoretical & Factual Quiz Practice (5 Days)
 
-- [ ] **Amazon RDS** — Engines (PostgreSQL, MySQL, MariaDB, Oracle, SQL Server), Multi-AZ Deployments (Synchronous), Read Replicas (Asynchronous), Automated Backups vs Manual Snapshots, Storage Auto-Scaling.
-- [ ] **Amazon Aurora** — Aurora Architecture (6 copies across 3 AZs), Aurora Serverless v2, Aurora Global Database, Aurora Read Replicas, Parallel Query, Fault Tolerance.
-- [ ] **Amazon ElastiCache** — Redis/Valkey (Clustering, Pub/Sub, Persistence) vs Memcached (Multi-threading, Simple Key-Value), Cache Strategies (Lazy Loading, Write-Through).
-- [ ] 🎯 *Day 7 Review*: Master RDS Multi-AZ failover mechanics vs Aurora Shared Storage architecture.
+* **Primary Resource**: [`02_Phase2_Topic_Theoretical_Quizzes_Days_16_20/SAA Topic Wise Quiz.html`](02_Phase2_Topic_Theoretical_Quizzes_Days_16_20/SAA%20Topic%20Wise%20Quiz.html)
+* **Goal**: Solve all 16 topic-wise theoretical modules to test core facts, service definitions, feature capabilities, and limits.
+* **Daily Schedule**:
+  * **Day 16**: Analytics & Application Integration (Quizzes 1–2)
+  * **Day 17**: Cloud Financial Management, Compute & Containers (Quizzes 3–6)
+  * **Day 18**: Databases, Developer Tools, Front-End & Messaging (Quizzes 7–10)
+  * **Day 19**: Migration, Networking & Content Delivery (Quizzes 11–13)
+  * **Day 20**: Security, Identity, Storage & Systems Management (Quizzes 14–16)
 
----
-
-### 📅 Day 8: NoSQL, Specialized Databases & Data Stores
-**Focus**: Non-relational databases, ledger, graph, and column-store databases.  
-**Handbook Category**: `DATABASE`
-
-- [ ] **Amazon DynamoDB** — Partition Keys & Sort Keys, Read/Write Capacity Units (On-Demand vs Provisioned), Global Secondary Indexes (GSI) vs Local Secondary Indexes (LSI), DynamoDB Streams, Global Tables.
-- [ ] **Amazon DocumentDB** — MongoDB-compatible managed document database.
-- [ ] **Amazon Keyspaces** — Apache Cassandra-compatible managed database service.
-- [ ] **Amazon Neptune** — Managed Graph database service (Gremlin, SPARQL).
-- [ ] **Amazon Quantum Ledger Database (Amazon QLDB)** — Immutable, cryptographically verifiable ledger database.
-- [ ] **Amazon Redshift (Database Focus)** — Columnar storage, Leader Node & Compute Nodes, Redshift Spectrum, Concurrency Scaling.
-- [ ] 🎯 *Day 8 Review*: Compare database selection criteria across OLTP, OLAP, NoSQL, and Graph.
+> [!TIP]
+> **Study Advice**: The topic-wise quiz tests factual knowledge. Move quickly through this phase in 5 days to dedicate maximum time to the real exam-level design scenario questions in Phase 3.
 
 ---
 
-### 📅 Day 9: Containers & Microservices Infrastructure
-**Focus**: Container management, orchestration, and image registries.  
-**Handbook Category**: `CONTAINERS`
+### 🏛️ Phase 3: Days 21–27 — Master Design Scenario Practice (7 Days)
 
-- [ ] **Amazon Elastic Container Service (Amazon ECS)** — Task Definitions, Services, Clusters, Launch Types (EC2 vs Fargate), Capacity Providers.
-- [ ] **Amazon Elastic Container Registry (Amazon ECR)** — Image repositories, vulnerability scanning, lifecycle policies, cross-account/cross-region replication.
-- [ ] **Amazon Elastic Kubernetes Service (Amazon EKS)** — Control plane management, Worker nodes (Managed Node Groups, Fargate profiles), kubectl integration.
-- [ ] **Amazon ECS Anywhere, EKS Anywhere & EKS Distro** — Hybrid container management on customer infrastructure.
-- [ ] 🎯 *Day 9 Review*: Review container deployment options (ECS Fargate vs EKS Fargate).
-
----
-
-### 📅 Day 10: Application Integration, Messaging & Developer Tools
-**Focus**: Event-driven architectures, asynchronous decoupling, and distributed tracing.  
-**Handbook Categories**: `APPLICATION INTEGRATION`, `DEVELOPER TOOLS`
-
-- [ ] **Amazon Simple Queue Service (Amazon SQS)** — Standard vs FIFO Queues, Visibility Timeout, Short vs Long Polling, Dead Letter Queues (DLQ), Delay Queues.
-- [ ] **Amazon Simple Notification Service (Amazon SNS)** — Topic subscriptions (SQS, Lambda, HTTP, Email), Fan-out pattern, FIFO Topics, Message Filtering.
-- [ ] **Amazon EventBridge** — Event Bus, Custom Rules, Schema Registry, EventBridge Pipes, API Destinations.
-- [ ] **AWS Step Functions** — State Machines (Standard vs Express), Task States, Choice States, Parallel States, Error Handling and Retries.
-- [ ] **Amazon MQ** — Managed message broker for Apache ActiveMQ and RabbitMQ.
-- [ ] **Amazon AppFlow & AWS AppSync** — SaaS data ingestion and GraphQL endpoint integration.
-- [ ] **AWS X-Ray** — Distributed tracing, Service Maps, Traces, Segments, Annotations.
-- [ ] 🎯 *Day 10 Review*: Architectural patterns for SQS + SNS Fan-out and EventBridge routing.
+* **Primary Resource**: [`03_Phase3_Design_Scenario_Quizzes_Days_21_27/SAA Design Master Quiz.html`](03_Phase3_Design_Scenario_Quizzes_Days_21_27/SAA%20Design%20Master%20Quiz.html) *(550 Questions Total)*
+* **Goal**: Master complex, multi-sentence AWS exam scenario questions where you must distinguish between similar AWS services under specific technical constraints.
+* **Daily Schedule**:
+  * **Day 21**: 🛡️ **[Design for Reliability Part 1](03_Phase3_Design_Scenario_Quizzes_Days_21_27/SAA%20Design-Reliability%20QUIZ%20Part%201-7.html)** (Qs 1–75): DR Strategies (RTO/RPO), Aurora/DynamoDB Global Tables, Route 53 Failover.
+  * **Day 22**: 🛡️ **[Design for Reliability Part 2](03_Phase3_Design_Scenario_Quizzes_Days_21_27/SAA%20Design-Reliability%20QUIZ%20Part%201-7.html)** (Qs 76–150): Multi-AZ RDS, SQS DLQ & Visibility Timeout, EFS/EBS resilience.
+  * **Day 23**: ⚡ **[Design for Performance](03_Phase3_Design_Scenario_Quizzes_Days_21_27/SAA%20Design-Performance%20QUIZ%20Part%201-5.html)** (100 Qs): EC2 Instance Families, HPC (FSx Lustre, EFA, Cluster PG), Aurora Serverless v2, CloudFront vs Global Accelerator.
+  * **Day 24**: 💰 **[Design for Cost Optimization](03_Phase3_Design_Scenario_Quizzes_Days_21_27/SAA%20Design-Cost-Optimization%20QUIZ%20Part%201-5.html)** (100 Qs): Spot vs Savings Plans vs RIs, S3 Lifecycle Rules, NAT Gateway vs NAT Instance, Compute Optimizer.
+  * **Day 25**: 🔒 **[Design for Security](03_Phase3_Design_Scenario_Quizzes_Days_21_27/SAA%20Design-Security%20QUIZ%20Part%201-9.html)** (100 Qs): WAF vs Shield vs Network Firewall, KMS CMK, Secrets Manager, VPC Endpoints & PrivateLink.
+  * **Day 26**: 🚚 **[Design for Migration & Hybrid Connectivity](03_Phase3_Design_Scenario_Quizzes_Days_21_27/SAA%20Design-Migration%20QUIZ.html)** (50 Qs): 7 Rs of Migration, AWS DMS vs SCT, AWS MGN, DataSync vs Storage Gateway, Direct Connect.
+  * **Day 27**: 🏢 **[Multi-Account Governance & Organizational Security](03_Phase3_Design_Scenario_Quizzes_Days_21_27/SAA%20Design-Governance%20QUIZ.html)** (50 Qs): AWS Organizations, SCPs, Control Tower Guardrails, RAM VPC Sharing, IAM Identity Center.
 
 ---
 
-## 🗓️ Phase 3: Security, Governance, Analytics & Cost Management (Days 11–15)
+### ⚡ Phase 4: Days 28–30 — Final Revision & Mock Exam Simulation (3 Days)
 
-### 📅 Day 11: Security, Identity & Key Management
-**Focus**: IAM policies, identity federation, cryptographic keys, and secret management.  
-**Handbook Category**: `SECURITY, IDENTITY & COMPLIANCE`
-
-- [ ] **AWS Identity and Access Management (IAM)** — Users, Groups, Roles, Policies (Identity-based, Resource-based, SCPs, Permission Boundaries), STS (AssumeRole), Identity Federation (SAML 2.0, Web Identity).
-- [ ] **Amazon Cognito** — User Pools (Authentication, User Directories) vs Identity Pools (Authorization, AWS Temporary Credentials).
-- [ ] **AWS Key Management Service (AWS KMS)** — Symmetric vs Asymmetric Keys, Customer Managed Keys (CMK) vs AWS Managed Keys, KMS Key Policies, Envelope Encryption, Multi-Region Keys.
-- [ ] **AWS CloudHSM** — Dedicated hardware security module for single-tenant compliance requirements.
-- [ ] **AWS Secrets Manager vs Parameter Store** — Automatic secret rotation, KMS integration, SSM Parameter Store (Free tier vs Advanced parameters).
-- [ ] **AWS Resource Access Manager (AWS RAM)** — Securely sharing AWS resources across accounts and within AWS Organizations.
-- [ ] 🎯 *Day 11 Review*: Solve IAM policy evaluation logic scenarios (Explicit Deny > Explicit Allow > Default Deny).
+* **Primary Resources**:
+  * [`04_Phase4_Final_Mock_Exam_Revision_Days_28_30/SAA Design Master Quiz.html`](04_Phase4_Final_Mock_Exam_Revision_Days_28_30/SAA%20Design%20Master%20Quiz.html)
+  * [`04_Phase4_Final_Mock_Exam_Revision_Days_28_30/SAA Topic Wise Quiz.html`](04_Phase4_Final_Mock_Exam_Revision_Days_28_30/SAA%20Topic%20Wise%20Quiz.html)
+* **Goal**: Simulate full 65-question timed AWS SAA-C03 exams to build speed, endurance, and score retention.
+* **Daily Schedule**:
+  * **Day 28**: Run 2 Full Mock Exams in **⚡ AWS Exam Mode** on `SAA Design Master Quiz.html`. Target Score: **> 750 / 1000 (75%+)**.
+  * **Day 29**: Review incorrect questions, re-take weak domain sections, run 2 more Mock Exams. Target Score: **> 820 / 1000 (82%+)**.
+  * **Day 30**: Final light review of weak topics & key numerical limits (RTO/RPO values, MTU sizes, S3 storage class transition days). Rest well before exam day!
 
 ---
 
-### 📅 Day 12: Network Security, Threat Detection & Compliance
-**Focus**: WAF protection, threat monitoring, security compliance, and firewall management.  
-**Handbook Category**: `SECURITY, IDENTITY & COMPLIANCE`
+## 📁 Repository Structure
 
-- [ ] **AWS WAF & AWS Shield** — Web ACLs, Rules, SQL Injection / XSS protection, Rate-based rules, Shield Standard vs Shield Advanced (DDoS protection).
-- [ ] **AWS Firewall Manager & AWS Network Firewall** — Central security management across VPCs and Accounts; Layer 7 inspection.
-- [ ] **Amazon GuardDuty** — Intelligent threat detection using machine learning on CloudTrail, VPC Flow Logs, and DNS Logs.
-- [ ] **Amazon Inspector & Amazon Macie** — Vulnerability scanning for EC2/ECR vs Sensitive data discovery (PII) in S3.
-- [ ] **AWS Security Hub & Amazon Detective** — Centralized security posture management and root cause analysis for security findings.
-- [ ] **AWS Directory Service** — AWS Managed Microsoft AD, Simple AD, AD Connector.
-- [ ] **AWS Artifact & AWS Audit Manager** — Compliance reports, agreements, and automated audit evidence collection.
-- [ ] 🎯 *Day 12 Review*: Differentiate GuardDuty vs Inspector vs Macie vs Security Hub.
-
----
-
-### 📅 Day 13: Management, Governance & Infrastructure as Code (Part 1)
-**Focus**: Resource management, audit logging, monitoring, and automated provisioning.  
-**Handbook Category**: `MANAGEMENT & GOVERNANCE`
-
-- [ ] **AWS CloudFormation** — Templates, Stacks, StackSets, Change Sets, Custom Resources, Drift Detection, Rollback behavior.
-- [ ] **AWS CloudTrail** — Logging management and data events, Trail organization aggregation, Integrity validation, CloudTrail Insights.
-- [ ] **Amazon CloudWatch** — Metrics, Alarm Actions, CloudWatch Logs, Log Groups, CloudWatch Insights, Dashboards, Synthetics.
-- [ ] **AWS Config** — Resource configuration history, Compliance Rules (Managed vs Custom), Remediation Actions.
-- [ ] **AWS Organizations & Control Tower** — Multi-account strategy, Organizational Units (OUs), Service Control Policies (SCPs), Guardrails.
-- [ ] **AWS Systems Manager (SSM)** — Parameter Store, Run Command, Patch Manager, Session Manager, Automation, State Manager.
-- [ ] 🎯 *Day 13 Review*: Master SCP inheritance rules across multi-account OU hierarchies.
-
----
-
-### 📅 Day 14: Operations, Governance & Cost Optimization
-**Focus**: Observability tools, operational health, service discovery, and cost monitoring.  
-**Handbook Categories**: `MANAGEMENT & GOVERNANCE`, `AWS COST MANAGEMENT`
-
-- [ ] **AWS CLI & AWS Management Console** — Command line automation, profiles, and console controls.
-- [ ] **AWS Health Dashboard** — Personal Health Dashboard (PHD) vs Service Health Dashboard (SHD).
-- [ ] **Amazon License Manager, Managed Grafana & Prometheus** — Open-source observability and software license management.
-- [ ] **AWS Proton & AWS Service Catalog** — Standardized application templates and catalog management for end users.
-- [ ] **AWS Trusted Advisor & AWS Well-Architected Tool** — Cost, security, fault tolerance recommendations, and Well-Architected reviews.
-- [ ] **AWS Cost Management Tools** — AWS Budgets, AWS Cost Explorer, AWS Cost and Usage Report (CUR), Savings Plans (Compute vs EC2 Instance vs SageMaker), Cost Allocation Tags.
-- [ ] 🎯 *Day 14 Review*: Solve cost reduction scenario questions (Savings Plans vs Reserved Instances vs Spot).
+```
+d:/Interview/SAA/
+├── 01_Phase1_Handbook_Study_Days_1_15/
+│   └── AWS Solution Architect Handbook.pdf               (Primary Study Guide - Days 1-15)
+│
+├── 02_Phase2_Topic_Theoretical_Quizzes_Days_16_20/
+│   ├── SAA Topic Wise Quiz.html                          (16 Topic Modules - Days 16-20)
+│   └── saa-badge.png
+│
+├── 03_Phase3_Design_Scenario_Quizzes_Days_21_27/
+│   ├── SAA Design Master Quiz.html                       (🌟 Combined Master Quiz - 550 Qs)
+│   ├── SAA Design-Reliability QUIZ Part 1-7.html        (150 Questions)
+│   ├── SAA Design-Performance QUIZ Part 1-5.html        (100 Questions)
+│   ├── SAA Design-Cost-Optimization QUIZ Part 1-5.html   (100 Questions)
+│   ├── SAA Design-Security QUIZ Part 1-9.html           (100 Questions)
+│   ├── SAA Design-Migration QUIZ.html                    (50 Questions)
+│   ├── SAA Design-Governance QUIZ.html                   (50 Questions)
+│   └── saa-badge.png
+│
+├── 04_Phase4_Final_Mock_Exam_Revision_Days_28_30/
+│   ├── SAA Design Master Quiz.html                       (⚡ 65-Q Timed SAA Exam Simulator)
+│   └── SAA Topic Wise Quiz.html                          (Factual Quick Review)
+│
+├── README.md                                             (This 30-Day Preparation Guide)
+└── saa-badge.png
+```
 
 ---
 
-### 📅 Day 15: Analytics & Data Lake Architectures
-**Focus**: Big data pipelines, stream processing, data lakes, and querying engines.  
-**Handbook Category**: `ANALYTICS`
+## 💻 How to Use the Quizzes
 
-- [ ] **Amazon Athena** — Serverless SQL queries on S3, Partitioning, Parquet/ORC compression, Glue Data Catalog integration.
-- [ ] **AWS Data Pipeline & AWS Data Exchange** — Data workflow orchestration and third-party data subscriptions.
-- [ ] **Amazon EMR** — Hadoop and Spark processing clusters, Spot Instance utilization, EMR Serverless.
-- [ ] **AWS Glue** — ETL jobs, Data Catalog, Crawlers, Glue Streaming, AWS Lake Formation (Data Lake governance).
-- [ ] **Amazon Kinesis** — Kinesis Data Streams (Shard management, retention), Kinesis Data Firehose (Delivery to S3/Redshift/OpenSearch), Kinesis Data Analytics (Flink).
-- [ ] **Amazon MSK & Amazon OpenSearch Service** — Managed Kafka streams and log/text analytics indexing.
-- [ ] **Amazon QuickSight & Amazon Redshift** — BI dashboards, SPICE engine, Redshift Data Warehouse (Distkeys & Sortkeys).
-- [ ] 🎯 *Day 15 Review*: Architectural comparison of Kinesis Data Streams vs Kinesis Data Firehose vs SQS.
+1. Simply open any `.html` file directly in any modern web browser (Google Chrome, Microsoft Edge, Firefox, etc.) — **no server setup or Node.js required!**
+2. Choose between **📖 Practice Mode** (instant explanation and answer feedback) or **⚡ AWS Exam Mode** (timed mock exam simulation).
+3. Use the top filters to toggle between **First**, **Last**, or **Randomize** ordering, and open the collapsed **Question List** panel to jump directly to any question.
 
----
-
-## 🗓️ Phase 4: Migration, AI/ML, Architecture Patterns & Mock Exams (Days 16–20)
-
-### 📅 Day 16: Migration, Data Transfer & Hybrid Architectures
-**Focus**: Migration strategies (6 Rs), database conversion, and large-scale data transfer.  
-**Handbook Category**: `MIGRATION AND TRANSFER`
-
-- [ ] **Migration Strategies (6 Rs)** — Rehost (Lift & Shift), Replatform (Lift, Tinker & Shift), Refactor/Re-architect, Repurchase, Retain, Retire.
-- [ ] **AWS Application Discovery Service & AWS Application Migration Service (MGN)** — Server assessment and automated block-level replication.
-- [ ] **AWS Database Migration Service (AWS DMS)** — Full load vs Change Data Capture (CDC), Schema Conversion Tool (SCT), Source/Target endpoints.
-- [ ] **AWS DataSync** — Automated data transfer between on-premises and AWS (S3, EFS, FSx).
-- [ ] **AWS Snow Family** — Snowcone, Snowball Edge (Storage/Compute), Snowmobile (PB/EB scale offline migration).
-- [ ] **AWS Transfer Family** — Managed SFTP, FTPS, and FTP transfers directly into S3 and EFS.
-- [ ] 🎯 *Day 16 Review*: Determine appropriate migration tool based on data volume, bandwidth, and downtime requirements.
-
----
-
-### 📅 Day 17: Front-End, Mobile, Media & ML Services
-**Focus**: Mobile backends, API management, media conversion, and managed ML services.  
-**Handbook Categories**: `FRONT-END & MOBILE`, `MEDIA SERVICES`, `MACHINE LEARNING`
-
-- [ ] **AWS Amplify & Amazon API Gateway** — Full-stack web/mobile app build framework and API management (REST, HTTP, WebSocket APIs, Throttling, API Keys, Authorizers).
-- [ ] **AWS Device Farm & Amazon Pinpoint** — Mobile app testing and customer engagement messaging.
-- [ ] **Amazon Elastic Transcoder** — Media file transcoding for mobile/web playback.
-- [ ] **Managed AI/ML Services** — Amazon Comprehend (NLP), Amazon Forecast (TimeSeries), Amazon Fraud Detector, Amazon Kendra (Enterprise Search), Amazon Lex (Chatbots), Amazon Polly (Text-to-Speech), Amazon Rekognition (Computer Vision), Amazon SageMaker (ML models), Amazon Textract (Document OCR), Amazon Transcribe (Speech-to-Text), Amazon Translate.
-- [ ] 🎯 *Day 17 Review*: Identify specific AI service for business scenario questions without requiring custom ML model building.
-
----
-
-### 📅 Day 18: Architectural Patterns & Scenario Deep Dives
-**Focus**: Scenario-based decision making aligned with SAA-C03 exam domains.  
-**Framework**: AWS Well-Architected Framework
-
-- [ ] **Design for High Availability & Disaster Recovery** — Multi-AZ vs Multi-Region, RTO (Recovery Time Objective) vs RPO (Recovery Point Objective), Backup & Restore, Pilot Light, Warm Standby, Multi-Site Active-Active.
-- [ ] **Design Secure Architectures** — Least privilege access, data protection at rest and in transit, defense-in-depth network design.
-- [ ] **Design Resilient Architectures** — Decoupled architectures, failover strategies, self-healing systems via ASG and ELB.
-- [ ] **Design High-Performing Architectures** — Caching strategies, read replicas, serverless computing, storage performance optimization.
-- [ ] **Design Cost-Optimized Architectures** — Right-sizing instances, lifecycle rules, serverless architectures, savings plans.
-- [ ] 🎯 *Day 18 Review*: Solve 20 scenario-based questions focusing on RTO/RPO requirements.
-
----
-
-### 📅 Day 19: Full-Length Practice Exam 1 & Weak Area Drills
-**Focus**: Exam simulation and thorough gap analysis.
-
-- [ ] **Practice Exam 1 (65 Questions / 130 Mins)** — Simulating timed environment without reference materials.
-- [ ] **Score Analysis & Question Audit** — Categorize incorrect answers by AWS Domain/Category.
-- [ ] **Handbook Reference Check** — Re-read handbook sections corresponding to missed questions.
-- [ ] **Flashcard & Cheat Sheet Review** — Review service limits, default timeouts, and metric intervals.
-- [ ] 🎯 *Day 19 Milestone*: Target Score ≥ 80% on practice exam.
-
----
-
-### 📅 Day 20: Full-Length Practice Exam 2, Final Checklist & Exam Readiness
-**Focus**: Final readiness check, key service comparisons, and exam mindset.
-
-- [ ] **Practice Exam 2 (65 Questions / 130 Mins)** — Final full-length exam simulation.
-- [ ] **Review High-Frequency Exam Distinguishers**:
-  - SQS Standard vs FIFO vs SNS Topic vs EventBridge
-  - Aurora Global Database vs RDS Read Replica vs DynamoDB Global Tables
-  - ALB vs NLB vs Global Accelerator vs CloudFront
-  - EBS Snapshots vs EFS Backups vs Storage Gateway
-  - KMS CMK vs Secrets Manager vs SSM Parameter Store
-- [ ] **Exam Day Strategy Review** — Time management (2 mins per question), flagging strategy, process of elimination.
-- [ ] 🎯 *Day 20 Milestone*: **Ready to conquer the AWS Certified Solutions Architect Associate (SAA-C03) Exam! 🚀**
-
----
-
-## 💡 Daily Study Routine & Checklist Tip
-1. Read the specific service section in the [AWS Solution Architect Handbook.pdf](file:///d:/Interview/SAA/AWS%20Solution%20Architect%20Handbook.pdf).
-2. Note key **Exam Tips**, **Use Cases**, and **Architectural Trade-offs**.
-3. Check off each completed service using `[x]`.
+Good luck with your AWS Solutions Architect Associate (SAA-C03) preparation! 🚀
