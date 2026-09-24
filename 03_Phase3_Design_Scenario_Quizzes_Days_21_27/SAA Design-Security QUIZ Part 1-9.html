@@ -778,6 +778,200 @@
     /* Order buttons */
     .order-btn-group { display: inline-flex; gap: 5px; margin-left: 10px; padding-left: 10px; border-left: 1px solid var(--border-color, #cbd5e1); }
 
+    
+        /* Star / Bookmark Button Styles */
+        .star-btn {
+            background: transparent;
+            border: 1px solid var(--border-color, #cbd5e1);
+            color: var(--text-secondary, #94a3b8);
+            font-size: 1.1rem;
+            line-height: 1;
+            padding: 4px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        .star-btn:hover {
+            border-color: #f59e0b;
+            color: #f59e0b;
+            background: rgba(245, 158, 11, 0.12);
+        }
+        .star-btn.starred {
+            color: #f59e0b;
+            border-color: #f59e0b;
+            background: rgba(245, 158, 11, 0.18);
+            box-shadow: 0 0 8px rgba(245, 158, 11, 0.3);
+        }
+
+        /* Question Navigator Panel Styles (Initially Collapsed) */
+        #practice-nav-btn {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 9000;
+            background: linear-gradient(135deg, #ff9900, #e07b00);
+            color: #ffffff;
+            border: none;
+            border-radius: 10px 0 0 10px;
+            padding: 12px 10px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            letter-spacing: 1px;
+            box-shadow: -3px 0 18px rgba(255, 153, 0, 0.45);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        #practice-nav-btn:hover {
+            background: linear-gradient(135deg, #ffaa22, #ff9900);
+            box-shadow: -4px 0 24px rgba(255, 153, 0, 0.6);
+        }
+        #practice-nav-panel {
+            position: fixed;
+            right: -360px; /* Initially Collapsed Off-Screen */
+            top: 0;
+            height: 100vh;
+            width: 340px;
+            background: var(--card-bg, #09090b);
+            border-left: 2px solid var(--accent-orange, #ff9900);
+            box-shadow: -6px 0 40px rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            transition: right 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+        #practice-nav-panel.open {
+            right: 0 !important; /* Slide Open */
+        }
+        #practice-nav-panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 18px;
+            background: rgba(255, 153, 0, 0.1);
+            border-bottom: 1px solid var(--border-color, #27272a);
+        }
+        #practice-nav-panel-header h3 {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent-orange, #ff9900);
+        }
+        #practice-nav-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary, #a1a1aa);
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: color 0.2s;
+        }
+        #practice-nav-close:hover {
+            color: var(--text-primary, #ffffff);
+        }
+        #practice-nav-stats {
+            padding: 10px 18px;
+            font-size: 0.82rem;
+            color: var(--text-secondary, #a1a1aa);
+            border-bottom: 1px solid var(--border-color, #27272a);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        #practice-nav-legend {
+            display: flex;
+            gap: 10px;
+            padding: 10px 18px;
+            border-bottom: 1px solid var(--border-color, #27272a);
+            flex-wrap: wrap;
+            font-size: 0.75rem;
+        }
+        .nav-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--text-secondary, #a1a1aa);
+        }
+        .nav-legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            display: inline-block;
+        }
+        .nav-legend-dot.unanswered {
+            background: var(--card-sub-bg, #121215);
+            border: 1px solid var(--border-color, #27272a);
+        }
+        .nav-legend-dot.correct {
+            background: rgba(16, 185, 129, 0.25);
+            border: 1px solid #10b981;
+        }
+        .nav-legend-dot.incorrect {
+            background: rgba(239, 68, 68, 0.25);
+            border: 1px solid #ef4444;
+        }
+        #practice-nav-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+            padding: 14px;
+            overflow-y: auto;
+            flex: 1;
+        }
+        .nav-q-btn {
+            aspect-ratio: 1;
+            border-radius: 6px;
+            border: 1px solid var(--border-color, #27272a);
+            background: var(--card-sub-bg, #121215);
+            color: var(--text-primary, #ffffff);
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: all 0.15s ease;
+        }
+        .nav-q-btn:hover {
+            border-color: var(--accent-orange, #ff9900);
+            color: var(--accent-orange, #ff9900);
+            transform: scale(1.06);
+        }
+        .nav-q-btn.status-correct {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: #10b981;
+            color: #34d399;
+        }
+        .nav-q-btn.status-incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #ef4444;
+            color: #fb7185;
+        }
+        .nav-q-btn.status-starred {
+            border-color: #f59e0b;
+        }
+        .nav-q-btn .nav-star-dot {
+            position: absolute;
+            top: -2px;
+            right: 1px;
+            font-size: 9px;
+        }
+
     </style>
 </head>
 <body>
@@ -787,8 +981,8 @@
         <div class="brand">
             <img src="saa-badge.png" alt="AWS Certified Solutions Architect Associate" class="logo-img">
             <div class="brand-text">
-                <h1>AWS Solutions Architect Associate (SAA-C03) - Performance Quiz Master</h1>
-                <p>Designing for Performance Efficiency • 50 High-Yield Questions</p>
+                <h1>AWS Solutions Architect Associate (SAA-C03) - Design for Security Master Quiz</h1>
+                <p>Designing for Security, Identity & Compliance • 100 High-Yield Questions</p>
             </div>
         </div>
         <div class="header-controls">
@@ -807,7 +1001,7 @@
 
     <div class="header-bottom" id="practice-header-bottom">
         <div class="stats-bar">
-            <div class="stat-badge"><span class="dot total"></span> Total: <span id="stat-total">50</span></div>
+            <div class="stat-badge"><span class="dot total"></span> Total: <span id="stat-total">100</span></div>
             <div class="stat-badge"><span class="dot total"></span> Answered: <span id="stat-answered">0</span></div>
             <div class="stat-badge"><span class="dot correct"></span> Correct: <span id="stat-correct">0</span></div>
             <div class="stat-badge"><span class="dot incorrect"></span> Incorrect: <span id="stat-incorrect">0</span></div>
@@ -819,6 +1013,8 @@
             <button class="filter-btn" onclick="setFilter('unanswered', this)">Unanswered</button>
             <button class="filter-btn" onclick="setFilter('correct', this)">Correct</button>
             <button class="filter-btn" onclick="setFilter('incorrect', this)">Incorrect</button>
+        <button class="filter-btn" id="filter-starred-btn" onclick="setFilter('starred', this)">⭐ Starred (<span id="starred-count">0</span>)</button>
+
         </div>
     </div>
 
@@ -829,8 +1025,8 @@
 
 <div class="container">
     <div class="module-banner" id="module-banner">
-        <h2>🚀 Performance Efficiency Domain Modules</h2>
-        <p>Master AWS performance optimization: Compute Right-Sizing, Auto Scaling, Elastic Load Balancing, CloudFront & Lambda@Edge Caching, Aurora Distributed Storage, ElastiCache, High-Performance Storage (EBS, EFS, FSx for Lustre), and Infrastructure as Code pipelines.</p>
+        <h2>🔒 Security, Identity & Compliance Domain Modules</h2>
+        <p>Master AWS Security: IAM Policies & Roles, AWS KMS Encryption, Secrets Manager, WAF & Shield, VPC Security Groups & NACLs, GuardDuty, Security Hub, Inspector, Cognito, and Network Firewall.</p>
     </div>
 
     <div id="quiz-container"></div>
@@ -2488,6 +2684,7 @@
             else if (currentFilter === 'unanswered' && status === 'unanswered') matchesFilter = true;
             else if (currentFilter === 'correct' && status === 'correct') matchesFilter = true;
             else if (currentFilter === 'incorrect' && status === 'incorrect') matchesFilter = true;
+            else if (currentFilter === 'starred' && card.getAttribute('data-starred') === 'true') matchesFilter = true;
 
             let matchesSearch = true;
             if (query) {
@@ -2545,6 +2742,8 @@
             const isMulti = q.type === 'multi' || (Array.isArray(q.correct) ? q.correct.length > 1 : (typeof q.correct === 'string' && q.correct.includes(',')));
             const reqCount = Array.isArray(q.correct) ? q.correct.length : (typeof q.correct === 'string' && q.correct.includes(',') ? q.correct.split(',').length : (isMulti ? 2 : 1));
             const inputType = isMulti ? 'checkbox' : 'radio';
+            const starredList = getStarredQuestions().map(String);
+            const isStarred = starredList.includes(String(q.id));
 
             let optionsHtml = '';
             q.options.forEach((opt) => {
@@ -2557,13 +2756,14 @@
                 '</li>';
             });
 
-            html += '<div class="question-card" id="card-' + q.id + '" data-id="' + q.id + '" data-type="' + (isMulti ? 'multi' : 'single') + '" data-req="' + reqCount + '" data-status="unanswered">' +
+            html += '<div class="question-card" id="card-' + q.id + '" data-id="' + q.id + '" data-type="' + (isMulti ? 'multi' : 'single') + '" data-req="' + reqCount + '" data-status="unanswered" data-starred="' + (isStarred ? 'true' : 'false') + '">' +
                 '<div>' +
                     '<span class="topic-pill">' + q.topic + (q.subtopic ? ' • ' + q.subtopic : '') + '</span>' +
                     '<div class="question-header">' +
                         '<div class="question-title">' +
                             (index + 1) + '. ' + q.question +
                             (isMulti ? '<span style="color: var(--accent-orange); font-weight: 700; margin-left: 8px;">(Select ' + reqCount + ' options)</span>' : '') +
+                            '<button class="star-btn ' + (isStarred ? 'starred' : '') + '" onclick="toggleStar(' + q.id + ', event)" title="' + (isStarred ? 'Unstar Question' : 'Star Question') + '">' + (isStarred ? '⭐' : '☆') + '</button>' +
                         '</div>' +
                         '<span class="status-badge correct">✓ Correct</span>' +
                         '<span class="status-badge incorrect">✕ Incorrect</span>' +
@@ -3158,6 +3358,183 @@
         if (typeof refreshPracticeNav === 'function') setTimeout(refreshPracticeNav, 200);
     }
 
-    </script>
+    
+    /* ========================================================================== */
+    /* STAR & PRACTICE QUESTION NAVIGATOR ENGINE                                 */
+    /* ========================================================================== */
+    const QUIZ_FILE_KEY = window.location.pathname.split('/').pop() || 'quiz';
+
+    function getStarredQuestions() {
+        try {
+            const stored = localStorage.getItem('saa_starred_' + QUIZ_FILE_KEY);
+            return stored ? JSON.parse(stored) : [];
+        } catch(e) {
+            return [];
+        }
+    }
+
+    function saveStarredQuestions(starredArr) {
+        try {
+            localStorage.setItem('saa_starred_' + QUIZ_FILE_KEY, JSON.stringify(starredArr));
+        } catch(e) {}
+    }
+
+    function toggleStar(qId, event) {
+        if (event) event.stopPropagation();
+        let starred = getStarredQuestions();
+        const strId = String(qId);
+        const index = starred.map(String).indexOf(strId);
+
+        if (index > -1) {
+            starred.splice(index, 1);
+        } else {
+            starred.push(qId);
+        }
+        saveStarredQuestions(starred);
+
+        // Update card DOM
+        const card = document.getElementById(`card-${qId}`) || document.querySelector(`.question-card[data-id="${qId}"]`);
+        if (card) {
+            const isStarredNow = starred.map(String).includes(strId);
+            card.setAttribute('data-starred', isStarredNow ? 'true' : 'false');
+            const starBtn = card.querySelector('.star-btn');
+            if (starBtn) {
+                starBtn.className = isStarredNow ? 'star-btn starred' : 'star-btn';
+                starBtn.innerHTML = isStarredNow ? '⭐' : '☆';
+                starBtn.title = isStarredNow ? 'Unstar Question' : 'Star Question';
+            }
+        }
+
+        updateStarUI();
+
+        if (typeof currentFilter !== 'undefined' && currentFilter === 'starred') {
+            filterQuestions();
+        }
+    }
+
+    function updateStarUI() {
+        const starred = getStarredQuestions();
+        const starredCountEl = document.getElementById('starred-count');
+        if (starredCountEl) starredCountEl.textContent = starred.length;
+
+        const panel = document.getElementById('practice-nav-panel');
+        if (panel && panel.classList.contains('open')) {
+            renderPracticeNavGrid();
+        }
+    }
+
+    function togglePracticeNav() {
+        const panel = document.getElementById('practice-nav-panel');
+        if (!panel) return;
+        panel.classList.toggle('open');
+        if (panel.classList.contains('open')) {
+            renderPracticeNavGrid();
+        }
+    }
+
+    function closePracticeNav() {
+        const panel = document.getElementById('practice-nav-panel');
+        if (panel) panel.classList.remove('open');
+    }
+
+    function renderPracticeNavGrid() {
+        const grid = document.getElementById('practice-nav-grid');
+        const navCount = document.getElementById('nav-count');
+        const cards = document.querySelectorAll('.question-card');
+
+        if (navCount) navCount.textContent = cards.length;
+        if (!grid) return;
+
+        const starred = getStarredQuestions().map(String);
+        let html = '';
+        let correctCount = 0;
+        let incorrectCount = 0;
+        let answeredCount = 0;
+        let starredCount = 0;
+
+        cards.forEach((card, idx) => {
+            const id = card.getAttribute('data-id') || (idx + 1);
+            const status = card.getAttribute('data-status') || 'unanswered';
+            const isStarred = card.getAttribute('data-starred') === 'true' || starred.includes(String(id));
+
+            if (status === 'correct') correctCount++;
+            if (status === 'incorrect') incorrectCount++;
+            if (status !== 'unanswered') answeredCount++;
+            if (isStarred) starredCount++;
+
+            let statusClass = '';
+            if (status === 'correct') statusClass = 'status-correct';
+            else if (status === 'incorrect') statusClass = 'status-incorrect';
+            if (isStarred) statusClass += ' status-starred';
+
+            html += `
+                <button class="nav-q-btn ${statusClass}" onclick="scrollToQuestion('${id}')" title="Jump to Question #${idx + 1}">
+                    ${idx + 1}
+                    ${isStarred ? '<span class="nav-star-dot">⭐</span>' : ''}
+                </button>
+            `;
+        });
+
+        grid.innerHTML = html;
+
+        const navTot = document.getElementById('nav-stat-total');
+        const navAns = document.getElementById('nav-stat-ans');
+        const navCor = document.getElementById('nav-stat-correct');
+        const navInc = document.getElementById('nav-stat-incorrect');
+        const navStar = document.getElementById('nav-stat-starred');
+
+        if (navTot) navTot.textContent = cards.length;
+        if (navAns) navAns.textContent = answeredCount;
+        if (navCor) navCor.textContent = correctCount;
+        if (navInc) navInc.textContent = incorrectCount;
+        if (navStar) navStar.textContent = `⭐ ${starredCount}`;
+    }
+
+    function scrollToQuestion(id) {
+        const card = document.getElementById(`card-${id}`) || document.querySelector(`.question-card[data-id="${id}"]`);
+        if (card) {
+            card.classList.remove('hidden');
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            card.style.transition = 'outline 0.3s ease, box-shadow 0.3s ease';
+            card.style.outline = '2px solid #ff9900';
+            card.style.boxShadow = '0 0 20px rgba(255, 153, 0, 0.4)';
+            setTimeout(() => {
+                card.style.outline = 'none';
+                card.style.boxShadow = '';
+            }, 1800);
+        }
+    }
+
+</script>
+
+<!-- Floating Collapsible Practice Navigator Toggle Button -->
+<button id="practice-nav-btn" onclick="togglePracticeNav()" title="Open Question Navigator">
+    📌 Questions (<span id="nav-count">0</span>)
+</button>
+
+<!-- Collapsible Question Navigator Side Drawer Panel (Initially Collapsed) -->
+<div id="practice-nav-panel">
+    <div id="practice-nav-panel-header">
+        <h3>📌 Question Navigator</h3>
+        <button id="practice-nav-close" onclick="closePracticeNav()" aria-label="Close Navigator">✕</button>
+    </div>
+    <div id="practice-nav-stats">
+        <span>Total: <strong id="nav-stat-total">0</strong></span>
+        <span>Ans: <strong id="nav-stat-ans">0</strong></span>
+        <span>Correct: <strong id="nav-stat-correct" style="color:#10b981;">0</strong></span>
+        <span>Incorrect: <strong id="nav-stat-incorrect" style="color:#ef4444;">0</strong></span>
+        <span>Starred: <strong id="nav-stat-starred" style="color:#f59e0b;">⭐ 0</strong></span>
+    </div>
+    <div id="practice-nav-legend">
+        <div class="nav-legend-item"><span class="nav-legend-dot unanswered"></span> Unanswered</div>
+        <div class="nav-legend-item"><span class="nav-legend-dot correct"></span> Correct</div>
+        <div class="nav-legend-item"><span class="nav-legend-dot incorrect"></span> Incorrect</div>
+        <div class="nav-legend-item"><span class="nav-legend-dot starred">⭐</span> Starred</div>
+    </div>
+    <div id="practice-nav-grid">
+        <!-- Question buttons dynamically generated -->
+    </div>
+</div>
+
 </body>
 </html>
