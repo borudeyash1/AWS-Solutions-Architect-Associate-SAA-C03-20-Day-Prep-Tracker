@@ -10534,15 +10534,16 @@ function renderQuizGroupedBySection(questions) {
         // Display explanation & update card status
         const expBox = document.getElementById(`explanation-${qId}`);
         expBox.style.display = 'block';
+        const expText = qObj.explanation || qObj.exp || qObj.expl || '';
 
         if (isCorrect) {
             expBox.className = 'explanation-box correct-ans';
-            expBox.innerHTML = `<strong>Correct!</strong> ${escapeHTML(qObj.exp || 'Great job!')}`;
+            expBox.innerHTML = `<strong>Correct!</strong>${expText ? '<br><br>' + escapeHTML(expText) : ' Great job!'}`;
             card.setAttribute('data-status', 'correct');
         } else {
             expBox.className = 'explanation-box incorrect-ans';
             const correctStr = Array.isArray((qObj.answer || qObj.correct) || qObj.correct) ? (qObj.answer || qObj.correct).join(', ') : (qObj.answer || qObj.correct);
-            expBox.innerHTML = `<strong>Incorrect.</strong> Correct answer is <strong>${escapeHTML(correctStr)}</strong>. ${escapeHTML(qObj.exp || '')}`;
+            expBox.innerHTML = `<strong>Incorrect.</strong> Correct answer is <strong>${escapeHTML(correctStr)}</strong>.${expText ? '<br><br>' + escapeHTML(expText) : ''}`;
             card.setAttribute('data-status', 'incorrect');
         }
 
@@ -12051,7 +12052,7 @@ function generate65QuestionMockExam() {
                     options: q.options,
                     userAnswer: userAns.length > 0 ? userAns.join(', ') : 'None (Unanswered)',
                     correctAnswer: correctAnsArray.join(', '),
-                    explanation: q.exp || ''
+                    explanation: q.explanation || q.exp || q.expl || ''
                 });
             }
         });
