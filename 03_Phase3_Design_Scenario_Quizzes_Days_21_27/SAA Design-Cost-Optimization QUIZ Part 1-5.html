@@ -3511,10 +3511,10 @@
             else if (status === 'incorrect') statusClass = 'status-incorrect';
             if (isStarred) statusClass += ' status-starred';
 
-            // Show position number (idx+1) in button, but navigate to correct card by q.id
+            // Show actual question ID in button; grid order reflects current sequence (random/first/last)
             html += `
-                <button class="nav-q-btn ${statusClass}" onclick="scrollToQuestion('${id}')" title="Q#${id} — Position ${idx + 1}">
-                    ${idx + 1}
+                <button class="nav-q-btn ${statusClass}" onclick="scrollToQuestion('${id}')" title="Q${id} — Position ${idx + 1} in current order">
+                    ${id}
                     ${isStarred ? '<span class="nav-star-dot">⭐</span>' : ''}
                 </button>
             `;
