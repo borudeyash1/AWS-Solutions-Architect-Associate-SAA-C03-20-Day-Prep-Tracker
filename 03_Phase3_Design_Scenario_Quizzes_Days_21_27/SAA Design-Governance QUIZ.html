@@ -1034,806 +1034,806 @@
 
 <script>
     const quizData = [
-    {
-        "id": 1,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "AWS Organizations",
-        "subtopic": "Organizational Hierarchy & Governance",
-        "type": "single",
-        "question": "An enterprise manages 100 AWS accounts. Security policies require applying strict baseline security guardrails across all Production accounts, while allowing experimental freedom in Sandbox accounts. What AWS Organizations feature enables grouping accounts for policy application?",
-        "options": [
-            "A) IAM Role Groups",
-            "B) AWS Systems Manager Resource Groups",
-            "C) Amazon Route 53 Traffic Policy Groups",
-            "D) Organizational Units (OUs)"
-        ],
-        "correct": "D",
-        "explanation": "Correct Answer: D. Organizational Units (OUs) provide a administrative structure inside AWS Organizations to group member accounts and attach Service Control Policies (SCPs) or backup policies hierarchically."
-    },
-    {
-        "id": 2,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "AWS Organizations",
-        "subtopic": "Organizational Hierarchy & Governance",
-        "type": "single",
-        "question": "What is a security best practice regarding operational workloads inside an AWS Organization Management (Payer) Account?",
-        "options": [
-            "A) Keep the Management Account restricted purely to administrative, governance, and billing tasks; do NOT host application workloads in it",
-            "B) Run all production databases in the Management Account to maximize IOPS",
-            "C) Delete the Management Account after member accounts are provisioned",
-            "D) Deploy public web servers in the Management Account for administrative visibility"
-        ],
-        "correct": "A",
-        "explanation": "Correct Answer: A. AWS security best practices strictly dictate keeping the Management Account clean of operational application workloads, restricting access exclusively to administrative management, organization governance, and consolidated billing."
-    },
-    {
-        "id": 3,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "AWS Organizations",
-        "subtopic": "Organizational Hierarchy & Governance",
-        "type": "single",
-        "question": "An enterprise wants to delegate administrative management of security monitoring services (such as GuardDuty and Security Hub) to a dedicated Security team account without granting full root access to the Organization Management Account. Which feature enables this?",
-        "options": [
-            "A) Delegated Administrator designation",
-            "B) Service Control Policy (SCP) Allow All",
-            "C) Consolidated Billing override",
-            "D) IAM Access Key rotation"
-        ],
-        "correct": "A",
-        "explanation": "Correct Answer: A. Delegated Administrator allows designating specific member accounts (e.g. a dedicated Security Account) to manage organization-wide services like GuardDuty, Security Hub, Inspector, and AWS Config without logging into the primary Management Account."
-    },
-    {
-        "id": 4,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "AWS Organizations",
-        "subtopic": "Organizational Hierarchy & Governance",
-        "type": "single",
-        "question": "When a Service Control Policy (SCP) is attached to the Root of an AWS Organization, which accounts are affected by the policy restrictions?",
-        "options": [
-            "A) External partner AWS accounts connected via VPC Peering",
-            "B) Only the Management Account",
-            "C) All member accounts in the organization (including accounts inside OUs), EXCEPT the Organization Management Account",
-            "D) All accounts including the Management Account"
-        ],
-        "correct": "C",
-        "explanation": "Correct Answer: C. SCPs attached to the Root apply to all member accounts in the organization hierarchy below root. Crucially, SCPs NEVER apply to the Organization Management Account."
-    },
-    {
-        "id": 5,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "AWS Organizations",
-        "subtopic": "Organizational Hierarchy & Governance",
-        "type": "single",
-        "question": "How does policy inheritance work when an SCP is attached to an Organizational Unit (OU) that contains child OUs?",
-        "options": [
-            "A) SCPs must be individually re-attached to every child account manually",
-            "B) SCPs apply only to the immediate parent OU and do not inherit downwards",
-            "C) Child OUs override parent SCPs automatically unless explicitly blocked",
-            "D) SCPs inherit down the organization tree; child OUs and member accounts automatically inherit all SCP restrictions applied to parent OUs"
-        ],
-        "correct": "D",
-        "explanation": "Correct Answer: D. SCPs follow hierarchical inheritance. Any SCP attached to a parent node (Root or parent OU) flows down and applies automatically to all child OUs and member accounts underneath it."
-    },
-    {
-        "id": 6,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Service Control Policies",
-        "subtopic": "SCP Design Strategies",
-        "type": "single",
-        "question": "An enterprise wants to enforce a strict Allow List strategy using SCPs, where member accounts can ONLY run specific approved AWS services (EC2, S3, RDS). How should the SCP strategy be configured?",
-        "options": [
-            "A) Attach IAM Permissions Boundaries to member account root users",
-            "B) Remove the default FullAWSAccess SCP and replace it with custom SCPs that explicitly list only allowed service actions",
-            "C) Keep the default FullAWSAccess SCP and add explicit DENY rules for unapproved services",
-            "D) Disable AWS Organizations All Features mode"
-        ],
-        "correct": "B",
-        "explanation": "Correct Answer: B. An Allow List SCP strategy involves removing the default FullAWSAccess policy (which permits everything) and explicitly attaching SCPs that specify allowed actions only."
-    },
-    {
-        "id": 7,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Service Control Policies",
-        "subtopic": "SCP Design Strategies",
-        "type": "single",
-        "question": "An enterprise prefers a Deny List SCP strategy, where member accounts have full access to AWS by default except for specific high-risk actions. Which policy configuration represents a Deny List strategy?",
-        "options": [
-            "A) Remove FullAWSAccess SCP from all accounts",
-            "B) Retain the default FullAWSAccess SCP and attach explicit DENY SCPs (e.g. denying s3:DeleteBucket or leave organization)",
-            "C) Use IAM Identity Center permission sets with Deny statements",
-            "D) Delete all IAM users in member accounts"
-        ],
-        "correct": "B",
-        "explanation": "Correct Answer: B. A Deny List SCP strategy retains the default FullAWSAccess policy (allowing access) and layers explicit DENY SCP rules over it to block specific forbidden operations."
-    },
-    {
-        "id": 8,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Service Control Policies",
-        "subtopic": "SCP Design Strategies",
-        "type": "single",
-        "question": "A security policy requires preventing member account administrators from leaving the AWS Organization or disabling AWS CloudTrail logging. Which mechanism enforces this permanently?",
-        "options": [
-            "A) S3 Bucket Policy on CloudTrail bucket",
-            "B) IAM policy on member account administrators",
-            "C) VPC Security Group rule",
-            "D) An SCP with explicit DENY for organizations:LeaveOrganization and cloudtrail:StopLogging / cloudtrail:DeleteTrail"
-        ],
-        "correct": "D",
-        "explanation": "Correct Answer: D. SCPs with explicit DENY statements prevent member account administrators (and root users) from removing accounts from the organization or tampering with organization-level audit trails."
-    },
-    {
-        "id": 9,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Service Control Policies",
-        "subtopic": "SCP Design Strategies",
-        "type": "single",
-        "question": "Can a Service Control Policy (SCP) affect service-linked roles created by AWS services to perform automated background actions?",
-        "options": [
-            "A) No, because service-linked roles run inside the AWS Management Account exclusively",
-            "B) No, SCPs do not affect service-linked roles; AWS services can continue using service-linked roles to perform automated actions",
-            "C) Yes, but only if the SCP contains a Wildcard (*)",
-            "D) Yes, SCPs automatically disable all service-linked roles in member accounts"
-        ],
-        "correct": "B",
-        "explanation": "Correct Answer: B. SCPs do NOT affect service-linked roles. Service-linked roles enable AWS services to integrate securely without being blocked by account SCP guardrails."
-    },
-    {
-        "id": 10,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Service Control Policies",
-        "subtopic": "SCP Design Strategies",
-        "type": "single",
-        "question": "What feature mode must be enabled in AWS Organizations before Service Control Policies (SCPs) can be used?",
-        "options": [
-            "A) VPC Sharing mode",
-            "B) Consolidated Billing Only mode",
-            "C) All Features mode",
-            "D) Basic Governance mode"
-        ],
-        "correct": "C",
-        "explanation": "Correct Answer: C. AWS Organizations must be set to 'All Features' mode to enable advanced management features, including SCPs, organizational backup policies, and service integrations."
-    },
-    {
-        "id": 11,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Service Control Policies",
-        "subtopic": "SCP Design Strategies",
-        "type": "single",
-        "question": "A company wants to restrict EC2 instance creation in member accounts to only specific approved instance types (e.g. t3.micro, t3.small, m6i.large). Which SCP condition key supports this?",
-        "options": [
-            "A) iam:PermissionsBoundary",
-            "B) ec2:InstanceType with StringNotEquals condition",
-            "C) ec2:VolumeType",
-            "D) aws:RequestedRegion"
-        ],
-        "correct": "B",
-        "explanation": "Correct Answer: B. The `ec2:InstanceType` condition key used with a `StringNotEquals` or `StringNotLike` condition in a DENY SCP restricts instance launches to authorized instance types."
-    },
-    {
-        "id": 12,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Control Tower & Landing Zones",
-        "subtopic": "Control Tower & Guardrails",
-        "type": "single",
-        "question": "An enterprise wants to set up a secure, multi-account AWS environment following AWS best practices (a Landing Zone) with automated account provisioning, centralized logging, and pre-configured guardrails in under a day. Which service automates this setup?",
-        "options": [
-            "A) AWS Organizations manually",
-            "B) AWS Control Tower",
-            "C) AWS Service Catalog",
-            "D) AWS Config custom scripts"
-        ],
-        "correct": "B",
-        "explanation": "Correct Answer: B. AWS Control Tower offers the easiest way to set up and govern a secure, multi-account AWS environment (Landing Zone) using automated best-practice blueprints and guardrails."
-    },
-    {
-        "id": 13,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Control Tower & Landing Zones",
-        "subtopic": "Control Tower & Guardrails",
-        "type": "single",
-        "question": "In AWS Control Tower, what is the difference between Preventive Guardrails and Detective Guardrails?",
-        "options": [
-            "A) Preventive guardrails use CloudWatch; Detective guardrails use Security Groups",
-            "B) Both guardrail types block API calls identically",
-            "C) Preventive guardrails (implemented via SCPs) block non-compliant actions from occurring; Detective guardrails (implemented via AWS Config Rules) detect and report non-compliant resources",
-            "D) Preventive guardrails only apply to S3; Detective guardrails apply to EC2"
-        ],
-        "correct": "C",
-        "explanation": "Correct Answer: C. Preventive Guardrails use SCPs to disallow non-compliant API requests before they execute. Detective Guardrails use AWS Config Rules to audit, monitor, and flag existing non-compliant resources."
-    },
-    {
-        "id": 14,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Control Tower & Landing Zones",
-        "subtopic": "Control Tower Account Factory",
-        "type": "single",
-        "question": "A DevOps team needs to automate the provisioning of new AWS member accounts with pre-approved network baseline VPC configurations and security baseline controls. Which AWS Control Tower component automates new account creation?",
-        "options": [
-            "A) Account Factory (integrated with AWS Service Catalog)",
-            "B) Control Tower Dashboard",
-            "C) AWS Control Tower Guardrail Studio",
-            "D) AWS Organizations Console"
-        ],
-        "correct": "A",
-        "explanation": "Correct Answer: A. Account Factory is a configurable component of AWS Control Tower that automates new account provisioning with pre-approved network and security baselines."
-    },
-    {
-        "id": 15,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Control Tower & Landing Zones",
-        "subtopic": "Control Tower Core Accounts",
-        "type": "single",
-        "question": "When AWS Control Tower sets up a Landing Zone, which core accounts are automatically created under the Security Organizational Unit (OU)?",
-        "options": [
-            "A) Network Account and Billing Account",
-            "B) Management Account and Developer Account",
-            "C) Log Archive Account and Audit Account",
-            "D) Production Account and Staging Account"
-        ],
-        "correct": "C",
-        "explanation": "Correct Answer: C. AWS Control Tower creates a dedicated Security OU containing two core governance accounts: the Log Archive Account (centralized CloudTrail/Config logs) and the Audit Account (security assessment access)."
-    },
-    {
-        "id": 16,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Control Tower & Landing Zones",
-        "subtopic": "Control Tower Drift Detection",
-        "type": "single",
-        "question": "What feature in AWS Control Tower alerts administrators when a member account's security configuration deviates from the governance baselines established by Control Tower?",
-        "options": [
-            "A) Drift Detection",
-            "B) Schema Conversion",
-            "C) License Manager Audit",
-            "D) Trusted Advisor Sync"
-        ],
-        "correct": "A",
-        "explanation": "Correct Answer: A. Drift Detection in AWS Control Tower identifies changes made to accounts or OUs that cause them to fall out of compliance with applied landing zone baselines and guardrails."
-    },
-    {
-        "id": 17,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Cross-Account Resource Sharing",
-        "subtopic": "AWS Resource Access Manager (RAM)",
-        "type": "single",
-        "question": "A central networking team creates subnets in a shared VPC. They need to allow development teams in 20 different member accounts to launch EC2 instances into these specific shared subnets without duplicating VPC infrastructure. Which service enables this?",
-        "options": [
-            "A) AWS Storage Gateway",
-            "B) AWS Resource Access Manager (AWS RAM)",
-            "C) VPC Peering mesh",
-            "D) AWS Transit Gateway"
-        ],
-        "correct": "B",
-        "explanation": "Correct Answer: B. AWS Resource Access Manager (AWS RAM) allows sharing specified AWS resources—such as VPC Subnets, Transit Gateways, Route 53 Resolver Rules, and License Manager configurations—across AWS accounts within an organization."
-    },
-    {
-        "id": 18,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Cross-Account Resource Sharing",
-        "subtopic": "AWS Resource Access Manager (RAM)",
-        "type": "single",
-        "question": "When VPC subnets are shared across accounts via AWS RAM, what permissions do participant accounts have regarding resources owned by other participant accounts in the same shared subnet?",
-        "options": [
-            "A) Participants have full administrative access over all resources in the subnet",
-            "B) Participants cannot view, modify, or delete resources owned by other participants or the VPC owner; they only manage their own resources",
-            "C) Participants can terminate EC2 instances launched by the VPC owner",
-            "D) Participants share a single shared security group automatically"
-        ],
-        "correct": "B",
-        "explanation": "Correct Answer: B. In VPC Sharing via RAM, resource isolation is preserved. Participant accounts can only see and manage their own resources (such as EC2 instances and ENIs) and cannot modify or view resources belonging to other accounts."
-    },
-    {
-        "id": 19,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Cross-Account Resource Sharing",
-        "subtopic": "AWS Resource Access Manager (RAM)",
-        "type": "single",
-        "question": "Which of the following resources CANNOT be shared across accounts using AWS RAM?",
-        "options": [
-            "A) VPC Subnets",
-            "B) AWS Transit Gateways",
-            "C) IAM Roles and Users",
-            "D) Route 53 Resolver Rules"
-        ],
-        "correct": "C",
-        "explanation": "Correct Answer: C. IAM Roles and IAM Users are account-level identity resources that cannot be shared via RAM. (VPC Subnets, Transit Gateways, Route 53 Resolver Rules, Capacity Reservations, and License Configurations CAN be shared via RAM)."
-    },
-    {
-        "id": 20,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Cross-Account Resource Sharing",
-        "subtopic": "AWS Resource Access Manager (RAM)",
-        "type": "single",
-        "question": "How are invitation steps handled when sharing resources via AWS RAM to accounts WITHIN the same AWS Organization with resource sharing enabled?",
-        "options": [
-            "A) Invitations are accepted automatically; member accounts gain access to shared resources without explicit manual invitation acceptance",
-            "B) Invitations must be processed via AWS Support ticket",
-            "C) Shared resources require root password authorization",
-            "D) Every member account administrator must manually accept an email invitation within 7 days"
-        ],
-        "correct": "A",
-        "explanation": "Correct Answer: A. When sharing resources within an AWS Organization (with sharing enabled in RAM settings), invitations are automatically accepted without requiring manual intervention from recipient account owners."
-    },
-    {
-        "id": 21,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Cross-Account Resource Sharing",
-        "subtopic": "AWS Resource Access Manager (RAM)",
-        "type": "single",
-        "question": "A enterprise buys software licenses that are constrained by CPU vCPU count. How can the company share license tracking rules across all AWS accounts to prevent license compliance violations?",
-        "options": [
-            "A) Deploy custom PowerShell scripts on every EC2 instance",
-            "B) Configure AWS Budgets alerts",
-            "C) Create license configurations in AWS License Manager and share them across accounts via AWS RAM",
-            "D) Attach a Service Control Policy to the root"
-        ],
-        "correct": "C",
-        "explanation": "Correct Answer: C. AWS License Manager integrates with AWS RAM, allowing license rules to be shared across accounts to track and enforce software license limits globally."
-    },
-    {
-        "id": 22,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Identity & Access Governance",
-        "subtopic": "IAM Identity Center & Permission Sets",
-        "type": "single",
-        "question": "What component in AWS IAM Identity Center (formerly AWS SSO) defines the collection of IAM permissions that are assigned to users or groups for specific target AWS accounts?",
-        "options": [
-            "A) Permission Sets",
-            "B) Resource Access Shares",
-            "C) IAM Access Keys",
-            "D) Service Control Policies"
-        ],
-        "correct": "A",
-        "explanation": "Correct Answer: A. Permission Sets in AWS IAM Identity Center define the IAM policies and permissions that are assigned to users or groups when accessing specific AWS accounts."
-    },
-    {
-        "id": 23,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Identity & Access Governance",
-        "subtopic": "IAM Identity Center & Permission Sets",
-        "type": "single",
-        "question": "How does AWS IAM Identity Center manage access behind the scenes when a user assumes a Permission Set to log into a target AWS account?",
-        "options": [
-            "A) It creates permanent IAM Users with static password credentials in each account",
-            "B) It routes all user traffic through an AWS Client VPN connection",
-            "C) It automatically provisions and updates short-lived IAM Roles in target accounts that users assume via SAML 2.0 federation",
-            "D) It generates hardcoded IAM Access Keys in S3"
-        ],
-        "correct": "C",
-        "explanation": "Correct Answer: C. IAM Identity Center automatically provisions and manages short-lived IAM roles in target accounts. When users authenticate, they assume these temporary roles using SAML federation."
-    },
-    {
-        "id": 24,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Identity & Access Governance",
-        "subtopic": "IAM Identity Center & Permission Sets",
-        "type": "single",
-        "question": "A security team wants to require Multi-Factor Authentication (MFA) for all corporate users signing in via AWS IAM Identity Center. Where is this MFA requirement configured?",
-        "options": [
-            "A) Inside VPC Security Groups",
-            "B) Individually in every member account IAM console",
-            "C) In the S3 Bucket Policy of the log archive account",
-            "D) Centrally in the AWS IAM Identity Center console settings"
-        ],
-        "correct": "D",
-        "explanation": "Correct Answer: D. MFA enforcement can be configured centrally in AWS IAM Identity Center console settings for all users across the entire organization."
-    },
-    {
-        "id": 25,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Identity & Access Governance",
-        "subtopic": "IAM Identity Center & Permission Sets",
-        "type": "single",
-        "question": "Which protocol is used by AWS IAM Identity Center to synchronize user identities and group memberships automatically from an external Identity Provider (such as Okta or Azure AD)?",
-        "options": [
-            "A) SFTP (Secure File Transfer Protocol)",
-            "B) SCIM (System for Cross-domain Identity Management)",
-            "C) SNMP (Simple Network Management Protocol)",
-            "D) BGP (Border Gateway Protocol)"
-        ],
-        "correct": "B",
-        "explanation": "Correct Answer: B. SCIM (System for Cross-domain Identity Management) is the open standard protocol used by IAM Identity Center to automatically sync users and groups from external IdPs (Okta, Azure AD)."
-    },
-    {
-        "id": 26,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Identity & Access Governance",
-        "subtopic": "IAM Identity Center & Permission Sets",
-        "type": "single",
-        "question": "Why is using AWS IAM Identity Center preferred over creating individual IAM Users inside each member account?",
-        "options": [
-            "A) IAM Identity Center bypasses Service Control Policies",
-            "B) IAM Users provide higher network throughput than IAM Identity Center",
-            "C) IAM Users incur monthly fees whereas IAM Identity Center is paid per query",
-            "D) It eliminates long-lived IAM user credentials, centralizes access management, and provides Single Sign-On (SSO) access using short-lived credentials"
-        ],
-        "correct": "D",
-        "explanation": "Correct Answer: D. IAM Identity Center eliminates credential sprawl and long-lived IAM user passwords/access keys, providing centralized Single Sign-On and short-lived temporary access credentials."
-    },
-    {
-        "id": 27,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Governance Enforcement",
-        "subtopic": "Config vs SCPs vs Boundaries",
-        "type": "single",
-        "question": "An enterprise wants to evaluate whether all existing Amazon EBS volumes across 50 accounts are encrypted. If an unencrypted volume is detected, an automated remediation script should encrypt it. Which service performs this evaluation and remediation?",
-        "options": [
-            "A) Amazon Route 53 DNS Firewall",
-            "B) Service Control Policies (SCPs)",
-            "C) IAM Permissions Boundaries",
-            "D) AWS Config with AWS Systems Manager Automation Remediation"
-        ],
-        "correct": "D",
-        "explanation": "Correct Answer: D. AWS Config evaluates resource compliance continuously (detective) and integrates with Systems Manager Automation documents to perform automated remediation when non-compliant resources are discovered."
-    },
-    {
-        "id": 28,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Governance Enforcement",
-        "subtopic": "Config vs SCPs vs Boundaries",
-        "type": "single",
-        "question": "What is the key functional difference between a Service Control Policy (SCP) and an AWS Config Rule?",
-        "options": [
-            "A) SCPs are detective; Config Rules are preventive",
-            "B) SCPs run inside VPCs; Config Rules run on on-premises edge servers",
-            "C) Both tools block API calls identically",
-            "D) SCPs are PREVENTIVE (block API calls before resources are created); AWS Config Rules are DETECTIVE (evaluate compliance of existing resources after creation)"
-        ],
-        "correct": "D",
-        "explanation": "Correct Answer: D. SCPs enforce preventive guardrails by blocking non-compliant API calls in real time. AWS Config Rules enforce detective controls by monitoring resource configuration changes and evaluating compliance after deployment."
-    },
-    {
-        "id": 29,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Governance Enforcement",
-        "subtopic": "Config vs SCPs vs Boundaries",
-        "type": "single",
-        "question": "A developer needs full access to manage S3 and EC2, but must NOT be allowed to create or modify IAM users or policies under any circumstances. Which IAM mechanism enforces this boundary on a developer user?",
-        "options": [
-            "A) Service Linked Role",
-            "B) AWS Trusted Advisor Rule",
-            "C) S3 Bucket Policy",
-            "D) IAM Permissions Boundary"
-        ],
-        "correct": "D",
-        "explanation": "Correct Answer: D. An IAM Permissions Boundary sets the maximum permissions an IAM entity can have, ensuring developers cannot grant themselves permissions beyond the boundary limit."
-    },
-    {
-        "id": 30,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Governance Enforcement",
-        "subtopic": "Config vs SCPs vs Boundaries",
-        "type": "single",
-        "question": "How can AWS Config rules be deployed continuously across all present and future member accounts in an AWS Organization automatically?",
-        "options": [
-            "A) Deploy Organization AWS Config Rules from the Management Account",
-            "B) Manually log into each account every month and enable rules",
-            "C) Attach a WAF rule to the organization root",
-            "D) Use S3 Cross-Region Replication"
-        ],
-        "correct": "A",
-        "explanation": "Correct Answer: A. Organization AWS Config Rules allow administrators to define and deploy AWS Config rules centrally across all accounts in an AWS Organization."
-    },
-    {
-        "id": 31,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Governance Enforcement",
-        "subtopic": "Config vs SCPs vs Boundaries",
-        "type": "single",
-        "question": "What AWS service manages enterprise software license compliance (e.g. tracking Microsoft Windows Server or SQL Server core licenses across EC2 instances)?",
-        "options": [
-            "A) AWS Config",
-            "B) AWS Billing Conductor",
-            "C) AWS License Manager",
-            "D) AWS Systems Manager Patch Manager"
-        ],
-        "correct": "C",
-        "explanation": "Correct Answer: C. AWS License Manager manages software licenses from vendors (like Microsoft, Oracle, and SAP) across AWS and on-premises environments, enforcing licensing rules automatically."
-    },
-    {
-        "id": 32,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Cost Governance",
-        "subtopic": "Consolidated Billing & RI Sharing",
-        "type": "single",
-        "question": "An enterprise has 10 member accounts under Consolidated Billing. Account A purchased a 3-year Reserved Instance for an r6g.2xlarge EC2 instance, but Account A's instance was terminated. How does Consolidated Billing handle the unused Reserved Instance discount?",
-        "options": [
-            "A) The Reserved Instance discount is automatically applied to matching r6g.2xlarge instance usage in other member accounts within the same organization",
-            "B) The Reserved Instance is automatically refunded to the billing credit card",
-            "C) The Reserved Instance discount is lost permanently",
-            "D) Account A is charged a cancellation penalty fee"
-        ],
-        "correct": "A",
-        "explanation": "Correct Answer: A. By default, Reserved Instance and Savings Plans billing benefits are shared across all member accounts within an AWS Organization's consolidated billing family."
-    },
-    {
-        "id": 33,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Cost Governance",
-        "subtopic": "Consolidated Billing & RI Sharing",
-        "type": "single",
-        "question": "A business unit owner in Account B wants to ensure their purchased Reserved Instance discounts are NOT shared with other member accounts in the AWS Organization. How can RI discount sharing be turned off?",
-        "options": [
-            "A) Turn off Reserved Instance discount sharing in the AWS Billing Console settings from the Management Account",
-            "B) Detach the member account from the VPC",
-            "C) Convert the account into an Organizational Unit",
-            "D) Enable S3 Block Public Access"
-        ],
-        "correct": "A",
-        "explanation": "Correct Answer: A. Reserved Instance and Savings Plans discount sharing can be explicitly disabled for specific accounts or the entire organization in the AWS Billing console."
-    },
-    {
-        "id": 34,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Cost Governance",
-        "subtopic": "Consolidated Billing & RI Sharing",
-        "type": "single",
-        "question": "Which AWS service allows creating custom billing rates, customizing line items, and allocating pro-rated billing data for reseller partners or internal business units?",
-        "options": [
-            "A) AWS Budgets",
-            "B) AWS Control Tower",
-            "C) AWS Cost Explorer",
-            "D) AWS Billing Conductor"
-        ],
-        "correct": "D",
-        "explanation": "Correct Answer: D. AWS Billing Conductor allows customized billing structures, custom rate cards, and cost allocation rules for enterprise showback/chargeback to internal business units or partners."
-    },
-    {
-        "id": 35,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Cost Governance",
-        "subtopic": "Consolidated Billing & RI Sharing",
-        "type": "single",
-        "question": "What is a primary financial benefit of using Consolidated Billing in AWS Organizations?",
-        "options": [
-            "A) Automatic 50% discount on all AWS Marketplace software",
-            "B) Zero data transfer fees across regions",
-            "C) Receiving a single consolidated invoice for all accounts and reaching higher volume tier discounts faster for S3 storage and Data Transfer Out",
-            "D) Free EC2 compute usage for all member accounts"
-        ],
-        "correct": "C",
-        "explanation": "Correct Answer: C. Consolidated Billing combines usage from all member accounts onto a single monthly bill, enabling the organization to qualify for tier volume pricing discounts faster."
-    },
-    {
-        "id": 36,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Audit Logging",
-        "subtopic": "Organization CloudTrail & Log Isolation",
-        "type": "single",
-        "question": "A Chief Information Security Officer (CISO) requires logging all AWS API activity across 100 member accounts into a single, tamper-proof Amazon S3 bucket located in a dedicated, isolated Log Archive account. How should CloudTrail be configured?",
-        "options": [
-            "A) Enable CloudWatch Container Insights on member VPCs",
-            "B) Create an Organization Trail in the Management Account that automatically logs events for all member accounts into the target S3 bucket in the Log Archive account",
-            "C) Export VPC Flow Logs to an on-premises syslog server over HTTP",
-            "D) Log into all 100 accounts individually and configure local S3 buckets"
-        ],
-        "correct": "B",
-        "explanation": "Correct Answer: B. An Organization Trail logs API calls for ALL member accounts in the organization automatically into a central S3 bucket in a secure Log Archive account, ensuring member account admins cannot disable logging."
-    },
-    {
-        "id": 37,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Audit Logging",
-        "subtopic": "Organization CloudTrail & Log Isolation",
-        "type": "single",
-        "question": "To protect CloudTrail audit logs stored in the central Log Archive S3 bucket against malicious modification or deletion by a compromised admin user, what security configuration is required?",
-        "options": [
-            "A) Enable S3 Object Lock in Compliance Mode, S3 Versioning, and CloudTrail Log File Integrity Validation",
-            "B) Enable Route 53 Resolver DNS Firewall",
-            "C) Store logs on EC2 instance store volumes",
-            "D) Enable S3 Transfer Acceleration"
-        ],
-        "correct": "A",
-        "explanation": "Correct Answer: A. Enabling CloudTrail Log File Integrity Validation (digest files), S3 Versioning, and S3 Object Lock in Compliance Mode ensures log files cannot be modified, overwritten, or deleted by any user."
-    },
-    {
-        "id": 38,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Audit Logging",
-        "subtopic": "Organization CloudTrail & Log Isolation",
-        "type": "single",
-        "question": "What happens when a new member account is created or joins an AWS Organization that has an active Organization Trail?",
-        "options": [
-            "A) The Organization Trail is automatically paused",
-            "B) An email request must be approved by AWS Support",
-            "C) The new account is excluded from logging until manual CloudTrail setup is executed",
-            "D) The new account automatically starts logging API activity to the Organization Trail without requiring manual setup"
-        ],
-        "correct": "D",
-        "explanation": "Correct Answer: D. When an Organization Trail is active, new member accounts joining the organization are automatically included and monitored by the Organization Trail immediately."
-    },
-    {
-        "id": 39,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Audit Logging",
-        "subtopic": "Organization CloudTrail & Log Isolation",
-        "type": "single",
-        "question": "Which service allows querying CloudTrail log files directly in Amazon S3 using standard SQL queries without managing database infrastructure?",
-        "options": [
-            "A) AWS DataSync",
-            "B) Amazon QuickSight",
-            "C) AWS Glue DataBrew",
-            "D) Amazon Athena (or CloudTrail Lake)"
-        ],
-        "correct": "D",
-        "explanation": "Correct Answer: D. Amazon Athena (and CloudTrail Lake) allows running SQL queries directly on JSON audit logs stored in Amazon S3 buckets for security investigation and compliance auditing."
-    },
-    {
-        "id": 40,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Cross-Account Architecture",
-        "subtopic": "Cross-Account Roles vs Resource Policies",
-        "type": "single",
-        "question": "An application in Account A needs to read objects from an S3 bucket in Account B. Which two methods can grant cross-account access?",
-        "options": [
-            "A) Use AWS Direct Connect Gateway",
-            "B) Enable VPC Peering between S3 buckets",
-            "C) Create static IAM User Access Keys in Account B and hardcode them in Account A",
-            "D) Attach an S3 Bucket Policy in Account B allowing Account A's IAM principal, OR allow Account A's principal to assume a cross-account IAM Role in Account B"
-        ],
-        "correct": "D",
-        "explanation": "Correct Answer: D. Cross-account access to S3 can be granted either via a resource-based policy (S3 Bucket Policy in Account B) or via identity-based role delegation (assuming a cross-account IAM Role in Account B)."
-    },
-    {
-        "id": 41,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Cross-Account Architecture",
-        "subtopic": "Cross-Account Roles vs Resource Policies",
-        "type": "single",
-        "question": "What is an architectural advantage of using an S3 Bucket Policy (resource-based policy) over IAM Role Assumption for cross-account S3 access?",
-        "options": [
-            "A) IAM Role assumption is limited to 1 request per hour",
-            "B) S3 Bucket Policies are stored in local RAM",
-            "C) Resource-based policies allow the principal in Account A to perform actions in Account B without switching IAM role context or issuing STS AssumeRole API calls",
-            "D) S3 Bucket Policies bypass KMS encryption"
-        ],
-        "correct": "C",
-        "explanation": "Correct Answer: C. Resource-based policies (such as S3 bucket policies or KMS key policies) grant direct access to external account principals without requiring them to call STS AssumeRole or switch security contexts."
-    },
-    {
-        "id": 42,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Cross-Account Architecture",
-        "subtopic": "VPC Sharing via RAM vs Peering",
-        "type": "single",
-        "question": "A enterprise network team wants to centrally manage subnets, route tables, and NAT Gateways in a single VPC owned by a Central Network Account, while allowing multiple business unit accounts to deploy EC2 instances into those subnets. Which topology should be chosen?",
-        "options": [
-            "A) AWS Site-to-Site VPN",
-            "B) VPC Peering mesh",
-            "C) AWS Transit Gateway with 50 attachments",
-            "D) VPC Sharing via AWS RAM"
-        ],
-        "correct": "D",
-        "explanation": "Correct Answer: D. VPC Sharing via AWS RAM enables a central networking team to own and manage VPCs, subnets, route tables, and NAT Gateways centrally while sharing subnets with participant accounts to deploy resources."
-    },
-    {
-        "id": 43,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Cross-Account Architecture",
-        "subtopic": "VPC Sharing via RAM vs Peering",
-        "type": "single",
-        "question": "What is a main network efficiency benefit of VPC Sharing via AWS RAM compared to creating separate VPCs connected via Transit Gateway?",
-        "options": [
-            "A) Shared subnets allow resources in different accounts to communicate with high bandwidth and low latency within the same VPC without Transit Gateway data processing fees",
-            "B) Transit Gateway is restricted to single-AZ deployments",
-            "C) VPC Sharing eliminates Security Groups",
-            "D) VPC Sharing provides free internet egress"
-        ],
-        "correct": "A",
-        "explanation": "Correct Answer: A. In VPC Sharing, instances in different participant accounts reside in the exact same VPC and subnets, allowing direct intra-VPC communication without incurring Transit Gateway data processing charges."
-    },
-    {
-        "id": 44,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Cross-Account Architecture",
-        "subtopic": "IAM Security Tooling",
-        "type": "single",
-        "question": "Which AWS IAM feature analyzes resource policies across your organization to identify S3 buckets, KMS keys, or IAM roles that are shared with external entities outside your AWS Organization?",
-        "options": [
-            "A) AWS Config Rules",
-            "B) AWS Trusted Advisor",
-            "C) IAM Access Analyzer",
-            "D) Amazon Macie"
-        ],
-        "correct": "C",
-        "explanation": "Correct Answer: C. IAM Access Analyzer uses mathematical logic to evaluate resource-based policies across your AWS environment and alerts you to resources that are accessible from outside your trusted account or organization boundary."
-    },
-    {
-        "id": 45,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Cross-Account Architecture",
-        "subtopic": "Service Catalog for Governance",
-        "type": "single",
-        "question": "An enterprise wants to allow non-administrative developers to launch pre-approved, security-hardened CloudFormation infrastructure templates (e.g. approved S3 buckets or EC2 stacks) without giving developers direct IAM permissions to provision those services manually. Which service provides this self-service governance portal?",
-        "options": [
-            "A) AWS Launch Wizard",
-            "B) AWS OpsWorks",
-            "C) AWS Service Catalog",
-            "D) AWS Control Tower"
-        ],
-        "correct": "C",
-        "explanation": "Correct Answer: C. AWS Service Catalog allows organizations to create and manage catalogs of IT services (CloudFormation templates) that are approved for use on AWS, allowing end users to launch pre-approved resources with constrained launch role permissions."
-    },
-    {
-        "id": 46,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Cross-Account Architecture",
-        "subtopic": "Service Catalog Portfolios",
-        "type": "single",
-        "question": "In AWS Service Catalog, how do administrators group products and manage access for specific IAM users, roles, or AWS accounts?",
-        "options": [
-            "A) By organizing products into Portfolios and granting access permissions to target IAM entities or sharing portfolios via AWS RAM",
-            "B) By running Systems Manager Automation",
-            "C) By deploying WAF Rate Rules",
-            "D) By attaching S3 Bucket Policies"
-        ],
-        "correct": "A",
-        "explanation": "Correct Answer: A. In AWS Service Catalog, products are collected into Portfolios. Administrators grant access to portfolios for specific IAM users, roles, or accounts, or share portfolios across accounts in an organization."
-    },
-    {
-        "id": 47,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Cross-Account Architecture",
-        "subtopic": "Service Catalog Launch Constraints",
-        "type": "single",
-        "question": "What is a Launch Constraint in AWS Service Catalog?",
-        "options": [
-            "A) A memory limit on CloudFormation execution engine",
-            "B) An IAM role that Service Catalog assumes when a user launches a product, allowing users to provision resources without needing underlying IAM permissions themselves",
-            "C) A network bandwidth throttle on VPC subnets",
-            "D) A rule that limits resource deployment to 1 instance per hour"
-        ],
-        "correct": "B",
-        "explanation": "Correct Answer: B. A Launch Constraint specifies an IAM role that AWS Service Catalog assumes to provision resources. This allows end users to launch approved products even if they do not have direct IAM permissions to create the underlying AWS resources."
-    },
-    {
-        "id": 48,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Cross-Account Architecture",
-        "subtopic": "AWS CloudFormation StackSets",
-        "type": "single",
-        "question": "A security administrator needs to deploy an IAM security audit role and AWS Config rules automatically across 200 member accounts in an AWS Organization. Which CloudFormation feature automates cross-account, multi-region stack deployments?",
-        "options": [
-            "A) AWS CloudFormation Modules",
-            "B) AWS Systems Manager State Manager",
-            "C) AWS Service Catalog Portfolios",
-            "D) AWS CloudFormation StackSets"
-        ],
-        "correct": "D",
-        "explanation": "Correct Answer: D. AWS CloudFormation StackSets allows creating, updating, or deleting CloudFormation stacks across multiple AWS accounts and regions in a single operation."
-    },
-    {
-        "id": 49,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Cross-Account Architecture",
-        "subtopic": "AWS Systems Manager Incident Manager",
-        "type": "single",
-        "question": "During a critical cross-account application outage, which AWS Systems Manager capability automates incident response plans, escalates alerts to on-call engineers via SMS/voice, and coordinates response channels?",
-        "options": [
-            "A) AWS Health Dashboard",
-            "B) AWS Systems Manager Incident Manager",
-            "C) AWS Systems Manager Parameter Store",
-            "D) AWS Systems Manager Patch Manager"
-        ],
-        "correct": "B",
-        "explanation": "Correct Answer: B. AWS Systems Manager Incident Manager automates incident response plans, engages on-call responders via SMS/voice/email, and provides centralized collaboration dashboards during critical operational incidents."
-    },
-    {
-        "id": 50,
-        "section": "GOVERNANCE & MULTI-ACCOUNT",
-        "topic": "Cross-Account Architecture",
-        "subtopic": "AWS Health Dashboard",
-        "type": "single",
-        "question": "An operational team needs personalized alerts when an AWS infrastructure event (such as an EC2 hardware degradation or scheduled maintenance) specifically affects resources in their AWS accounts. Which dashboard provides personalized event visibility?",
-        "options": [
-            "A) AWS Health Dashboard (AWS Personal Health Dashboard)",
-            "B) AWS CloudTrail Insights",
-            "C) AWS Service Health Dashboard (Public status page)",
-            "D) Amazon CloudWatch ServiceLens"
-        ],
-        "correct": "A",
-        "explanation": "Correct Answer: A. AWS Health Dashboard provides personalized alerts and guidance when AWS experiences events that may affect your specific AWS account resources and scheduled maintenance."
-    }
+  {
+    "id": 1,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "AWS Organizations",
+    "subtopic": "Organizational Hierarchy & Governance",
+    "type": "single",
+    "question": "An enterprise manages 100 AWS accounts. Security policies require applying strict baseline security guardrails across all Production accounts, while allowing experimental freedom in Sandbox accounts. What AWS Organizations feature enables grouping accounts for policy application?",
+    "options": [
+      "A) IAM Role Groups",
+      "B) AWS Systems Manager Resource Groups",
+      "C) Amazon Route 53 Traffic Policy Groups",
+      "D) Organizational Units (OUs)"
+    ],
+    "correct": "D",
+    "explanation": "Correct Answer: D. Organizational Units (OUs) provide a administrative structure inside AWS Organizations to group member accounts and attach Service Control Policies (SCPs) or backup policies hierarchically."
+  },
+  {
+    "id": 2,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "AWS Organizations",
+    "subtopic": "Organizational Hierarchy & Governance",
+    "type": "single",
+    "question": "What is a security best practice regarding operational workloads inside an AWS Organization Management (Payer) Account?",
+    "options": [
+      "A) Keep the Management Account restricted purely to administrative, governance, and billing tasks; do NOT host application workloads in it",
+      "B) Run all production databases in the Management Account to maximize IOPS",
+      "C) Delete the Management Account after member accounts are provisioned",
+      "D) Deploy public web servers in the Management Account for administrative visibility"
+    ],
+    "correct": "A",
+    "explanation": "Correct Answer: A. AWS security best practices strictly dictate keeping the Management Account clean of operational application workloads, restricting access exclusively to administrative management, organization governance, and consolidated billing."
+  },
+  {
+    "id": 3,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "AWS Organizations",
+    "subtopic": "Organizational Hierarchy & Governance",
+    "type": "single",
+    "question": "An enterprise wants to delegate administrative management of security monitoring services (such as GuardDuty and Security Hub) to a dedicated Security team account without granting full root access to the Organization Management Account. Which feature enables this?",
+    "options": [
+      "A) Delegated Administrator designation",
+      "B) Service Control Policy (SCP) Allow All",
+      "C) Consolidated Billing override",
+      "D) IAM Access Key rotation"
+    ],
+    "correct": "A",
+    "explanation": "Correct Answer: A. Delegated Administrator allows designating specific member accounts (e.g. a dedicated Security Account) to manage organization-wide services like GuardDuty, Security Hub, Inspector, and AWS Config without logging into the primary Management Account."
+  },
+  {
+    "id": 4,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "AWS Organizations",
+    "subtopic": "Organizational Hierarchy & Governance",
+    "type": "single",
+    "question": "When a Service Control Policy (SCP) is attached to the Root of an AWS Organization, which accounts are affected by the policy restrictions?",
+    "options": [
+      "A) External partner AWS accounts connected via VPC Peering",
+      "B) Only the Management Account",
+      "C) All member accounts in the organization (including accounts inside OUs), EXCEPT the Organization Management Account",
+      "D) All accounts including the Management Account"
+    ],
+    "correct": "C",
+    "explanation": "Correct Answer: C. SCPs attached to the Root apply to all member accounts in the organization hierarchy below root. Crucially, SCPs NEVER apply to the Organization Management Account."
+  },
+  {
+    "id": 5,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "AWS Organizations",
+    "subtopic": "Organizational Hierarchy & Governance",
+    "type": "single",
+    "question": "How does policy inheritance work when an SCP is attached to an Organizational Unit (OU) that contains child OUs?",
+    "options": [
+      "A) SCPs must be individually re-attached to every child account manually",
+      "B) SCPs apply only to the immediate parent OU and do not inherit downwards",
+      "C) Child OUs override parent SCPs automatically unless explicitly blocked",
+      "D) SCPs inherit down the organization tree; child OUs and member accounts automatically inherit all SCP restrictions applied to parent OUs"
+    ],
+    "correct": "D",
+    "explanation": "Correct Answer: D. SCPs follow hierarchical inheritance. Any SCP attached to a parent node (Root or parent OU) flows down and applies automatically to all child OUs and member accounts underneath it."
+  },
+  {
+    "id": 6,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Service Control Policies",
+    "subtopic": "SCP Design Strategies",
+    "type": "single",
+    "question": "An enterprise wants to enforce a strict Allow List strategy using SCPs, where member accounts can ONLY run specific approved AWS services (EC2, S3, RDS). How should the SCP strategy be configured?",
+    "options": [
+      "A) Attach IAM Permissions Boundaries to member account root users",
+      "B) Remove the default FullAWSAccess SCP and replace it with custom SCPs that explicitly list only allowed service actions",
+      "C) Keep the default FullAWSAccess SCP and add explicit DENY rules for unapproved services",
+      "D) Disable AWS Organizations All Features mode"
+    ],
+    "correct": "B",
+    "explanation": "Correct Answer: B. An Allow List SCP strategy involves removing the default FullAWSAccess policy (which permits everything) and explicitly attaching SCPs that specify allowed actions only."
+  },
+  {
+    "id": 7,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Service Control Policies",
+    "subtopic": "SCP Design Strategies",
+    "type": "single",
+    "question": "An enterprise prefers a Deny List SCP strategy, where member accounts have full access to AWS by default except for specific high-risk actions. Which policy configuration represents a Deny List strategy?",
+    "options": [
+      "A) Remove FullAWSAccess SCP from all accounts",
+      "B) Retain the default FullAWSAccess SCP and attach explicit DENY SCPs (e.g. denying s3:DeleteBucket or leave organization)",
+      "C) Use IAM Identity Center permission sets with Deny statements",
+      "D) Delete all IAM users in member accounts"
+    ],
+    "correct": "B",
+    "explanation": "Correct Answer: B. A Deny List SCP strategy retains the default FullAWSAccess policy (allowing access) and layers explicit DENY SCP rules over it to block specific forbidden operations."
+  },
+  {
+    "id": 8,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Service Control Policies",
+    "subtopic": "SCP Design Strategies",
+    "type": "single",
+    "question": "A security policy requires preventing member account administrators from leaving the AWS Organization or disabling AWS CloudTrail logging. Which mechanism enforces this permanently?",
+    "options": [
+      "A) S3 Bucket Policy on CloudTrail bucket",
+      "B) IAM policy on member account administrators",
+      "C) VPC Security Group rule",
+      "D) An SCP with explicit DENY for organizations:LeaveOrganization and cloudtrail:StopLogging / cloudtrail:DeleteTrail"
+    ],
+    "correct": "D",
+    "explanation": "Correct Answer: D. SCPs with explicit DENY statements prevent member account administrators (and root users) from removing accounts from the organization or tampering with organization-level audit trails."
+  },
+  {
+    "id": 9,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Service Control Policies",
+    "subtopic": "SCP Design Strategies",
+    "type": "single",
+    "question": "Can a Service Control Policy (SCP) affect service-linked roles created by AWS services to perform automated background actions?",
+    "options": [
+      "A) No, because service-linked roles run inside the AWS Management Account exclusively",
+      "B) No, SCPs do not affect service-linked roles; AWS services can continue using service-linked roles to perform automated actions",
+      "C) Yes, but only if the SCP contains a Wildcard (*)",
+      "D) Yes, SCPs automatically disable all service-linked roles in member accounts"
+    ],
+    "correct": "B",
+    "explanation": "Correct Answer: B. SCPs do NOT affect service-linked roles. Service-linked roles enable AWS services to integrate securely without being blocked by account SCP guardrails."
+  },
+  {
+    "id": 10,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Service Control Policies",
+    "subtopic": "SCP Design Strategies",
+    "type": "single",
+    "question": "What feature mode must be enabled in AWS Organizations before Service Control Policies (SCPs) can be used?",
+    "options": [
+      "A) VPC Sharing mode",
+      "B) Consolidated Billing Only mode",
+      "C) All Features mode",
+      "D) Basic Governance mode"
+    ],
+    "correct": "C",
+    "explanation": "Correct Answer: C. AWS Organizations must be set to 'All Features' mode to enable advanced management features, including SCPs, organizational backup policies, and service integrations."
+  },
+  {
+    "id": 11,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Service Control Policies",
+    "subtopic": "SCP Design Strategies",
+    "type": "single",
+    "question": "A company wants to restrict EC2 instance creation in member accounts to only specific approved instance types (e.g. t3.micro, t3.small, m6i.large). Which SCP condition key supports this?",
+    "options": [
+      "A) iam:PermissionsBoundary",
+      "B) ec2:InstanceType with StringNotEquals condition",
+      "C) ec2:VolumeType",
+      "D) aws:RequestedRegion"
+    ],
+    "correct": "B",
+    "explanation": "Correct Answer: B. The `ec2:InstanceType` condition key used with a `StringNotEquals` or `StringNotLike` condition in a DENY SCP restricts instance launches to authorized instance types."
+  },
+  {
+    "id": 12,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Control Tower & Landing Zones",
+    "subtopic": "Control Tower & Guardrails",
+    "type": "single",
+    "question": "An enterprise wants to set up a secure, multi-account AWS environment following AWS best practices (a Landing Zone) with automated account provisioning, centralized logging, and pre-configured guardrails in under a day. Which service automates this setup?",
+    "options": [
+      "A) AWS Organizations manually",
+      "B) AWS Control Tower",
+      "C) AWS Service Catalog",
+      "D) AWS Config custom scripts"
+    ],
+    "correct": "B",
+    "explanation": "Correct Answer: B. AWS Control Tower offers the easiest way to set up and govern a secure, multi-account AWS environment (Landing Zone) using automated best-practice blueprints and guardrails."
+  },
+  {
+    "id": 13,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Control Tower & Landing Zones",
+    "subtopic": "Control Tower & Guardrails",
+    "type": "single",
+    "question": "In AWS Control Tower, what is the difference between Preventive Guardrails and Detective Guardrails?",
+    "options": [
+      "A) Preventive guardrails use CloudWatch; Detective guardrails use Security Groups",
+      "B) Both guardrail types block API calls identically",
+      "C) Preventive guardrails (implemented via SCPs) block non-compliant actions from occurring; Detective guardrails (implemented via AWS Config Rules) detect and report non-compliant resources",
+      "D) Preventive guardrails only apply to S3; Detective guardrails apply to EC2"
+    ],
+    "correct": "C",
+    "explanation": "Correct Answer: C. Preventive Guardrails use SCPs to disallow non-compliant API requests before they execute. Detective Guardrails use AWS Config Rules to audit, monitor, and flag existing non-compliant resources."
+  },
+  {
+    "id": 14,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Control Tower & Landing Zones",
+    "subtopic": "Control Tower Account Factory",
+    "type": "single",
+    "question": "A DevOps team needs to automate the provisioning of new AWS member accounts with pre-approved network baseline VPC configurations and security baseline controls. Which AWS Control Tower component automates new account creation?",
+    "options": [
+      "A) Account Factory (integrated with AWS Service Catalog)",
+      "B) Control Tower Dashboard",
+      "C) AWS Control Tower Guardrail Studio",
+      "D) AWS Organizations Console"
+    ],
+    "correct": "A",
+    "explanation": "Correct Answer: A. Account Factory is a configurable component of AWS Control Tower that automates new account provisioning with pre-approved network and security baselines."
+  },
+  {
+    "id": 15,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Control Tower & Landing Zones",
+    "subtopic": "Control Tower Core Accounts",
+    "type": "single",
+    "question": "When AWS Control Tower sets up a Landing Zone, which core accounts are automatically created under the Security Organizational Unit (OU)?",
+    "options": [
+      "A) Network Account and Billing Account",
+      "B) Management Account and Developer Account",
+      "C) Log Archive Account and Audit Account",
+      "D) Production Account and Staging Account"
+    ],
+    "correct": "C",
+    "explanation": "Correct Answer: C. AWS Control Tower creates a dedicated Security OU containing two core governance accounts: the Log Archive Account (centralized CloudTrail/Config logs) and the Audit Account (security assessment access)."
+  },
+  {
+    "id": 16,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Control Tower & Landing Zones",
+    "subtopic": "Control Tower Drift Detection",
+    "type": "single",
+    "question": "What feature in AWS Control Tower alerts administrators when a member account's security configuration deviates from the governance baselines established by Control Tower?",
+    "options": [
+      "A) Drift Detection",
+      "B) Schema Conversion",
+      "C) License Manager Audit",
+      "D) Trusted Advisor Sync"
+    ],
+    "correct": "A",
+    "explanation": "Correct Answer: A. Drift Detection in AWS Control Tower identifies changes made to accounts or OUs that cause them to fall out of compliance with applied landing zone baselines and guardrails."
+  },
+  {
+    "id": 17,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Cross-Account Resource Sharing",
+    "subtopic": "AWS Resource Access Manager (RAM)",
+    "type": "single",
+    "question": "A central networking team creates subnets in a shared VPC. They need to allow development teams in 20 different member accounts to launch EC2 instances into these specific shared subnets without duplicating VPC infrastructure. Which service enables this?",
+    "options": [
+      "A) AWS Storage Gateway",
+      "B) AWS Resource Access Manager (AWS RAM)",
+      "C) VPC Peering mesh",
+      "D) AWS Transit Gateway"
+    ],
+    "correct": "B",
+    "explanation": "Correct Answer: B. AWS Resource Access Manager (AWS RAM) allows sharing specified AWS resources—such as VPC Subnets, Transit Gateways, Route 53 Resolver Rules, and License Manager configurations—across AWS accounts within an organization."
+  },
+  {
+    "id": 18,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Cross-Account Resource Sharing",
+    "subtopic": "AWS Resource Access Manager (RAM)",
+    "type": "single",
+    "question": "When VPC subnets are shared across accounts via AWS RAM, what permissions do participant accounts have regarding resources owned by other participant accounts in the same shared subnet?",
+    "options": [
+      "A) Participants have full administrative access over all resources in the subnet",
+      "B) Participants cannot view, modify, or delete resources owned by other participants or the VPC owner; they only manage their own resources",
+      "C) Participants can terminate EC2 instances launched by the VPC owner",
+      "D) Participants share a single shared security group automatically"
+    ],
+    "correct": "B",
+    "explanation": "Correct Answer: B. In VPC Sharing via RAM, resource isolation is preserved. Participant accounts can only see and manage their own resources (such as EC2 instances and ENIs) and cannot modify or view resources belonging to other accounts."
+  },
+  {
+    "id": 19,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Cross-Account Resource Sharing",
+    "subtopic": "AWS Resource Access Manager (RAM)",
+    "type": "single",
+    "question": "Which of the following resources CANNOT be shared across accounts using AWS RAM?",
+    "options": [
+      "A) VPC Subnets",
+      "B) AWS Transit Gateways",
+      "C) IAM Roles and Users",
+      "D) Route 53 Resolver Rules"
+    ],
+    "correct": "C",
+    "explanation": "Correct Answer: C. IAM Roles and IAM Users are account-level identity resources that cannot be shared via RAM. (VPC Subnets, Transit Gateways, Route 53 Resolver Rules, Capacity Reservations, and License Configurations CAN be shared via RAM)."
+  },
+  {
+    "id": 20,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Cross-Account Resource Sharing",
+    "subtopic": "AWS Resource Access Manager (RAM)",
+    "type": "single",
+    "question": "How are invitation steps handled when sharing resources via AWS RAM to accounts WITHIN the same AWS Organization with resource sharing enabled?",
+    "options": [
+      "A) Invitations are accepted automatically; member accounts gain access to shared resources without explicit manual invitation acceptance",
+      "B) Invitations must be processed via AWS Support ticket",
+      "C) Shared resources require root password authorization",
+      "D) Every member account administrator must manually accept an email invitation within 7 days"
+    ],
+    "correct": "A",
+    "explanation": "Correct Answer: A. When sharing resources within an AWS Organization (with sharing enabled in RAM settings), invitations are automatically accepted without requiring manual intervention from recipient account owners."
+  },
+  {
+    "id": 21,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Cross-Account Resource Sharing",
+    "subtopic": "AWS Resource Access Manager (RAM)",
+    "type": "single",
+    "question": "A enterprise buys software licenses that are constrained by CPU vCPU count. How can the company share license tracking rules across all AWS accounts to prevent license compliance violations?",
+    "options": [
+      "A) Deploy custom PowerShell scripts on every EC2 instance",
+      "B) Configure AWS Budgets alerts",
+      "C) Create license configurations in AWS License Manager and share them across accounts via AWS RAM",
+      "D) Attach a Service Control Policy to the root"
+    ],
+    "correct": "C",
+    "explanation": "Correct Answer: C. AWS License Manager integrates with AWS RAM, allowing license rules to be shared across accounts to track and enforce software license limits globally."
+  },
+  {
+    "id": 22,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Identity & Access Governance",
+    "subtopic": "IAM Identity Center & Permission Sets",
+    "type": "single",
+    "question": "What component in AWS IAM Identity Center (formerly AWS SSO) defines the collection of IAM permissions that are assigned to users or groups for specific target AWS accounts?",
+    "options": [
+      "A) Permission Sets",
+      "B) Resource Access Shares",
+      "C) IAM Access Keys",
+      "D) Service Control Policies"
+    ],
+    "correct": "A",
+    "explanation": "Correct Answer: A. Permission Sets in AWS IAM Identity Center define the IAM policies and permissions that are assigned to users or groups when accessing specific AWS accounts."
+  },
+  {
+    "id": 23,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Identity & Access Governance",
+    "subtopic": "IAM Identity Center & Permission Sets",
+    "type": "single",
+    "question": "How does AWS IAM Identity Center manage access behind the scenes when a user assumes a Permission Set to log into a target AWS account?",
+    "options": [
+      "A) It creates permanent IAM Users with static password credentials in each account",
+      "B) It routes all user traffic through an AWS Client VPN connection",
+      "C) It automatically provisions and updates short-lived IAM Roles in target accounts that users assume via SAML 2.0 federation",
+      "D) It generates hardcoded IAM Access Keys in S3"
+    ],
+    "correct": "C",
+    "explanation": "Correct Answer: C. IAM Identity Center automatically provisions and manages short-lived IAM roles in target accounts. When users authenticate, they assume these temporary roles using SAML federation."
+  },
+  {
+    "id": 24,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Identity & Access Governance",
+    "subtopic": "IAM Identity Center & Permission Sets",
+    "type": "single",
+    "question": "A security team wants to require Multi-Factor Authentication (MFA) for all corporate users signing in via AWS IAM Identity Center. Where is this MFA requirement configured?",
+    "options": [
+      "A) Inside VPC Security Groups",
+      "B) Individually in every member account IAM console",
+      "C) In the S3 Bucket Policy of the log archive account",
+      "D) Centrally in the AWS IAM Identity Center console settings"
+    ],
+    "correct": "D",
+    "explanation": "Correct Answer: D. MFA enforcement can be configured centrally in AWS IAM Identity Center console settings for all users across the entire organization."
+  },
+  {
+    "id": 25,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Identity & Access Governance",
+    "subtopic": "IAM Identity Center & Permission Sets",
+    "type": "single",
+    "question": "Which protocol is used by AWS IAM Identity Center to synchronize user identities and group memberships automatically from an external Identity Provider (such as Okta or Azure AD)?",
+    "options": [
+      "A) SFTP (Secure File Transfer Protocol)",
+      "B) SCIM (System for Cross-domain Identity Management)",
+      "C) SNMP (Simple Network Management Protocol)",
+      "D) BGP (Border Gateway Protocol)"
+    ],
+    "correct": "B",
+    "explanation": "Correct Answer: B. SCIM (System for Cross-domain Identity Management) is the open standard protocol used by IAM Identity Center to automatically sync users and groups from external IdPs (Okta, Azure AD)."
+  },
+  {
+    "id": 26,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Identity & Access Governance",
+    "subtopic": "IAM Identity Center & Permission Sets",
+    "type": "single",
+    "question": "Why is using AWS IAM Identity Center preferred over creating individual IAM Users inside each member account?",
+    "options": [
+      "A) IAM Identity Center bypasses Service Control Policies",
+      "B) IAM Users provide higher network throughput than IAM Identity Center",
+      "C) IAM Users incur monthly fees whereas IAM Identity Center is paid per query",
+      "D) It eliminates long-lived IAM user credentials, centralizes access management, and provides Single Sign-On (SSO) access using short-lived credentials"
+    ],
+    "correct": "D",
+    "explanation": "Correct Answer: D. IAM Identity Center eliminates credential sprawl and long-lived IAM user passwords/access keys, providing centralized Single Sign-On and short-lived temporary access credentials."
+  },
+  {
+    "id": 27,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Governance Enforcement",
+    "subtopic": "Config vs SCPs vs Boundaries",
+    "type": "single",
+    "question": "An enterprise wants to evaluate whether all existing Amazon EBS volumes across 50 accounts are encrypted. If an unencrypted volume is detected, an automated remediation script should encrypt it. Which service performs this evaluation and remediation?",
+    "options": [
+      "A) Amazon Route 53 DNS Firewall",
+      "B) Service Control Policies (SCPs)",
+      "C) IAM Permissions Boundaries",
+      "D) AWS Config with AWS Systems Manager Automation Remediation"
+    ],
+    "correct": "D",
+    "explanation": "Correct Answer: D. AWS Config evaluates resource compliance continuously (detective) and integrates with Systems Manager Automation documents to perform automated remediation when non-compliant resources are discovered."
+  },
+  {
+    "id": 28,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Governance Enforcement",
+    "subtopic": "Config vs SCPs vs Boundaries",
+    "type": "single",
+    "question": "What is the key functional difference between a Service Control Policy (SCP) and an AWS Config Rule?",
+    "options": [
+      "A) SCPs are detective; Config Rules are preventive",
+      "B) SCPs run inside VPCs; Config Rules run on on-premises edge servers",
+      "C) Both tools block API calls identically",
+      "D) SCPs are PREVENTIVE (block API calls before resources are created); AWS Config Rules are DETECTIVE (evaluate compliance of existing resources after creation)"
+    ],
+    "correct": "D",
+    "explanation": "Correct Answer: D. SCPs enforce preventive guardrails by blocking non-compliant API calls in real time. AWS Config Rules enforce detective controls by monitoring resource configuration changes and evaluating compliance after deployment."
+  },
+  {
+    "id": 29,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Governance Enforcement",
+    "subtopic": "Config vs SCPs vs Boundaries",
+    "type": "single",
+    "question": "A developer needs full access to manage S3 and EC2, but must NOT be allowed to create or modify IAM users or policies under any circumstances. Which IAM mechanism enforces this boundary on a developer user?",
+    "options": [
+      "A) Service Linked Role",
+      "B) AWS Trusted Advisor Rule",
+      "C) S3 Bucket Policy",
+      "D) IAM Permissions Boundary"
+    ],
+    "correct": "D",
+    "explanation": "Correct Answer: D. An IAM Permissions Boundary sets the maximum permissions an IAM entity can have, ensuring developers cannot grant themselves permissions beyond the boundary limit."
+  },
+  {
+    "id": 30,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Governance Enforcement",
+    "subtopic": "Config vs SCPs vs Boundaries",
+    "type": "single",
+    "question": "How can AWS Config rules be deployed continuously across all present and future member accounts in an AWS Organization automatically?",
+    "options": [
+      "A) Deploy Organization AWS Config Rules from the Management Account",
+      "B) Manually log into each account every month and enable rules",
+      "C) Attach a WAF rule to the organization root",
+      "D) Use S3 Cross-Region Replication"
+    ],
+    "correct": "A",
+    "explanation": "Correct Answer: A. Organization AWS Config Rules allow administrators to define and deploy AWS Config rules centrally across all accounts in an AWS Organization."
+  },
+  {
+    "id": 31,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Governance Enforcement",
+    "subtopic": "Config vs SCPs vs Boundaries",
+    "type": "single",
+    "question": "What AWS service manages enterprise software license compliance (e.g. tracking Microsoft Windows Server or SQL Server core licenses across EC2 instances)?",
+    "options": [
+      "A) AWS Config",
+      "B) AWS Billing Conductor",
+      "C) AWS License Manager",
+      "D) AWS Systems Manager Patch Manager"
+    ],
+    "correct": "C",
+    "explanation": "Correct Answer: C. AWS License Manager manages software licenses from vendors (like Microsoft, Oracle, and SAP) across AWS and on-premises environments, enforcing licensing rules automatically."
+  },
+  {
+    "id": 32,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Cost Governance",
+    "subtopic": "Consolidated Billing & RI Sharing",
+    "type": "single",
+    "question": "An enterprise has 10 member accounts under Consolidated Billing. Account A purchased a 3-year Reserved Instance for an r6g.2xlarge EC2 instance, but Account A's instance was terminated. How does Consolidated Billing handle the unused Reserved Instance discount?",
+    "options": [
+      "A) The Reserved Instance discount is automatically applied to matching r6g.2xlarge instance usage in other member accounts within the same organization",
+      "B) The Reserved Instance is automatically refunded to the billing credit card",
+      "C) The Reserved Instance discount is lost permanently",
+      "D) Account A is charged a cancellation penalty fee"
+    ],
+    "correct": "A",
+    "explanation": "Correct Answer: A. By default, Reserved Instance and Savings Plans billing benefits are shared across all member accounts within an AWS Organization's consolidated billing family."
+  },
+  {
+    "id": 33,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Cost Governance",
+    "subtopic": "Consolidated Billing & RI Sharing",
+    "type": "single",
+    "question": "A business unit owner in Account B wants to ensure their purchased Reserved Instance discounts are NOT shared with other member accounts in the AWS Organization. How can RI discount sharing be turned off?",
+    "options": [
+      "A) Turn off Reserved Instance discount sharing in the AWS Billing Console settings from the Management Account",
+      "B) Detach the member account from the VPC",
+      "C) Convert the account into an Organizational Unit",
+      "D) Enable S3 Block Public Access"
+    ],
+    "correct": "A",
+    "explanation": "Correct Answer: A. Reserved Instance and Savings Plans discount sharing can be explicitly disabled for specific accounts or the entire organization in the AWS Billing console."
+  },
+  {
+    "id": 34,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Cost Governance",
+    "subtopic": "Consolidated Billing & RI Sharing",
+    "type": "single",
+    "question": "Which AWS service allows creating custom billing rates, customizing line items, and allocating pro-rated billing data for reseller partners or internal business units?",
+    "options": [
+      "A) AWS Budgets",
+      "B) AWS Control Tower",
+      "C) AWS Cost Explorer",
+      "D) AWS Billing Conductor"
+    ],
+    "correct": "D",
+    "explanation": "Correct Answer: D. AWS Billing Conductor allows customized billing structures, custom rate cards, and cost allocation rules for enterprise showback/chargeback to internal business units or partners."
+  },
+  {
+    "id": 35,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Cost Governance",
+    "subtopic": "Consolidated Billing & RI Sharing",
+    "type": "single",
+    "question": "What is a primary financial benefit of using Consolidated Billing in AWS Organizations?",
+    "options": [
+      "A) Automatic 50% discount on all AWS Marketplace software",
+      "B) Zero data transfer fees across regions",
+      "C) Receiving a single consolidated invoice for all accounts and reaching higher volume tier discounts faster for S3 storage and Data Transfer Out",
+      "D) Free EC2 compute usage for all member accounts"
+    ],
+    "correct": "C",
+    "explanation": "Correct Answer: C. Consolidated Billing combines usage from all member accounts onto a single monthly bill, enabling the organization to qualify for tier volume pricing discounts faster."
+  },
+  {
+    "id": 36,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Audit Logging",
+    "subtopic": "Organization CloudTrail & Log Isolation",
+    "type": "single",
+    "question": "A Chief Information Security Officer (CISO) requires logging all AWS API activity across 100 member accounts into a single, tamper-proof Amazon S3 bucket located in a dedicated, isolated Log Archive account. How should CloudTrail be configured?",
+    "options": [
+      "A) Enable CloudWatch Container Insights on member VPCs",
+      "B) Create an Organization Trail in the Management Account that automatically logs events for all member accounts into the target S3 bucket in the Log Archive account",
+      "C) Export VPC Flow Logs to an on-premises syslog server over HTTP",
+      "D) Log into all 100 accounts individually and configure local S3 buckets"
+    ],
+    "correct": "B",
+    "explanation": "Correct Answer: B. An Organization Trail logs API calls for ALL member accounts in the organization automatically into a central S3 bucket in a secure Log Archive account, ensuring member account admins cannot disable logging."
+  },
+  {
+    "id": 37,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Audit Logging",
+    "subtopic": "Organization CloudTrail & Log Isolation",
+    "type": "single",
+    "question": "To protect CloudTrail audit logs stored in the central Log Archive S3 bucket against malicious modification or deletion by a compromised admin user, what security configuration is required?",
+    "options": [
+      "A) Enable S3 Object Lock in Compliance Mode, S3 Versioning, and CloudTrail Log File Integrity Validation",
+      "B) Enable Route 53 Resolver DNS Firewall",
+      "C) Store logs on EC2 instance store volumes",
+      "D) Enable S3 Transfer Acceleration"
+    ],
+    "correct": "A",
+    "explanation": "Correct Answer: A. Enabling CloudTrail Log File Integrity Validation (digest files), S3 Versioning, and S3 Object Lock in Compliance Mode ensures log files cannot be modified, overwritten, or deleted by any user."
+  },
+  {
+    "id": 38,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Audit Logging",
+    "subtopic": "Organization CloudTrail & Log Isolation",
+    "type": "single",
+    "question": "What happens when a new member account is created or joins an AWS Organization that has an active Organization Trail?",
+    "options": [
+      "A) The Organization Trail is automatically paused",
+      "B) An email request must be approved by AWS Support",
+      "C) The new account is excluded from logging until manual CloudTrail setup is executed",
+      "D) The new account automatically starts logging API activity to the Organization Trail without requiring manual setup"
+    ],
+    "correct": "D",
+    "explanation": "Correct Answer: D. When an Organization Trail is active, new member accounts joining the organization are automatically included and monitored by the Organization Trail immediately."
+  },
+  {
+    "id": 39,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Audit Logging",
+    "subtopic": "Organization CloudTrail & Log Isolation",
+    "type": "single",
+    "question": "Which service allows querying CloudTrail log files directly in Amazon S3 using standard SQL queries without managing database infrastructure?",
+    "options": [
+      "A) AWS DataSync",
+      "B) Amazon QuickSight",
+      "C) AWS Glue DataBrew",
+      "D) Amazon Athena (or CloudTrail Lake)"
+    ],
+    "correct": "D",
+    "explanation": "Correct Answer: D. Amazon Athena (and CloudTrail Lake) allows running SQL queries directly on JSON audit logs stored in Amazon S3 buckets for security investigation and compliance auditing."
+  },
+  {
+    "id": 40,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Cross-Account Architecture",
+    "subtopic": "Cross-Account Roles vs Resource Policies",
+    "type": "single",
+    "question": "An application in Account A needs to read objects from an S3 bucket in Account B. Which approach correctly describes how cross-account access can be granted?",
+    "options": [
+      "A) Use AWS Direct Connect Gateway",
+      "B) Enable VPC Peering between S3 buckets",
+      "C) Create static IAM User Access Keys in Account B and hardcode them in Account A",
+      "D) Attach an S3 Bucket Policy in Account B allowing Account A's IAM principal, OR allow Account A's principal to assume a cross-account IAM Role in Account B"
+    ],
+    "correct": "D",
+    "explanation": "Correct Answer: D. Cross-account access to S3 can be granted either via a resource-based policy (S3 Bucket Policy in Account B) or via identity-based role delegation (assuming a cross-account IAM Role in Account B)."
+  },
+  {
+    "id": 41,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Cross-Account Architecture",
+    "subtopic": "Cross-Account Roles vs Resource Policies",
+    "type": "single",
+    "question": "What is an architectural advantage of using an S3 Bucket Policy (resource-based policy) over IAM Role Assumption for cross-account S3 access?",
+    "options": [
+      "A) IAM Role assumption is limited to 1 request per hour",
+      "B) S3 Bucket Policies are stored in local RAM",
+      "C) Resource-based policies allow the principal in Account A to perform actions in Account B without switching IAM role context or issuing STS AssumeRole API calls",
+      "D) S3 Bucket Policies bypass KMS encryption"
+    ],
+    "correct": "C",
+    "explanation": "Correct Answer: C. Resource-based policies (such as S3 bucket policies or KMS key policies) grant direct access to external account principals without requiring them to call STS AssumeRole or switch security contexts."
+  },
+  {
+    "id": 42,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Cross-Account Architecture",
+    "subtopic": "VPC Sharing via RAM vs Peering",
+    "type": "single",
+    "question": "A enterprise network team wants to centrally manage subnets, route tables, and NAT Gateways in a single VPC owned by a Central Network Account, while allowing multiple business unit accounts to deploy EC2 instances into those subnets. Which topology should be chosen?",
+    "options": [
+      "A) AWS Site-to-Site VPN",
+      "B) VPC Peering mesh",
+      "C) AWS Transit Gateway with 50 attachments",
+      "D) VPC Sharing via AWS RAM"
+    ],
+    "correct": "D",
+    "explanation": "Correct Answer: D. VPC Sharing via AWS RAM enables a central networking team to own and manage VPCs, subnets, route tables, and NAT Gateways centrally while sharing subnets with participant accounts to deploy resources."
+  },
+  {
+    "id": 43,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Cross-Account Architecture",
+    "subtopic": "VPC Sharing via RAM vs Peering",
+    "type": "single",
+    "question": "What is a main network efficiency benefit of VPC Sharing via AWS RAM compared to creating separate VPCs connected via Transit Gateway?",
+    "options": [
+      "A) Shared subnets allow resources in different accounts to communicate with high bandwidth and low latency within the same VPC without Transit Gateway data processing fees",
+      "B) Transit Gateway is restricted to single-AZ deployments",
+      "C) VPC Sharing eliminates Security Groups",
+      "D) VPC Sharing provides free internet egress"
+    ],
+    "correct": "A",
+    "explanation": "Correct Answer: A. In VPC Sharing, instances in different participant accounts reside in the exact same VPC and subnets, allowing direct intra-VPC communication without incurring Transit Gateway data processing charges."
+  },
+  {
+    "id": 44,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Cross-Account Architecture",
+    "subtopic": "IAM Security Tooling",
+    "type": "single",
+    "question": "Which AWS IAM feature analyzes resource policies across your organization to identify S3 buckets, KMS keys, or IAM roles that are shared with external entities outside your AWS Organization?",
+    "options": [
+      "A) AWS Config Rules",
+      "B) AWS Trusted Advisor",
+      "C) IAM Access Analyzer",
+      "D) Amazon Macie"
+    ],
+    "correct": "C",
+    "explanation": "Correct Answer: C. IAM Access Analyzer uses mathematical logic to evaluate resource-based policies across your AWS environment and alerts you to resources that are accessible from outside your trusted account or organization boundary."
+  },
+  {
+    "id": 45,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Cross-Account Architecture",
+    "subtopic": "Service Catalog for Governance",
+    "type": "single",
+    "question": "An enterprise wants to allow non-administrative developers to launch pre-approved, security-hardened CloudFormation infrastructure templates (e.g. approved S3 buckets or EC2 stacks) without giving developers direct IAM permissions to provision those services manually. Which service provides this self-service governance portal?",
+    "options": [
+      "A) AWS Launch Wizard",
+      "B) AWS OpsWorks",
+      "C) AWS Service Catalog",
+      "D) AWS Control Tower"
+    ],
+    "correct": "C",
+    "explanation": "Correct Answer: C. AWS Service Catalog allows organizations to create and manage catalogs of IT services (CloudFormation templates) that are approved for use on AWS, allowing end users to launch pre-approved resources with constrained launch role permissions."
+  },
+  {
+    "id": 46,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Cross-Account Architecture",
+    "subtopic": "Service Catalog Portfolios",
+    "type": "single",
+    "question": "In AWS Service Catalog, how do administrators group products and manage access for specific IAM users, roles, or AWS accounts?",
+    "options": [
+      "A) By organizing products into Portfolios and granting access permissions to target IAM entities or sharing portfolios via AWS RAM",
+      "B) By running Systems Manager Automation",
+      "C) By deploying WAF Rate Rules",
+      "D) By attaching S3 Bucket Policies"
+    ],
+    "correct": "A",
+    "explanation": "Correct Answer: A. In AWS Service Catalog, products are collected into Portfolios. Administrators grant access to portfolios for specific IAM users, roles, or accounts, or share portfolios across accounts in an organization."
+  },
+  {
+    "id": 47,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Cross-Account Architecture",
+    "subtopic": "Service Catalog Launch Constraints",
+    "type": "single",
+    "question": "What is a Launch Constraint in AWS Service Catalog?",
+    "options": [
+      "A) A memory limit on CloudFormation execution engine",
+      "B) An IAM role that Service Catalog assumes when a user launches a product, allowing users to provision resources without needing underlying IAM permissions themselves",
+      "C) A network bandwidth throttle on VPC subnets",
+      "D) A rule that limits resource deployment to 1 instance per hour"
+    ],
+    "correct": "B",
+    "explanation": "Correct Answer: B. A Launch Constraint specifies an IAM role that AWS Service Catalog assumes to provision resources. This allows end users to launch approved products even if they do not have direct IAM permissions to create the underlying AWS resources."
+  },
+  {
+    "id": 48,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Cross-Account Architecture",
+    "subtopic": "AWS CloudFormation StackSets",
+    "type": "single",
+    "question": "A security administrator needs to deploy an IAM security audit role and AWS Config rules automatically across 200 member accounts in an AWS Organization. Which CloudFormation feature automates cross-account, multi-region stack deployments?",
+    "options": [
+      "A) AWS CloudFormation Modules",
+      "B) AWS Systems Manager State Manager",
+      "C) AWS Service Catalog Portfolios",
+      "D) AWS CloudFormation StackSets"
+    ],
+    "correct": "D",
+    "explanation": "Correct Answer: D. AWS CloudFormation StackSets allows creating, updating, or deleting CloudFormation stacks across multiple AWS accounts and regions in a single operation."
+  },
+  {
+    "id": 49,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Cross-Account Architecture",
+    "subtopic": "AWS Systems Manager Incident Manager",
+    "type": "single",
+    "question": "During a critical cross-account application outage, which AWS Systems Manager capability automates incident response plans, escalates alerts to on-call engineers via SMS/voice, and coordinates response channels?",
+    "options": [
+      "A) AWS Health Dashboard",
+      "B) AWS Systems Manager Incident Manager",
+      "C) AWS Systems Manager Parameter Store",
+      "D) AWS Systems Manager Patch Manager"
+    ],
+    "correct": "B",
+    "explanation": "Correct Answer: B. AWS Systems Manager Incident Manager automates incident response plans, engages on-call responders via SMS/voice/email, and provides centralized collaboration dashboards during critical operational incidents."
+  },
+  {
+    "id": 50,
+    "section": "GOVERNANCE & MULTI-ACCOUNT",
+    "topic": "Cross-Account Architecture",
+    "subtopic": "AWS Health Dashboard",
+    "type": "single",
+    "question": "An operational team needs personalized alerts when an AWS infrastructure event (such as an EC2 hardware degradation or scheduled maintenance) specifically affects resources in their AWS accounts. Which dashboard provides personalized event visibility?",
+    "options": [
+      "A) AWS Health Dashboard (AWS Personal Health Dashboard)",
+      "B) AWS CloudTrail Insights",
+      "C) AWS Service Health Dashboard (Public status page)",
+      "D) Amazon CloudWatch ServiceLens"
+    ],
+    "correct": "A",
+    "explanation": "Correct Answer: A. AWS Health Dashboard provides personalized alerts and guidance when AWS experiences events that may affect your specific AWS account resources and scheduled maintenance."
+  }
 ];
 
     // Theme Management
@@ -2555,7 +2555,7 @@
         if (typeof activeQuizData !== 'undefined') activeQuizData = ordered;
         if (typeof renderQuizGroupedBySection === 'function') renderQuizGroupedBySection(ordered);
         else if (typeof renderQuiz === 'function') renderQuiz(ordered);
-        if (typeof refreshPracticeNav === 'function') setTimeout(refreshPracticeNav, 200);
+        setTimeout(function() { if (typeof renderPracticeNavGrid === 'function') renderPracticeNavGrid(); }, 200);
     }
 
     
@@ -2640,9 +2640,13 @@
     function renderPracticeNavGrid() {
         const grid = document.getElementById('practice-nav-grid');
         const navCount = document.getElementById('nav-count');
-        const cards = document.querySelectorAll('.question-card');
 
-        if (navCount) navCount.textContent = cards.length;
+        // Use activeQuizData (already reordered by setOrder) instead of DOM querySelectorAll
+        const data = (typeof activeQuizData !== 'undefined' && activeQuizData && activeQuizData.length > 0)
+            ? activeQuizData
+            : (typeof quizData !== 'undefined' ? quizData : []);
+
+        if (navCount) navCount.textContent = data.length;
         if (!grid) return;
 
         const starred = getStarredQuestions().map(String);
@@ -2652,10 +2656,11 @@
         let answeredCount = 0;
         let starredCount = 0;
 
-        cards.forEach((card, idx) => {
-            const id = card.getAttribute('data-id') || (idx + 1);
-            const status = card.getAttribute('data-status') || 'unanswered';
-            const isStarred = card.getAttribute('data-starred') === 'true' || starred.includes(String(id));
+        data.forEach((q, idx) => {
+            const id = String(q.id);
+            const card = document.getElementById('card-' + id);
+            const status = card ? (card.getAttribute('data-status') || 'unanswered') : 'unanswered';
+            const isStarred = (card && card.getAttribute('data-starred') === 'true') || starred.includes(id);
 
             if (status === 'correct') correctCount++;
             if (status === 'incorrect') incorrectCount++;
@@ -2667,8 +2672,9 @@
             else if (status === 'incorrect') statusClass = 'status-incorrect';
             if (isStarred) statusClass += ' status-starred';
 
+            // Show position number (idx+1) in button, but navigate to correct card by q.id
             html += `
-                <button class="nav-q-btn ${statusClass}" onclick="scrollToQuestion('${id}')" title="Jump to Question #${idx + 1}">
+                <button class="nav-q-btn ${statusClass}" onclick="scrollToQuestion('${id}')" title="Q#${id} — Position ${idx + 1}">
                     ${idx + 1}
                     ${isStarred ? '<span class="nav-star-dot">⭐</span>' : ''}
                 </button>
@@ -2683,7 +2689,7 @@
         const navInc = document.getElementById('nav-stat-incorrect');
         const navStar = document.getElementById('nav-stat-starred');
 
-        if (navTot) navTot.textContent = cards.length;
+        if (navTot) navTot.textContent = data.length;
         if (navAns) navAns.textContent = answeredCount;
         if (navCor) navCor.textContent = correctCount;
         if (navInc) navInc.textContent = incorrectCount;

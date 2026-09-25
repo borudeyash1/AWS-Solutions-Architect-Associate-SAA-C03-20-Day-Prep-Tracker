@@ -10762,7 +10762,7 @@ function renderQuizGroupedBySection(questions) {
         }
 
         // Refresh question navigator
-        if (typeof refreshPracticeNav === 'function') setTimeout(refreshPracticeNav, 200);
+        setTimeout(function() { if (typeof renderPracticeNavGrid === 'function') renderPracticeNavGrid(); }, 200);
     }
 
     let currentFilter = 'all';
@@ -12411,8 +12411,7 @@ function generate65QuestionMockExam() {
             setFilter('all', activeFilterBtn);
         }
         if (typeof updateStats === 'function') updateStats();
-    setTimeout(refreshPracticeNav, 100);
-        if (typeof refreshPracticeNav === 'function') refreshPracticeNav();
+    setTimeout(function() { if (typeof renderPracticeNavGrid === 'function') renderPracticeNavGrid(); }, 200);
     }
 
     
@@ -12576,9 +12575,13 @@ function generate65QuestionMockExam() {
     function renderPracticeNavGrid() {
         const grid = document.getElementById('practice-nav-grid');
         const navCount = document.getElementById('nav-count');
-        const cards = document.querySelectorAll('.question-card');
 
-        if (navCount) navCount.textContent = cards.length;
+        // Use activeQuizData (already reordered by setOrder) instead of DOM querySelectorAll
+        const data = (typeof activeQuizData !== 'undefined' && activeQuizData && activeQuizData.length > 0)
+            ? activeQuizData
+            : (typeof quizData !== 'undefined' ? quizData : []);
+
+        if (navCount) navCount.textContent = data.length;
         if (!grid) return;
 
         const starred = getStarredQuestions().map(String);
@@ -12588,10 +12591,11 @@ function generate65QuestionMockExam() {
         let answeredCount = 0;
         let starredCount = 0;
 
-        cards.forEach((card, idx) => {
-            const id = card.getAttribute('data-id') || (idx + 1);
-            const status = card.getAttribute('data-status') || 'unanswered';
-            const isStarred = card.getAttribute('data-starred') === 'true' || starred.includes(String(id));
+        data.forEach((q, idx) => {
+            const id = String(q.id);
+            const card = document.getElementById('card-' + id);
+            const status = card ? (card.getAttribute('data-status') || 'unanswered') : 'unanswered';
+            const isStarred = (card && card.getAttribute('data-starred') === 'true') || starred.includes(id);
 
             if (status === 'correct') correctCount++;
             if (status === 'incorrect') incorrectCount++;
@@ -12603,8 +12607,9 @@ function generate65QuestionMockExam() {
             else if (status === 'incorrect') statusClass = 'status-incorrect';
             if (isStarred) statusClass += ' status-starred';
 
+            // Show position number (idx+1) in button, but navigate to correct card by q.id
             html += `
-                <button class="nav-q-btn ${statusClass}" onclick="scrollToQuestion('${id}')" title="Jump to Question #${idx + 1}">
+                <button class="nav-q-btn ${statusClass}" onclick="scrollToQuestion('${id}')" title="Q#${id} — Position ${idx + 1}">
                     ${idx + 1}
                     ${isStarred ? '<span class="nav-star-dot">⭐</span>' : ''}
                 </button>
@@ -12619,7 +12624,7 @@ function generate65QuestionMockExam() {
         const navInc = document.getElementById('nav-stat-incorrect');
         const navStar = document.getElementById('nav-stat-starred');
 
-        if (navTot) navTot.textContent = cards.length;
+        if (navTot) navTot.textContent = data.length;
         if (navAns) navAns.textContent = answeredCount;
         if (navCor) navCor.textContent = correctCount;
         if (navInc) navInc.textContent = incorrectCount;
