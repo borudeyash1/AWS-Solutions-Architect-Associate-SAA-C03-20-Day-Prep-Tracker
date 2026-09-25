@@ -972,6 +972,218 @@
             font-size: 9px;
         }
 
+
+
+
+
+    /* ════════════════════════════════════════════════════════════════════
+       FOCUS MODE  — immersive full-screen single-question experience
+    ════════════════════════════════════════════════════════════════════ */
+
+    /* Focus toggle button in the filter bar */
+    .focus-mode-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 14px;
+        border-radius: 8px;
+        border: 1.5px solid var(--border-color, #27272a);
+        background: transparent;
+        color: var(--text-secondary, #a1a1aa);
+        font-size: 0.82rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+    }
+    .focus-mode-btn:hover {
+        border-color: #ff9900;
+        color: #ff9900;
+        background: rgba(255,153,0,0.08);
+    }
+    .focus-mode-btn.active {
+        background: linear-gradient(135deg, #ff9900, #e07b00);
+        border-color: #ff9900;
+        color: #fff;
+        box-shadow: 0 0 14px rgba(255,153,0,0.4);
+    }
+
+    /* ── FOCUS MODE: hide everything except the card ── */
+    body.focus-mode .sticky-header,
+    body.focus-mode .toolbar-container,
+    body.focus-mode .quiz-intro,
+    body.focus-mode .section-header,
+    body.focus-mode .guidance-banner,
+    body.focus-mode #practice-nav-btn { display: none !important; }
+
+    /* Dim the background when focus is active */
+    body.focus-mode {
+        background: var(--bg-color) !important;
+    }
+
+    /* The question card in focus mode: centred, breathing room */
+    body.focus-mode .question-card { display: none !important; }
+    body.focus-mode .question-card.focus-active {
+        display: block !important;
+        max-width: 1400px;
+        background: var(--bg-color) !important;
+        border-color: var(--border-color) !important;
+        box-shadow: none !important;
+        margin: 0 auto;
+        animation: focusCardIn 0.28s cubic-bezier(0.4,0,0.2,1);
+    }
+    @keyframes focusCardIn {
+        from { opacity: 0; transform: translateY(14px) scale(0.99); }
+        to   { opacity: 1; transform: translateY(0)   scale(1);    }
+    }
+
+    /* Container padding when in focus mode */
+    body.focus-mode .container {
+        padding-top: 16px;
+        padding-bottom: 100px; /* space for bottom strip */
+    }
+
+    /* ── FOCUS MINI TOPBAR (only exit + counter + navigator) ── */
+    #focus-topbar {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        z-index: 10000;
+        height: 50px;
+        background: var(--sticky-bg) !important;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(255,153,0,0.25);
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+        gap: 12px;
+    }
+    body.focus-mode #focus-topbar { display: flex; }
+
+    /* Topbar: Exit button */
+    #focus-exit-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 14px;
+        border-radius: 8px;
+        border: 1.5px solid rgba(255,153,0,0.5);
+        background: rgba(255,153,0,0.12);
+        color: #ff9900;
+        font-size: 0.82rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+    }
+    #focus-exit-btn:hover {
+        background: rgba(255,153,0,0.25);
+        border-color: #ff9900;
+    }
+
+    /* Topbar: counter */
+    #focus-topbar-counter {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: 0.5px;
+        flex: 1;
+        text-align: center;
+    }
+    #focus-topbar-counter .fc-cur { color: #ff9900; font-size: 1.1rem; }
+    #focus-topbar-counter .fc-sep { color: #555; }
+    #focus-topbar-counter .fc-tot { color: #aaa; }
+
+    /* Topbar: navigator button */
+    #focus-nav-opener-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 14px;
+        border-radius: 8px;
+        border: 1.5px solid rgba(255,255,255,0.12);
+        background: rgba(255,255,255,0.05);
+        color: #e4e4e7;
+        font-size: 0.82rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+    }
+    #focus-nav-opener-btn:hover {
+        border-color: #ff9900;
+        color: #ff9900;
+        background: rgba(255,153,0,0.1);
+    }
+
+    /* ── FLOATING PREV / NEXT ARROWS on left & right edges ── */
+    #focus-prev-float,
+    #focus-next-float {
+        display: none;
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 9500;
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        border: 2px solid rgba(255,153,0,0.45);
+        background: var(--card-bg) !important;
+        backdrop-filter: blur(8px);
+        color: #ff9900;
+        font-size: 1.4rem;
+        font-weight: 700;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+        user-select: none;
+    }
+    body.focus-mode #focus-prev-float,
+    body.focus-mode #focus-next-float { display: flex; }
+
+    #focus-prev-float { left: 12px; }
+    #focus-next-float { right: 12px; }
+
+    #focus-prev-float:hover:not(:disabled),
+    #focus-next-float:hover:not(:disabled) {
+        background: rgba(255,153,0,0.18);
+        border-color: #ff9900;
+        transform: translateY(-50%) scale(1.1);
+        box-shadow: 0 0 22px rgba(255,153,0,0.5);
+    }
+    #focus-prev-float:disabled,
+    #focus-next-float:disabled {
+        opacity: 0.2;
+        cursor: not-allowed;
+    }
+
+    /* Push body content down by topbar height */
+    body.focus-mode #quiz-container-wrapper,
+    body.focus-mode .container { margin-top: 50px; }
+
+    /* Keyboard hint at bottom */
+    #focus-key-hint {
+        display: none;
+        position: fixed;
+        bottom: 14px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--card-sub-bg) !important;
+        color: var(--text-primary) !important;
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 20px;
+        padding: 5px 16px;
+        font-size: 0.72rem;
+        color: #555;
+        white-space: nowrap;
+        z-index: 9000;
+        letter-spacing: 0.3px;
+    }
+    body.focus-mode #focus-key-hint { display: block; }
+
     </style>
 </head>
 <body>
@@ -1014,7 +1226,9 @@
             <button class="filter-btn" onclick="setFilter('correct', this)">Correct</button>
             <button class="filter-btn" onclick="setFilter('incorrect', this)">Incorrect</button>
         <button class="filter-btn" id="filter-starred-btn" onclick="setFilter('starred', this)">⭐ Starred (<span id="starred-count">0</span>)</button>
-
+        <span style="display:inline-flex;align-items:center;margin-left:8px;padding-left:8px;border-left:1px solid var(--border-color,#27272a);">
+            <button class="focus-mode-btn" id="focus-mode-toggle-btn" onclick="toggleFocusMode()" title="Focus Mode: one question at a time">&#x1F3AF; Focus</button>
+        </span>
         </div>
     </div>
 
@@ -1031,6 +1245,8 @@
 
     <div id="quiz-container"></div>
 </div>
+
+
 
 <script>
     const quizData = [
@@ -2690,14 +2906,15 @@
     function updateThemeUI(theme) {
         const icon = document.getElementById('theme-icon');
         const text = document.getElementById('theme-text');
-        if (icon && text) {
-            if (theme === 'dark') {
-                icon.textContent = '🌙';
-                text.textContent = 'Dark Mode';
-            } else {
-                icon.textContent = '☀️';
-                text.textContent = 'Light Mode';
-            }
+        const focusIcon = document.getElementById('focus-theme-icon');
+        if (icon) {
+            icon.textContent = theme === 'dark' ? '🌙' : '☀️';
+        }
+        if (text) {
+            text.textContent = theme === 'dark' ? 'Dark Mode' : 'Light Mode';
+        }
+        if (focusIcon) {
+            focusIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
         }
     }
 
@@ -3536,6 +3753,17 @@
     }
 
     function scrollToQuestion(id) {
+        if (typeof focusMode !== 'undefined' && focusMode) {
+            var filteredData = (typeof _getFilteredData === 'function') ? _getFilteredData() : [];
+            var index = filteredData.findIndex(function(q) { return String(q.id) === String(id); });
+            if (index > -1) {
+                focusIndex = index;
+                if (typeof renderFocusCard === 'function') renderFocusCard();
+                if (typeof closePracticeNav === 'function') closePracticeNav();
+            }
+            return;
+        }
+
         const card = document.getElementById(`card-${id}`) || document.querySelector(`.question-card[data-id="${id}"]`);
         if (card) {
             card.classList.remove('hidden');
@@ -3547,10 +3775,147 @@
                 card.style.outline = 'none';
                 card.style.boxShadow = '';
             }, 1800);
+            if (typeof closePracticeNav === 'function') closePracticeNav();
         }
     }
 
-</script>
+
+
+
+    
+    // ======================== FOCUS MODE ENGINE (v2 — immersive) ========================
+    var focusMode = false;
+    var focusIndex = 0;
+
+    function toggleFocusMode() {
+        focusMode = !focusMode;
+        document.body.classList.toggle('focus-mode', focusMode);
+
+        // Update the toolbar Focus button label
+        var btn = document.getElementById('focus-mode-toggle-btn');
+        if (btn) {
+            btn.classList.toggle('active', focusMode);
+            btn.innerHTML = focusMode ? '&#x1F4C4; Scroll' : '&#x1F3AF; Focus';
+            btn.title = focusMode ? 'Exit Focus Mode' : 'Focus Mode: one question at a time';
+        }
+
+        if (focusMode) {
+            // Scroll to top so topbar is visible
+            window.scrollTo({ top: 0, behavior: 'instant' });
+
+            // Find first visible card index
+            var data = _getFocusData();
+            var filtered = _getFilteredData(data);
+            focusIndex = 0;
+            renderFocusCard();
+        } else {
+            // Remove focus-active class → all cards become visible again
+            document.querySelectorAll('.question-card.focus-active').forEach(function(c) {
+                c.classList.remove('focus-active');
+            });
+            // Scroll back to top cleanly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
+    function _getFocusData() {
+        return (typeof activeQuizData !== 'undefined' && activeQuizData && activeQuizData.length > 0)
+            ? activeQuizData
+            : (typeof quizData !== 'undefined' ? quizData : []);
+    }
+
+    function _getFilteredData(data) {
+        return (data || _getFocusData()).filter(function(q) {
+            var card = document.getElementById('card-' + q.id);
+            return card && !card.classList.contains('hidden');
+        });
+    }
+
+    function renderFocusCard() {
+        var filteredData = _getFilteredData();
+
+        if (filteredData.length === 0) {
+            ['focus-current'].forEach(function(id) {
+                var el = document.getElementById(id);
+                if (el) el.textContent = '0';
+            });
+            ['focus-total'].forEach(function(id) {
+                var el = document.getElementById(id);
+                if (el) el.textContent = '0';
+            });
+            document.querySelectorAll('.question-card.focus-active').forEach(function(c) {
+                c.classList.remove('focus-active');
+            });
+            return;
+        }
+
+        // Clamp
+        if (focusIndex >= filteredData.length) focusIndex = filteredData.length - 1;
+        if (focusIndex < 0) focusIndex = 0;
+
+        // Remove old active
+        document.querySelectorAll('.question-card.focus-active').forEach(function(c) {
+            c.classList.remove('focus-active');
+        });
+
+        // Activate current
+        var q = filteredData[focusIndex];
+        var card = document.getElementById('card-' + q.id);
+        if (card) {
+            card.classList.add('focus-active');
+            // Scroll to top so user always starts reading from top of question
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        var pos = focusIndex + 1;
+        var total = filteredData.length;
+
+        // Update topbar counter
+        var elCur = document.getElementById('focus-current');
+        var elTot = document.getElementById('focus-total');
+        if (elCur) elCur.textContent = pos;
+        if (elTot) elTot.textContent = total;
+
+        // Disable/enable floating arrows
+        var prevBtn = document.getElementById('focus-prev-float');
+        var nextBtn = document.getElementById('focus-next-float');
+        if (prevBtn) prevBtn.disabled = (focusIndex === 0);
+        if (nextBtn) nextBtn.disabled = (focusIndex >= total - 1);
+    }
+
+    function focusNav(direction) {
+        var filteredData = _getFilteredData();
+        focusIndex += direction;
+        if (focusIndex < 0) focusIndex = 0;
+        if (focusIndex >= filteredData.length) focusIndex = filteredData.length - 1;
+        renderFocusCard();
+    }
+
+    // Patch filterQuestions: after filtering, refresh focus card if in focus mode
+    (function() {
+        var origFilter = window.filterQuestions;
+        if (typeof origFilter === 'function') {
+            window.filterQuestions = function() {
+                origFilter.apply(this, arguments);
+                if (focusMode) {
+                    focusIndex = 0;
+                    setTimeout(renderFocusCard, 50);
+                }
+            };
+        }
+    })();
+
+    // Keyboard: arrows = navigate, Escape = exit focus
+    document.addEventListener('keydown', function(e) {
+        if (!focusMode) return;
+        if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); focusNav(1); }
+        if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   { e.preventDefault(); focusNav(-1); }
+        if (e.key === 'Escape') { if (focusMode) toggleFocusMode(); }
+    });
+    // ======================== END FOCUS MODE ENGINE ========================
+
+    </script>
 
 <!-- Floating Collapsible Practice Navigator Toggle Button -->
 <button id="practice-nav-btn" onclick="togglePracticeNav()" title="Open Question Navigator">
@@ -3580,6 +3945,28 @@
         <!-- Question buttons dynamically generated -->
     </div>
 </div>
+
+
+<!-- Focus Mode: Immersive Overlay Elements -->
+<div id="focus-topbar">
+    <button id="focus-exit-btn" onclick="toggleFocusMode()" title="Exit Focus Mode">&#x2190; Exit Focus</button>
+    <div id="focus-topbar-counter">
+        <span class="fc-cur" id="focus-current">1</span>
+        <span class="fc-sep"> / </span>
+        <span class="fc-tot" id="focus-total">1</span>
+    </div>
+    <div style="display:flex; gap:10px; align-items:center;">
+        <button id="focus-theme-btn" onclick="toggleTheme()" title="Toggle Theme" style="display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:8px; border:1.5px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.05); color:#e4e4e7; font-size:1.1rem; cursor:pointer; transition:all 0.2s;">
+            <span id="focus-theme-icon">🌙</span>
+        </button>
+        <button id="focus-nav-opener-btn" onclick="togglePracticeNav()" title="Open Question Navigator">&#x1F4CC; Navigator</button>
+    </div>
+</div>
+
+<button id="focus-prev-float" onclick="focusNav(-1)" title="Previous Question (&#8592;)">&#8592;</button>
+<button id="focus-next-float" onclick="focusNav(1)"  title="Next Question (&#8594;)">&#8594;</button>
+
+<div id="focus-key-hint">&#8592; &#8594; arrow keys to navigate &nbsp;|&nbsp; Esc to exit focus</div>
 
 </body>
 </html>
